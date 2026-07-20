@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Infrastructure Damage Reporting</title>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<main class="container">
+		<section class="hero">
+			<h1>Infrastructure Damage Reporting</h1>
+			<p>Report road, utility, and public infrastructure damage in your area.</p>
+			<p style="margin-top:12px;font-size:0.9rem"><a href="admin.html" style="color:#7c3aed;text-decoration:none;font-weight:500">Admin Portal</a></p>
+		</section>
+
+		<form id="damageForm" class="report-form">
+			<div class="form-grid">
+				<div class="field-group">
+					<label for="fullName">Full Name</label>
+					<input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required />
+				</div>
+
+				<div class="field-group">
+					<label for="email">Email Address</label>
+					<input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+				</div>
+
+				<div class="field-group">
+					<label for="phone">Phone Number</label>
+					<input type="tel" id="phone" name="phone" value="+91 " placeholder="+91 9876543210" required />
+				</div>
+
+				<div class="field-group">
+					<label for="state">State</label>
+					<select id="state" name="state" required>
+						<option value="">Select your state</option>
+						<option value="Andhra Pradesh">Andhra Pradesh</option>
+						<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+						<option value="Assam">Assam</option>
+						<option value="Bihar">Bihar</option>
+						<option value="Chhattisgarh">Chhattisgarh</option>
+						<option value="Goa">Goa</option>
+						<option value="Gujarat">Gujarat</option>
+						<option value="Haryana">Haryana</option>
+						<option value="Himachal Pradesh">Himachal Pradesh</option>
+						<option value="Jharkhand">Jharkhand</option>
+						<option value="Karnataka">Karnataka</option>
+						<option value="Kerala">Kerala</option>
+						<option value="Madhya Pradesh">Madhya Pradesh</option>
+						<option value="Maharashtra">Maharashtra</option>
+						<option value="Manipur">Manipur</option>
+						<option value="Meghalaya">Meghalaya</option>
+						<option value="Mizoram">Mizoram</option>
+						<option value="Nagaland">Nagaland</option>
+						<option value="Odisha">Odisha</option>
+						<option value="Punjab">Punjab</option>
+						<option value="Rajasthan">Rajasthan</option>
+						<option value="Sikkim">Sikkim</option>
+						<option value="Tamil Nadu">Tamil Nadu</option>
+						<option value="Telangana">Telangana</option>
+						<option value="Tripura">Tripura</option>
+						<option value="Uttar Pradesh">Uttar Pradesh</option>
+						<option value="Uttarakhand">Uttarakhand</option>
+						<option value="West Bengal">West Bengal</option>
+					</select>
+				</div>
+
+				<div class="field-group">
+					<label for="city">City</label>
+					<select id="city" name="city" required>
+						<option value="">Select your city</option>
+					</select>
+				</div>
+
+			<div class="field-group">
+				<label for="location">Street Address / Landmark</label>
+				<input type="text" id="location" name="location" placeholder="Street name, building, or landmark" required />
+			</div>
+
+			<div class="field-group">
+				<label for="category">Damage Category</label>
+				<select id="category" name="category" required>
+					<option value="">Select a damage category</option>
+					<option value="Pothole / Damaged Road">Pothole / Damaged Road</option>
+					<option value="Cracked Road">🚧 Cracked Road</option>
+					<option value="Bridge Damage">🌉 Bridge Damage</option>
+					<option value="Streetlight Not Working">💡 Streetlight Not Working</option>
+					<option value="Traffic Signal Not Working">🚦 Traffic Signal Not Working</option>
+					<option value="Water Leakage">🚰 Water Leakage</option>
+					<option value="Burst Water Pipeline">🚱 Burst Water Pipeline</option>
+					<option value="Drainage / Sewer Overflow">🚽 Drainage / Sewer Overflow</option>
+					<option value="Garbage Not Collected">🗑️ Garbage Not Collected</option>
+					<option value="Fallen Tree">🌳 Fallen Tree</option>
+					<option value="Electric Pole Damage">⚡ Electric Pole Damage</option>
+					<option value="Hanging or Broken Electric Wires">🔌 Hanging or Broken Electric Wires</option>
+					<option value="Damaged Road Sign">🛑 Damaged Road Sign</option>
+					<option value="Damaged Bus Stop">🚌 Damaged Bus Stop</option>
+					<option value="Waterlogging / Flooding">🌧️ Waterlogging / Flooding</option>
+					<option value="Footpath / Sidewalk Damage">🧱 Footpath / Sidewalk Damage</option>
+					<option value="Manhole Cover Missing or Broken">🚨 Manhole Cover Missing or Broken</option>
+					<option value="Damage to Public Buildings">🏫 Damage to Public Buildings</option>
+					<option value="Park Equipment Damage">🏞️ Park Equipment Damage</option>
+					<option value="Other">📷 Other</option>
+				</select>
+			</div>
+
+			<div class="field-group">
+				<label for="description">Detailed Description</label>
+				<textarea id="description" name="description" rows="5" placeholder="Please describe the damage clearly and mention its exact location." required></textarea>
+			</div>
+
+			<div class="form-grid">
+				<div class="field-group">
+					<label for="severity">Severity Level</label>
+					<select id="severity" name="severity" required>
+						<option value="">Select severity level</option>
+						<option value="Low">Low - Minor issue</option>
+						<option value="Medium">Medium - Moderate issue</option>
+						<option value="High">High - Serious issue</option>
+						<option value="Critical">Critical - Urgent risk</option>
+					</select>
+				</div>
+
+				<div class="field-group">
+					<label for="photo">Photo (Optional)</label>
+					<input type="file" id="photo" name="photo" accept="image/*" />
+				</div>
+			</div>
+
+			<div id="formFeedback" class="form-feedback hidden" role="alert"></div>
+
+			<div class="form-actions">
+				<button type="submit">Submit Report</button>
+			</div>
+		</form>
+
+		<section id="result" class="result hidden">
+			<h2>✓ Report Submitted Successfully</h2>
+			<p id="userThankYou">Thank you! Your report has been received and will be reviewed by our team. Reference ID: <strong id="refId"></strong></p>
+		</section>
+	</main>
+
+	<script src="script.js"></script>
+</body>
+</html>
+
