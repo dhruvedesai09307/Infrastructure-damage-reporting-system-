@@ -168,10 +168,14 @@ if (damageForm) {
       photoData: photoData || null,
     };
 
-    // save to localStorage for admin review
     const existing = JSON.parse(localStorage.getItem('reports') || '[]');
     existing.push(report);
     localStorage.setItem('reports', JSON.stringify(existing));
+    try {
+      await fetch('/api/reports', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(report) });
+    } catch (error) {
+      console.warn('Local API unavailable; report saved in this browser only.', error);
+    }
 
     // show generic confirmation with reference id to user
     const refEl = document.getElementById('refId');

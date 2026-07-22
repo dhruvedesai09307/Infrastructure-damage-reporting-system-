@@ -1,55 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<title>Report Damage</title>
-	<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-	<header class="site-header">
-		<h1>Infrastructure Damage Reporting</h1>
-		<nav class="site-nav">
-			<a href="reporthome.html">Report Home</a>
-			<a href="landing.html">About</a>
-			<a href="admin.html">Admin</a>
-		</nav>
-	</header>
-
-	<main class="container">
-		<section class="reports-info">
-			<h2>Reports Overview</h2>
-			<p>Submission is disabled on this page. To submit a new report, use the main reporting page from the site navigation.</p>
-		</section>
-
-		<section class="recent-reports">
-			<h3>Recent Reports</h3>
-			<ul id="reportsList"></ul>
-		</section>
-	</main>
-
-	<footer class="site-footer">
-		<small>&copy; Infrastructure Damage Reporting</small>
-	</footer>
-
-	<script>
-		// Render recent reports from localStorage (read-only on this page)
-		(function(){
-			const reportsList = document.getElementById('reportsList');
-			function renderReports(){
-				const items = JSON.parse(localStorage.getItem('idr_reports') || '[]');
-				if(!items.length){
-					reportsList.innerHTML = '<li>No reports available.</li>';
-					return;
-				}
-				reportsList.innerHTML = items.slice().reverse().map(r=>{
-					const when = new Date(r.timestamp).toLocaleString();
-					return `<li><strong>${r.damageType}</strong> — ${r.location} <em>(${when})</em><div>${(r.description||'').replace(/\n/g,'<br>')}</div></li>`;
-				}).join('');
-			}
-			renderReports();
-		})();
-	</script>
-</body>
-</html>
-
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Infrastructure Report System | Report Infrastructure Issues</title><link rel="stylesheet" href="styles.css">
+<style>
+body{background:#f8fafc;color:#0f172a}.topbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:18px 6%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:1.2rem;font-weight:800;color:#1d4ed8}.nav{display:flex;gap:24px;align-items:center}.nav a{color:#475569;text-decoration:none;font-weight:600}.nav .button{background:#2563eb;color:#fff;padding:11px 18px;border-radius:9px}.wrap{max-width:1120px;margin:auto;padding:58px 24px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:42px;align-items:center}.tag{color:#2563eb;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;font-size:.78rem}.hero h1{font-size:clamp(2.4rem,5vw,4.5rem);line-height:1.04;margin:14px 0 20px;letter-spacing:-2px}.hero p{font-size:1.08rem;color:#64748b;line-height:1.7;max-width:620px}.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.actions a{padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:800}.primary{background:#2563eb;color:#fff}.secondary{border:1px solid #cbd5e1;color:#334155;background:#fff}.visual{background:linear-gradient(145deg,#172554,#2563eb);border-radius:24px;padding:30px;color:#fff;box-shadow:0 18px 40px #1d4ed833}.visual h2{font-size:1.7rem;margin:0 0 24px}.status{background:#ffffff1c;border:1px solid #ffffff33;border-radius:14px;padding:18px;margin-top:14px}.status strong{display:block;font-size:2rem}.section{margin-top:72px}.section h2{text-align:center;font-size:2rem;margin-bottom:10px}.section>p{text-align:center;color:#64748b;margin:0 0 28px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px;box-shadow:0 8px 24px #0f172a0a}.icon{width:42px;height:42px;border-radius:12px;background:#dbeafe;color:#1d4ed8;display:grid;place-items:center;font-weight:800}.card h3{margin:18px 0 8px}.card p{color:#64748b;line-height:1.6;margin:0}.footer{text-align:center;border-top:1px solid #e2e8f0;color:#64748b;padding:24px}@media(max-width:760px){.topbar{display:block}.nav{margin-top:16px;gap:14px;flex-wrap:wrap}.hero{display:block}.visual{margin-top:34px}.cards{grid-template-columns:1fr}.wrap{padding-top:38px}}
+</style></head>
+<body><header class="topbar"><div class="brand">Infrastructure Report System</div><nav class="nav"><a href="reporthome.html">Home</a><a href="landing.html">About</a><a href="admin-login.html">Admin</a><a id="profileLink" href="reportform.html">User Login</a><a class="button" href="index.html">Report an issue</a></nav></header>
+<main class="wrap"><section class="hero"><div><div class="tag">Better infrastructure starts with you</div><h1>Make your neighborhood safer.</h1><p>Report potholes, damaged roads, broken streetlights, water leaks, and other public infrastructure problems directly from one simple platform.</p><div class="actions"><a class="primary" href="index.html">Submit a report →</a><a class="secondary" href="#how-it-works">Learn how it works</a></div></div><aside class="visual"><h2>Community impact</h2><div class="status"><strong id="reportCount">0</strong> reports submitted</div><div class="status">Fast, clear reporting for stronger communities.</div></aside></section><section class="section" id="how-it-works"><h2>How it works</h2><p>Three simple steps help local teams understand the problem.</p><div class="cards"><article class="card"><div class="icon">01</div><h3>Describe the issue</h3><p>Select the damage category, severity, and location so the problem is easy to understand.</p></article><article class="card"><div class="icon">02</div><h3>Add details</h3><p>Share a clear description and attach an optional photo to support your report.</p></article><article class="card"><div class="icon">03</div><h3>Get a reference ID</h3><p>Submit your report and receive a unique reference number for your records.</p></article></div></section></main><footer class="footer">Infrastructure Report System · Helping communities report and resolve infrastructure issues</footer>
+<script>const user=JSON.parse(sessionStorage.getItem("currentUser")||"null");if(user){const link=document.getElementById("profileLink");link.textContent=user.username;link.href="profile.html"}fetch('/api/reports' ).then(r=>r.json()).then(r=>document.getElementById('reportCount').textContent=r.length).catch(()=>{document.getElementById('reportCount').textContent=JSON.parse(localStorage.getItem('reports')||'[]').length});</script></body></html>
