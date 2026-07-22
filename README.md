@@ -6,7 +6,7 @@ A simple static infrastructure damage reporting form for reporting road, utility
 
 - `landing.html` – **Welcome/home page** with navigation, statistics, and quick access (START HERE!)
 - `home.html` – All-in-one dashboard with reporting form, admin panel, and statistics
-- `index.html` – Main reporting form UI with admin login modal
+- `index.html` – Main reporting form UI 
 - `styles.css` – Responsive form styling
 - `script.js` – Client-side submit handling and report preview
 - `admin.html` – Admin dashboard (access after login)
