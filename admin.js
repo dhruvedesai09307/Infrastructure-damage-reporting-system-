@@ -1,14 +1,11 @@
-const loginBox = document.getElementById('loginBox');
-const loginBtn = document.getElementById('loginBtn');
-const adminUser = document.getElementById('adminUser');
-const adminPass = document.getElementById('adminPass');
-const adminArea = document.getElementById('adminArea');
+// Check if admin is logged in; if not, redirect to the admin-specific login page
+if (!sessionStorage.getItem('adminLoggedIn')) {
+  window.location.href = 'admin-login.html';
+}
+
 const reportsList = document.getElementById('reportsList');
 const logoutBtn = document.getElementById('logoutBtn');
 const clearBtn = document.getElementById('clearBtn');
-
-const ADMIN_USERNAME = 'sujal';
-const ADMIN_PASSWORD = 'sujal123';
 
 function renderReports() {
   const reports = JSON.parse(localStorage.getItem('reports') || '[]').slice().reverse();
@@ -32,24 +29,12 @@ function renderReports() {
   reportsList.innerHTML = rows;
 }
 
-loginBtn.addEventListener('click', () => {
-  const username = adminUser.value || '';
-  const password = adminPass.value || '';
-  
-  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-    loginBox.classList.add('hidden');
-    adminArea.classList.remove('hidden');
-    renderReports();
-  } else {
-    alert('Incorrect username or password.');
-  }
-});
+// Render reports on page load
+renderReports();
 
 logoutBtn.addEventListener('click', () => {
-  adminUser.value = '';
-  adminPass.value = '';
-  adminArea.classList.add('hidden');
-  loginBox.classList.remove('hidden');
+  sessionStorage.removeItem('adminLoggedIn');
+  window.location.href = 'admin-login.html';
 });
 
 clearBtn.addEventListener('click', () => {

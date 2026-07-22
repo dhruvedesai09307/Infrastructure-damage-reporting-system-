@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infrastructure Damage Reporting System</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .navbar {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      padding: 16px 24px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: #e2e8f0;
+      border: 2px solid #cbd5e1;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #0f172a;
+      font-size: 1rem;
+    }
+
+    .tab-btn:hover {
+      background: #cbd5e1;
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+      border: 2px solid #86efac;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.08);
+    }
+
+    .stat-card h3 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #059669;
+    }
+
+    .stat-card p {
+      margin: 8px 0 0;
+      color: #047857;
+    }
+
+    .admin-section {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .admin-login-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .admin-login-card h2 {
+      text-align: center;
+      margin: 0 0 24px;
+      color: #0f172a;
+    }
+
+    .admin-login-card .field-group {
+      margin-bottom: 20px;
+    }
+
+    .admin-login-card button {
+      width: 100%;
+    }
+
+    .success-message {
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+      border: 2px solid #86efac;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-message h3 {
+      margin: 0 0 12px;
+      color: #059669;
+    }
+
+    .success-message p {
+      margin: 0;
+      color: #047857;
+    }
+
+    .reports-list-container {
+      max-width: 1000px;
+      margin: 24px auto;
+    }
+
+    .reports-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <h1>🏗️ Infrastructure Damage Reporting System</h1>
+    <p style="margin: 8px 0 0; font-size: 0.95rem; opacity: 0.9;">Report road damage, utilities, and public infrastructure issues</p>
+    <div id="userProfile" style="position:absolute;right:16px;top:12px;font-weight:600"></div>
+  </div>
+
+  <div class="container">
+    <section class="stats" style="margin-top: 24px;">
+      <div class="stat-card">
+        <h3 id="dashboardStatTotal">0</h3>
+        <p>Total Reports</p>
+      </div>
+      <div class="stat-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fef5f5 100%); border-color: #fca5a5;">
+        <h3 id="dashboardStatCritical" style="color: #991b1b;">0</h3>
+        <p style="color: #991b1b;">Critical Issues</p>
+      </div>
+      <div class="stat-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%); border-color: #fcd34d;">
+        <h3 id="dashboardStatHigh" style="color: #b45309;">0</h3>
+        <p style="color: #b45309;">High Priority</p>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('admin', this)">👨‍💼 Admin Panel</button>
+      <button class="tab-btn" onclick="switchTab('stats', this)">📊 Statistics</button>
+    </div>
+
+    <!-- Tab 1: Admin Panel -->
+    <div id="admin" class="tab-content active">
+    <div id="admin" class="tab-content">
+      <div class="admin-section">
+        <div class="admin-login-card">
+          <h2>Admin Access</h2>
+          
+          <div id="adminLoginError" style="color: #991b1b; background: #fee2e2; border: 1px solid #fca5a5; padding: 12px 16px; border-radius: 12px; margin-bottom: 20px; display: none;"></div>
+
+          <div id="adminPanel" style="display: none;">
+            <h3 style="margin-top: 0;">Dashboard</h3>
+            <div class="reports-list-header">
+              <p style="margin: 0; color: #475569;"><strong id="totalReports">0</strong> total reports</p>
+              <div style="display: flex; gap: 12px;">
+                <button id="adminRefresh" style="background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">Refresh</button>
+                <button id="adminLogout" style="background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">Logout</button>
+              </div>
+            </div>
+            <div id="adminReportsList" style="margin-top: 20px;"></div>
+          </div>
+
+          <form id="adminLoginForm" style="display: block;">
+            <div class="field-group">
+              <label for="adminUsername">Username</label>
+              <input type="text" id="adminUsername" placeholder="Enter username" required>
+            </div>
+
+            <div class="field-group">
+              <label for="adminPassword">Password</label>
+              <input type="password" id="adminPassword" placeholder="Enter password" required>
+            </div>
+
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Statistics -->
+    <div id="stats" class="tab-content">
+      <h2 style="text-align: center; margin-bottom: 24px;">System Statistics</h2>
+      
+      <div class="stats">
+        <div class="stat-card">
+          <h3 id="statTotal">0</h3>
+          <p>Total Reports</p>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #fef2f2 0%, #fef5f5 100%); border-color: #fca5a5;">
+          <h3 id="statCritical" style="color: #991b1b;">0</h3>
+          <p style="color: #991b1b;">Critical Issues</p>
+        </div>
+        <div class="stat-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%); border-color: #fcd34d;">
+          <h3 id="statHigh" style="color: #b45309;">0</h3>
+          <p style="color: #b45309;">High Priority</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <h3>Recent Reports</h3>
+        <div id="recentReports" style="max-width: 1000px; margin: 0 auto;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Tab switching
+    window.switchTab = function(tabName, btn) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      // Remove active from all buttons
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+      // Show selected tab
+      const tabEl = document.getElementById(tabName);
+      if (tabEl) tabEl.classList.add('active');
+      if (btn) btn.classList.add('active');
+
+      // Load data when switching to stats or admin
+      if (tabName === 'stats') updateStats();
+      if (tabName === 'admin') checkAdminSession();
+    };
+
+    // Update statistics
+    function updateStats() {
+      const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+      const critical = reports.filter(r => r.severity === 'Critical - Immediate danger').length;
+      const high = reports.filter(r => r.severity === 'High - Severe damage').length;
+
+      document.getElementById('statTotal').textContent = reports.length;
+      document.getElementById('statCritical').textContent = critical;
+      document.getElementById('statHigh').textContent = high;
+
+      const dashboardTotal = document.getElementById('dashboardStatTotal');
+      const dashboardCritical = document.getElementById('dashboardStatCritical');
+      const dashboardHigh = document.getElementById('dashboardStatHigh');
+      if (dashboardTotal) dashboardTotal.textContent = reports.length;
+      if (dashboardCritical) dashboardCritical.textContent = critical;
+      if (dashboardHigh) dashboardHigh.textContent = high;
+
+      // Recent reports
+      const recentReports = reports.slice(-5).reverse();
+      const recentHtml = recentReports.length === 0 
+        ? '<p style="text-align: center; color: #6b7280;">No reports yet</p>'
+        : recentReports.map(r => `
+          <div style="border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; margin-bottom: 12px;">
+            <p style="margin: 0 0 8px;"><strong>${r.fullName}</strong> - ${r.category}</p>
+            <p style="margin: 0; font-size: 0.9rem; color: #6b7280;">${new Date(r.submittedAt).toLocaleDateString()}</p>
+          </div>
+        `).join('');
+      document.getElementById('recentReports').innerHTML = recentHtml;
+    }
+
+    // Admin login
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const adminPanel = document.getElementById('adminPanel');
+    const adminLoginError = document.getElementById('adminLoginError');
+    const adminReportsList = document.getElementById('adminReportsList');
+
+    const ADMIN_USERNAME = 'sujal';
+    const ADMIN_PASSWORD = 'sujal123';
+
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('adminUsername').value.trim();
+      const password = document.getElementById('adminPassword').value.trim();
+
+      adminLoginError.style.display = 'none';
+
+      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        adminLoginForm.style.display = 'none';
+        adminPanel.style.display = 'block';
+        loadAdminReports();
+      } else {
+        adminLoginError.textContent = 'Invalid credentials';
+        adminLoginError.style.display = 'block';
+        document.getElementById('adminPassword').value = '';
+      }
+    });
+
+    function checkAdminSession() {
+      if (sessionStorage.getItem('adminLoggedIn')) {
+        adminLoginForm.style.display = 'none';
+        adminPanel.style.display = 'block';
+        loadAdminReports();
+      }
+    }
+
+    function loadAdminReports() {
+      const reports = JSON.parse(localStorage.getItem('reports') || '[]').reverse();
+      document.getElementById('totalReports').textContent = reports.length;
+
+      const html = reports.length === 0
+        ? '<p>No reports submitted yet.</p>'
+        : reports.map(r => {
+          const photoHtml = r.photoAttached && r.photoData ? `<img src="${r.photoData}" style="max-width:160px;border-radius:8px;margin-top:12px"/>` : '';
+          return `<div style="border:1px solid #e2e8f0;padding:16px;border-radius:12px;margin-bottom:12px">
+            <p><strong>ID:</strong> ${r.id} <strong style="margin-left:12px">${new Date(r.submittedAt).toLocaleString()}</strong></p>
+            <p><strong>Name:</strong> ${r.fullName} | <strong>Email:</strong> ${r.email} | <strong>Phone:</strong> ${r.phone}</p>
+            <p><strong>Location:</strong> ${r.state}, ${r.city} - ${r.location}</p>
+            <p><strong>Category:</strong> ${r.category} | <strong>Severity:</strong> ${r.severity}</p>
+            <p><strong>Description:</strong> ${r.description}</p>
+            ${photoHtml}
+          </div>`;
+        }).join('');
+      
+      adminReportsList.innerHTML = html;
+    }
+
+    document.getElementById('adminRefresh').addEventListener('click', loadAdminReports);
+
+    document.getElementById('adminLogout').addEventListener('click', () => {
+      sessionStorage.removeItem('adminLoggedIn');
+      adminLoginForm.style.display = 'block';
+      adminPanel.style.display = 'none';
+      adminLoginForm.reset();
+      adminLoginError.style.display = 'none';
+    });
+
+    // Show success message when report is submitted
+    const originalConsoleLog = console.log;
+    const damageForm = document.getElementById('damageForm');
+    if (damageForm) {
+      const originalSubmitHandler = damageForm.onsubmit;
+      damageForm.addEventListener('submit', function(e) {
+        setTimeout(() => {
+          const refId = document.getElementById('refId');
+          if (refId && refId.textContent !== '-') {
+            document.getElementById('refIdDisplay').textContent = refId.textContent;
+            document.getElementById('successMessage').classList.add('show');
+            setTimeout(() => {
+              document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+          }
+        }, 500);
+      });
+    }
+
+    // Render user profile (if logged in)
+    function renderUserProfile(){
+      const profileEl = document.getElementById('userProfile');
+      if(!profileEl) return;
+      const user = sessionStorage.getItem('userLoggedIn') || localStorage.getItem('userLoggedIn');
+      if(user){
+        profileEl.innerHTML = `<span style="margin-right:10px">${user}</span><button id="logoutUserBtn" style="background:#ef4444;color:#fff;border:none;padding:6px 10px;border-radius:8px;cursor:pointer">Logout</button>`;
+        const btn = document.getElementById('logoutUserBtn');
+        if(btn) btn.addEventListener('click', ()=>{
+          sessionStorage.removeItem('userLoggedIn');
+          localStorage.removeItem('userLoggedIn');
+          // refresh page to update UI
+          location.reload();
+        });
+      } else {
+        profileEl.innerHTML = '';
+      }
+    }
+    renderUserProfile();
+    updateStats();
+    checkAdminSession();
+  </script>
+</body>
+</html>

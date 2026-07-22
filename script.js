@@ -3,7 +3,6 @@ const resultSection = document.getElementById('result');
 const reportSummary = document.getElementById('reportSummary');
 const formFeedback = document.getElementById('formFeedback');
 
-<<<<<<< Updated upstream
 const stateSelect = document.getElementById('state');
 const citySelect = document.getElementById('city');
 
@@ -58,8 +57,6 @@ if (stateSelect) {
   });
 }
 
-=======
->>>>>>> Stashed changes
 function toBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -91,7 +88,6 @@ function validateLocation(location) {
 }
 
 function showFeedback(message) {
-<<<<<<< Updated upstream
   const el = document.getElementById('formFeedback');
   if (!el) return;
   el.textContent = message;
@@ -184,77 +180,3 @@ if (damageForm) {
     damageForm.reset();
   });
 }
-=======
-  formFeedback.textContent = message;
-  formFeedback.classList.remove('hidden');
-}
-
-function hideFeedback() {
-  formFeedback.textContent = '';
-  formFeedback.classList.add('hidden');
-}
-
-damageForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(damageForm);
-  const fullName = formData.get('fullName').trim();
-  const email = formData.get('email').trim();
-  const phone = formData.get('phone').trim();
-  const location = formData.get('location').trim();
-
-  const normalizedPhone = phone
-    .replace(/\s|[-()]/g, '')
-    .replace(/^\+?91/, '');
-  const finalPhone = normalizedPhone.length === 10 ? `+91${normalizedPhone}` : phone;
-
-  if (!validateEmail(email)) {
-    showFeedback('Please enter a valid email address.');
-    return;
-  }
-
-  if (!validatePhone(phone)) {
-    showFeedback('Please enter a valid Indian mobile number (10 digits, starting with 6-9).');
-    return;
-  }
-
-  if (!validateLocation(location)) {
-    showFeedback('Please enter a real address. Use a full street or landmark name so the damage location is clear.');
-    return;
-  }
-
-  hideFeedback();
-
-  const photoFile = formData.get('photo');
-  let photoData = null;
-
-  if (photoFile && photoFile.size > 0) {
-    photoData = await toBase64(photoFile);
-  }
-
-  const report = {
-    id: `REP-${Date.now()}-${Math.floor(Math.random() * 9000 + 1000)}`,
-    submittedAt: new Date().toISOString(),
-    fullName,
-    email,
-    phone: finalPhone,
-    location,
-    category: formData.get('category'),
-    severity: formData.get('severity'),
-    description: formData.get('description').trim(),
-    photoAttached: Boolean(photoData),
-    photoData: photoData || null,
-  };
-
-  // save to localStorage for admin review
-  const existing = JSON.parse(localStorage.getItem('reports') || '[]');
-  existing.push(report);
-  localStorage.setItem('reports', JSON.stringify(existing));
-
-  // show generic confirmation with reference id to user
-  const refEl = document.getElementById('refId');
-  if (refEl) refEl.textContent = report.id;
-  resultSection.classList.remove('hidden');
-  damageForm.reset();
-});
->>>>>>> Stashed changes

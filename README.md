@@ -4,36 +4,56 @@ A simple static infrastructure damage reporting form for reporting road, utility
 
 ## Files
 
-- `index.html` – main reporting form UI
-- `styles.css` – responsive form styling
-- `script.js` – client-side submit handling and report preview
-<<<<<<< Updated upstream
-- `admin.html` – simple admin page to view submitted reports (local demo)
-- `admin.js` – admin page logic
-=======
->>>>>>> Stashed changes
+- `landing.html` – **Welcome/home page** with navigation, statistics, and quick access (START HERE!)
+- `home.html` – All-in-one dashboard with reporting form, admin panel, and statistics
+- `index.html` – Main reporting form UI with admin login modal
+- `styles.css` – Responsive form styling
+- `script.js` – Client-side submit handling and report preview
+- `admin.html` – Admin dashboard (access after login)
+- `admin.js` – Admin page logic
+- `login.html` – Separate login page
+- `login.js` – Login authentication
+
+## Quick Start
+
+1. **Open `landing.html`** - Welcome page with all options
+2. Choose one of:
+   - **Report Damage** - Go to index.html to submit reports
+   - **Dashboard** - Open home.html for all-in-one experience
+   - **Admin Access** - Login to view reports
 
 ## Usage
 
-1. Open `index.html` in a browser.
-<<<<<<< Updated upstream
-2. Fill in the report details and submit. You will receive a reference ID.
-3. Admins can open `admin.html`, sign in with the demo password, and view all submissions stored locally.
+**Starting Point: Landing Page**
+- Open `landing.html` in a browser
+- See system statistics
+- Choose your action:
+  - Report new damage
+  - Access the full dashboard
+  - Login to admin panel
+
+**Report Damage Flow**
+1. Click "Report Damage" or open `index.html`
+2. Fill in all required details
+3. Submit with optional photo
+4. Get reference ID for your report
+
+**Admin Access Flow**
+1. From landing page, click "Access Admin"
+2. Enter credentials: username: `sujal` | password: `sujal123`
+3. View all submitted reports
+4. See report details with photos
 
 ## Admin Page (local demo)
 
 This project includes a simple local admin page for viewing submitted reports.
 
 - Open `admin.html` in a browser to view the admin panel.
-- Demo admin password: `admin123` (only for local testing).
+- Demo login: Username: `sujal`, Password: `sujal123` (only for local testing).
 
 Notes:
 - Submitted reports are stored in your browser's `localStorage` under the `reports` key.
 - For a production system, replace `localStorage` with a server-side database and implement secure authentication.
-=======
-2. Fill in the report details.
-3. Submit to see the captured report payload.
->>>>>>> Stashed changes
 
 ## Report Categories
 
@@ -57,8 +77,4 @@ Includes support for:
 - Manhole Cover Missing or Broken
 - Damage to Public Buildings
 - Park Equipment Damage
-<<<<<<< Updated upstream
 - Other (with description)
-=======
-- Other (with description)
->>>>>>> Stashed changes

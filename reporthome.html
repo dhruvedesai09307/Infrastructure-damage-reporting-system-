@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Report Damage</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="site-header">
+		<h1>Infrastructure Damage Reporting</h1>
+		<nav class="site-nav">
+			<a href="reporthome.html">Report Home</a>
+			<a href="landing.html">About</a>
+			<a href="admin.html">Admin</a>
+		</nav>
+	</header>
+
+	<main class="container">
+		<section class="reports-info">
+			<h2>Reports Overview</h2>
+			<p>Submission is disabled on this page. To submit a new report, use the main reporting page from the site navigation.</p>
+		</section>
+
+		<section class="recent-reports">
+			<h3>Recent Reports</h3>
+			<ul id="reportsList"></ul>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<small>&copy; Infrastructure Damage Reporting</small>
+	</footer>
+
+	<script>
+		// Render recent reports from localStorage (read-only on this page)
+		(function(){
+			const reportsList = document.getElementById('reportsList');
+			function renderReports(){
+				const items = JSON.parse(localStorage.getItem('idr_reports') || '[]');
+				if(!items.length){
+					reportsList.innerHTML = '<li>No reports available.</li>';
+					return;
+				}
+				reportsList.innerHTML = items.slice().reverse().map(r=>{
+					const when = new Date(r.timestamp).toLocaleString();
+					return `<li><strong>${r.damageType}</strong> — ${r.location} <em>(${when})</em><div>${(r.description||'').replace(/\n/g,'<br>')}</div></li>`;
+				}).join('');
+			}
+			renderReports();
+		})();
+	</script>
+</body>
+</html>
+

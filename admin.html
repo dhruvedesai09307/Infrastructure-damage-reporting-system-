@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Infrastructure Damage Reports</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>Admin Dashboard</h1>
+      <p>View and manage submitted infrastructure damage reports</p>
+    </div>
+
+    <div style="margin-bottom: 24px; display: flex; gap: 12px; justify-content: center;">
+      <button id="logoutBtn">Logout</button>
+      <button id="clearBtn">Clear All Reports</button>
+      <a href="reporthome.html" style="display: inline-block; background: #6b7280; color: white; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; cursor: pointer;">Back to Report Home</a>
+    </div>
+
+    <div id="reportsList" style="max-width: 1000px; margin: 0 auto;"></div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
