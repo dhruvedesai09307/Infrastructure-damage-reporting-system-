@@ -7,12 +7,16 @@ A simple static infrastructure damage reporting form for reporting road, utility
 - `index.html` – main reporting form UI
 - `styles.css` – responsive form styling
 - `script.js` – client-side submit handling and report preview
+<<<<<<< Updated upstream
 - `admin.html` – simple admin page to view submitted reports (local demo)
 - `admin.js` – admin page logic
+=======
+>>>>>>> Stashed changes
 
 ## Usage
 
 1. Open `index.html` in a browser.
+<<<<<<< Updated upstream
 2. Fill in the report details and submit. You will receive a reference ID.
 3. Admins can open `admin.html`, sign in with the demo password, and view all submissions stored locally.
 
@@ -26,6 +30,10 @@ This project includes a simple local admin page for viewing submitted reports.
 Notes:
 - Submitted reports are stored in your browser's `localStorage` under the `reports` key.
 - For a production system, replace `localStorage` with a server-side database and implement secure authentication.
+=======
+2. Fill in the report details.
+3. Submit to see the captured report payload.
+>>>>>>> Stashed changes
 
 ## Report Categories
 
@@ -49,4 +57,8 @@ Includes support for:
 - Manhole Cover Missing or Broken
 - Damage to Public Buildings
 - Park Equipment Damage
+<<<<<<< Updated upstream
 - Other (with description)
+=======
+- Other (with description)
+>>>>>>> Stashed changes
