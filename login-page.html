@@ -867,49 +867,39 @@ password.addEventListener("input", function(){
     }
 
 });
-
 // ================================
 // Login Validation
 // ================================
 
 const loginForm = document.getElementById("loginForm");
+const loginButton = document.querySelector(".login-btn");
 
 loginForm.addEventListener("submit", function(e){
 
     e.preventDefault();
 
-    const email=document.getElementById("email").value.trim();
-
-    const pass=password.value.trim();
-
-    if(email==="" || pass===""){
-
-        alert("Please fill in all fields.");
-
-        return;
-
-    }
-    loginForm.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
     const email = document.getElementById("email").value.trim();
-
     const pass = password.value.trim();
 
     if(email === "" || pass === ""){
 
         alert("Please fill in all fields.");
-
         return;
 
     }
 
-    alert("Login Successful!");
+    loginButton.innerHTML =
+    '<i class="fa-solid fa-spinner fa-spin"></i> Logging In...';
 
-    window.location.href = "home-page.html";
+    loginButton.disabled = true;
 
-});
+    setTimeout(function(){
+
+        //alert("Welcome to Infrastructure Damage Reporting System!");
+
+        window.location.href = "home-page.html";
+
+    },2000);
 
 });
 // ================================
@@ -947,31 +937,9 @@ window.addEventListener("load", function(){
     console.log("Infrastructure Damage Reporting System Loaded Successfully");
 
 });
+</script>
 
-// ================================
-// Login Button Loading Effect
-// ================================
+</body>
 
-const loginButton = document.querySelector(".login-btn");
+</html>
 
-loginForm.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    loginButton.innerHTML =
-    '<i class="fa-solid fa-spinner fa-spin"></i> Logging In...';
-
-    loginButton.disabled = true;
-
-    setTimeout(function(){
-
-        alert("Welcome to Infrastructure Damage Reporting System!");
-
-        loginButton.innerHTML =
-        '<i class="fa-solid fa-right-to-bracket"></i> Login';
-
-        loginButton.disabled = false;
-
-    },2000);
-
-});
