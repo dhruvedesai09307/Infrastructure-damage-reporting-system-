@@ -889,8 +889,27 @@ loginForm.addEventListener("submit", function(e){
         return;
 
     }
+    loginForm.addEventListener("submit", function(e){
 
-    alert("Login Successful! (Demo)");
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+
+    const pass = password.value.trim();
+
+    if(email === "" || pass === ""){
+
+        alert("Please fill in all fields.");
+
+        return;
+
+    }
+
+    alert("Login Successful!");
+
+    window.location.href = "home-page.html";
+
+});
 
 });
 // ================================
