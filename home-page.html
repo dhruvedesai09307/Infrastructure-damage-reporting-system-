@@ -85,89 +85,39 @@ right:-70px;
 
 /* Navigation */
 
-nav{
-
-width:100%;
-padding:18px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-position:fixed;
-top:0;
-left:0;
-z-index:1000;
-
+.topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    z-index:1000;
 }
 
-.logo{
-
-display:flex;
-align-items:center;
-gap:15px;
-
+.menu-icon{
+    font-size:28px;
+    cursor:pointer;
 }
 
-.logo i{
-
-font-size:34px;
-
+.logout-btn{
+    background:white;
+    color:#1b49d1;
+    border:none;
+    padding:10px 20px;
+    border-radius:30px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.logo-text h2{
-
-font-size:28px;
-font-weight:700;
-
-}
-
-.logo-text p{
-
-font-size:14px;
-opacity:.9;
-
-}
-
-nav ul{
-
-display:flex;
-list-style:none;
-gap:30px;
-
-}
-
-nav ul li a{
-
-text-decoration:none;
-color:white;
-font-weight:500;
-transition:.3s;
-
-}
-
-nav ul li a:hover{
-
-color:#d7e4ff;
-
-}
-
-.login-btn{
-
-padding:10px 24px;
-background:white;
-border-radius:30px;
-color:#1c47cf;
-font-weight:600;
-text-decoration:none;
-transition:.3s;
-
-}
-
-.login-btn:hover{
-
-transform:translateY(-2px);
-
+.logout-btn:hover{
+    transform:translateY(-2px);
 }
 
 /* Hero Section */
@@ -301,9 +251,88 @@ font-size:18px;
 
 margin-right:10px;
 color:#fff;
+}
+
+
 
 /* Paste ALL the CSS from Part 2 here */
+/* ===================== */
+/* Common Section Styles */
+/* ===================== */
 
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo i{
+    font-size:32px;
+}
+
+.logo-text h2{
+    margin:0;
+    font-size:24px;
+}
+
+.logo-text p{
+    margin:0;
+    font-size:12px;
+    opacity:.8;
+}
+
+.section-title{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.section-subtitle{
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 40px;
+    line-height:30px;
+    opacity:.9;
+}
+
+.stat-card,
+.category-card{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(12px);
+    padding:35px;
+    border-radius:22px;
+    text-align:center;
+    transition:.35s;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.stat-card:hover,
+.category-card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,.18);
+}
+
+.stat-card i,
+.category-card i{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.stat-card h2{
+    margin-bottom:10px;
+}
+.categories{
+    padding:80px 8%;
+}
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.categories{
+    padding:80px 8%;
+}
 /* ===================== */
 /* Statistics Section */
 /* ===================== */
@@ -317,7 +346,6 @@ gap:25px;
 
 }
 
-}
 /* ===================== */
 /* How It Works */
 /* ===================== */
@@ -869,120 +897,189 @@ opacity:.8;
 /* Responsive Design */
 /* ===================== */
 
-@media(max-width:1100px){
+@media (max-width:1100px){
 
-.hero,
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-left,
+.hero-right{
+    width:100%;
+}
+
+.hero-right{
+    margin-top:40px;
+}
+
 .statistics,
 .category-grid,
 .steps-container,
 .emergency-grid,
 .feature-grid,
 .footer-container{
-
-display:block;
-
+    grid-template-columns:1fr;
 }
 
-.hero-left,
-.hero-right{
-
-width:100%;
-
-}
-
-.hero-right{
-
-margin-top:50px;
-
-}
-
-.stat-card,
-.category-card,
-.step-box,
-.emergency-card,
-.feature-card{
-
-margin-bottom:25px;
-
+.hero-buttons{
+    justify-content:center;
+    flex-wrap:wrap;
 }
 
 .report-controls{
-
-flex-direction:column;
-align-items:center;
-
+    flex-direction:column;
+    align-items:center;
 }
 
 .report-controls input{
-
-width:100%;
-
+    width:100%;
+    max-width:500px;
 }
 
 .hero-left h1{
+    font-size:42px;
+    line-height:55px;
+}
 
-font-size:42px;
-line-height:55px;
+.topbar{
+    padding:0 15px;
+}
+
+.logo-text p{
+    display:none;
+}
+
+.cta-content{
+    padding:35px 20px;
+}
+
+.cta-content h2{
+    font-size:32px;
+}
+
+table{
+    min-width:700px;
+}
 
 }
 
-nav{
+/* Close Button */
 
-flex-direction:column;
-gap:20px;
+.close-btn{
+    position:absolute;
+    top:18px;
+    right:18px;
+    width:36px;
+    height:36px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    color:white;
+    cursor:pointer;
+    z-index:3000;
+}
+
+.close-btn:hover{
+    transform:scale(1.1);
+}
+
+.side-menu{
+    position:fixed;
+    left:-260px;
+    top:0;
+    width:250px;
+    height:100%;
+    background:#244fcf;
+    padding-top:70px;
+    overflow-y:auto;
+    transition:.35s;
+    z-index:2000;
+}
+
+.side-menu a{
+
+display:block;
+
+padding:18px 25px;
+
+color:white;
+
+text-decoration:none;
+
+font-size:18px;
+
+transition:.3s;
 
 }
 
-nav ul{
+.side-menu a:hover{
 
-flex-wrap:wrap;
-justify-content:center;
-
-}
+background:rgba(255,255,255,.15);
 
 }
 
+.side-menu.show{
+
+left:0;
+
+}
 </style>
 
 </head>
 
-<body>
+<body id="top">
 
 <div class="circle circle1"></div>
 <div class="circle circle2"></div>
 <div class="circle circle3"></div>
 <div class="circle circle4"></div>
 
-<nav>
+<header class="topbar">
 
-<div class="logo">
+    <div class="menu-icon" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
 
-<i class="fas fa-road"></i>
+    <div class="logo">
+        <i class="fas fa-road"></i>
 
-<div class="logo-text">
+        <div class="logo-text">
+            <h2>IDRS</h2>
+            <p>Infrastructure Damage Reporting System</p>
+        </div>
+    </div>
 
-<h2>IDRS</h2>
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-right-from-bracket"></i>
+        Logout
+    </button>
 
-<p>Infrastructure Damage Reporting System</p>
+</header>
 
+<div id="sideMenu" class="side-menu">
+
+<div class="close-btn" onclick="toggleMenu()">
+    <i class="fas fa-times"></i>
 </div>
 
+<a href="#top" onclick="toggleMenu()"><i class="fas fa-house"></i> Dashboard</a>
+
+<a href="#report" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
+
+<a href="#track" onclick="toggleMenu()"><i class="fas fa-location-dot"></i> Track Report</a>
+
+<a href="#about" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> About</a>
+
+<a href="#contact" onclick="toggleMenu()"><i class="fas fa-phone"></i> Contact</a>
+
+<a href="#" onclick="logout(); return false;">
+<i class="fas fa-right-from-bracket"></i>
+Logout
+</a>
+
 </div>
-
-<ul>
-
-<li><a href="#">Home</a></li>
-<li><a href="#">Report Damage</a></li>
-<li><a href="#">Track Report</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">Contact</a></li>
-
-</ul>
-
-<a href="#" class="login-btn" id="loginBtn" style="display:none;">Login</a>
-
-</nav>
-
 <section class="hero">
 
 <div class="hero-left">
@@ -1007,7 +1104,7 @@ Together we can help authorities maintain safer cities.
 
 <div class="hero-buttons">
 
-<a href="#" class="btn1">
+<a href="#report" class="btn1">
 
 <i class="fas fa-plus-circle"></i>
 
@@ -1015,7 +1112,7 @@ Report Now
 
 </a>
 
-<a href="#" class="btn2">
+<a href="#track" class="btn2">
 
 <i class="fas fa-location-dot"></i>
 
@@ -1279,7 +1376,7 @@ Follow these simple steps to report any infrastructure damage.
 <!-- CTA Section -->
 <!-- ===================== -->
 
-<section class="cta">
+<section id="report" class="cta">
 
 <div class="cta-content">
 
@@ -1293,7 +1390,7 @@ infrastructure much faster.
 
 </p>
 
-<a href="#" class="cta-btn">
+<a href="#report" class="cta-btn">
 
 <i class="fas fa-triangle-exclamation"></i>
 
@@ -1308,7 +1405,7 @@ Report Damage Now
 <!-- Recent Reports Section -->
 <!-- ===================== -->
 
-<section class="recent-reports">
+<section id="track" class="recent-reports">
 
 <h2 class="section-title">Recent Damage Reports</h2>
 
@@ -1531,7 +1628,7 @@ Quick access to important emergency services.
 <!-- Why Choose IDRS -->
 <!-- ===================== -->
 
-<section class="features">
+<section id="about" class="features">
 
 <h2 class="section-title">
 
@@ -1654,7 +1751,7 @@ Everything you need to know about reporting infrastructure damage.
 <!-- Footer -->
 <!-- ===================== -->
 
-<footer>
+<footer id="contact">
 
 <div class="footer-container">
 
@@ -1678,15 +1775,11 @@ authorities to respond efficiently.
 
 <ul>
 
-<li><a href="#">Home</a></li>
-
-<li><a href="#">Report Damage</a></li>
-
-<li><a href="#">Track Report</a></li>
-
-<li><a href="#">About</a></li>
-
-<li><a href="#">Contact</a></li>
+<li><a href="#top">Home</a></li>
+<li><a href="#report">Report Damage</a></li>
+<li><a href="#track">Track Report</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
 
 </ul>
 
@@ -1715,7 +1808,21 @@ authorities to respond efficiently.
 </div>
 
 </footer>
+<script>
 
+function toggleMenu(){
+
+document.getElementById("sideMenu").classList.toggle("show");
+
+}
+
+function logout(){
+
+window.location.href="login-page.html";
+
+}
+
+</script>
 </body>
 
 </html>
