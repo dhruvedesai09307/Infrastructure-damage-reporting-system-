@@ -1,2 +1,159 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign in | Infrastructure Report System</title><link rel="stylesheet" href="styles.css"><style>.auth{max-width:440px;margin:80px auto;background:#fff;padding:36px;border:1px solid #e2e8f0;border-radius:18px;box-shadow:0 12px 30px #0f172a12}.auth h1{margin-top:0;color:#183fa8}.auth button{width:100%}.error{display:none;background:#fee2e2;color:#991b1b;padding:12px;border-radius:8px;margin-bottom:16px}</style><style>.topbar{background:linear-gradient(135deg,#5575d2,#2454d6);border-bottom:1px solid #e2e8f0;padding:18px 6%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:1.2rem;font-weight:800;color:#183fa8}.nav{display:flex;gap:24px;align-items:center}.nav a{color:#fff;text-decoration:none;font-weight:600}.nav .button{background:#fff;color:#183fa8;padding:11px 18px;border-radius:9px}@media(max-width:760px){.topbar{display:block}.nav{margin-top:16px;gap:14px;flex-wrap:wrap}}</style></head><body>
-<header class="topbar"><div class="brand">Infrastructure Report System</div><nav class="nav"><a href="reporthome.html">Home</a><a href="landing.html">About</a><a href="admin-login.html">Admin</a><a href="reportform.html">User Login</a><a class="button" href="index.html">Report an issue</a></nav></header><main class="auth"><h1>Welcome back</h1><p>Sign in to access the report submission form and your profile.</p><div id="loginError" class="error"></div><form id="loginForm"><div class="field-group"><label for="username">Username</label><input id="username" type="text" required minlength="3" placeholder="Enter your username"></div><div class="field-group"><label for="email">Email</label><input id="email" type="text" required placeholder="you@example.com"></div><div class="field-group"><label for="password">Password</label><input id="password" type="password" minlength="6" required placeholder="Minimum 6 characters"></div><button type="submit">Sign in</button></form><p><a href="reporthome.html">← Back to home</a></p></main><script src="login.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infrastructure Damage Report</title>
+  <link rel="stylesheet" href="styles.css">
+<style>.topbar{background:linear-gradient(135deg,#5575d2,#2454d6);border-bottom:1px solid #e2e8f0;padding:18px 6%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:1.2rem;font-weight:800;color:#183fa8}.nav{display:flex;gap:24px;align-items:center}.nav a{color:#fff;text-decoration:none;font-weight:600}.nav .button{background:#fff;color:#183fa8;padding:11px 18px;border-radius:9px}@media(max-width:760px){.topbar{display:block}.nav{margin-top:16px;gap:14px;flex-wrap:wrap}}</style></head>
+<body>
+<script>(function(){if(!sessionStorage.getItem("currentUser")){window.location.href="mainlogin.html";}})();</script>
+<header class="topbar"><div class="brand">Infrastructure Report System</div><nav class="nav"><a href="reporthome.html">Home</a><a href="landing.html">About</a><a href="admin-login.html">Admin</a><a href="mainlogin.html">User Login</a><a class="button" href="reportform.html">Report an issue</a></nav></header>
+  <div class="container">
+    <div class="hero">
+      <h1>Infrastructure Damage Report</h1>
+      <p>Report road damage, utility issues, and public infrastructure problems in your area</p>
+      <p style="margin-top: 16px;">
+        <a href="reporthome.html" style="display: inline-block; background: linear-gradient(135deg, #2454d6 0%, #183fa8 100%); color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600;">Go to Report Home</a>
+      </p>
+    </div>
+
+    <form class="report-form" id="damageForm">
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 9876543210" required>
+        </div>
+
+        <div class="field-group">
+          <label for="state">State *</label>
+          <select id="state" name="state" required>
+            <option value="">Select your state</option>
+            <option>Andhra Pradesh</option>
+            <option>Arunachal Pradesh</option>
+            <option>Assam</option>
+            <option>Bihar</option>
+            <option>Chhattisgarh</option>
+            <option>Goa</option>
+            <option>Gujarat</option>
+            <option>Haryana</option>
+            <option>Himachal Pradesh</option>
+            <option>Jharkhand</option>
+            <option>Karnataka</option>
+            <option>Kerala</option>
+            <option>Madhya Pradesh</option>
+            <option>Maharashtra</option>
+            <option>Manipur</option>
+            <option>Meghalaya</option>
+            <option>Mizoram</option>
+            <option>Nagaland</option>
+            <option>Odisha</option>
+            <option>Punjab</option>
+            <option>Rajasthan</option>
+            <option>Sikkim</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Tripura</option>
+            <option>Uttar Pradesh</option>
+            <option>Uttarakhand</option>
+            <option>West Bengal</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="city">City *</label>
+          <select id="city" name="city" required>
+            <option value="">Select your city</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="location">Location Details *</label>
+          <input type="text" id="location" name="location" placeholder="Street name, landmark, or area" required>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="category">Damage Category *</label>
+          <select id="category" name="category" required>
+            <option value="">Select category</option>
+            <option>Pothole / Damaged Road</option>
+            <option>Cracked Road</option>
+            <option>Bridge Damage</option>
+            <option>Streetlight Not Working</option>
+            <option>Traffic Signal Not Working</option>
+            <option>Water Leakage</option>
+            <option>Burst Water Pipeline</option>
+            <option>Drainage / Sewer Overflow</option>
+            <option>Garbage Not Collected</option>
+            <option>Fallen Tree</option>
+            <option>Electric Pole Damage</option>
+            <option>Hanging or Broken Electric Wires</option>
+            <option>Damaged Road Sign</option>
+            <option>Damaged Bus Stop</option>
+            <option>Waterlogging / Flooding</option>
+            <option>Footpath / Sidewalk Damage</option>
+            <option>Manhole Cover Missing or Broken</option>
+            <option>Damage to Public Buildings</option>
+            <option>Park Equipment Damage</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="severity">Severity Level *</label>
+          <select id="severity" name="severity" required>
+            <option value="">Select severity</option>
+            <option>Low - Minor damage</option>
+            <option>Medium - Moderate damage</option>
+            <option>High - Severe damage</option>
+            <option>Critical - Immediate danger</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="description">Description of Damage *</label>
+        <textarea id="description" name="description" placeholder="Provide detailed description of the damage..." required></textarea>
+      </div>
+
+      <div class="field-group">
+        <label for="photo">Attach Photo (Optional)</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+      </div>
+
+      <div id="formFeedback" class="form-feedback hidden"></div>
+
+      <div class="form-actions">
+        <button type="submit">Submit Report</button>
+      </div>
+    </form>
+
+    <div id="result" class="result hidden">
+      <h2>✓ Report Submitted Successfully</h2>
+      <p>Thank you for reporting the infrastructure damage. Your report has been recorded with the following reference ID:</p>
+      <p style="font-size: 1.3rem; font-weight: bold; color: #059669; margin-top: 12px;">
+        Reference ID: <span id="refId">-</span>
+      </p>
+      <div id="reportSummary" class="report-summary"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
