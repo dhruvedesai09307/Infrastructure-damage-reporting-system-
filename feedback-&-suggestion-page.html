@@ -301,6 +301,24 @@
       background: #eef3ff;
     }
 
+    .back-home-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 28px;
+  background: white;
+  color: #11469f;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.back-home-btn:hover {
+  background: #eef3ff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(8, 35, 112, 0.25);
+}
+
     .info-card {
       margin-bottom: 20px;
     }
@@ -440,7 +458,7 @@
     </div>
 
     <nav>
-      <a href="#">Home</a>
+      <a href="./home-page.html">Home</a>
       <a href="#">Report Damage</a>
       <a href="#">My Reports</a>
       <a href="#" class="active">Feedback</a>
@@ -450,10 +468,15 @@
   </header>
 
   <main>
+
     <div class="page-heading">
-      <h2>Feedback & Suggestions</h2>
-      <p>Your feedback helps us improve public infrastructure reporting services.</p>
-    </div>
+  <h2>Feedback & Suggestions</h2>
+  <p>Your feedback helps us improve public infrastructure reporting services.</p>
+
+  <a href="home-page.html" class="back-home-btn">
+    ← Back to Home
+  </a>
+</div>
 
     <div class="layout">
       <section class="glass-card">
