@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback & Suggestions</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+    :root {
+      --deep-blue: #0b3dbd;
+      --primary-blue: #164fcb;
+      --blue: #2559c7;
+      --light-blue: #8da9e8;
+      --soft-blue: #b6c8f5;
+      --white: #ffffff;
+      --glass: rgba(120, 151, 222, 0.52);
+      --glass-border: rgba(255, 255, 255, 0.28);
+      --text-muted: #e8eeff;
+      --input-text: #173a8f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Poppins", Arial, sans-serif;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--deep-blue), var(--primary-blue), var(--blue));
+      overflow-x: hidden;
+    }
+
+    /* Background decorative circles */
+    .circle {
+      position: fixed;
+      border-radius: 50%;
+      background: rgba(180, 204, 255, 0.18);
+      pointer-events: none;
+    }
+
+    .circle-one {
+      width: 250px;
+      height: 250px;
+      top: 130px;
+      left: -85px;
+    }
+
+    .circle-two {
+      width: 120px;
+      height: 120px;
+      top: 215px;
+      right: 80px;
+    }
+
+    .circle-three {
+      width: 280px;
+      height: 280px;
+      bottom: -90px;
+      right: -70px;
+    }
+
+    .circle-four {
+      width: 105px;
+      height: 105px;
+      bottom: 95px;
+      left: 12%;
+    }
+
+    header {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      background: rgba(125, 156, 226, 0.25);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-size: 24px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.25s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .profile {
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 90%);
+      margin: 45px auto;
+    }
+
+    .page-heading {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .page-heading h2 {
+      font-size: clamp(28px, 4vw, 39px);
+      font-weight: 700;
+    }
+
+    .page-heading p {
+      margin-top: 8px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.65fr 1fr;
+      gap: 24px;
+    }
+
+    .glass-card {
+      padding: 30px;
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      background: var(--glass);
+      box-shadow: 0 18px 45px rgba(4, 25, 94, 0.28);
+      backdrop-filter: blur(13px);
+      -webkit-backdrop-filter: blur(13px);
+    }
+
+    .glass-card h3 {
+      font-size: 22px;
+      margin-bottom: 7px;
+    }
+
+    .card-description {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: none;
+      outline: none;
+      border-radius: 11px;
+      padding: 14px 15px;
+      color: var(--input-text);
+      font-family: inherit;
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 3px rgba(205, 219, 255, 0.55);
+    }
+
+    .rating-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .rating-options input {
+      display: none;
+    }
+
+    .rating-options label {
+      width: 42px;
+      height: 42px;
+      margin: 0;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.14);
+      transition: 0.25s;
+      font-size: 19px;
+    }
+
+    .rating-options input:checked + label,
+    .rating-options label:hover {
+      color: #164fcb;
+      background: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .checkbox-area {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 5px 0 21px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .checkbox-area input {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--white);
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      background: var(--white);
+      color: #11469f;
+      font: 600 15px "Poppins", sans-serif;
+      transition: 0.25s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(8, 35, 112, 0.25);
+      background: #eef3ff;
+    }
+
+    .info-card {
+      margin-bottom: 20px;
+    }
+
+    .info-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .feedback-types {
+      margin-top: 17px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .feedback-type {
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 12px;
+    }
+
+    .feedback-type strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+      margin-top: 24px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 17px 8px;
+      border-radius: 13px;
+      background: rgba(230, 239, 255, 0.28);
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 23px;
+    }
+
+    .stat-box span {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 20px 28px;
+      color: var(--soft-blue);
+      font-size: 12px;
+    }
+
+    @media (max-width: 850px) {
+      header {
+        padding: 0 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 540px) {
+      header {
+        height: 72px;
+      }
+
+      .brand h1 {
+        font-size: 16px;
+      }
+
+      .brand span {
+        font-size: 9px;
+      }
+
+      main {
+        width: 92%;
+        margin: 30px auto;
+      }
+
+      .glass-card {
+        padding: 22px 18px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="circle circle-one"></div>
+  <div class="circle circle-two"></div>
+  <div class="circle circle-three"></div>
+  <div class="circle circle-four"></div>
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">⚠</div>
+      <div>
+        <h1>Infrastructure Report</h1>
+        <span>Report • Track • Improve Public Infrastructure</span>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Report Damage</a>
+      <a href="#">My Reports</a>
+      <a href="#" class="active">Feedback</a>
+    </nav>
+
+    <div class="profile">👤</div>
+  </header>
+
+  <main>
+    <div class="page-heading">
+      <h2>Feedback & Suggestions</h2>
+      <p>Your feedback helps us improve public infrastructure reporting services.</p>
+    </div>
+
+    <div class="layout">
+      <section class="glass-card">
+        <h3>Share Your Experience</h3>
+        <p class="card-description">
+          Tell us what is working well and what we can improve.
+        </p>
+
+        <form>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Enter your full name" />
+            </div>
+
+            <div class="input-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="Enter your email address" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label for="category">Feedback Category</label>
+              <select id="category">
+                <option>Select a category</option>
+                <option>Website Experience</option>
+                <option>Report Submission</option>
+                <option>Tracking Reports</option>
+                <option>Service Improvement</option>
+                <option>Other Suggestion</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="location">City / Area</label>
+              <input type="text" id="location" placeholder="Enter your city or area" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>How would you rate our service?</label>
+
+            <div class="rating-options">
+              <input type="radio" name="rating" id="r1" />
+              <label for="r1">😞</label>
+
+              <input type="radio" name="rating" id="r2" />
+              <label for="r2">😐</label>
+
+              <input type="radio" name="rating" id="r3" />
+              <label for="r3">🙂</label>
+
+              <input type="radio" name="rating" id="r4" />
+              <label for="r4">😊</label>
+
+              <input type="radio" name="rating" id="r5" />
+              <label for="r5">🤩</label>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="message">Your Feedback or Suggestion</label>
+            <textarea
+              id="message"
+              placeholder="Write your feedback, issue, or suggestion here..."
+            ></textarea>
+          </div>
+
+          <div class="checkbox-area">
+            <input type="checkbox" id="anonymous" />
+            <label for="anonymous">Submit this feedback anonymously</label>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            ✉ Submit Feedback
+          </button>
+        </form>
+      </section>
+
+      <aside>
+        <div class="glass-card info-card">
+          <h4>💡 Why Your Feedback Matters</h4>
+          <p>
+            Every suggestion helps us create a faster, clearer, and more reliable
+            infrastructure damage reporting platform for citizens.
+          </p>
+
+          <div class="feedback-types">
+            <div class="feedback-type">
+              <strong>⚙ Service Improvement</strong>
+              Suggest better features or services.
+            </div>
+
+            <div class="feedback-type">
+              <strong>🖥 Website Experience</strong>
+              Tell us about usability or technical problems.
+            </div>
+
+            <div class="feedback-type">
+              <strong>🏗 Public Infrastructure</strong>
+              Share ideas for improving local infrastructure.
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card info-card">
+          <h4>📊 Community Impact</h4>
+
+          <div class="stats">
+            <div class="stat-box">
+              <strong>12.5K</strong>
+              <span>Reports Filed</span>
+            </div>
+
+            <div class="stat-box">
+              <strong>10.9K</strong>
+              <span>Resolved Cases</span>
+            </div>
+
+            <div class="stat-box">
+              <strong>87%</strong>
+              <span>Satisfaction</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Infrastructure Damage Reporting System · Building safer communities together.
+  </footer>
+</body>
+</html>
