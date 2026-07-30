@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Help & Support | Infrastructure Damage Reporting System</title>
+
+<!-- Google Font -->
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+
+background:#F3F4F6;
+color:#374151;
+overflow-x:hidden;
+
+}
+
+/* ============================= */
+/* Navigation */
+/* ============================= */
+
+.topbar{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:70px;
+background:#FFFFFF;
+border-bottom:1px solid #E5E7EB;
+box-shadow:0 2px 8px rgba(0,0,0,.05);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 30px;
+z-index:1000;
+
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+}
+
+.logo i{
+
+font-size:32px;
+color:#2F3B4A;
+
+}
+
+.logo-text h2{
+
+font-size:24px;
+color:#111827;
+
+}
+
+.logo-text p{
+
+font-size:12px;
+color:#6B7280;
+
+}
+
+.menu-icon{
+
+font-size:26px;
+cursor:pointer;
+color:#374151;
+
+}
+
+.logout-btn{
+
+background:#2F3B4A;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+
+}
+
+.logout-btn:hover{
+
+background:#1F2937;
+
+}
+
+/* ============================= */
+/* Side Menu */
+/* ============================= */
+
+.side-menu{
+
+position:fixed;
+left:-260px;
+top:0;
+width:250px;
+height:100%;
+background:#FFFFFF;
+border-right:1px solid #E5E7EB;
+box-shadow:5px 0 20px rgba(0,0,0,.08);
+padding-top:70px;
+overflow-y:auto;
+transition:.35s;
+z-index:999;
+
+}
+
+.side-menu.show{
+
+left:0;
+
+}
+
+.side-menu a{
+
+display:block;
+padding:18px 25px;
+text-decoration:none;
+color:#374151;
+font-size:18px;
+transition:.3s;
+
+}
+
+.side-menu a:hover{
+
+background:#F3F4F6;
+
+}
+
+.close-btn{
+
+position:absolute;
+top:18px;
+right:18px;
+font-size:24px;
+cursor:pointer;
+
+}
+
+/* ============================= */
+/* Hero */
+/* ============================= */
+
+.hero{
+
+padding:130px 8% 70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:50px;
+
+}
+
+.hero-left{
+
+width:58%;
+
+}
+
+.hero-left h1{
+
+font-size:58px;
+font-weight:800;
+color:#111827;
+line-height:72px;
+margin-bottom:25px;
+
+}
+
+.hero-left span{
+
+color:#2563EB;
+
+}
+
+.hero-left p{
+
+font-size:18px;
+line-height:34px;
+color:#6B7280;
+margin-bottom:35px;
+
+}
+
+.search-box{
+
+width:100%;
+max-width:600px;
+background:white;
+border:1px solid #E5E7EB;
+border-radius:50px;
+display:flex;
+align-items:center;
+padding:16px 22px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.search-box i{
+
+font-size:20px;
+color:#2563EB;
+margin-right:15px;
+
+}
+
+.search-box input{
+
+border:none;
+outline:none;
+width:100%;
+font-size:17px;
+background:transparent;
+color:#374151;
+
+}
+
+.hero-right{
+
+width:36%;
+
+}
+
+.support-card{
+
+background:white;
+border:1px solid #E5E7EB;
+border-radius:25px;
+padding:35px;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+}
+
+.support-card i{
+
+font-size:55px;
+color:#2563EB;
+margin-bottom:20px;
+
+}
+
+.support-card h2{
+
+font-size:30px;
+margin-bottom:15px;
+
+}
+
+.support-card p{
+
+font-size:17px;
+line-height:32px;
+color:#6B7280;
+margin-bottom:25px;
+
+}
+
+.support-card ul{
+
+list-style:none;
+
+}
+
+.support-card li{
+
+margin:14px 0;
+font-size:17px;
+
+}
+
+.support-card li i{
+
+font-size:16px;
+margin-right:10px;
+color:#22C55E;
+
+}
+
+/* ============================= */
+/* Quick Help */
+/* ============================= */
+
+.quick-help{
+
+padding:30px 8% 90px;
+
+}
+
+.section-title{
+
+text-align:center;
+font-size:42px;
+font-weight:700;
+color:#111827;
+margin-bottom:15px;
+
+}
+
+.section-subtitle{
+
+text-align:center;
+max-width:750px;
+margin:auto;
+font-size:18px;
+line-height:32px;
+color:#6B7280;
+margin-bottom:45px;
+
+}
+
+.help-grid{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:28px;
+
+}
+
+.help-card{
+
+background:white;
+border:1px solid #E5E7EB;
+border-radius:22px;
+padding:35px 28px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+transition:.35s;
+
+}
+
+.help-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.help-card i{
+
+font-size:48px;
+color:#2563EB;
+margin-bottom:20px;
+
+}
+
+.help-card h3{
+
+font-size:24px;
+margin-bottom:15px;
+color:#111827;
+
+}
+
+.help-card p{
+
+font-size:17px;
+line-height:30px;
+color:#6B7280;
+
+}
+
+@media(max-width:1100px){
+
+.hero{
+
+flex-direction:column;
+
+}
+
+.hero-left,
+.hero-right{
+
+width:100%;
+
+}
+
+.help-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero-left h1{
+
+font-size:42px;
+line-height:55px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="menu-icon" onclick="toggleMenu()">
+
+<i class="fas fa-bars"></i>
+
+</div>
+
+<div class="logo">
+
+<i class="fas fa-circle-question"></i>
+
+<div class="logo-text">
+
+<h2>IDRS</h2>
+
+<p>Infrastructure Damage Reporting System</p>
+
+</div>
+
+</div>
+
+<button class="logout-btn" onclick="logout()">
+
+<i class="fas fa-right-from-bracket"></i>
+
+Logout
+
+</button>
+
+</header>
+
+<div id="sideMenu" class="side-menu">
+
+<div class="close-btn" onclick="toggleMenu()">
+
+<i class="fas fa-times"></i>
+
+</div>
+
+<a href="./home-page.html"><i class="fas fa-house"></i> Home</a>
+
+<a href="./report-damage-page.html"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
+
+<a href="./track-report-page.html"><i class="fas fa-location-dot"></i> Track Complaint</a>
+
+<a href="./feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</a>
+
+<a href="./terms-and-condition-page.html"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+
+<a href="./About-project-page.html"><i class="fas fa-circle-info"></i> About Project</a>
+
+<a href="./help-and-support-page.html"><i class="fas fa-circle-question"></i> Help & Support</a>
+
+</div>
+
+<section class="hero">
+
+<div class="hero-left">
+
+<h1>
+
+Need <span>Help?</span><br>
+
+We're Here To Assist You.
+
+</h1>
+
+<p>
+
+Welcome to the Help & Support Center of the Infrastructure Damage Reporting System. Here you can find answers to common questions, understand how the reporting system works, learn about complaint tracking, and get assistance whenever you need it.
+
+</p>
+
+<div class="search-box">
+
+<i class="fas fa-search"></i>
+
+<input
+type="text"
+placeholder="Search help articles, FAQs, complaint status...">
+
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<div class="support-card">
+
+<i class="fas fa-headset"></i>
+
+<h2>Support Center</h2>
+
+<p>
+
+Everything you need to use the Infrastructure Damage Reporting System efficiently.
+
+</p>
+
+<ul>
+
+<li><i class="fas fa-check-circle"></i> Frequently Asked Questions</li>
+
+<li><i class="fas fa-check-circle"></i> Complaint Tracking Help</li>
+
+<li><i class="fas fa-check-circle"></i> Step-by-Step Guides</li>
+
+<li><i class="fas fa-check-circle"></i> Emergency Contacts</li>
+
+<li><i class="fas fa-check-circle"></i> Technical Support</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="quick-help">
+
+<h2 class="section-title">
+
+Quick Help
+
+</h2>
+
+<p class="section-subtitle">
+
+Choose a topic below to quickly find the information you are looking for.
+
+</p>
+
+<div class="help-grid">
+
+<div class="help-card">
+
+<i class="fas fa-file-circle-plus"></i>
+
+<h3>Report Damage</h3>
+
+<p>
+
+Learn how to submit infrastructure damage reports correctly with photos and descriptions.
+
+</p>
+
+</div>
+
+<div class="help-card">
+
+<i class="fas fa-location-dot"></i>
+
+<h3>Track Complaint</h3>
+
+<p>
+
+Check the current progress and status of your submitted complaint.
+
+</p>
+
+</div>
+
+<div class="help-card">
+
+<i class="fas fa-user-shield"></i>
+
+<h3>Account Help</h3>
+
+<p>
+
+Find help with login, password recovery and profile management.
+
+</p>
+
+</div>
+
+<div class="help-card">
+
+<i class="fas fa-phone-volume"></i>
+
+<h3>Contact Support</h3>
+
+<p>
+
+Reach our support team whenever additional assistance is required.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===================================== -->
+<!-- Frequently Asked Questions -->
+<!-- ===================================== -->
+
+<style>
+
+/* FAQ */
+
+.faq-section{
+
+padding:20px 8% 90px;
+
+}
+
+.faq-container{
+
+max-width:1100px;
+margin:auto;
+
+}
+
+.faq-box{
+
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+border-radius:18px;
+margin-bottom:18px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+
+}
+
+.faq-question{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:22px 28px;
+cursor:pointer;
+font-size:18px;
+font-weight:600;
+color:#111827;
+transition:.3s;
+
+}
+
+.faq-question:hover{
+
+background:#F9FAFB;
+
+}
+
+.faq-question i{
+
+color:#2563EB;
+transition:.3s;
+
+}
+
+.faq-answer{
+
+display:none;
+padding:0 28px 25px;
+font-size:17px;
+line-height:32px;
+color:#6B7280;
+
+}
+
+.faq-box.active .faq-answer{
+
+display:block;
+
+}
+
+.faq-box.active i{
+
+transform:rotate(180deg);
+
+}
+
+/* Complaint Status */
+
+.status-section{
+
+padding:20px 8% 100px;
+
+}
+
+.status-grid{
+
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:22px;
+
+}
+
+.status-card{
+
+background:white;
+border:1px solid #E5E7EB;
+border-radius:22px;
+padding:30px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+transition:.35s;
+
+}
+
+.status-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.status-card i{
+
+font-size:46px;
+margin-bottom:18px;
+
+}
+
+.status-card h3{
+
+margin-bottom:12px;
+font-size:22px;
+
+}
+
+.status-card p{
+
+font-size:16px;
+line-height:28px;
+color:#6B7280;
+
+}
+
+.blue{
+
+color:#2563EB;
+
+}
+
+.orange{
+
+color:#F59E0B;
+
+}
+
+.green{
+
+color:#22C55E;
+
+}
+
+.red{
+
+color:#EF4444;
+
+}
+
+.purple{
+
+color:#8B5CF6;
+
+}
+
+@media(max-width:1100px){
+
+.status-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+<section class="faq-section">
+
+<h2 class="section-title">
+
+Frequently Asked Questions
+
+</h2>
+
+<p class="section-subtitle">
+
+Find answers to the most common questions asked by citizens using the Infrastructure Damage Reporting System.
+
+</p>
+
+<div class="faq-container">
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+How do I report infrastructure damage?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+Navigate to the Report Damage page, upload a clear image, choose the correct damage category, enter the location, provide a detailed description, and submit your complaint.
+
+</div>
+
+</div>
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+How do I track my complaint?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+Open the Track Complaint page and enter your Complaint ID to view its latest progress and current status.
+
+</div>
+
+</div>
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+Can I upload multiple images?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+Yes. Uploading multiple clear photographs helps the authorities verify the reported issue more efficiently.
+
+</div>
+
+</div>
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+Can I edit my complaint after submission?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+Once submitted, complaints cannot be edited. If you need to provide additional information, please contact support through the Feedback & Suggestions page.
+
+</div>
+
+</div>
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+What image formats are accepted?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+JPG, JPEG and PNG images are supported. Make sure the uploaded photos are clear and not blurry.
+
+</div>
+
+</div>
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+How long does complaint verification take?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+Verification time depends on the severity and location of the issue. Most reports are reviewed within a few working days.
+
+</div>
+
+</div>
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+Will I receive updates?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+Yes. Complaint status changes such as Under Review, Assigned, In Progress and Resolved can be viewed using the Track Complaint page.
+
+</div>
+
+</div>
+
+<div class="faq-box">
+
+<div class="faq-question">
+
+Can I report more than one issue?
+
+<i class="fas fa-chevron-down"></i>
+
+</div>
+
+<div class="faq-answer">
+
+Yes. Every infrastructure issue should be submitted as a separate complaint for faster processing.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================== -->
+<!-- Complaint Status -->
+<!-- ===================================== -->
+
+<section class="status-section">
+
+<h2 class="section-title">
+
+Complaint Status Guide
+
+</h2>
+
+<p class="section-subtitle">
+
+Understand what each complaint status means during the resolution process.
+
+</p>
+
+<div class="status-grid">
+
+<div class="status-card">
+
+<i class="fas fa-paper-plane blue"></i>
+
+<h3>Submitted</h3>
+
+<p>
+
+Your complaint has been successfully received by the system.
+
+</p>
+
+</div>
+
+<div class="status-card">
+
+<i class="fas fa-magnifying-glass orange"></i>
+
+<h3>Under Review</h3>
+
+<p>
+
+Authorities are reviewing the complaint details and verifying the issue.
+
+</p>
+
+</div>
+
+<div class="status-card">
+
+<i class="fas fa-user-check purple"></i>
+
+<h3>Assigned</h3>
+
+<p>
+
+The complaint has been assigned to the responsible department.
+
+</p>
+
+</div>
+
+<div class="status-card">
+
+<i class="fas fa-screwdriver-wrench blue"></i>
+
+<h3>In Progress</h3>
+
+<p>
+
+Repair work has started and is currently underway.
+
+</p>
+
+</div>
+
+<div class="status-card">
+
+<i class="fas fa-circle-check green"></i>
+
+<h3>Resolved</h3>
+
+<p>
+
+The reported infrastructure issue has been successfully repaired.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===================================== -->
+<!-- Additional CSS -->
+<!-- ===================================== -->
+
+<style>
+
+/* Step Guide */
+
+.guide-section{
+
+padding:20px 8% 100px;
+
+}
+
+.timeline{
+
+position:relative;
+max-width:1000px;
+margin:auto;
+
+}
+
+.timeline::before{
+
+content:"";
+position:absolute;
+left:50%;
+top:0;
+width:4px;
+height:100%;
+background:#2563EB;
+transform:translateX(-50%);
+
+}
+
+.timeline-item{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:50px 0;
+position:relative;
+
+}
+
+.timeline-item:nth-child(even){
+
+flex-direction:row-reverse;
+
+}
+
+.timeline-content{
+
+width:43%;
+background:#FFFFFF;
+padding:28px;
+border-radius:20px;
+border:1px solid #E5E7EB;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+
+}
+
+.timeline-content h3{
+
+margin-bottom:15px;
+font-size:24px;
+color:#111827;
+
+}
+
+.timeline-content p{
+
+font-size:17px;
+line-height:30px;
+color:#6B7280;
+
+}
+
+.timeline-circle{
+
+width:60px;
+height:60px;
+background:#2563EB;
+color:white;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+font-weight:700;
+z-index:2;
+
+}
+
+/* Tips */
+
+.tips-section{
+
+padding:20px 8% 100px;
+
+}
+
+.tips-grid{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+
+}
+
+.tip-card{
+
+background:white;
+padding:30px;
+border-radius:20px;
+border:1px solid #E5E7EB;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+display:flex;
+gap:20px;
+align-items:flex-start;
+transition:.35s;
+
+}
+
+.tip-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.tip-card i{
+
+font-size:34px;
+color:#2563EB;
+margin-top:5px;
+
+}
+
+.tip-card h3{
+
+margin-bottom:12px;
+
+}
+
+.tip-card p{
+
+line-height:30px;
+color:#6B7280;
+font-size:17px;
+
+}
+
+/* Emergency */
+
+.emergency-section{
+
+padding:20px 8% 100px;
+
+}
+
+.emergency-grid{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+
+}
+
+.emergency-card{
+
+background:white;
+padding:35px;
+text-align:center;
+border-radius:22px;
+border:1px solid #E5E7EB;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+transition:.35s;
+
+}
+
+.emergency-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.emergency-card i{
+
+font-size:50px;
+color:#2563EB;
+margin-bottom:20px;
+
+}
+
+.emergency-card h3{
+
+margin-bottom:10px;
+
+}
+
+.emergency-card h2{
+
+font-size:30px;
+margin:15px 0;
+color:#111827;
+
+}
+
+.emergency-card p{
+
+font-size:16px;
+line-height:28px;
+color:#6B7280;
+
+}
+
+@media(max-width:1100px){
+
+.timeline::before{
+
+display:none;
+
+}
+
+.timeline-item,
+.timeline-item:nth-child(even){
+
+flex-direction:column;
+
+}
+
+.timeline-content{
+
+width:100%;
+
+}
+
+.tips-grid,
+.emergency-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+<!-- ===================================== -->
+<!-- Step-by-Step Guide -->
+<!-- ===================================== -->
+
+<section class="guide-section">
+
+<h2 class="section-title">
+
+Step-by-Step Reporting Guide
+
+</h2>
+
+<p class="section-subtitle">
+
+Follow these simple steps to submit an infrastructure damage complaint successfully.
+
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+
+<div class="timeline-content">
+
+<h3>Login</h3>
+
+<p>
+
+Sign in using your registered account to access all reporting features.
+
+</p>
+
+</div>
+
+<div class="timeline-circle">1</div>
+
+<div style="width:43%;"></div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-content">
+
+<h3>Report Damage</h3>
+
+<p>
+
+Select the damage category and provide complete information about the issue.
+
+</p>
+
+</div>
+
+<div class="timeline-circle">2</div>
+
+<div style="width:43%;"></div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-content">
+
+<h3>Upload Images</h3>
+
+<p>
+
+Attach clear photographs showing the infrastructure damage from different angles.
+
+</p>
+
+</div>
+
+<div class="timeline-circle">3</div>
+
+<div style="width:43%;"></div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-content">
+
+<h3>Track Progress</h3>
+
+<p>
+
+Use your Complaint ID to monitor the repair status until the issue is resolved.
+
+</p>
+
+</div>
+
+<div class="timeline-circle">4</div>
+
+<div style="width:43%;"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================== -->
+<!-- Reporting Tips -->
+<!-- ===================================== -->
+
+<section class="tips-section">
+
+<h2 class="section-title">
+
+Tips for Better Reporting
+
+</h2>
+
+<p class="section-subtitle">
+
+These simple tips help authorities verify and resolve complaints faster.
+
+</p>
+
+<div class="tips-grid">
+
+<div class="tip-card">
+
+<i class="fas fa-camera"></i>
+
+<div>
+
+<h3>Upload Clear Photos</h3>
+
+<p>
+
+Take high-quality pictures in daylight whenever possible.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="tip-card">
+
+<i class="fas fa-location-dot"></i>
+
+<div>
+
+<h3>Provide Accurate Location</h3>
+
+<p>
+
+Mention nearby landmarks or use GPS for precise identification.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="tip-card">
+
+<i class="fas fa-pen"></i>
+
+<div>
+
+<h3>Write a Detailed Description</h3>
+
+<p>
+
+Explain the issue clearly to help authorities understand the problem.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="tip-card">
+
+<i class="fas fa-triangle-exclamation"></i>
+
+<div>
+
+<h3>Avoid Duplicate Reports</h3>
+
+<p>
+
+Search before reporting to ensure the issue has not already been submitted.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================== -->
+<!-- Emergency Contacts -->
+<!-- ===================================== -->
+
+<section class="emergency-section">
+
+<h2 class="section-title">
+
+Emergency Contacts
+
+</h2>
+
+<p class="section-subtitle">
+
+Quick access to important public emergency services.
+
+</p>
+
+<div class="emergency-grid">
+
+<div class="emergency-card">
+
+<i class="fas fa-shield-alt"></i>
+
+<h3>Police</h3>
+
+<h2>100</h2>
+
+<p>For emergencies requiring police assistance.</p>
+
+</div>
+
+<div class="emergency-card">
+
+<i class="fas fa-fire-extinguisher"></i>
+
+<h3>Fire Brigade</h3>
+
+<h2>101</h2>
+
+<p>Report fires and rescue emergencies.</p>
+
+</div>
+
+<div class="emergency-card">
+
+<i class="fas fa-ambulance"></i>
+
+<h3>Ambulance</h3>
+
+<h2>108</h2>
+
+<p>Medical emergency response services.</p>
+
+</div>
+
+<div class="emergency-card">
+
+<i class="fas fa-city"></i>
+
+<h3>Municipal Office</h3>
+
+<h2>1800-123-456</h2>
+
+<p>General civic support and municipal assistance.</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===================================== -->
+<!-- Additional CSS -->
+<!-- ===================================== -->
+
+<style>
+
+/* Contact Support */
+
+.contact-support{
+
+padding:20px 8% 100px;
+
+}
+
+.support-grid{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+
+}
+
+.support-box{
+
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+border-radius:22px;
+padding:35px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
+transition:.35s;
+
+}
+
+.support-box:hover{
+
+transform:translateY(-8px);
+
+}
+
+.support-box i{
+
+font-size:48px;
+color:#2563EB;
+margin-bottom:20px;
+
+}
+
+.support-box h3{
+
+font-size:26px;
+margin-bottom:15px;
+
+}
+
+.support-box p{
+
+font-size:17px;
+line-height:30px;
+color:#6B7280;
+margin-bottom:20px;
+
+}
+
+.support-btn{
+
+display:inline-block;
+padding:13px 30px;
+background:#2F3B4A;
+color:white;
+text-decoration:none;
+border-radius:40px;
+font-weight:600;
+transition:.3s;
+
+}
+
+.support-btn:hover{
+
+background:#1F2937;
+
+}
+
+/* CTA */
+
+.help-cta{
+
+padding:0 8% 90px;
+
+}
+
+.cta-card{
+
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+border-radius:25px;
+padding:60px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.cta-card h2{
+
+font-size:42px;
+margin-bottom:20px;
+color:#111827;
+
+}
+
+.cta-card p{
+
+font-size:18px;
+line-height:34px;
+color:#6B7280;
+margin-bottom:35px;
+
+}
+
+.cta-btn{
+
+display:inline-block;
+padding:16px 40px;
+background:#2563EB;
+color:white;
+text-decoration:none;
+border-radius:40px;
+font-weight:600;
+transition:.3s;
+
+}
+
+.cta-btn:hover{
+
+background:#1D4ED8;
+
+}
+
+/* Footer */
+
+footer{
+
+background:#FFFFFF;
+border-top:1px solid #E5E7EB;
+padding:60px 8% 25px;
+
+}
+
+.footer-grid{
+
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+gap:40px;
+
+}
+
+.footer-grid h3{
+
+margin-bottom:18px;
+
+}
+
+.footer-grid p{
+
+line-height:30px;
+color:#6B7280;
+
+}
+
+.footer-grid a{
+
+display:block;
+margin:12px 0;
+color:#374151;
+text-decoration:none;
+
+}
+
+.footer-grid a:hover{
+
+color:#2563EB;
+
+}
+
+.footer-bottom{
+
+margin-top:40px;
+padding-top:20px;
+border-top:1px solid #E5E7EB;
+text-align:center;
+color:#6B7280;
+
+}
+
+@media(max-width:1100px){
+
+.support-grid,
+.footer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.cta-card{
+
+padding:35px 20px;
+
+}
+
+.cta-card h2{
+
+font-size:32px;
+
+}
+
+}
+
+</style>
+
+<!-- Contact Support -->
+
+<section class="contact-support">
+
+<h2 class="section-title">
+
+Contact Support
+
+</h2>
+
+<p class="section-subtitle">
+
+Still need help? Choose one of the support options below.
+
+</p>
+
+<div class="support-grid">
+
+<div class="support-box">
+
+<i class="fas fa-envelope"></i>
+
+<h3>Email</h3>
+
+<p>
+
+Send us your queries and we'll respond as soon as possible.
+
+</p>
+
+<a href="mailto:support@idrs.com" class="support-btn">
+
+Email Us
+
+</a>
+
+</div>
+
+<div class="support-box">
+
+<i class="fas fa-phone"></i>
+
+<h3>Phone</h3>
+
+<p>
+
+Speak directly with our support team during office hours.
+
+</p>
+
+<a href="tel:+911800123456" class="support-btn">
+
+Call Now
+
+</a>
+
+</div>
+
+<div class="support-box">
+
+<i class="fas fa-comment-dots"></i>
+
+<h3>Feedback</h3>
+
+<p>
+
+Share your suggestions to improve the Infrastructure Damage Reporting System.
+
+</p>
+
+<a href="./feedback-and-suggestion-page.html" class="support-btn">
+
+Give Feedback
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="help-cta">
+
+<div class="cta-card">
+
+<h2>
+
+Still Need Assistance?
+
+</h2>
+
+<p>
+
+Our support resources are designed to help you quickly report issues, track complaints, and resolve any questions related to the Infrastructure Damage Reporting System.
+
+</p>
+
+<a href="./feedback-and-suggestion-page.html" class="cta-btn">
+
+Contact Support
+
+</a>
+
+</div>
+
+</section>
+
+<!-- Footer -->
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<h3>IDRS</h3>
+
+<p>
+
+Infrastructure Damage Reporting System helps citizens report damaged public infrastructure quickly and efficiently while enabling authorities to respond faster.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Quick Links</h3>
+
+<a href="./home-page.html">Home</a>
+
+<a href="./report-damage-page.html">Report Damage</a>
+
+<a href="./track-report-page.html">Track Complaint</a>
+
+<a href="./About-project-page.html">About Project</a>
+
+<a href="./help-and-support-page.html">Help & Support</a>
+
+</div>
+
+<div>
+
+<h3>Support</h3>
+
+<a href="./feedback-and-suggestion-page.html">Feedback</a>
+
+<a href="./terms-and-condition-page.html">Terms & Conditions</a>
+
+<a href="mailto:support@idrs.com">Email Support</a>
+
+<a href="tel:+911800123456">Call Support</a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2026 Infrastructure Damage Reporting System | Diploma Project
+
+</div>
+
+</footer>
+
+<script>
+
+function toggleMenu(){
+
+document.getElementById("sideMenu").classList.toggle("show");
+
+}
+
+function logout(){
+
+window.location.href="login-page.html";
+
+}
+
+document.querySelectorAll(".faq-question").forEach(function(item){
+
+item.addEventListener("click",function(){
+
+this.parentElement.classList.toggle("active");
+
+});
+
+});
+
+</script>
+
+</body>
+
+</html>
