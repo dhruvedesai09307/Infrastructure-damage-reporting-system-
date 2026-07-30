@@ -1,26 +1,42 @@
 <!doctype html>
-<html lang='en'>
+<html lang="en">
 <head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Admin Dashboard | IDRS</title>
-<link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap' rel='stylesheet'><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;color:#fff;font:14px Poppins,sans-serif;background:linear-gradient(135deg,#4a6edb,#1539c7);overflow-x:hidden}.orb{position:fixed;border-radius:50%;background:#ffffff20;pointer-events:none}.one{width:260px;height:260px;top:120px;left:-100px}.two{width:180px;height:180px;right:60px;top:90px}.three{width:280px;height:280px;right:-90px;bottom:-100px}.topbar{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;min-height:70px;padding:12px 6%;background:#ffffff1f;backdrop-filter:blur(12px)}.brand{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none}.brand i{font-size:29px}.brand strong{display:block;font-size:20px}.brand small{font-size:10px;letter-spacing:.08em;opacity:.8}.nav{display:flex;align-items:center;gap:20px}.nav a{color:#fff;text-decoration:none}.nav a:hover,.nav .active{color:#dce8ff}.back{padding:8px 15px;border:1px solid #fff;border-radius:22px}.back:hover{color:#1539c7!important;background:#fff}main{position:relative;z-index:1;width:min(1180px,90%);margin:45px auto 65px}.heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}.heading h1{font-size:clamp(30px,5vw,48px);line-height:1.15}.heading p{margin-top:9px;opacity:.9}.admin-badge{padding:10px 17px;border:1px solid #ffffff55;border-radius:25px;background:#ffffff1f;white-space:nowrap}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:25px}.stat,.panel{border:1px solid #ffffff47;border-radius:20px;background:#fffffff0;color:#18337f;box-shadow:0 18px 40px #09217e33}.stat{padding:23px}.stat i{font-size:26px;color:#1539c7}.stat h2{margin-top:14px;font-size:30px}.stat p{color:#617098;font-size:12px}.panel{padding:25px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.panel-head h2{font-size:22px}.panel-head p{color:#617098;font-size:12px}.tools{display:flex;gap:12px}.tools input,.tools select{padding:10px 12px;border:1px solid #d9e1f3;border-radius:10px;outline:0;color:#25335c;background:#f8faff;font:inherit;font-size:13px}.table-wrap{overflow:auto}table{width:100%;min-width:760px;border-collapse:collapse;text-align:left}th{padding:13px;color:#617098;background:#eef3ff;font-size:12px}td{padding:14px 13px;border-bottom:1px solid #e3e9f5;color:#35446c;font-size:13px}tbody tr:hover{background:#f7f9ff}.status{display:inline-block;padding:5px 11px;border-radius:18px;color:#fff;font-size:11px;font-weight:600}.resolved{background:#27ae60}.progress{background:#f39c12}.pending{background:#e74c3c}.action{padding:7px 12px;border:0;border-radius:17px;color:#1539c7;background:#eaf0ff;font:600 11px Poppins;cursor:pointer}.action:hover{background:#dce8ff}.notice{margin-top:22px;padding:16px 18px;border-radius:15px;color:#18337f;background:#eaf0ff}.notice i{margin-right:8px;color:#1539c7}footer{position:relative;z-index:1;text-align:center;padding-bottom:25px;font-size:12px;opacity:.8}@media(max-width:800px){.topbar{align-items:flex-start;flex-direction:column;gap:13px}.nav{flex-wrap:wrap;gap:10px 16px}.heading{align-items:flex-start;flex-direction:column}.stats{grid-template-columns:1fr 1fr}.tools{flex-wrap:wrap}}@media(max-width:480px){.stats{grid-template-columns:1fr}main{width:92%;margin-top:30px}}
-/* White-and-gray theme matching home-page.html */
-body{background:#F3F4F6;color:#374151}
-.orb{display:none}
-.topbar{background:#FFFFFF;border-bottom:1px solid #E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.brand,.nav a{color:#374151}.brand i{color:#2F3B4A}.nav a:hover,.nav .active{color:#111827}
-.back{border-color:#D1D5DB}.back:hover{color:#1F2937!important;background:#F3F4F6}
-.heading h1,.heading p{color:#374151}.admin-badge{color:#374151;border-color:#D1D5DB;background:#FFFFFF}
-.stat,.panel{background:#FFFFFF;color:#374151;border-color:#E5E7EB;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-.stat i{color:#2F3B4A}.stat p,.panel-head p,th{color:#6B7280}.tools input,.tools select{background:#F9FAFB;border-color:#D1D5DB;color:#374151}
-th{background:#F3F4F6}td{color:#374151}tbody tr:hover{background:#F9FAFB}.action{background:#E5E7EB;color:#374151}.action:hover{background:#D1D5DB}
-.notice{background:#F3F4F6;color:#374151}.notice i{color:#2F3B4A}footer{color:#6B7280;opacity:1}
-</style></head>
-<body><script>try{const admin=JSON.parse(sessionStorage.getItem('currentAdmin'));if(!admin||admin.username!=='admin'){throw new Error('Invalid session');}}catch(error){sessionStorage.removeItem('currentAdmin');window.location.replace('admin-login.html');}</script><div class='orb one'></div><div class='orb two'></div><div class='orb three'></div>
-<header class='topbar'><a class='brand' href='home-page.html'><i class='fas fa-road'></i><span><strong>IDRS</strong><small>REPORT | TRACK | IMPROVE</small></span></a><nav class='nav'><a href='home-page.html'>Home</a><a href='report.html'>Reports</a><a class='active' href='admin.html'>Admin Dashboard</a><a href='#' id='adminLogout'>Logout</a><a class='back' href='home-page.html'><i class='fas fa-arrow-left'></i> Back Home</a></nav></header>
-<main><section class='heading'><div><h1>Admin Dashboard</h1><p>Monitor infrastructure reports and update their progress.</p></div><div class='admin-badge'><i class='fas fa-user-shield'></i> Administrator</div></section>
-<section class='stats'><article class='stat'><i class='fas fa-file-circle-plus'></i><h2>12,580</h2><p>Total Reports</p></article><article class='stat'><i class='fas fa-circle-check'></i><h2>10,962</h2><p>Resolved Cases</p></article><article class='stat'><i class='fas fa-hourglass-half'></i><h2>1,321</h2><p>Under Review</p></article><article class='stat'><i class='fas fa-triangle-exclamation'></i><h2>297</h2><p>High Priority</p></article></section>
-<section class='panel'><div class='panel-head'><div><h2>Recent Reports</h2><p>Search reports and update their status.</p></div><div class='tools'><input id='search' type='search' placeholder='Search ID or location'><select id='filter'><option value='all'>All statuses</option><option value='Resolved'>Resolved</option><option value='In Progress'>In Progress</option><option value='Pending'>Pending</option></select></div></div><div class='table-wrap'><table><thead><tr><th>Report ID</th><th>Category</th><th>Location</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id='reports'><tr data-status='Resolved'><td>#1001</td><td>Road Damage</td><td>Patan</td><td>24 Jul 2026</td><td><span class='status resolved'>Resolved</span></td><td><button class='action'>Review</button></td></tr><tr data-status='In Progress'><td>#1002</td><td>Street Light</td><td>Ahmedabad</td><td>23 Jul 2026</td><td><span class='status progress'>In Progress</span></td><td><button class='action'>Review</button></td></tr><tr data-status='Pending'><td>#1003</td><td>Water Leakage</td><td>Mehsana</td><td>22 Jul 2026</td><td><span class='status pending'>Pending</span></td><td><button class='action'>Review</button></td></tr><tr data-status='Resolved'><td>#1004</td><td>Bridge Damage</td><td>Palanpur</td><td>21 Jul 2026</td><td><span class='status resolved'>Resolved</span></td><td><button class='action'>Review</button></td></tr></tbody></table></div><div class='notice'><i class='fas fa-circle-info'></i> Dashboard actions are currently frontend-only. Connect them to your backend API to persist status updates.</div></section></main><footer>(c) 2026 Infrastructure Damage Reporting System | Admin Portal</footer>
-<script>const search=document.getElementById('search'),filter=document.getElementById('filter'),rows=[...document.querySelectorAll('#reports tr')];function update(){const term=search.value.toLowerCase(),status=filter.value;rows.forEach(row=>{const matchesText=row.textContent.toLowerCase().includes(term),matchesStatus=status==='all'||row.dataset.status===status;row.style.display=matchesText&&matchesStatus?'':'none'})}search.oninput=update;filter.onchange=update;document.querySelectorAll('.action').forEach(button=>button.onclick=()=>alert('Report review details will be connected to the admin API.'));document.getElementById('adminLogout').onclick=function(event){event.preventDefault();sessionStorage.removeItem('currentAdmin');window.location.href='admin-login.html';}</script></body></html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;font-family:Poppins,sans-serif}
+    body{margin:0;min-height:100vh;background:#F3F4F6;color:#374151}
+    .top{padding:22px 6%;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;border-bottom:1px solid #E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+    .top a,.top strong{color:#374151;text-decoration:none}.wrap{max-width:1050px;margin:auto;padding:42px 24px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .stat,.report{background:#FFFFFF;border:1px solid #E5E7EB;border-radius:16px;padding:22px;box-shadow:0 10px 25px rgba(0,0,0,.08)}.stat strong{font-size:2rem;display:block;color:#111827}.toolbar{margin:26px 0;display:flex;gap:12px}.button{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}.danger{background:#EF4444;color:#FFFFFF}.light{background:#2F3B4A;color:#FFFFFF}.light:hover{background:#1F2937}.report{margin:14px 0}.muted{color:#6B7280}@media(max-width:650px){.stats{grid-template-columns:1fr}.top{display:block}.top a{display:inline-block;margin-top:12px}}
+  </style>
+</head>
+<body>
+  <header class="top"><strong>Infrastructure Report System · Admin</strong><a href="home-page.html">Home</a></header>
+  <main class="wrap">
+    <h1>Admin Dashboard</h1>
+    <div class="stats">
+      <div class="stat"><strong id="total">0</strong>Total Reports</div>
+      <div class="stat"><strong id="critical">0</strong>Critical Reports</div>
+      <div class="stat"><strong id="resolved">0%</strong>Resolution Rate</div>
+    </div>
+    <div class="toolbar"><button class="button light" id="logout">Logout</button><button class="button danger" id="clear">Clear Reports</button></div>
+    <section id="list"><p class="muted">Loading reports...</p></section>
+  </main>
+  <script>
+    if (sessionStorage.getItem('adminLoggedIn') !== 'true') location.href = 'admin-login.html';
+    const reports = () => JSON.parse(localStorage.getItem('reports') || '[]');
+    function render() {
+      const data = reports();
+      total.textContent = data.length;
+      critical.textContent = data.filter((report) => String(report.severity).startsWith('Critical')).length;
+      list.innerHTML = data.length ? data.slice().reverse().map((report) => `<article class="report"><strong>${report.category || 'Infrastructure issue'}</strong><p>${report.state || ''}, ${report.city || ''} · ${report.location || ''}</p><p>${report.description || ''}</p><small>Submitted by ${report.fullName || 'User'} · ${report.email || ''}</small></article>`).join('') : '<p class="muted">No reports submitted yet.</p>';
+    }
+    render();
+    logout.onclick = () => { sessionStorage.removeItem('adminLoggedIn'); location.href = 'admin-login.html'; };
+    clear.onclick = () => { if (confirm('Clear all reports?')) { localStorage.removeItem('reports'); render(); } };
+  </script>
+</body>
+</html>
