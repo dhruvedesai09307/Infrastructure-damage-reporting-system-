@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
     body{font-family:'Poppins',sans-serif;background:#FFFFFF;color:#6B7280;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
-    .login-card{background:#FFFFFF;padding:30px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);width:300px}
-    .login-card h2{text-align:center;margin-bottom:20px;color:#6B7280}
+    .login-card{background:#FFFFFF;padding:30px;border:1px solid #E5E7EB;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.08);width:320px}
+    .login-card h2{text-align:center;margin-bottom:8px;color:#374151}
     .login-card input{width:100%;padding:10px;margin:10px 0;border:1px solid #E5E7EB;border-radius:5px}
     .login-card button{background:#6B7280;color:white;border:none;padding:10px 20px;border-radius:5px;width:100%;cursor:pointer}
     .login-card button:hover{background:#4B5563}
@@ -19,13 +19,31 @@
 <body>
   <div class="login-card">
     <h2>Admin Login</h2>
+    <p style="margin:0 0 16px;text-align:center;font-size:12px;">Sign in to access the dashboard.</p>
     <form id="adminLoginForm">
       <input type="text" id="adminUsername" placeholder="Username" required>
       <input type="password" id="adminPassword" placeholder="Password" required>
       <button type="submit">Login</button>
     </form>
+    <p style="font-size:12px;text-align:center;margin:14px 0 0;color:#6B7280;">Demo credentials: <strong>admin</strong> / <strong>admin123</strong></p>
     <div id="loginError" class="error" style="display:none;"></div>
   </div>
-  <script src="admin-login.js"></script>
+  <script>
+    document.getElementById('adminLoginForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const username = document.getElementById('adminUsername').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      const error = document.getElementById('loginError');
+
+      if (username !== 'admin' || password !== 'admin123') {
+        error.textContent = 'Invalid administrator credentials.';
+        error.style.display = 'block';
+        return;
+      }
+
+      sessionStorage.setItem('currentAdmin', JSON.stringify({ username: username }));
+      window.location.href = 'admin.html';
+    });
+  </script>
 </body>
 </html>

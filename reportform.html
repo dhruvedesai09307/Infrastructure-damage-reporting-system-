@@ -7,7 +7,7 @@
   <style>
 /* Home page style copied for report form */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
-body{background:#FFFFFF;min-height:100vh;overflow-x:hidden;color:#6B7280;position:relative;}
+body{background:#F3F4F6;min-height:100vh;overflow-x:hidden;color:#374151;position:relative;}
 /* Navigation */
 .topbar{position:fixed;top:0;left:0;width:100%;height:70px;background:#FFFFFF;border-bottom:1px solid #E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;padding:0 30px;z-index:1000;}
 .menu-icon{font-size:26px;cursor:pointer;color:#374151;}
@@ -57,29 +57,30 @@ body{background:#FFFFFF;min-height:100vh;overflow-x:hidden;color:#6B7280;positio
 .cta{padding:70px 8% 100px;}
 /* End of copied styles */
 /* Additional styles for report form */
-.report-form{max-width:800px;margin:0 auto;background:#FFFFFF;padding:30px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
-.report-form h2{margin-top:0;color:#6B7280;font-size:24px;}
+.report-form{max-width:800px;margin:0 auto;background:#FFFFFF;padding:30px;border:1px solid #E5E7EB;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.08);}
+.report-form h2{margin-top:0;color:#374151;font-size:24px;}
 .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
 .field-group{display:flex;flex-direction:column;}
 .field-group label{margin-bottom:5px;font-weight:600;color:#111827;}
-.field-group input,.field-group select,.field-group textarea{padding:10px;border:1px solid #E5E7EB;border-radius:5px;}
+.field-group input,.field-group select,.field-group textarea{padding:10px;border:1px solid #D1D5DB;border-radius:5px;background:#F9FAFB;color:#374151;}
+.field-group input:focus,.field-group select:focus,.field-group textarea:focus{outline:none;border-color:#6B7280;box-shadow:0 0 0 3px rgba(107,114,128,.15);}
 .form-actions{text-align:center;margin-top:20px;}
-.form-actions button{background:#6B7280;color:white;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;}
-.form-actions button:hover{background:#4B5563;}
+.form-actions button{background:#2F3B4A;color:white;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;}
+.form-actions button:hover{background:#1F2937;}
 /* Result modal */
 .result{display:none;text-align:center;}
 /* End of report form styles */
 /* End of style block */
   </style>
 <body>
-<script>(function(){if(!sessionStorage.getItem("currentUser")){window.location.href="mainlogin.html";}})();</script>
-<header class="topbar"><div class="brand">Infrastructure Report System</div><nav class="nav"><a href="reporthome.html">Home</a><a href="landing.html">About</a><a href="admin-login.html">Admin</a><a href="mainlogin.html">User Login</a><a class="button" href="reportform.html">Report an issue</a></nav></header>
+<script>(function(){if(!sessionStorage.getItem("currentUser")){window.location.href="login-page.html";}})();</script>
+<header class="topbar"><div class="brand">Infrastructure Report System</div><nav class="nav"><a href="home-page.html">Home</a><a href="landing.html">About</a><a href="admin-login.html">Admin</a><a href="login-page.html">User Login</a><a class="button" href="reportform.html">Report an issue</a></nav></header>
   <div class="container">
     <div class="hero">
       <h1>Infrastructure Damage Report</h1>
       <p>Report road damage, utility issues, and public infrastructure problems in your area</p>
       <p style="margin-top: 16px;">
-        <a href="reporthome.html" style="display: inline-block; background: linear-gradient(135deg, #2454d6 0%, #183fa8 100%); color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600;">Go to Report Home</a>
+        <a href="home-page.html" style="display: inline-block; background: linear-gradient(135deg, #2454d6 0%, #183fa8 100%); color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600;">Go to Report Home</a>
       </p>
     </div>
 
