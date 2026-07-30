@@ -12,7 +12,7 @@ adminLoginForm.addEventListener('submit', (e) => {
   loginError.style.display = 'none';
   loginError.textContent = '';
 
-  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+  if (username === sujal  && password === 1234) {
     sessionStorage.setItem('adminLoggedIn', 'true');
     window.location.href = 'admin.html';
   } else {
