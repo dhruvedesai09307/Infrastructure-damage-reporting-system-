@@ -64,7 +64,14 @@ background:white;
 color:#111827;
 border-bottom:1px solid #E5E7EB;
 box-shadow:0 2px 8px rgba(0,0,0,.05);
+transition:all .8s ease;
 
+}
+
+.hide-header{
+    opacity:0;
+    transform:translateY(-100%);
+    pointer-events:none;
 }
 
 header h1{
@@ -86,23 +93,15 @@ color:#6B7280;
 /* Login Card */
 
 .container{
-
-background:#FFFFFF;
-
-border-radius:18px;
-
-border:1px solid #E5E7EB;
-
-box-shadow:0 10px 35px rgba(0,0,0,.08);
-
-color:#111827;
-
-animation:fadeUp 1.2s;
-
-width:460px;
-
-padding:40px;
-
+    background:#FFFFFF;
+    border-radius:18px;
+    border:1px solid #E5E7EB;
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+    color:#111827;
+    animation:fadeUp 1.2s;
+    width:460px;
+    padding:40px;
+    transition:all .8s ease;
 }
 @keyframes fadeUp{
 
@@ -815,9 +814,28 @@ forgotLink.addEventListener("click", function(e){
 // Welcome Message
 // ================================
 
-window.addEventListener("load", function(){
+window.addEventListener("load", function () {
 
     console.log("Infrastructure Damage Reporting System Loaded Successfully");
+
+    // Hide the header after 3 seconds
+    setTimeout(function () {
+
+        const header = document.querySelector("header");
+        const container = document.querySelector(".container");
+
+
+        header.style.transition = "all 0.8s ease";
+        header.style.opacity = "0";
+        header.style.transform = "translateY(-100%)";
+        container.style.transform = "translateY(-45px)";
+
+        // Remove it completely after animation
+        setTimeout(function () {
+            header.style.display = "none";
+        }, 800);
+
+    }, 3000);
 
 });
 </script>
