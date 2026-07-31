@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Community Awareness | Infrastructure Damage Reporting System</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#F3F4F6;
+color:#374151;
+overflow-x:hidden;
+}
+
+/* ===========================
+Navigation
+=========================== */
+
+.topbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:70px;
+background:#FFFFFF;
+border-bottom:1px solid #E5E7EB;
+box-shadow:0 2px 8px rgba(0,0,0,.05);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 30px;
+z-index:1000;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo i{
+font-size:32px;
+color:#2F3B4A;
+}
+
+.logo-text h2{
+font-size:24px;
+color:#111827;
+}
+
+.logo-text p{
+font-size:12px;
+color:#6B7280;
+}
+
+.menu-icon{
+font-size:26px;
+cursor:pointer;
+color:#374151;
+}
+
+.logout-btn{
+background:#2F3B4A;
+color:white;
+border:none;
+padding:10px 22px;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.logout-btn:hover{
+background:#1F2937;
+}
+
+/* ===========================
+Side Menu
+=========================== */
+
+.side-menu{
+position:fixed;
+left:-260px;
+top:0;
+width:250px;
+height:100%;
+background:#FFFFFF;
+border-right:1px solid #E5E7EB;
+box-shadow:5px 0 20px rgba(0,0,0,.08);
+padding-top:70px;
+overflow-y:auto;
+transition:.35s;
+z-index:2000;
+}
+
+.side-menu.show{
+left:0;
+}
+
+.close-btn{
+position:absolute;
+top:18px;
+right:18px;
+font-size:24px;
+cursor:pointer;
+}
+
+.side-menu a{
+display:block;
+padding:18px 25px;
+text-decoration:none;
+font-size:18px;
+color:#374151;
+transition:.3s;
+}
+
+.side-menu a:hover{
+background:#F3F4F6;
+color:#2563EB;
+}
+
+/* ===========================
+Hero Section
+=========================== */
+
+.hero{
+padding:130px 8% 80px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:60px;
+}
+
+.hero-left{
+flex:1;
+}
+
+.hero-left h1{
+font-size:56px;
+font-weight:800;
+color:#111827;
+line-height:72px;
+margin-bottom:25px;
+}
+
+.hero-left span{
+color:#2563EB;
+}
+
+.hero-left p{
+font-size:19px;
+line-height:34px;
+color:#6B7280;
+margin-bottom:40px;
+}
+
+.hero-buttons{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn1{
+background:#2F3B4A;
+color:white;
+padding:15px 35px;
+border-radius:40px;
+text-decoration:none;
+font-weight:600;
+transition:.3s;
+}
+
+.btn2{
+background:#FFFFFF;
+color:#2F3B4A;
+border:1px solid #D1D5DB;
+padding:15px 35px;
+border-radius:40px;
+text-decoration:none;
+font-weight:600;
+transition:.3s;
+}
+
+.btn1:hover,
+.btn2:hover{
+transform:translateY(-6px);
+}
+
+.hero-right{
+flex:1;
+}
+
+.awareness-card{
+background:white;
+padding:35px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+border:1px solid #E5E7EB;
+}
+
+.awareness-card h2{
+font-size:32px;
+margin-bottom:20px;
+color:#111827;
+}
+
+.awareness-card p{
+line-height:30px;
+color:#6B7280;
+margin-bottom:25px;
+}
+
+.awareness-list{
+list-style:none;
+}
+
+.awareness-list li{
+margin:18px 0;
+font-size:18px;
+}
+
+.awareness-list i{
+color:#2563EB;
+margin-right:12px;
+}
+
+/* Section Title */
+
+.section-title{
+text-align:center;
+font-size:42px;
+font-weight:700;
+margin-bottom:15px;
+color:#111827;
+}
+
+.section-subtitle{
+max-width:800px;
+margin:auto;
+text-align:center;
+line-height:30px;
+color:#6B7280;
+margin-bottom:50px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="menu-icon" onclick="toggleMenu()">
+<i class="fas fa-bars"></i>
+</div>
+
+<div class="logo">
+
+<i class="fas fa-road"></i>
+
+<div class="logo-text">
+<h2>IDRS</h2>
+<p>Infrastructure Damage Reporting System</p>
+</div>
+
+</div>
+
+<button class="logout-btn" onclick="logout()">
+<i class="fas fa-right-from-bracket"></i>
+Logout
+</button>
+
+</header>
+
+<div class="side-menu" id="sideMenu">
+
+<div class="close-btn" onclick="toggleMenu()">
+<i class="fas fa-times"></i>
+</div>
+
+<a href="./home-page.html" onclick="toggleMenu()">
+    <i class="fas fa-house"></i> Home
+</a>
+<a href="./report.html" onclick="toggleMenu()">
+    <i class="fas fa-file-circle-plus"></i> Report Damage
+</a>
+<a href="./About-project-page.html" onclick="toggleMenu()">
+    <i class="fas fa-circle-info"></i> About Project
+</a>
+<a href="./community-awareness-page.html" onclick="toggleMenu()">
+    <i class="fas fa-users"></i> Community Awareness
+</a>
+<a href="./safety-tips-page.html" onclick="toggleMenu()">
+    <i class="fas fa-shield-halved"></i> Safety Tips
+</a>
+<a href="./feedback-and-suggestion-page.html" onclick="toggleMenu()">
+    <i class="fas fa-comment-dots"></i> Feedback
+</a>
+<a href="./help-and-support-page.html" onclick="toggleMenu()">
+    <i class="fas fa-headset"></i> Help & Support
+</a>
+
+</div>
+
+<section class="hero">
+
+<div class="hero-left">
+
+<h1>
+
+Building a <span>Responsible Community</span> Together
+
+</h1>
+
+<p>
+
+Community awareness encourages every citizen to take responsibility for protecting public infrastructure. By reporting damage, spreading awareness, and participating in local initiatives, we can create cleaner, safer, and smarter cities for everyone.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#campaigns" class="btn1">
+<i class="fas fa-users"></i>
+Join Campaign
+</a>
+
+<a href="#responsibility" class="btn2">
+<i class="fas fa-circle-info"></i>
+Learn More
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<div class="awareness-card">
+
+<h2>Why Community Awareness?</h2>
+
+<p>
+
+Every citizen plays an important role in maintaining roads, public buildings, parks, water systems, and streetlights. Together we can reduce accidents, improve infrastructure, and build a smarter city.
+
+</p>
+
+<ul class="awareness-list">
+
+<li><i class="fas fa-circle-check"></i> Encourage responsible citizens</li>
+
+<li><i class="fas fa-circle-check"></i> Improve public safety</li>
+
+<li><i class="fas fa-circle-check"></i> Support Smart City initiatives</li>
+
+<li><i class="fas fa-circle-check"></i> Protect public property</li>
+
+<li><i class="fas fa-circle-check"></i> Reduce infrastructure damage</li>
+
+<li><i class="fas fa-circle-check"></i> Build cleaner communities</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+<!-- ========================================= -->
+<!-- Why Community Awareness Matters -->
+<!-- ========================================= -->
+
+<section id="responsibility" class="awareness-section">
+
+<h2 class="section-title">
+Why Community Awareness Matters
+</h2>
+
+<p class="section-subtitle">
+A strong community is built when every citizen takes responsibility for protecting public infrastructure and reporting issues before they become major problems.
+</p>
+
+<div class="awareness-grid">
+
+<div class="awareness-box">
+<i class="fas fa-road"></i>
+<h3>Safer Roads</h3>
+<p>
+Reporting potholes, damaged roads and broken footpaths helps reduce accidents and improves transportation safety.
+</p>
+</div>
+
+<div class="awareness-box">
+<i class="fas fa-shield-heart"></i>
+<h3>Public Safety</h3>
+<p>
+Reporting broken streetlights, damaged bridges and unsafe public places helps protect everyone in the community.
+</p>
+</div>
+
+<div class="awareness-box">
+<i class="fas fa-city"></i>
+<h3>Smart Cities</h3>
+<p>
+Active citizens contribute to cleaner, smarter and better managed cities by reporting infrastructure problems quickly.
+</p>
+</div>
+
+<div class="awareness-box">
+<i class="fas fa-handshake"></i>
+<h3>Community Support</h3>
+<p>
+Working together with local authorities helps solve public issues faster and improves the quality of life.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Citizen Responsibilities -->
+<!-- ========================================= -->
+
+<section class="citizen-section">
+
+<h2 class="section-title">
+Citizen Responsibilities
+</h2>
+
+<p class="section-subtitle">
+Every citizen has an important role in protecting public property and keeping the community safe.
+</p>
+
+<div class="responsibility-grid">
+
+<div class="responsibility-card">
+<i class="fas fa-camera"></i>
+<h3>Report Damage</h3>
+<p>
+Take clear photographs of damaged infrastructure and report it through the IDRS portal.
+</p>
+</div>
+
+<div class="responsibility-card">
+<i class="fas fa-tree"></i>
+<h3>Protect Nature</h3>
+<p>
+Support tree plantation drives and keep parks and public places clean.
+</p>
+</div>
+
+<div class="responsibility-card">
+<i class="fas fa-lightbulb"></i>
+<h3>Save Electricity</h3>
+<p>
+Report broken streetlights and avoid unnecessary electricity wastage.
+</p>
+</div>
+
+<div class="responsibility-card">
+<i class="fas fa-faucet-drip"></i>
+<h3>Save Water</h3>
+<p>
+Report leaking pipelines immediately to prevent water wastage.
+</p>
+</div>
+
+<div class="responsibility-card">
+<i class="fas fa-traffic-light"></i>
+<h3>Follow Traffic Rules</h3>
+<p>
+Respect traffic signs, crossings and help maintain road discipline.
+</p>
+</div>
+
+<div class="responsibility-card">
+<i class="fas fa-users"></i>
+<h3>Spread Awareness</h3>
+<p>
+Encourage your friends, family and neighbours to report infrastructure issues responsibly.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Community Impact -->
+<!-- ========================================= -->
+
+<section class="impact-section">
+
+<h2 class="section-title">
+Positive Community Impact
+</h2>
+
+<p class="section-subtitle">
+Small actions by citizens create a big impact on society.
+</p>
+
+<div class="impact-container">
+
+<div class="impact-item">
+<i class="fas fa-circle-check"></i>
+<span>Reduced road accidents</span>
+</div>
+
+<div class="impact-item">
+<i class="fas fa-circle-check"></i>
+<span>Cleaner public places</span>
+</div>
+
+<div class="impact-item">
+<i class="fas fa-circle-check"></i>
+<span>Faster complaint resolution</span>
+</div>
+
+<div class="impact-item">
+<i class="fas fa-circle-check"></i>
+<span>Improved government services</span>
+</div>
+
+<div class="impact-item">
+<i class="fas fa-circle-check"></i>
+<span>Better environmental protection</span>
+</div>
+
+<div class="impact-item">
+<i class="fas fa-circle-check"></i>
+<span>Safer neighbourhoods</span>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+/* ===========================================
+Community Awareness
+=========================================== */
+
+.awareness-section,
+.citizen-section,
+.impact-section{
+padding:100px 8%;
+}
+
+.awareness-grid,
+.responsibility-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+}
+
+.awareness-box,
+.responsibility-card{
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+padding:35px;
+border-radius:24px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.35s;
+text-align:center;
+}
+
+.awareness-box:hover,
+.responsibility-card:hover{
+transform:translateY(-8px);
+}
+
+.awareness-box i,
+.responsibility-card i{
+font-size:50px;
+color:#2563EB;
+margin-bottom:20px;
+}
+
+.awareness-box h3,
+.responsibility-card h3{
+margin-bottom:15px;
+font-size:24px;
+color:#111827;
+}
+
+.awareness-box p,
+.responsibility-card p{
+line-height:30px;
+color:#6B7280;
+}
+
+.impact-container{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+margin-top:50px;
+}
+
+.impact-item{
+background:#FFFFFF;
+padding:25px;
+border-radius:18px;
+display:flex;
+align-items:center;
+gap:15px;
+font-size:18px;
+font-weight:600;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.impact-item:hover{
+transform:translateY(-6px);
+}
+
+.impact-item i{
+font-size:24px;
+color:#2563EB;
+}
+
+@media(max-width:1000px){
+
+.awareness-grid,
+.responsibility-grid,
+.impact-container{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+<!-- ========================================= -->
+<!-- Awareness Campaigns -->
+<!-- ========================================= -->
+
+<section id="campaigns" class="campaign-section">
+
+<h2 class="section-title">
+Community Awareness Campaigns
+</h2>
+
+<p class="section-subtitle">
+Join campaigns that inspire citizens to protect public infrastructure and create a cleaner, safer environment.
+</p>
+
+<div class="campaign-grid">
+
+<div class="campaign-card">
+<i class="fas fa-broom"></i>
+<h3>Clean City Drive</h3>
+<p>
+Participate in cleanliness campaigns by keeping roads, parks and public spaces clean.
+</p>
+</div>
+
+<div class="campaign-card">
+<i class="fas fa-road"></i>
+<h3>Road Safety Week</h3>
+<p>
+Promote safe driving, use pedestrian crossings and encourage responsible road behaviour.
+</p>
+</div>
+
+<div class="campaign-card">
+<i class="fas fa-tint"></i>
+<h3>Water Conservation</h3>
+<p>
+Report leaking pipelines and encourage responsible use of water resources.
+</p>
+</div>
+
+<div class="campaign-card">
+<i class="fas fa-seedling"></i>
+<h3>Tree Plantation</h3>
+<p>
+Plant trees, protect green spaces and support environmental sustainability.
+</p>
+</div>
+
+<div class="campaign-card">
+<i class="fas fa-recycle"></i>
+<h3>Waste Management</h3>
+<p>
+Separate recyclable waste and dispose of garbage responsibly to keep the city clean.
+</p>
+</div>
+
+<div class="campaign-card">
+<i class="fas fa-users"></i>
+<h3>Citizen Participation</h3>
+<p>
+Encourage neighbours and friends to report infrastructure issues using IDRS.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Road Safety Rules -->
+<!-- ========================================= -->
+
+<section class="road-safety">
+
+<h2 class="section-title">
+Road Safety Guidelines
+</h2>
+
+<p class="section-subtitle">
+Following simple road safety practices helps prevent accidents and protects everyone.
+</p>
+
+<div class="safety-grid">
+
+<div class="safety-card">
+<i class="fas fa-helmet-safety"></i>
+<h3>Wear Safety Gear</h3>
+<p>Always wear helmets while riding two-wheelers and use seat belts in cars.</p>
+</div>
+
+<div class="safety-card">
+<i class="fas fa-traffic-light"></i>
+<h3>Obey Traffic Signals</h3>
+<p>Follow traffic lights, speed limits and road signs at all times.</p>
+</div>
+
+<div class="safety-card">
+<i class="fas fa-mobile-screen-button"></i>
+<h3>Avoid Phone Usage</h3>
+<p>Never use mobile phones while driving to reduce distractions.</p>
+</div>
+
+<div class="safety-card">
+<i class="fas fa-person-walking"></i>
+<h3>Use Zebra Crossing</h3>
+<p>Pedestrians should always cross roads using designated crossings.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Environmental Protection -->
+<!-- ========================================= -->
+
+<section class="environment">
+
+<h2 class="section-title">
+Protect Our Environment
+</h2>
+
+<p class="section-subtitle">
+A healthy environment creates healthier communities. Every small action makes a difference.
+</p>
+
+<div class="environment-grid">
+
+<div class="environment-card">
+<i class="fas fa-tree"></i>
+<h3>Plant More Trees</h3>
+<p>Increase green cover to improve air quality and reduce pollution.</p>
+</div>
+
+<div class="environment-card">
+<i class="fas fa-leaf"></i>
+<h3>Reduce Pollution</h3>
+<p>Use eco-friendly transport and avoid littering in public places.</p>
+</div>
+
+<div class="environment-card">
+<i class="fas fa-solar-panel"></i>
+<h3>Save Energy</h3>
+<p>Support renewable energy and avoid unnecessary electricity consumption.</p>
+</div>
+
+<div class="environment-card">
+<i class="fas fa-water"></i>
+<h3>Protect Water Resources</h3>
+<p>Report water leaks immediately and encourage water conservation.</p>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+/* ===========================================
+Campaigns
+=========================================== */
+
+.campaign-section,
+.road-safety,
+.environment{
+padding:100px 8%;
+}
+
+.campaign-grid,
+.safety-grid,
+.environment-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.campaign-card,
+.safety-card,
+.environment-card{
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+padding:35px;
+border-radius:24px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.35s;
+}
+
+.campaign-card:hover,
+.safety-card:hover,
+.environment-card:hover{
+transform:translateY(-8px);
+box-shadow:0 16px 35px rgba(0,0,0,.12);
+}
+
+.campaign-card i,
+.safety-card i,
+.environment-card i{
+font-size:52px;
+color:#2563EB;
+margin-bottom:20px;
+}
+
+.campaign-card h3,
+.safety-card h3,
+.environment-card h3{
+margin-bottom:15px;
+font-size:24px;
+color:#111827;
+}
+
+.campaign-card p,
+.safety-card p,
+.environment-card p{
+line-height:30px;
+color:#6B7280;
+}
+
+@media(max-width:1000px){
+
+.campaign-grid,
+.safety-grid,
+.environment-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+<!-- ========================================= -->
+<!-- Community Statistics -->
+<!-- ========================================= -->
+
+<section class="community-stats">
+
+<h2 class="section-title">
+Community Impact Statistics
+</h2>
+
+<p class="section-subtitle">
+Together, citizens and local authorities are creating safer, cleaner and smarter communities.
+</p>
+
+<div class="stats-grid">
+
+<div class="stats-card">
+<i class="fas fa-users"></i>
+<h2 class="counter" data-target="25000">0</h2>
+<p>Active Citizens</p>
+</div>
+
+<div class="stats-card">
+<i class="fas fa-file-circle-check"></i>
+<h2 class="counter" data-target="18450">0</h2>
+<p>Reports Submitted</p>
+</div>
+
+<div class="stats-card">
+<i class="fas fa-circle-check"></i>
+<h2 class="counter" data-target="16520">0</h2>
+<p>Issues Resolved</p>
+</div>
+
+<div class="stats-card">
+<i class="fas fa-city"></i>
+<h2 class="counter" data-target="125">0</h2>
+<p>Communities Covered</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Volunteer Program -->
+<!-- ========================================= -->
+
+<section class="volunteer-section">
+
+<h2 class="section-title">
+Become a Community Volunteer
+</h2>
+
+<p class="section-subtitle">
+Volunteers help spread awareness, report public issues and encourage citizens to protect infrastructure.
+</p>
+
+<div class="volunteer-grid">
+
+<div class="volunteer-card">
+<i class="fas fa-bullhorn"></i>
+<h3>Spread Awareness</h3>
+<p>
+Educate people about keeping roads, parks and public places clean.
+</p>
+</div>
+
+<div class="volunteer-card">
+<i class="fas fa-camera"></i>
+<h3>Report Issues</h3>
+<p>
+Report damaged roads, broken lights and water leaks through IDRS.
+</p>
+</div>
+
+<div class="volunteer-card">
+<i class="fas fa-tree"></i>
+<h3>Environmental Drives</h3>
+<p>
+Participate in tree plantation and cleanliness campaigns.
+</p>
+</div>
+
+<div class="volunteer-card">
+<i class="fas fa-handshake"></i>
+<h3>Community Support</h3>
+<p>
+Work with local authorities to improve public infrastructure.
+</p>
+</div>
+
+</div>
+
+<div class="volunteer-banner">
+
+<h2>Together We Can Build Better Cities</h2>
+
+<p>
+Every report, every volunteer and every awareness campaign makes our community stronger.
+</p>
+
+<a href="#" class="join-btn">
+<i class="fas fa-user-plus"></i>
+Become a Volunteer
+</a>
+
+</div>
+
+</section>
+
+<style>
+
+/* ===================================
+Community Statistics
+=================================== */
+
+.community-stats,
+.volunteer-section{
+padding:100px 8%;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+margin-top:50px;
+}
+
+.stats-card{
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+padding:40px;
+text-align:center;
+border-radius:24px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.35s;
+}
+
+.stats-card:hover{
+transform:translateY(-8px);
+}
+
+.stats-card i{
+font-size:55px;
+color:#2563EB;
+margin-bottom:20px;
+}
+
+.stats-card h2{
+font-size:42px;
+color:#111827;
+margin-bottom:10px;
+}
+
+.stats-card p{
+font-size:18px;
+color:#6B7280;
+}
+
+/* ===================================
+Volunteer
+=================================== */
+
+.volunteer-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+margin-top:50px;
+}
+
+.volunteer-card{
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+padding:35px;
+border-radius:24px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+text-align:center;
+transition:.35s;
+}
+
+.volunteer-card:hover{
+transform:translateY(-8px);
+}
+
+.volunteer-card i{
+font-size:52px;
+color:#2563EB;
+margin-bottom:20px;
+}
+
+.volunteer-card h3{
+margin-bottom:15px;
+font-size:24px;
+}
+
+.volunteer-card p{
+line-height:30px;
+color:#6B7280;
+}
+
+.volunteer-banner{
+margin-top:70px;
+background:#2F3B4A;
+padding:60px;
+border-radius:30px;
+text-align:center;
+color:white;
+}
+
+.volunteer-banner h2{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.volunteer-banner p{
+font-size:18px;
+line-height:34px;
+max-width:800px;
+margin:auto auto 35px;
+}
+
+.join-btn{
+display:inline-block;
+padding:16px 38px;
+background:white;
+color:#2F3B4A;
+text-decoration:none;
+font-weight:600;
+border-radius:40px;
+transition:.3s;
+}
+
+.join-btn:hover{
+transform:translateY(-6px);
+}
+
+@media(max-width:1000px){
+
+.stats-grid,
+.volunteer-grid{
+grid-template-columns:1fr;
+}
+
+.volunteer-banner{
+padding:40px 25px;
+}
+
+.volunteer-banner h2{
+font-size:32px;
+}
+
+}
+
+</style>
+<!-- ========================================= -->
+<!-- Success Stories -->
+<!-- ========================================= -->
+
+<section class="success-section">
+
+<h2 class="section-title">
+Community Success Stories
+</h2>
+
+<p class="section-subtitle">
+Real examples of how citizen participation has improved public infrastructure.
+</p>
+
+<div class="success-grid">
+
+<div class="success-card">
+<i class="fas fa-road"></i>
+<h3>Pothole Repaired</h3>
+<p>
+A major pothole reported by local residents was repaired within 48 hours, improving road safety.
+</p>
+</div>
+
+<div class="success-card">
+<i class="fas fa-lightbulb"></i>
+<h3>Street Lights Restored</h3>
+<p>
+Citizens reported damaged streetlights which were replaced, making the area safer at night.
+</p>
+</div>
+
+<div class="success-card">
+<i class="fas fa-faucet-drip"></i>
+<h3>Water Leakage Fixed</h3>
+<p>
+Quick reporting helped authorities stop thousands of litres of water from being wasted.
+</p>
+</div>
+
+<div class="success-card">
+<i class="fas fa-tree"></i>
+<h3>Public Park Improved</h3>
+<p>
+Community volunteers cleaned the park and planted new trees for a greener environment.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Community Achievements -->
+<!-- ========================================= -->
+
+<section class="achievement-section">
+
+<h2 class="section-title">
+Community Achievements
+</h2>
+
+<p class="section-subtitle">
+Together we continue to build cleaner, smarter and safer communities.
+</p>
+
+<div class="achievement-grid">
+
+<div class="achievement-card">
+<i class="fas fa-award"></i>
+<h2>15+</h2>
+<h3>Awareness Campaigns</h3>
+</div>
+
+<div class="achievement-card">
+<i class="fas fa-users"></i>
+<h2>8,500+</h2>
+<h3>Volunteers Joined</h3>
+</div>
+
+<div class="achievement-card">
+<i class="fas fa-city"></i>
+<h2>120+</h2>
+<h3>Areas Improved</h3>
+</div>
+
+<div class="achievement-card">
+<i class="fas fa-handshake"></i>
+<h2>95%</h2>
+<h3>Citizen Satisfaction</h3>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Citizen Testimonials -->
+<!-- ========================================= -->
+
+<section class="testimonial-section">
+
+<h2 class="section-title">
+What Citizens Say
+</h2>
+
+<p class="section-subtitle">
+Feedback from citizens who actively participated in improving their communities.
+</p>
+
+<div class="testimonial-grid">
+
+<div class="testimonial-card">
+
+<i class="fas fa-quote-left"></i>
+
+<p>
+"The reporting system is simple and very effective. The damaged road near my area was repaired quickly."
+</p>
+
+<h3>Rahul Patel</h3>
+
+<span>Citizen</span>
+
+</div>
+
+<div class="testimonial-card">
+
+<i class="fas fa-quote-left"></i>
+
+<p>
+"Community awareness campaigns encouraged many people in our neighbourhood to report issues responsibly."
+</p>
+
+<h3>Priya Shah</h3>
+
+<span>Volunteer</span>
+
+</div>
+
+<div class="testimonial-card">
+
+<i class="fas fa-quote-left"></i>
+
+<p>
+"I appreciate how easy it is to report infrastructure damage. It really helps keep our city safe."
+</p>
+
+<h3>Amit Kumar</h3>
+
+<span>Resident</span>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+/* =====================================
+Success Stories
+===================================== */
+
+.success-section,
+.achievement-section,
+.testimonial-section{
+padding:100px 8%;
+}
+
+.success-grid,
+.achievement-grid,
+.testimonial-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+margin-top:50px;
+}
+
+.success-card,
+.achievement-card,
+.testimonial-card{
+
+background:#FFFFFF;
+border:1px solid #E5E7EB;
+padding:35px;
+border-radius:24px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.35s;
+
+}
+
+.success-card:hover,
+.achievement-card:hover,
+.testimonial-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.success-card i,
+.achievement-card i{
+
+font-size:52px;
+color:#2563EB;
+margin-bottom:20px;
+
+}
+
+.success-card h3{
+
+margin-bottom:15px;
+font-size:24px;
+
+}
+
+.success-card p{
+
+line-height:30px;
+color:#6B7280;
+
+}
+
+.achievement-card h2{
+
+font-size:46px;
+color:#2563EB;
+margin-bottom:10px;
+
+}
+
+.achievement-card h3{
+
+font-size:22px;
+
+}
+
+.testimonial-card i{
+
+font-size:42px;
+color:#2563EB;
+margin-bottom:20px;
+
+}
+
+.testimonial-card p{
+
+line-height:30px;
+color:#6B7280;
+font-style:italic;
+margin-bottom:25px;
+
+}
+
+.testimonial-card h3{
+
+margin-bottom:8px;
+
+}
+
+.testimonial-card span{
+
+color:#6B7280;
+font-size:15px;
+
+}
+
+@media(max-width:1000px){
+
+.success-grid,
+.achievement-grid,
+.testimonial-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+<!-- ========================================= -->
+<!-- Community Gallery -->
+<!-- ========================================= -->
+
+<section class="gallery-section">
+
+<h2 class="section-title">
+Community Awareness Gallery
+</h2>
+
+<p class="section-subtitle">
+Snapshots of awareness campaigns, cleanliness drives and citizen participation.
+</p>
+
+<div class="gallery-grid">
+
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600" alt="">
+<div class="gallery-overlay">
+<h3>Clean City Drive</h3>
+</div>
+</div>
+
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600" alt="">
+<div class="gallery-overlay">
+<h3>Volunteer Program</h3>
+</div>
+</div>
+
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1509099863731-ef4bff19e808?w=600" alt="">
+<div class="gallery-overlay">
+<h3>Road Safety Campaign</h3>
+</div>
+</div>
+
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600" alt="">
+<div class="gallery-overlay">
+<h3>Tree Plantation</h3>
+</div>
+</div>
+
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600" alt="">
+<div class="gallery-overlay">
+<h3>Public Awareness</h3>
+</div>
+</div>
+
+<div class="gallery-card">
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600" alt="">
+<div class="gallery-overlay">
+<h3>Smart City Initiative</h3>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Upcoming Events -->
+<!-- ========================================= -->
+
+<section class="timeline-section">
+
+<h2 class="section-title">
+Upcoming Community Events
+</h2>
+
+<p class="section-subtitle">
+Participate in upcoming awareness activities.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<h3>Road Safety Week</h3>
+<p>10 August 2026</p>
+</div>
+
+<div class="timeline-item">
+<h3>Tree Plantation Drive</h3>
+<p>18 August 2026</p>
+</div>
+
+<div class="timeline-item">
+<h3>Clean City Campaign</h3>
+<p>28 August 2026</p>
+</div>
+
+<div class="timeline-item">
+<h3>Water Conservation Workshop</h3>
+<p>5 September 2026</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Awareness Video -->
+<!-- ========================================= -->
+
+<section class="video-section">
+
+<h2 class="section-title">
+Awareness Video
+</h2>
+
+<p class="section-subtitle">
+Watch how communities work together to build safer cities.
+</p>
+
+<div class="video-box">
+
+<iframe
+width="100%"
+height="500"
+src="https://www.youtube.com/embed/M7lc1UVf-VE"
+title="Community Awareness"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Latest Awareness News -->
+<!-- ========================================= -->
+
+<section class="news-section">
+
+<h2 class="section-title">
+Latest Awareness Updates
+</h2>
+
+<p class="section-subtitle">
+Recent community initiatives and public awareness activities.
+</p>
+
+<div class="news-grid">
+
+<div class="news-card">
+<i class="fas fa-road"></i>
+<h3>Road Repair Drive</h3>
+<p>Local authorities repaired over 150 damaged roads this month.</p>
+</div>
+
+<div class="news-card">
+<i class="fas fa-tree"></i>
+<h3>5,000 Trees Planted</h3>
+<p>Citizens participated in a city-wide tree plantation campaign.</p>
+</div>
+
+<div class="news-card">
+<i class="fas fa-users"></i>
+<h3>Volunteer Growth</h3>
+<p>More than 2,000 new volunteers joined community programs.</p>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+/* Gallery */
+
+.gallery-section,
+.timeline-section,
+.video-section,
+.news-section{
+padding:100px 8%;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:50px;
+}
+
+.gallery-card{
+position:relative;
+overflow:hidden;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+.gallery-card img{
+width:100%;
+height:260px;
+object-fit:cover;
+transition:.4s;
+display:block;
+}
+
+.gallery-card:hover img{
+transform:scale(1.1);
+}
+
+.gallery-overlay{
+position:absolute;
+bottom:0;
+width:100%;
+padding:20px;
+background:rgba(47,59,74,.85);
+color:white;
+}
+
+/* Timeline */
+
+.timeline{
+max-width:900px;
+margin:50px auto;
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.timeline-item{
+background:#FFFFFF;
+padding:25px;
+border-left:6px solid #2563EB;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.timeline-item h3{
+margin-bottom:10px;
+}
+
+.timeline-item p{
+color:#6B7280;
+}
+
+/* Video */
+
+.video-box{
+background:#FFFFFF;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+/* News */
+
+.news-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:50px;
+}
+
+.news-card{
+background:#FFFFFF;
+padding:35px;
+border-radius:22px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.35s;
+}
+
+.news-card:hover{
+transform:translateY(-8px);
+}
+
+.news-card i{
+font-size:50px;
+color:#2563EB;
+margin-bottom:20px;
+}
+
+.news-card h3{
+margin-bottom:15px;
+}
+
+.news-card p{
+line-height:30px;
+color:#6B7280;
+}
+
+@media(max-width:1000px){
+
+.gallery-grid,
+.news-grid{
+grid-template-columns:1fr;
+}
+
+iframe{
+height:260px;
+}
+
+}
+
+</style>
+<!-- ========================================= -->
+<!-- Frequently Asked Questions -->
+<!-- ========================================= -->
+
+<section class="faq-section">
+
+<h2 class="section-title">
+Frequently Asked Questions
+</h2>
+
+<p class="section-subtitle">
+Find answers to common questions about community awareness and citizen participation.
+</p>
+
+<div class="faq-container">
+
+<div class="faq-card">
+<h3><i class="fas fa-circle-question"></i> Why is community awareness important?</h3>
+<p>
+Community awareness encourages citizens to work together to protect public infrastructure, reduce accidents, and create a cleaner environment.
+</p>
+</div>
+
+<div class="faq-card">
+<h3><i class="fas fa-circle-question"></i> How can I participate?</h3>
+<p>
+You can report infrastructure damage, volunteer for campaigns, attend awareness events, and encourage others to use the IDRS platform.
+</p>
+</div>
+
+<div class="faq-card">
+<h3><i class="fas fa-circle-question"></i> Is reporting damage free?</h3>
+<p>
+Yes. Reporting infrastructure damage through the IDRS platform is completely free for all citizens.
+</p>
+</div>
+
+<div class="faq-card">
+<h3><i class="fas fa-circle-question"></i> Can I become a volunteer?</h3>
+<p>
+Yes. Anyone interested in helping the community can join awareness campaigns and volunteer programs.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Final Call To Action -->
+<!-- ========================================= -->
+
+<section class="final-cta">
+
+<div class="cta-box">
+
+<h2>
+Together We Can Build a Safer & Smarter Community
+</h2>
+
+<p>
+
+Every report, every volunteer, and every awareness campaign helps improve public infrastructure and creates a better future for everyone.
+
+</p>
+
+<div class="cta-buttons">
+
+<a href="report.html" class="cta-btn-dark">
+<i class="fas fa-file-circle-plus"></i>
+Report Damage
+</a>
+
+<a href="volunteer.html" class="cta-btn-light">
+<i class="fas fa-users"></i>
+Join Community
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- Footer -->
+<!-- ========================================= -->
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-about">
+
+<h2>IDRS</h2>
+
+<p>
+
+Infrastructure Damage Reporting System encourages citizens to actively participate in protecting public infrastructure through awareness, reporting, and community engagement.
+
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<h3>Quick Links</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="About-project-page.html">About Project</a></li>
+
+<li><a href="community-awareness.html">Community Awareness</a></li>
+
+<li><a href="safety-tips-page.html">Safety Tips</a></li>
+
+<li><a href="feedback-and-suggestion-page.html">Feedback</a></li>
+
+<li><a href="help-and-support.html">Help & Support</a></li>
+
+</ul>
+
+</div>
+
+<div class="footer-contact">
+
+<h3>Contact Us</h3>
+
+<p><i class="fas fa-envelope"></i> support@idrs.gov.in</p>
+
+<p><i class="fas fa-phone"></i> +91 98765 43210</p>
+
+<p><i class="fas fa-location-dot"></i> Gujarat, India</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copyright">
+
+© 2026 Infrastructure Damage Reporting System | Community Awareness Portal
+
+</p>
+
+</footer>
+
+<style>
+
+/* ===========================================
+FAQ
+=========================================== */
+
+.faq-section,
+.final-cta{
+padding:100px 8%;
+}
+
+.faq-container{
+display:flex;
+flex-direction:column;
+gap:25px;
+margin-top:40px;
+}
+
+.faq-card{
+background:#FFFFFF;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+border:1px solid #E5E7EB;
+transition:.3s;
+}
+
+.faq-card:hover{
+transform:translateY(-5px);
+}
+
+.faq-card h3{
+margin-bottom:15px;
+font-size:22px;
+color:#111827;
+}
+
+.faq-card h3 i{
+color:#2563EB;
+margin-right:10px;
+}
+
+.faq-card p{
+line-height:30px;
+color:#6B7280;
+}
+
+/* CTA */
+
+.cta-box{
+background:#2F3B4A;
+padding:70px;
+border-radius:30px;
+text-align:center;
+color:white;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.cta-box h2{
+font-size:44px;
+margin-bottom:20px;
+}
+
+.cta-box p{
+max-width:850px;
+margin:auto;
+line-height:34px;
+margin-bottom:35px;
+font-size:18px;
+}
+
+.cta-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.cta-btn-dark,
+.cta-btn-light{
+padding:16px 36px;
+border-radius:40px;
+font-weight:600;
+text-decoration:none;
+transition:.3s;
+}
+
+.cta-btn-dark{
+background:white;
+color:#2F3B4A;
+}
+
+.cta-btn-light{
+background:#2563EB;
+color:white;
+}
+
+.cta-btn-dark:hover,
+.cta-btn-light:hover{
+transform:translateY(-6px);
+}
+
+/* Footer */
+
+footer{
+margin-top:80px;
+background:#FFFFFF;
+padding:60px 8% 30px;
+border-top:1px solid #E5E7EB;
+}
+
+.footer-container{
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+gap:40px;
+}
+
+.footer-about p,
+.footer-contact p{
+margin-top:18px;
+line-height:30px;
+color:#6B7280;
+}
+
+.footer-links ul{
+list-style:none;
+margin-top:20px;
+}
+
+.footer-links li{
+margin:12px 0;
+}
+
+.footer-links a{
+text-decoration:none;
+color:#374151;
+}
+
+.footer-links a:hover{
+color:#2563EB;
+}
+
+hr{
+margin:40px 0;
+border:none;
+height:1px;
+background:#E5E7EB;
+}
+
+.copyright{
+text-align:center;
+color:#6B7280;
+}
+
+@media(max-width:1000px){
+
+.footer-container{
+grid-template-columns:1fr;
+}
+
+.cta-box{
+padding:40px 25px;
+}
+
+.cta-box h2{
+font-size:32px;
+}
+
+}
+
+</style>
+<script>
+
+/* ===========================
+Side Menu
+=========================== */
+
+function toggleMenu(){
+
+document.getElementById("sideMenu").classList.toggle("show");
+
+}
+
+/* ===========================
+Logout
+=========================== */
+
+function logout(){
+
+window.location.href="login-page.html";
+
+}
+
+/* ===========================
+Animated Counters
+=========================== */
+
+const counters=document.querySelectorAll('.counter');
+
+const speed=200;
+
+counters.forEach(counter=>{
+
+const animate=()=>{
+
+const target=+counter.getAttribute('data-target');
+
+const count=+counter.innerText;
+
+const increment=target/speed;
+
+if(count<target){
+
+counter.innerText=Math.ceil(count+increment);
+
+setTimeout(animate,10);
+
+}
+
+else{
+
+counter.innerText=target.toLocaleString();
+
+}
+
+};
+
+animate();
+
+});
+
+/* ===========================
+Scroll Animation
+=========================== */
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.style.opacity="1";
+
+entry.target.style.transform="translateY(0px)";
+
+}
+
+});
+
+},{threshold:.15});
+
+document.querySelectorAll(
+
+'.awareness-box,.responsibility-card,.campaign-card,.safety-card,.environment-card,.stats-card,.volunteer-card,.success-card,.achievement-card,.testimonial-card,.gallery-card,.timeline-item,.news-card,.faq-card'
+
+).forEach(card=>{
+
+card.style.opacity="0";
+
+card.style.transform="translateY(40px)";
+
+card.style.transition=".7s";
+
+observer.observe(card);
+
+});
+
+/* ===========================
+Button Ripple Effect
+=========================== */
+
+document.querySelectorAll('a').forEach(button=>{
+
+button.addEventListener('mouseenter',()=>{
+
+button.style.transition=".3s";
+
+});
+
+});
+
+/* ===========================
+Back To Top Button
+=========================== */
+
+const topBtn=document.createElement("button");
+
+topBtn.innerHTML='<i class="fas fa-arrow-up"></i>';
+
+document.body.appendChild(topBtn);
+
+topBtn.style.position="fixed";
+topBtn.style.right="25px";
+topBtn.style.bottom="25px";
+topBtn.style.width="55px";
+topBtn.style.height="55px";
+topBtn.style.borderRadius="50%";
+topBtn.style.border="none";
+topBtn.style.background="#2F3B4A";
+topBtn.style.color="#fff";
+topBtn.style.fontSize="20px";
+topBtn.style.cursor="pointer";
+topBtn.style.display="none";
+topBtn.style.boxShadow="0 10px 25px rgba(0,0,0,.25)";
+topBtn.style.zIndex="999";
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>400){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
+
+});
+
+topBtn.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+/* ===========================
+Gallery Image Hover
+=========================== */
+
+document.querySelectorAll(".gallery-card img").forEach(img=>{
+
+img.addEventListener("mouseover",()=>{
+
+img.style.filter="brightness(.85)";
+
+});
+
+img.addEventListener("mouseout",()=>{
+
+img.style.filter="brightness(1)";
+
+});
+
+});
+
+/* ===========================
+Current Year
+=========================== */
+
+const year=new Date().getFullYear();
+
+const copy=document.querySelector(".copyright");
+
+if(copy){
+
+copy.innerHTML="© "+year+" Infrastructure Damage Reporting System | Community Awareness Portal";
+
+}
+
+</script>
+
+</body>
+
+</html>
