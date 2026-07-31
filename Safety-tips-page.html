@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Safety Tips - Infrastructure Damage Reporting System</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',Arial,sans-serif;
+    background:#f3f4f6;
+    color:#29384b;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    background:#fff;
+    padding:25px 6%;
+    border-bottom:1px solid #e3e6ea;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.brand-icon{
+    width:40px;
+    height:40px;
+    border-radius:8px;
+    background:#29384b;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.brand h1{
+    font-size:27px;
+    font-weight:800;
+    color:#19283a;
+}
+
+.subtitle{
+    margin-left:52px;
+    margin-top:3px;
+    font-size:14px;
+    color:#858d96;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    background:#29384b;
+}
+
+.nav{
+    max-width:1200px;
+    height:56px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.nav-links{
+    display:flex;
+    gap:5px;
+    list-style:none;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#e8edf2;
+    padding:9px 14px;
+    border-radius:6px;
+    font-size:13px;
+    transition:.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    background:#3b4b5f;
+    color:white;
+}
+
+.report-btn{
+    background:#fff;
+    color:#29384b;
+    text-decoration:none;
+    padding:9px 15px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:700;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:1120px;
+    margin:auto;
+    padding:42px 20px 60px;
+}
+
+/* ================= TITLE ================= */
+
+.page-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.page-icon{
+    width:62px;
+    height:62px;
+    background:#e8edf3;
+    color:#29384b;
+    border-radius:13px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:14px;
+}
+
+.page-title h2{
+    font-size:30px;
+    color:#253447;
+    margin-bottom:7px;
+}
+
+.page-title p{
+    color:#7b858f;
+    font-size:14px;
+}
+
+/* ================= SEARCH ================= */
+
+.search-box{
+    max-width:650px;
+    margin:0 auto 28px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    height:48px;
+    padding:0 48px 0 17px;
+    border:1px solid #dfe3e7;
+    border-radius:8px;
+    background:#fff;
+    outline:none;
+    font-size:13px;
+    color:#29384b;
+}
+
+.search-box input:focus{
+    border-color:#8b9caf;
+    box-shadow:0 0 0 3px rgba(41,56,75,.06);
+}
+
+.search-box i{
+    position:absolute;
+    right:17px;
+    top:16px;
+    color:#89929c;
+}
+
+/* ================= SAFETY STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:35px;
+}
+
+.stat{
+    background:#fff;
+    border:1px solid #e2e5e8;
+    border-radius:10px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.stat-icon{
+    width:42px;
+    height:42px;
+    border-radius:8px;
+    background:#edf1f5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#29384b;
+}
+
+.stat strong{
+    display:block;
+    font-size:17px;
+}
+
+.stat span{
+    color:#858e98;
+    font-size:11px;
+}
+
+/* ================= SECTION ================= */
+
+.section-heading{
+    margin:30px 0 18px;
+}
+
+.section-heading h3{
+    font-size:21px;
+}
+
+.section-heading p{
+    color:#808a94;
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* ================= CATEGORY CARDS ================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #e0e4e8;
+    border-radius:11px;
+    padding:22px;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 24px rgba(30,45,60,.09);
+}
+
+.card-top{
+    display:flex;
+    gap:13px;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.icon{
+    width:47px;
+    height:47px;
+    border-radius:9px;
+    background:#edf2f7;
+    color:#29384b;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:19px;
+}
+
+.card h4{
+    font-size:16px;
+}
+
+.card small{
+    color:#84909b;
+    font-size:11px;
+}
+
+.card p{
+    color:#707b86;
+    font-size:12.5px;
+    margin-bottom:13px;
+}
+
+.tips{
+    list-style:none;
+}
+
+.tips li{
+    display:flex;
+    gap:9px;
+    color:#596673;
+    font-size:12px;
+    margin:8px 0;
+}
+
+.tips i{
+    color:#55789d;
+    margin-top:3px;
+}
+
+/* ================= DO DON'T ================= */
+
+.do-dont{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.box{
+    background:#fff;
+    border:1px solid #e0e4e8;
+    border-radius:11px;
+    padding:23px;
+}
+
+.box-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+}
+
+.box-title span{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.do .box-title span{
+    background:#eaf4ee;
+    color:#438063;
+}
+
+.dont .box-title span{
+    background:#faeded;
+    color:#b85b5b;
+}
+
+.box-title h4{
+    font-size:16px;
+}
+
+.item{
+    display:flex;
+    gap:10px;
+    color:#64707b;
+    font-size:12.5px;
+    padding:8px 0;
+}
+
+.do .item i{
+    color:#438063;
+}
+
+.dont .item i{
+    color:#b85b5b;
+}
+
+/* ================= REPORT STEPS ================= */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.step{
+    background:#fff;
+    border:1px solid #e0e4e8;
+    border-radius:10px;
+    padding:20px 14px;
+    text-align:center;
+}
+
+.step-number{
+    width:40px;
+    height:40px;
+    background:#29384b;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 12px;
+    font-weight:700;
+}
+
+.step h4{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.step p{
+    color:#7e8993;
+    font-size:11px;
+}
+
+/* ================= ALERT ================= */
+
+.alert{
+    margin-top:25px;
+    background:#fff8ed;
+    border:1px solid #ebdfca;
+    border-left:4px solid #c88b42;
+    border-radius:8px;
+    padding:17px 19px;
+    display:flex;
+    gap:13px;
+}
+
+.alert i{
+    color:#c88b42;
+    font-size:19px;
+}
+
+.alert h4{
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.alert p{
+    color:#756e65;
+    font-size:11.5px;
+}
+
+/* ================= FAQ ================= */
+
+.faq{
+    background:#fff;
+    border:1px solid #e0e4e8;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.faq-item{
+    border-bottom:1px solid #edf0f2;
+}
+
+.faq-item:last-child{
+    border-bottom:none;
+}
+
+.question{
+    padding:17px 19px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+}
+
+.question i{
+    color:#7d8994;
+    transition:.25s;
+}
+
+.answer{
+    display:none;
+    padding:0 19px 17px;
+    color:#7b858e;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.faq-item.open .answer{
+    display:block;
+}
+
+.faq-item.open .question i{
+    transform:rotate(180deg);
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    margin-top:35px;
+    background:#29384b;
+    color:white;
+    border-radius:12px;
+    padding:29px;
+    text-align:center;
+}
+
+.cta h3{
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.cta p{
+    color:#d1d8df;
+    font-size:12px;
+    margin-bottom:17px;
+}
+
+.cta a{
+    background:white;
+    color:#29384b;
+    text-decoration:none;
+    padding:10px 19px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:700;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#202d3d;
+    color:#cbd3db;
+    padding:24px 6%;
+}
+
+.footer-inner{
+    max-width:1120px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+footer h4{
+    color:#fff;
+    font-size:13px;
+}
+
+footer p{
+    font-size:11px;
+    margin-top:4px;
+}
+
+.footer-links a{
+    color:#cbd3db;
+    text-decoration:none;
+    font-size:11px;
+    margin-left:15px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .brand h1{
+        font-size:20px;
+    }
+
+    .subtitle{
+        margin-left:0;
+    }
+
+    .nav{
+        height:auto;
+        padding:10px 15px;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .cards,
+    .do-dont{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px){
+
+    .header{
+        padding:18px 5%;
+    }
+
+    .brand h1{
+        font-size:17px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:30px 14px 50px;
+    }
+
+    .page-title h2{
+        font-size:25px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        text-align:center;
+        gap:12px;
+    }
+
+    .footer-links a{
+        margin:0 6px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="fa-solid fa-road"></i>
+        </div>
+
+        <h1>Infrastructure Damage Reporting System</h1>
+
+    </div>
+
+    <div class="subtitle">
+        Report • Track • Improve Public Infrastructure
+    </div>
+
+</header>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+<div class="nav">
+
+<ul class="nav-links">
+
+<li>
+<a href="home-page.html">Home</a>
+</li>
+
+<li>
+<a href="about-project.html">About Project</a>
+</li>
+
+<li>
+<a href="report.html">Report Damage</a>
+</li>
+
+<li>
+<a href="track.html">Track Report</a>
+</li>
+
+<li>
+<a href="safety-tips.html" class="active">Safety Tips</a>
+</li>
+
+</ul>
+
+<a href="report.html" class="report-btn">
+<i class="fa-solid fa-flag"></i>
+Report Damage
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- ================= CONTENT ================= -->
+
+<main class="container">
+
+
+<!-- PAGE TITLE -->
+
+<section class="page-title">
+
+<div class="page-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+
+<h2>Safety Tips</h2>
+
+<p>
+Important safety information for reporting infrastructure issues safely.
+</p>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="Search safety tips..."
+onkeyup="searchTips()">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-icon">
+<i class="fa-solid fa-shield"></i>
+</div>
+
+<div>
+<strong>Safety First</strong>
+<span>Protect yourself and others</span>
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-icon">
+<i class="fa-solid fa-camera"></i>
+</div>
+
+<div>
+<strong>Safe Photos</strong>
+<span>Capture only from safe areas</span>
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-icon">
+<i class="fa-solid fa-location-dot"></i>
+</div>
+
+<div>
+<strong>Accurate Location</strong>
+<span>Provide useful location details</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CATEGORIES -->
+
+<div class="section-heading">
+
+<h3>Safety Categories</h3>
+
+<p>
+Select a category to learn important safety precautions.
+</p>
+
+</div>
+
+
+<div class="cards" id="cards">
+
+
+<!-- ROAD -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-road"></i>
+</div>
+
+<div>
+<h4>Road Safety</h4>
+<small>Potholes & damaged roads</small>
+</div>
+
+</div>
+
+<p>
+Stay alert around potholes, cracks and damaged road surfaces.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Keep a safe distance from damaged areas.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Slow down when approaching potholes.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Never take photos while driving.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report the location accurately.
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- STREET LIGHT -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-lightbulb"></i>
+</div>
+
+<div>
+<h4>Street Light Safety</h4>
+<small>Broken & non-functional lights</small>
+</div>
+
+</div>
+
+<p>
+Damaged street lights and poles can create safety hazards.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Stay away from damaged poles.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Never touch exposed electrical wiring.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report non-functional lights.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Mention the nearest landmark.
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- WATER -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-droplet"></i>
+</div>
+
+<div>
+<h4>Water Leakage</h4>
+<small>Pipeline leaks & water wastage</small>
+</div>
+
+</div>
+
+<p>
+Water leakage can cause slippery surfaces and road damage.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Avoid walking through unknown water.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Stay away from damaged pipelines.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Keep electrical equipment away from water.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report the exact leakage location.
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- TRAFFIC -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-traffic-light"></i>
+</div>
+
+<div>
+<h4>Traffic Signal Safety</h4>
+<small>Damaged or inactive signals</small>
+</div>
+
+</div>
+
+<p>
+Broken traffic signals can create dangerous road conditions.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Follow traffic signs when signals fail.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Drive slowly near the affected junction.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Do not stand in moving traffic.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report the junction location.
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- FALLEN TREE -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-tree"></i>
+</div>
+
+<div>
+<h4>Fallen Tree Safety</h4>
+<small>Road & pathway obstruction</small>
+</div>
+
+</div>
+
+<p>
+Fallen trees may block roads, pathways or damage nearby utilities.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Keep away from unstable branches.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Do not attempt to move the tree.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Watch for nearby electrical wires.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report the obstruction promptly.
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- BRIDGE -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-bridge"></i>
+</div>
+
+<div>
+<h4>Bridge Safety</h4>
+<small>Cracks & structural damage</small>
+</div>
+
+</div>
+
+<p>
+Structural damage can make bridges and elevated areas unsafe.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Do not enter restricted areas.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Stay away from visible structural damage.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Follow warning signs and barriers.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report serious damage immediately.
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- BUILDING -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-building"></i>
+</div>
+
+<div>
+<h4>Public Building Safety</h4>
+<small>Government building damage</small>
+</div>
+
+</div>
+
+<p>
+Damaged public buildings may contain unsafe structural areas.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Avoid entering visibly unsafe structures.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Follow official warning signs.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Keep away from damaged sections.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report the building location.
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- SEWER -->
+
+<div class="card">
+
+<div class="card-top">
+
+<div class="icon">
+<i class="fa-solid fa-water"></i>
+</div>
+
+<div>
+<h4>Sewer & Drainage Safety</h4>
+<small>Open drains & sewer issues</small>
+</div>
+
+</div>
+
+<p>
+Open drains and missing covers can be dangerous for pedestrians.
+</p>
+
+<ul class="tips">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Stay away from uncovered drains.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Never enter a sewer or drainage area.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Keep children away from open areas.
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Report missing covers immediately.
+</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+
+<!-- DO DON'T -->
+
+<div class="section-heading">
+
+<h3>Safety Do's & Don'ts</h3>
+
+<p>
+Simple rules to keep yourself safe while reporting.
+</p>
+
+</div>
+
+
+<div class="do-dont">
+
+
+<div class="box do">
+
+<div class="box-title">
+
+<span>
+<i class="fa-solid fa-check"></i>
+</span>
+
+<h4>Do</h4>
+
+</div>
+
+<div class="item">
+<i class="fa-solid fa-check"></i>
+Stay in a safe location.
+</div>
+
+<div class="item">
+<i class="fa-solid fa-check"></i>
+Take photos from a safe distance.
+</div>
+
+<div class="item">
+<i class="fa-solid fa-check"></i>
+Use nearby landmarks.
+</div>
+
+<div class="item">
+<i class="fa-solid fa-check"></i>
+Follow traffic signs and barriers.
+</div>
+
+</div>
+
+
+<div class="box dont">
+
+<div class="box-title">
+
+<span>
+<i class="fa-solid fa-xmark"></i>
+</span>
+
+<h4>Don't</h4>
+
+</div>
+
+<div class="item">
+<i class="fa-solid fa-xmark"></i>
+Do not stand in moving traffic.
+</div>
+
+<div class="item">
+<i class="fa-solid fa-xmark"></i>
+Do not touch exposed electrical wires.
+</div>
+
+<div class="item">
+<i class="fa-solid fa-xmark"></i>
+Do not enter restricted areas.
+</div>
+
+<div class="item">
+<i class="fa-solid fa-xmark"></i>
+Do not take photos while driving.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- REPORT PROCESS -->
+
+<div class="section-heading">
+
+<h3>Safe Reporting Process</h3>
+
+<p>
+Follow these simple steps before submitting an infrastructure report.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+
+<div class="step">
+
+<div class="step-number">1</div>
+
+<h4>Stay Safe</h4>
+
+<p>
+Move to a safe location first.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">2</div>
+
+<h4>Observe</h4>
+
+<p>
+Identify the damage carefully.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">3</div>
+
+<h4>Capture</h4>
+
+<p>
+Take a photo only if safe.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">4</div>
+
+<h4>Report</h4>
+
+<p>
+Submit accurate information.
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- ALERT -->
+
+<div class="alert">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+<div>
+
+<h4>Important Safety Notice</h4>
+
+<p>
+Never put yourself in danger to collect information. If an area appears
+unsafe, maintain a safe distance and report the issue with the information
+you can safely provide.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ -->
+
+<div class="section-heading">
+
+<h3>Frequently Asked Questions</h3>
+
+<p>
+Quick answers about safe reporting.
+</p>
+
+</div>
+
+
+<div class="faq">
+
+
+<div class="faq-item">
+
+<div class="question" onclick="toggleFAQ(this)">
+Can I report damage without taking a photo?
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="answer">
+Yes. If taking a photo is unsafe, do not take one. You can provide
+the location and a clear description of the issue instead.
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<div class="question" onclick="toggleFAQ(this)">
+Should I enter a damaged area to inspect it?
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="answer">
+No. Stay outside restricted or unsafe areas. Your personal safety
+should always come first.
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<div class="question" onclick="toggleFAQ
