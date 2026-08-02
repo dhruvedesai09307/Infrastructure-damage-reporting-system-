@@ -42,21 +42,21 @@ overflow-x:hidden;
 /* ============================= */
 
 .topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:#FFFFFF;
+    border-bottom:1px solid #E5E7EB;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
 
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:70px;
-background:#FFFFFF;
-border-bottom:1px solid #E5E7EB;
-box-shadow:0 2px 8px rgba(0,0,0,.05);
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 30px;
-z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
+    padding:0 40px;
+    z-index:1000;
 }
 
 .logo{
@@ -88,85 +88,50 @@ color:#6B7280;
 
 }
 
-.menu-icon{
-
-font-size:26px;
-cursor:pointer;
-color:#374151;
-
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
 }
 
-.logout-btn{
-
-background:#2F3B4A;
-color:white;
-border:none;
-padding:10px 20px;
-border-radius:10px;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
-
+.nav-links a{
+    text-decoration:none;
+    color:#374151;
+    font-weight:500;
+    transition:.3s;
 }
 
-.logout-btn:hover{
-
-background:#1F2937;
-
+.nav-links a:hover{
+    color:#2563EB;
 }
 
-/* ============================= */
-/* Side Menu */
-/* ============================= */
-
-.side-menu{
-
-position:fixed;
-left:-260px;
-top:0;
-width:250px;
-height:100%;
-background:#FFFFFF;
-border-right:1px solid #E5E7EB;
-box-shadow:5px 0 20px rgba(0,0,0,.08);
-padding-top:70px;
-overflow-y:auto;
-transition:.35s;
-z-index:999;
-
+.nav-links a.active{
+    background:#E5E7EB;
+    padding:10px 16px;
+    border-radius:10px;
+    font-weight:600;
 }
 
-.side-menu.show{
-
-left:0;
-
+.home-btn{
+    padding:10px 22px;
+    border:1px solid #D1D5DB;
+    border-radius:12px;
+    text-decoration:none;
+    color:#374151;
+    font-weight:600;
+    transition:.3s;
 }
 
-.side-menu a{
-
-display:block;
-padding:18px 25px;
-text-decoration:none;
-color:#374151;
-font-size:18px;
-transition:.3s;
-
+.home-btn:hover{
+    background:#F3F4F6;
 }
 
-.side-menu a:hover{
-
-background:#F3F4F6;
-
+.logo{
+    text-decoration:none;
 }
 
-.close-btn{
-
-position:absolute;
-top:18px;
-right:18px;
-font-size:24px;
-cursor:pointer;
-
+.logo:hover{
+    cursor:pointer;
 }
 
 /* ============================= */
@@ -428,59 +393,40 @@ line-height:55px;
 
 <header class="topbar">
 
-<div class="menu-icon" onclick="toggleMenu()">
+    <div class="logo">
 
-<i class="fas fa-bars"></i>
+        <i class="fas fa-road"></i>
 
-</div>
+        <div class="logo-text">
+            <h2>IDRS</h2>
+            <p>CIVIC INFRASTRUCTURE</p>
+        </div>
 
-<div class="logo">
+    </div>
 
-<i class="fas fa-circle-question"></i>
+    <nav class="nav-links">
 
-<div class="logo-text">
+        <a href="home-page.html">Home</a>
 
-<h2>IDRS</h2>
+        <a href="report.html">Report Damage</a>
 
-<p>Infrastructure Damage Reporting System</p>
+        <a href="track-report.html">Track Progress</a>
 
-</div>
+        <a href="About-project-page.html">About</a>
 
-</div>
+        <a href="feedback-and-suggestion-page.html">Feedback</a>
 
-<button class="logout-btn" onclick="logout()">
+        <a href="help-and-support.html" class="active">Support</a>
 
-<i class="fas fa-right-from-bracket"></i>
+    </nav>
 
-Logout
-
-</button>
+    <a href="home-page.html" class="home-btn">
+        <i class="fas fa-arrow-left"></i> Home
+    </a>
 
 </header>
 
-<div id="sideMenu" class="side-menu">
 
-<div class="close-btn" onclick="toggleMenu()">
-
-<i class="fas fa-times"></i>
-
-</div>
-
-<a href="./home-page.html"><i class="fas fa-house"></i> Home</a>
-
-<a href="./report-damage-page.html"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
-
-<a href="./track-report-page.html"><i class="fas fa-location-dot"></i> Track Complaint</a>
-
-<a href="./feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</a>
-
-<a href="./terms-and-condition-page.html"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
-
-<a href="./About-project-page.html"><i class="fas fa-circle-info"></i> About Project</a>
-
-<a href="./help-and-support-page.html"><i class="fas fa-circle-question"></i> Help & Support</a>
-
-</div>
 
 <section class="hero">
 
