@@ -1,949 +1,932 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>About Project - Infrastructure Damage Reporting System</title>  
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Font Awesome -->  
+<link rel="stylesheet"  
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  
 
-    <title>About Project - Infrastructure Damage Reporting System</title>
+<!-- Google Font -->  
+<link rel="preconnect" href="https://fonts.googleapis.com">  
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>  
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    * {  
+        margin: 0;  
+        padding: 0;  
+        box-sizing: border-box;  
+    }  
 
-    <style>
+    body {  
+        font-family: "Inter", Arial, sans-serif;  
+        background: #f3f5f8;  
+        color: #273548;  
+    }  
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* ================= HEADER ================= */  
+/* ===== HEADER ===== */
 
-        body {
-    font-family: "Poppins", sans-serif;
-    background: #f3f5f8;
-    color: #273548;
+.top-header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:#ffffff;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 40px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-        /* ================= HEADER ================= */
-
-        .header {
-            background: #ffffff;
-            padding: 25px 5%;
-            border-bottom: 1px solid #e5e8ec;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .brand-icon {
-            width: 44px;
-            height: 44px;
-            background: #263548;
-            color: white;
-            border-radius: 8px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            font-size: 22px;
-        }
-
-        .brand-text h1 {
-            font-size: 27px;
-            font-weight: 800;
-            color: #182638;
-        }
-
-        .brand-text p {
-            margin-top: 3px;
-            color: #7b8490;
-            font-size: 14px;
-        }
-
-        /* ================= NAVBAR ================= */
-
-        .navbar {
-            height: 64px;
-            background: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 5%;
-            border-bottom: 1px solid #e5e8ec;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #596574;
-
-            padding: 9px 15px;
-            border-radius: 6px;
-
-            font-size: 14px;
-            font-weight: 600;
-
-            transition: 0.25s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: #edf3fa;
-            color: #527bb5;
-        }
-
-        .login-btn {
-            text-decoration: none;
-            background: #2b394b;
-            color: white;
-
-            padding: 10px 20px;
-            border-radius: 6px;
-
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* ================= MAIN ================= */
-
-        .main {
-            width: 90%;
-            max-width: 1150px;
-            margin: 35px auto 70px;
-        }
-
-        /* ================= HERO ================= */
-
-        .about-hero {
-            background: #ffffff;
-            border: 1px solid #e1e5ea;
-            border-radius: 12px;
-
-            padding: 42px 45px;
-            margin-bottom: 22px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-            position: relative;
-            overflow: hidden;
-
-            box-shadow: 0 5px 20px rgba(35, 50, 70, 0.04);
-        }
-
-        .about-hero::after {
-            content: "";
-            position: absolute;
-
-            width: 230px;
-            height: 230px;
-
-            border-radius: 50%;
-            border: 45px solid #f0f4f9;
+.logo-icon{
+    width:44px;
+    height:44px;
 
-            right: -80px;
-            top: -100px;
-        }
-
-        .small-title {
-            color: #567db6;
-            font-size: 12px;
-            font-weight: 700;
-
-            text-transform: uppercase;
-            letter-spacing: 1px;
-
-            margin-bottom: 10px;
-        }
-
-        .about-hero h2 {
-            font-size: 34px;
-            color: #263548;
-            margin-bottom: 12px;
-        }
-
-        .about-hero p {
-            max-width: 780px;
-            color: #707b88;
-            font-size: 15px;
-            line-height: 1.8;
-        }
-
-        /* ================= SECTION ================= */
-
-        .section-title {
-            text-align: center;
-            margin: 38px 0 22px;
-        }
-
-        .section-title h2 {
-            font-size: 25px;
-            color: #263548;
-        }
-
-        .section-title p {
-            color: #7a8490;
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        /* ================= ABOUT CARDS ================= */
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.25fr 0.75fr;
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid #e0e5eb;
-            border-radius: 10px;
-
-            padding: 27px;
-
-            box-shadow: 0 4px 15px rgba(35, 50, 70, 0.035);
-        }
-
-        .card h3 {
-            color: #263548;
-            font-size: 18px;
-            margin-bottom: 11px;
-        }
-
-        .card p {
-            color: #707b88;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        /* ================= OBJECTIVES ================= */
-
-        .objective-list {
-            margin-top: 18px;
-            list-style: none;
-        }
-
-        .objective-list li {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-
-            color: #5e6875;
-            font-size: 13px;
-        }
-
-        .objective-list i {
-            color: #557db8;
-            margin-top: 3px;
-        }
-
-        /* ================= FEATURES ================= */
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 17px;
-        }
-
-        .feature {
-            background: white;
-            border: 1px solid #e0e5eb;
-            border-radius: 10px;
-
-            padding: 22px;
-
-            transition: 0.25s;
-        }
-
-        .feature:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(35, 50, 70, 0.08);
-        }
-
-        .feature-icon {
-            width: 43px;
-            height: 43px;
-
-            border-radius: 8px;
-            background: #edf3fa;
-            color: #527bb5;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            margin-bottom: 14px;
-        }
-
-        .feature h3 {
-            font-size: 15px;
-            margin-bottom: 7px;
-            color: #2c3b4d;
-        }
-
-        .feature p {
-            font-size: 12px;
-            color: #78828e;
-            line-height: 1.7;
-        }
-
-        /* ================= WORKFLOW ================= */
-
-        .workflow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .step {
-            background: white;
-            border: 1px solid #e0e5eb;
-            border-radius: 10px;
-            padding: 22px;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-
-            background: #2b394b;
-            color: white;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            border-radius: 50%;
-
-            font-size: 12px;
-            font-weight: 700;
-
-            margin-bottom: 14px;
-        }
-
-        .step h3 {
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
-
-        .step p {
-            font-size: 12px;
-            color: #78828e;
-            line-height: 1.6;
-        }
-
-        /* ================= BENEFITS ================= */
-
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .benefit {
-            background: white;
-            border: 1px solid #e0e5eb;
-            border-radius: 9px;
-
-            padding: 18px;
-
-            display: flex;
-            gap: 13px;
-            align-items: flex-start;
-        }
-
-        .benefit i {
-            color: #557db8;
-            font-size: 17px;
-            margin-top: 2px;
-        }
-
-        .benefit h3 {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .benefit p {
-            color: #7a8490;
-            font-size: 12px;
-        }
-
-        /* ================= TECHNOLOGY ================= */
-
-        .technology {
-            background: #2b394b;
-            color: white;
-
-            border-radius: 11px;
-            padding: 30px;
-
-            margin-top: 35px;
-        }
-
-        .technology h2 {
-            font-size: 21px;
-            margin-bottom: 7px;
-        }
-
-        .technology p {
-            color: #cbd3dc;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-        }
-
-        .tech {
-            padding: 8px 13px;
-
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.06);
-
-            border-radius: 5px;
-
-            font-size: 12px;
-            color: #e0e6ed;
-        }
-
-        /* ================= STATS ================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-
-            margin-top: 20px;
-        }
-
-        .stat {
-            background: white;
-            border: 1px solid #e0e5eb;
-            border-radius: 9px;
-
-            padding: 21px;
-            text-align: center;
-        }
-
-        .stat i {
-            color: #557db8;
-            font-size: 19px;
-            margin-bottom: 8px;
-        }
-
-        .stat h3 {
-            font-size: 23px;
-            color: #29384a;
-        }
-
-        .stat p {
-            color: #7b8591;
-            font-size: 11px;
-            margin-top: 2px;
-        }
-
-        /* ================= FOOTER ================= */
-
-        .footer {
-            background: white;
-            border-top: 1px solid #e0e5eb;
-
-            padding: 25px 5%;
-            text-align: center;
-        }
-
-        .footer h3 {
-            color: #263548;
-            font-size: 15px;
-        }
-
-        .footer p {
-            color: #8a929d;
-            font-size: 11px;
-            margin-top: 5px;
-        }
-
-        /* ================= RESPONSIVE ================= */
-
-        @media(max-width: 850px) {
-
-            .brand-text h1 {
-                font-size: 21px;
-            }
-
-            .navbar {
-                height: auto;
-                padding: 12px 5%;
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .feature-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .workflow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media(max-width: 550px) {
-
-            .header {
-                padding: 18px 5%;
-            }
-
-            .brand-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 18px;
-            }
-
-            .brand-text h1 {
-                font-size: 17px;
-            }
-
-            .brand-text p {
-                font-size: 11px;
-            }
-
-            .main {
-                width: 92%;
-            }
-
-            .about-hero {
-                padding: 28px 22px;
-            }
-
-            .about-hero h2 {
-                font-size: 26px;
-            }
-
-            .feature-grid,
-            .workflow,
-            .benefits {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .nav-links a {
-                padding: 7px 9px;
-                font-size: 11px;
-            }
-        }
-
-    </style>
-</head>
-
-<body>
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="header">
-
-    <div class="brand">
-
-        <div class="brand-icon">
+    border-radius:10px;
+
+    background:#263548;
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+}
+
+.logo-text h2{
+    font-size:20px;
+    color:#263548;
+    font-weight:800;
+}
+
+.logo-text span{
+    font-size:11px;
+    letter-spacing:1px;
+    color:#7d8794;
+}
+
+.menu{
+    display:flex;
+    gap:12px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#5c6572;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.menu a:hover,
+.menu .active{
+    background:#edf2f7;
+    color:#263548;
+}
+
+.home-btn{
+    text-decoration:none;
+
+    background:#f3f4f6;
+    color:#263548;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-size:14px;
+    font-weight:600;
+}
+
+.home-btn:hover{
+    background:#e5e7eb;
+}
+    
+
+    /* ================= MAIN ================= */  
+
+    .main {  
+        width: 90%;  
+        max-width: 1150px;  
+        margin: 35px auto 70px;  
+    }  
+
+    /* ================= HERO ================= */  
+
+    .about-hero {  
+        background: #ffffff;  
+        border: 1px solid #e1e5ea;  
+        border-radius: 12px;  
+
+        padding: 42px 45px;  
+        margin-bottom: 22px;  
+
+        position: relative;  
+        overflow: hidden;  
+
+        box-shadow: 0 5px 20px rgba(35, 50, 70, 0.04);  
+    }  
+
+    .about-hero::after {  
+        content: "";  
+        position: absolute;  
+
+        width: 230px;  
+        height: 230px;  
+
+        border-radius: 50%;  
+        border: 45px solid #f0f4f9;  
+
+        right: -80px;  
+        top: -100px;  
+    }  
+
+    .small-title {  
+        color: #567db6;  
+        font-size: 12px;  
+        font-weight: 700;  
+
+        text-transform: uppercase;  
+        letter-spacing: 1px;  
+
+        margin-bottom: 10px;  
+    }  
+
+   .about-hero h2 {  
+font-size: 42px;  
+color: #263548;  
+margin-bottom: 12px;
+
+}
+
+.about-hero p {
+max-width: 780px;
+color: #707b88;
+font-size: 18px;
+line-height: 1.8;
+}
+
+/* ================= SECTION ================= */  
+
+    .section-title {  
+        text-align: center;  
+        margin: 38px 0 22px;  
+    }  
+
+    .section-title h2 {  
+font-size: 36px;  
+color: #263548;
+
+}
+
+.section-title p {
+color: #7a8490;
+font-size: 18px;
+margin-top: 5px;
+}
+
+/* ================= ABOUT CARDS ================= */  
+
+    .about-grid {  
+        display: grid;  
+        grid-template-columns: 1.25fr 0.75fr;  
+        gap: 20px;  
+    }  
+
+    .card {  
+        background: white;  
+        border: 1px solid #e0e5eb;  
+        border-radius: 10px;  
+
+        padding: 27px;  
+
+        box-shadow: 0 4px 15px rgba(35, 50, 70, 0.035);  
+    }  
+
+   .card h3 {  
+color: #263548;  
+font-size: 22px;  
+margin-bottom: 11px;
+
+}
+
+.card p {
+color: #707b88;
+font-size: 17px;
+line-height: 1.8;
+}
+
+/* ================= OBJECTIVES ================= */  
+
+    .objective-list {  
+        margin-top: 18px;  
+        list-style: none;  
+    }  
+
+    .objective-list li {  
+display: flex;  
+gap: 10px;  
+margin-bottom: 12px;  
+color: #5e6875;  
+font-size: 17px;
+
+}
+.objective-list i {
+color: #557db8;
+margin-top: 3px;
+}
+
+/* ================= FEATURES ================= */  
+
+    .feature-grid {  
+        display: grid;  
+        grid-template-columns: repeat(3, 1fr);  
+        gap: 17px;  
+    }  
+
+    .feature {  
+        background: white;  
+        border: 1px solid #e0e5eb;  
+        border-radius: 10px;  
+
+        padding: 22px;  
+
+        transition: 0.25s;  
+    }  
+
+    .feature:hover {  
+        transform: translateY(-3px);  
+        box-shadow: 0 8px 25px rgba(35, 50, 70, 0.08);  
+    }  
+
+    .feature-icon {  
+        width: 43px;  
+        height: 43px;  
+
+        border-radius: 8px;  
+        background: #edf3fa;  
+        color: #527bb5;  
+
+        display: flex;  
+        align-items: center;  
+        justify-content: center;  
+
+        margin-bottom: 14px;  
+    }  
+
+    .feature h3 {  
+font-size: 20px;  
+margin-bottom: 7px;  
+color: #2c3b4d;
+
+}
+
+.feature p {
+font-size: 16px;
+color: #78828e;
+line-height: 1.7;
+}
+
+/* ================= WORKFLOW ================= */  
+
+    .workflow {  
+        display: grid;  
+        grid-template-columns: repeat(4, 1fr);  
+        gap: 15px;  
+    }  
+
+    .step {  
+        background: white;  
+        border: 1px solid #e0e5eb;  
+        border-radius: 10px;  
+        padding: 22px;  
+    }  
+
+    .step-number {  
+        width: 32px;  
+        height: 32px;  
+
+        background: #2b394b;  
+        color: white;  
+
+        display: flex;  
+        justify-content: center;  
+        align-items: center;  
+
+        border-radius: 50%;  
+
+        font-size: 12px;  
+        font-weight: 700;  
+
+        margin-bottom: 14px;  
+    }  
+
+    .step h3 {  
+font-size: 19px;  
+margin-bottom: 6px;
+
+}
+
+.step p {
+font-size: 16px;
+color: #78828e;
+line-height: 1.6;
+}
+
+/* ================= BENEFITS ================= */  
+
+    .benefits {  
+        display: grid;  
+        grid-template-columns: repeat(2, 1fr);  
+        gap: 15px;  
+    }  
+
+    .benefit {  
+        background: white;  
+        border: 1px solid #e0e5eb;  
+        border-radius: 9px;  
+
+        padding: 18px;  
+
+        display: flex;  
+        gap: 13px;  
+        align-items: flex-start;  
+    }  
+
+    .benefit i {  
+        color: #557db8;  
+        font-size: 17px;  
+        margin-top: 2px;  
+    }  
+
+    .benefit h3 {  
+font-size: 19px;  
+margin-bottom: 4px;
+
+}
+
+.benefit p {
+color: #7a8490;
+font-size: 16px;
+}
+/* ================= TECHNOLOGY ================= */
+
+.technology {  
+        background: #2b394b;  
+        color: white;  
+
+        border-radius: 11px;  
+        padding: 30px;  
+
+        margin-top: 35px;  
+    }  
+
+    .technology h2 {  
+font-size: 32px;  
+margin-bottom: 7px;
+
+}
+
+.technology p {
+color: #cbd3dc;
+font-size: 17px;
+margin-bottom: 20px;
+}
+
+.tech {
+font-size: 15px;
+color: #e0e6ed;
+}
+
+.tech-list {  
+        display: flex;  
+        flex-wrap: wrap;  
+        gap: 9px;  
+    }  
+
+    .tech {  
+        padding: 8px 13px;  
+
+        border: 1px solid rgba(255,255,255,0.15);  
+        background: rgba(255,255,255,0.06);  
+
+        border-radius: 5px;  
+
+        font-size: 15px;  
+color: #e0e6ed;  
+    }  
+
+    /* ================= STATS ================= */  
+
+    .stats {  
+        display: grid;  
+        grid-template-columns: repeat(4, 1fr);  
+        gap: 15px;  
+
+        margin-top: 20px;  
+    }  
+
+    .stat {  
+        background: white;  
+        border: 1px solid #e0e5eb;  
+        border-radius: 9px;  
+
+        padding: 21px;  
+        text-align: center;  
+    }  
+
+    .stat i {  
+        color: #557db8;  
+        font-size: 19px;  
+        margin-bottom: 8px;  
+    }  
+
+    .stat h3 {  
+font-size: 30px;  
+color: #29384a;
+
+}
+
+.stat p {
+color: #7b8591;
+font-size: 16px;
+margin-top: 2px;
+}
+
+/* ================= FOOTER ================= */  
+
+    .footer {  
+        background: white;  
+        border-top: 1px solid #e0e5eb;  
+
+        padding: 25px 5%;  
+        text-align: center;  
+    }  
+
+    .footer h3 {  
+color: #263548;  
+font-size: 20px;
+
+}
+
+.footer p {
+color: #8a929d;
+font-size: 16px;
+margin-top: 5px;
+}
+
+/* ================= RESPONSIVE ================= */  
+
+    @media(max-width: 850px) {  
+
+        .brand-text h1 {  
+            font-size: 21px;  
+        }  
+
+        .navbar {  
+            height: auto;  
+            padding: 12px 5%;  
+            flex-direction: column;  
+            gap: 12px;  
+        }  
+
+        .nav-links {  
+            flex-wrap: wrap;  
+            justify-content: center;  
+        }  
+
+        .about-grid {  
+            grid-template-columns: 1fr;  
+        }  
+
+        .feature-grid {  
+            grid-template-columns: repeat(2, 1fr);  
+        }  
+
+        .workflow {  
+            grid-template-columns: repeat(2, 1fr);  
+        }  
+
+        .stats {  
+            grid-template-columns: repeat(2, 1fr);  
+        }  
+    }  
+
+    @media(max-width: 550px) {  
+
+        .header {  
+            padding: 18px 5%;  
+        }  
+
+        .brand-icon {  
+            width: 38px;  
+            height: 38px;  
+            font-size: 18px;  
+        }  
+
+        .brand-text h1 {  
+            font-size: 17px;  
+        }  
+
+        .brand-text p {  
+            font-size: 11px;  
+        }  
+
+        .main {  
+            width: 92%;  
+        }  
+
+        .about-hero {  
+            padding: 28px 22px;  
+        }  
+
+        .about-hero h2 {  
+            font-size: 26px;  
+        }  
+
+        .feature-grid,  
+        .workflow,  
+        .benefits {  
+            grid-template-columns: 1fr;  
+        }  
+
+        .stats {  
+            grid-template-columns: 1fr 1fr;  
+        }  
+
+        .nav-links a {  
+            padding: 7px 9px;  
+            font-size: 11px;  
+        }  
+    }  
+
+</style>
+
+</head>  <body>  <!-- =====================================================  
+     HEADER  
+===================================================== -->  <header class="top-header">
+
+    <div class="logo">
+        <div class="logo-icon">
             <i class="fa-solid fa-road"></i>
         </div>
 
-        <div class="brand-text">
-
-            <h1>Infrastructure Damage Reporting System</h1>
-
-            <p>
-                Report • Track • Improve Public Infrastructure
-            </p>
-
+        <div class="logo-text">
+            <h2>IDRS</h2>
+            <span>CIVIC INFRASTRUCTURE</span>
         </div>
-
     </div>
 
-</header>
+    <nav class="menu">
+        <a href="home-page.html">Home</a>
+        <a href="report.html">Report Damage</a>
+        <a href="About-project-page.html" class="active">About</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="support.html">Support</a>
+    </nav>
 
-
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<nav class="navbar">
-
-    <ul class="nav-links">
-
-        <li>
-            <a href="home-page.html">Home</a>
-        </li>
-
-        <li>
-            <a href="report.html">Report Damage</a>
-        </li>
-
-        <li>
-            <a href="home-page.html#track">Track Report</a>
-        </li>
-
-        <li>
-            <a href="About-project-page.html" class="active">
-                About Project
-            </a>
-        </li>
-
-        <li>
-            <a href="home-page.html#contact">Contact</a>
-        </li>
-
-    </ul>
-
-    <a href="login-page.html" class="login-btn">
-        <i class="fa-solid fa-right-to-bracket"></i>
-        Login
+    <a href="home-page.html" class="home-btn">
+        <i class="fa-solid fa-arrow-left"></i> Home
     </a>
 
-</nav>
+</header> <!-- =====================================================  
+     MAIN  
+===================================================== -->  <main class="main">  <!-- HERO -->  
 
+<section class="about-hero">  
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+    <div class="small-title">  
+        About Project  
+    </div>  
 
-<main class="main">
+    <h2>  
+        Infrastructure Damage Reporting System  
+    </h2>  
 
+    <p>  
+        A smart digital platform designed to make reporting,  
+        tracking and managing public infrastructure problems  
+        simple, transparent and efficient. Citizens can report  
+        damaged infrastructure and authorities can manage,  
+        prioritize and resolve reported issues through one  
+        centralized system.  
+    </p>  
 
-    <!-- HERO -->
+</section>  
 
-    <section class="about-hero">
 
-        <div class="small-title">
-            About Project
-        </div>
+<!-- PROJECT OVERVIEW -->  
 
-        <h2>
-            Infrastructure Damage Reporting System
-        </h2>
+<div class="section-title">  
 
-        <p>
-            A smart digital platform designed to make reporting,
-            tracking and managing public infrastructure problems
-            simple, transparent and efficient. Citizens can report
-            damaged infrastructure and authorities can manage,
-            prioritize and resolve reported issues through one
-            centralized system.
-        </p>
+    <h2>Project Overview</h2>  
 
-    </section>
+    <p>  
+        Connecting citizens and authorities for better public infrastructure  
+    </p>  
 
+</div>  
 
-    <!-- PROJECT OVERVIEW -->
 
-    <div class="section-title">
+<section class="about-grid">  
 
-        <h2>Project Overview</h2>
 
-        <p>
-            Connecting citizens and authorities for better public infrastructure
-        </p>
+    <div class="card">  
 
-    </div>
+        <h3>  
+            <i class="fa-solid fa-circle-info"></i>  
+            What is this project?  
+        </h3>  
 
+        <p>  
+            The Infrastructure Damage Reporting System is a web-based  
+            platform that allows citizens to report problems related  
+            to public infrastructure such as damaged roads, potholes,  
+            broken street lights, drainage problems, damaged public  
+            property and other infrastructure issues.  
+        </p>  
 
-    <section class="about-grid">
+        <br>  
 
+        <p>  
+            The system helps authorities receive accurate information,  
+            review submitted reports, assign issues to responsible  
+            departments and update their progress until the problem  
+            is resolved.  
+        </p>  
 
-        <div class="card">
+    </div>  
 
-            <h3>
-                <i class="fa-solid fa-circle-info"></i>
-                What is this project?
-            </h3>
 
-            <p>
-                The Infrastructure Damage Reporting System is a web-based
-                platform that allows citizens to report problems related
-                to public infrastructure such as damaged roads, potholes,
-                broken street lights, drainage problems, damaged public
-                property and other infrastructure issues.
-            </p>
+    <div class="card">  
 
-            <br>
+        <h3>  
+            <i class="fa-solid fa-bullseye"></i>  
+            Project Objective  
+        </h3>  
 
-            <p>
-                The system helps authorities receive accurate information,
-                review submitted reports, assign issues to responsible
-                departments and update their progress until the problem
-                is resolved.
-            </p>
+        <ul class="objective-list">  
 
-        </div>
+            <li>  
+                <i class="fa-solid fa-check"></i>  
+                Easy infrastructure issue reporting  
+            </li>  
 
+            <li>  
+                <i class="fa-solid fa-check"></i>  
+                Faster response from authorities  
+            </li>  
 
-        <div class="card">
+            <li>  
+                <i class="fa-solid fa-check"></i>  
+                Transparent report tracking  
+            </li>  
 
-            <h3>
-                <i class="fa-solid fa-bullseye"></i>
-                Project Objective
-            </h3>
+            <li>  
+                <i class="fa-solid fa-check"></i>  
+                Centralized complaint management  
+            </li>  
 
-            <ul class="objective-list">
+            <li>  
+                <i class="fa-solid fa-check"></i>  
+                Better public infrastructure planning  
+            </li>  
 
-                <li>
-                    <i class="fa-solid fa-check"></i>
-                    Easy infrastructure issue reporting
-                </li>
+        </ul>  
 
-                <li>
-                    <i class="fa-solid fa-check"></i>
-                    Faster response from authorities
-                </li>
+    </div>  
 
-                <li>
-                    <i class="fa-solid fa-check"></i>
-                    Transparent report tracking
-                </li>
+</section>  
 
-                <li>
-                    <i class="fa-solid fa-check"></i>
-                    Centralized complaint management
-                </li>
 
-                <li>
-                    <i class="fa-solid fa-check"></i>
-                    Better public infrastructure planning
-                </li>
+<!-- STATISTICS -->  
 
-            </ul>
+<div class="section-title">  
 
-        </div>
+    <h2>System at a Glance</h2>  
 
-    </section>
+</div>  
 
+<section class="stats">  
 
-    <!-- STATISTICS -->
+    <div class="stat">  
 
-    <div class="section-title">
+        <i class="fa-solid fa-file-circle-check"></i>  
 
-        <h2>System at a Glance</h2>
+        <h3>12,580</h3>  
 
-    </div>
+        <p>  
+            Reports Submitted  
+        </p>  
 
-    <section class="stats">
+    </div>  
 
-        <div class="stat">
 
-            <i class="fa-solid fa-file-circle-check"></i>
+    <div class="stat">  
 
-            <h3>12,580</h3>
+        <i class="fa-solid fa-circle-check"></i>  
 
-            <p>
-                Reports Submitted
-            </p>
+        <h3>10,962</h3>  
 
-        </div>
+        <p>  
+            Issues Resolved  
+        </p>  
 
+    </div>  
 
-        <div class="stat">
 
-            <i class="fa-solid fa-circle-check"></i>
+    <div class="stat">  
 
-            <h3>10,962</h3>
+        <i class="fa-solid fa-chart-line"></i>  
 
-            <p>
-                Issues Resolved
-            </p>
+        <h3>87%</h3>  
 
-        </div>
+        <p>  
+            Resolution Rate  
+        </p>  
 
+    </div>  
 
-        <div class="stat">
 
-            <i class="fa-solid fa-chart-line"></i>
+    <div class="stat">  
 
-            <h3>87%</h3>
+        <i class="fa-solid fa-users"></i>  
 
-            <p>
-                Resolution Rate
-            </p>
+        <h3>5,240+</h3>  
 
-        </div>
+        <p>  
+            Citizens  
+        </p>  
 
+    </div>  
 
-        <div class="stat">
+</section>  
 
-            <i class="fa-solid fa-users"></i>
 
-            <h3>5,240+</h3>
+<!-- FEATURES -->  
 
-            <p>
-                Citizens
-            </p>
+<div class="section-title">  
 
-        </div>
+    <h2>Key Features</h2>  
 
-    </section>
+    <p>  
+        Important features provided by the system  
+    </p>  
 
+</div>  
 
-    <!-- FEATURES -->
 
-    <div class="section-title">
+<section class="feature-grid">  
 
-        <h2>Key Features</h2>
 
-        <p>
-            Important features provided by the system
-        </p>
+    <div class="feature">  
 
-    </div>
+        <div class="feature-icon">  
+            <i class="fa-solid fa-file-circle-plus"></i>  
+        </div>  
 
+        <h3>Online Damage Reporting</h3>  
 
-    <section class="feature-grid">
+        <p>  
+            Citizens can submit infrastructure damage reports  
+            through an easy-to-use online form.  
+        </p>  
 
+    </div>  
 
-        <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-file-circle-plus"></i>
-            </div>
+    <div class="feature">  
 
-            <h3>Online Damage Reporting</h3>
+        <div class="feature-icon">  
+            <i class="fa-solid fa-camera"></i>  
+        </div>  
 
-            <p>
-                Citizens can submit infrastructure damage reports
-                through an easy-to-use online form.
-            </p>
+        <h3>Photo Evidence</h3>  
 
-        </div>
+        <p>  
+            Users can attach images to provide visual evidence  
+            of the reported infrastructure problem.  
+        </p>  
 
+    </div>  
 
-        <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-camera"></i>
-            </div>
+    <div class="feature">  
 
-            <h3>Photo Evidence</h3>
+        <div class="feature-icon">  
+            <i class="fa-solid fa-location-dot"></i>  
+        </div>  
 
-            <p>
-                Users can attach images to provide visual evidence
-                of the reported infrastructure problem.
-            </p>
+        <h3>Location Information</h3>  
 
-        </div>
+        <p>  
+            Report location details help authorities identify  
+            the exact area where an issue exists.  
+        </p>  
 
+    </div>  
 
-        <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-location-dot"></i>
-            </div>
+    <div class="feature">  
 
-            <h3>Location Information</h3>
+        <div class="feature-icon">  
+            <i class="fa-solid fa-magnifying-glass"></i>  
+        </div>  
 
-            <p>
-                Report location details help authorities identify
-                the exact area where an issue exists.
-            </p>
+        <h3>Report Tracking</h3>  
 
-        </div>
+        <p>  
+            Citizens can track submitted reports and check  
+            the current status of their complaints.  
+        </p>  
 
+    </div>  
 
-        <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
+    <div class="feature">  
 
-            <h3>Report Tracking</h3>
+        <div class="feature-icon">  
+            <i class="fa-solid fa-bell"></i>  
+        </div>  
 
-            <p>
-                Citizens can track submitted reports and check
-                the current status of their complaints.
-            </p>
+        <h3>Status Updates</h3>  
 
-        </div>
+        <p>  
+            Users can receive updates when their complaint  
+            is reviewed, assigned or resolved.  
+        </p>  
 
+    </div>  
 
-        <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-bell"></i>
-            </div>
+    <div class="feature">  
 
-            <h3>Status Updates</h3>
+        <div class="feature-icon">  
+            <i class="fa-solid fa-chart-column"></i>  
+        </div>  
 
-            <p>
-                Users can receive updates when their complaint
-                is reviewed, assigned or resolved.
-            </p>
+        <h3>Analytics Dashboard</h3>  
 
-        </div>
+        <p>  
+            Authorities can analyze reports and monitor  
+            infrastructure problems using useful statistics.  
+        </p>  
 
+    </div>  
 
-        <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-chart-column"></i>
-            </div>
+    <div class="feature">  
 
-            <h3>Analytics Dashboard</h3>
+        <div class="feature-icon">  
+            <i class="fa-solid fa-layer-group"></i>  
+        </div>  
 
-            <p>
-                Authorities can analyze reports and monitor
-                infrastructure problems using useful statistics.
-            </p>
+        <h3>Issue Categories</h3>  
 
-        </div>
+        <p>  
+            Problems can be organized into categories such  
+            as roads, lighting, drainage and public property.  
+        </p>  
 
+    </div>  
 
-        <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-layer-group"></i>
-            </div>
+   <div class="feature">  
 
-            <h3>Issue Categories</h3>
+<div class="feature-icon">  
+    <i class="fa-solid fa-users"></i>  
+</div>  
 
-            <p>
-                Problems can be organized into categories such
-                as roads, lighting, drainage and public property.
-            </p>
+<h3>Community Participation</h3>  
 
-        </div>
+<p>  
+    Citizens can actively participate in improving public  
+    infrastructure by reporting issues, sharing valuable  
+    feedback, supporting local initiatives, and working  
+    together with authorities to build safer, cleaner,  
+    and smarter communities.  
+</p>
 
-
-        <div class="feature">
+</div>  
