@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Damage Report Progress | Infrastructure Damage Reporting System (IDRS)</title>
+
+  <!-- Google Fonts: Poppins & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #2F3B4A;
+      --primary-hover: #1F2937;
+      --primary-light: #F3F4F6;
+      --navy: #111827;
+      --slate-800: #1F2937;
+      --slate-700: #374151;
+      --slate-600: #4B5563;
+      --slate-500: #6B7280;
+      --slate-300: #D1D5DB;
+      --slate-200: #E5E7EB;
+      --slate-100: #F3F4F6;
+      --slate-50: #F9FAFB;
+      
+      --success: #10B981;
+      --success-light: #ECFDF5;
+      --warning: #F59E0B;
+      --warning-light: #FFFBEB;
+      --danger: #EF4444;
+      --danger-light: #FEF2F2;
+      --info: #3B82F6;
+      --info-light: #EFF6FF;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(31, 41, 55, 0.08), 0 10px 10px -5px rgba(31, 41, 55, 0.04);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6, .brand-title {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* Header Navigation */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--navy);
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary), #1F2937);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(47, 59, 74, 0.25);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .brand-text small {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-600);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-link {
+      padding: 8px 16px;
+      text-decoration: none;
+      color: var(--slate-600);
+      font-weight: 500;
+      font-size: 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--navy);
+      background-color: var(--slate-100);
+    }
+
+    .nav-link.active {
+      color: var(--navy);
+      font-weight: 600;
+      background-color: var(--slate-200);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background-color: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      background-color: var(--slate-200);
+      color: var(--navy);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1080px;
+      width: 100%;
+      margin: 36px auto 60px;
+      padding: 0 20px;
+    }
+
+    /* Hero Banner */
+    .page-hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background-color: #E5E7EB;
+      color: #374151;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
+    .page-hero h1 {
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .page-hero p {
+      color: var(--slate-600);
+      font-size: 16px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* Search Box Container */
+    .search-card {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-xl);
+      padding: 32px;
+      margin-bottom: 36px;
+    }
+
+    .search-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-title i {
+      color: var(--slate-700);
+    }
+
+    .search-form {
+      display: flex;
+      gap: 12px;
+    }
+
+    .search-input-wrapper {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-input-wrapper i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--slate-400);
+      font-size: 16px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 16px 14px 46px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--slate-800);
+      background-color: var(--slate-50);
+      border: 2px solid var(--slate-200);
+      border-radius: 12px;
+      outline: none;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+    }
+
+    .search-input:focus {
+      background-color: white;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(47, 59, 74, 0.12);
+    }
+
+    .btn-search {
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      background-color: var(--primary);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(47, 59, 74, 0.25);
+    }
+
+    .btn-search:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Quick Demo Ticket Chips */
+    .demo-chips-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .demo-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-500);
+    }
+
+    .chip-btn {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip-btn:hover {
+      background: var(--slate-200);
+      color: var(--navy);
+    }
+
+    /* Results Dashboard Card (Hidden until searched) */
+    .dashboard-container {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .status-summary-bar {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+      padding: 24px 32px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-md);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .summary-ticket-info h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-ticket-info p {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-top: 4px;
+    }
+
+    .status-badge-lg {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .badge-in-progress {
+      background-color: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FCD34D;
+    }
+
+    .badge-resolved {
+      background-color: #D1FAE5;
+      color: #065F46;
+      border: 1px solid #6EE7B7;
+    }
+
+    .badge-inspection {
+      background-color: #DBEAFE;
+      color: #1E40AF;
+      border: 1px solid #93C5FD;
+    }
+
+    .badge-pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: currentColor;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* 5-Stage Timeline Card */
+    .timeline-card {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 28px;
+    }
+
+    .card-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timeline-stepper {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 20px 0 30px;
+    }
+
+    .timeline-line {
+      position: absolute;
+      top: 24px;
+      left: 40px;
+      right: 40px;
+      height: 4px;
+      background: var(--slate-200);
+      z-index: 1;
+    }
+
+    .timeline-line-fill {
+      height: 100%;
+      background: var(--success);
+      width: 60%;
+      transition: width 0.6s ease;
+    }
+
+    .t-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding: 0 6px;
+      text-align: center;
+      max-width: 150px;
+    }
+
+    .t-node {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--slate-300);
+      color: var(--slate-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .t-step.completed .t-node {
+      border-color: var(--success);
+      background: var(--success);
+      color: white;
+      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .t-step.active .t-node {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 0 0 6px rgba(47, 59, 74, 0.15);
+      animation: bounce 1s infinite alternate;
+    }
+
+    .t-step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--slate-700);
+      margin-bottom: 3px;
+    }
+
+    .t-step.active .t-step-title {
+      color: var(--navy);
+    }
+
+    .t-step-time {
+      font-size: 11px;
+      color: var(--slate-500);
+    }
+
+    /* Grid Layout for Detailed Cards */
+    .details-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .info-box {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .info-key {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-500);
+    }
+
+    .info-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      text-align: right;
+    }
+
+    /* Officer Contact Badge */
+    .officer-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--slate-100);
+      padding: 16px 20px;
+      border-radius: 14px;
+      margin-top: 16px;
+      border: 1px solid var(--slate-200);
+    }
+
+    .officer-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .officer-info h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .officer-info p {
+      font-size: 12px;
+      color: var(--slate-600);
+    }
+
+    /* Live Activity Log Stream */
+    .log-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .log-item {
+      display: flex;
+      gap: 14px;
+      padding-left: 12px;
+      border-left: 3px solid var(--slate-300);
+      position: relative;
+    }
+
+    .log-item.latest {
+      border-left-color: var(--primary);
+    }
+
+    .log-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--slate-500);
+      min-width: 80px;
+    }
+
+    .log-content h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .log-content p {
+      font-size: 12px;
+      color: var(--slate-600);
+      margin-top: 2px;
+    }
+
+    /* Action Buttons Row */
+    .action-toolbar {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-action-tool {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-dark {
+      background: var(--slate-800);
+      color: white;
+    }
+
+    .btn-dark:hover {
+      background: var(--navy);
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--slate-700);
+      border: 1.5px solid var(--slate-300);
+    }
+
+    .btn-outline:hover {
+      background: var(--slate-100);
+      border-color: var(--slate-400);
+    }
+
+    .btn-urgent {
+      background: var(--danger-light);
+      color: var(--danger);
+      border: 1px solid #FCA5A5;
+    }
+
+    .btn-urgent:hover {
+      background: #FEE2E2;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: white;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      padding: 28px;
+      box-shadow: var(--shadow-xl);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: var(--slate-400);
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      background: white;
+      border-top: 1px solid var(--slate-200);
+      padding: 24px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-top: auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 840px) {
+      .details-two-col { grid-template-columns: 1fr; }
+      .timeline-stepper { flex-wrap: wrap; gap: 20px; justify-content: center; }
+      .timeline-line { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-container { padding: 0 16px; }
+      .nav-links { display: none; }
+      .search-form { flex-direction: column; }
+      .btn-search { width: 100%; justify-content: center; }
+      .status-summary-bar { flex-direction: column; align-items: flex-start; }
+      .action-toolbar { flex-direction: column; align-items: stretch; }
+      .btn-action-tool { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="topbar">
+    <div class="nav-container">
+      <a href="home-page.html" class="brand">
+        <div class="brand-icon">
+          <i class="fas fa-road"></i>
+        </div>
+        <div class="brand-text">
+          <strong>IDRS</strong>
+          <small>CIVIC INFRASTRUCTURE</small>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="home-page.html" class="nav-link">Home</a></li>
+          <li><a href="report.html" class="nav-link">Report Damage</a></li>
+          <li><a href="track-report.html" class="nav-link active">Track Progress</a></li>
+          <li><a href="About-project-page.html" class="nav-link">About</a></li>
+          <li><a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a></li>
+        </ul>
+      </nav>
+
+      <a href="home-page.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main>
+
+    <!-- Page Hero Title -->
+    <div class="page-hero">
+      <div class="hero-badge">
+        <i class="fas fa-magnifying-glass-chart"></i> Official Tracking System
+      </div>
+      <h1>Track Damage Report Status</h1>
+      <p>Enter your unique Reference Ticket ID to view real-time inspection updates, assigned field crews, and repair progress.</p>
+    </div>
+
+    <!-- Ticket Search Card -->
+    <div class="search-card">
+      <div class="search-title">
+        <i class="fas fa-ticket"></i> Enter Report Reference ID
+      </div>
+
+      <form class="search-form" id="searchForm" onsubmit="handleSearch(event)">
+        <div class="search-input-wrapper">
+          <i class="fas fa-barcode"></i>
+          <input type="text" id="ticketInput" class="search-input" placeholder="e.g. IDRS-2026-892410 or report_1.txt" required>
+        </div>
+        <button type="submit" class="btn-search">
+          <i class="fas fa-search"></i> Track Status
+        </button>
+      </form>
+
+      <div class="demo-chips-row">
+        <span class="demo-label">Try sample report tickets:</span>
+        <button type="button" class="chip-btn" onclick="quickFill('IDRS-2026-892410')">IDRS-2026-892410 (In Progress)</button>
+        <button type="button" class="chip-btn" onclick="quickFill('IDRS-2026-471029')">IDRS-2026-471029 (Resolved)</button>
+        <button type="button" class="chip-btn" onclick="quickFill('report_1.txt')">report_1.txt (Server Record)</button>
+      </div>
+    </div>
+
+    <!-- Live Status Dashboard (Rendered dynamically) -->
+    <div class="dashboard-container" id="dashboard">
+      
+      <!-- Top Summary Header Bar -->
+      <div class="status-summary-bar">
+        <div class="summary-ticket-info">
+          <h2>
+            <i class="fas fa-file-shield" style="color:var(--primary)"></i> 
+            Ticket <span id="dispTicketId">IDRS-2026-892410</span>
+          </h2>
+          <p>Filed on <span id="dispDate">August 1, 2026</span> • Category: <strong id="dispCategory" style="color:var(--navy)">Pothole / Road Hazard</strong></p>
+        </div>
+
+        <div class="status-badge-lg badge-in-progress" id="dispStatusBadge">
+          <div class="badge-pulse-dot"></div>
+          <span id="dispStatusText">Work Crew On-Site</span>
+        </div>
+      </div>
+
+      <!-- 5-Stage Timeline Stepper Card -->
+      <div class="timeline-card">
+        <div class="card-heading">
+          <i class="fas fa-timeline" style="color:var(--primary)"></i> Official Resolution Timeline
+        </div>
+
+        <div class="timeline-stepper">
+          <div class="timeline-line">
+            <div class="timeline-line-fill" id="timelineFill" style="width: 60%"></div>
+          </div>
+
+          <div class="t-step completed" id="tStep1">
+            <div class="t-node"><i class="fas fa-file-check"></i></div>
+            <div class="t-step-title">Report Filed</div>
+            <div class="t-step-time" id="tTime1">10:00 AM</div>
+          </div>
+
+          <div class="t-step completed" id="tStep2">
+            <div class="t-node"><i class="fas fa-user-check"></i></div>
+            <div class="t-step-title">Verified</div>
+            <div class="t-step-time" id="tTime2">10:30 AM</div>
+          </div>
+
+          <div class="t-step active" id="tStep3">
+            <div class="t-node"><i class="fas fa-screwdriver-wrench"></i></div>
+            <div class="t-step-title">Repair Active</div>
+            <div class="t-step-time" id="tTime3">In Progress</div>
+          </div>
+
+          <div class="t-step" id="tStep4">
+            <div class="t-node"><i class="fas fa-clipboard-check"></i></div>
+            <div class="t-step-title">Quality Audit</div>
+            <div class="t-step-time">Pending</div>
+          </div>
+
+          <div class="t-step" id="tStep5">
+            <div class="t-node"><i class="fas fa-circle-check"></i></div>
+            <div class="t-step-title">Case Closed</div>
+            <div class="t-step-time">Pending</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Info Grid: Incident Particulars & Officer Log -->
+      <div class="details-two-col">
+        
+        <!-- Incident & Authority Breakdown -->
+        <div class="info-box">
+          <div class="card-heading" style="margin-bottom:16px">
+            <i class="fas fa-building-user" style="color:var(--primary)"></i> Authority & SLA Details
+          </div>
+
+          <ul class="info-list">
+            <li class="info-item">
+              <span class="info-key">Assigned Department</span>
+              <span class="info-val" id="dispDept">Roads & Public Works Dept (Zone 4)</span>
+            </li>
+            <li class="info-item">
+              <span class="info-key">Severity Level</span>
+              <span class="info-val" id="dispSeverity" style="color:var(--danger)">High (8 Hr SLA)</span>
+            </li>
+            <li class="info-item">
+              <span class="info-key">Est. SLA Resolution</span>
+              <span class="info-val" id="dispSLA">Today, 6:00 PM (On Schedule)</span>
+            </li>
+            <li class="info-item">
+              <span class="info-key">Location</span>
+              <span class="info-val" id="dispLocation">Surat, Gujarat</span>
+            </li>
+          </ul>
+
+          <div class="officer-card">
+            <div class="officer-avatar">
+              <i class="fas fa-user-gear"></i>
+            </div>
+            <div class="officer-info">
+              <h4 id="dispOfficer">Inspector R. K. Patel</h4>
+              <p id="dispOfficerTitle">Lead Field Engineer • Municipal Zone 4</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Field Log Updates -->
+        <div class="info-box">
+          <div class="card-heading" style="margin-bottom:16px">
+            <i class="fas fa-list-ol" style="color:var(--primary)"></i> Official Activity Log
+          </div>
+
+          <div class="log-feed" id="logFeed">
+            <div class="log-item latest">
+              <div class="log-time">11:15 AM</div>
+              <div class="log-content">
+                <h5>Repair Crew Arrived On-Site</h5>
+                <p>Equipments dispatched. Asphalting crew began hole preparation.</p>
+              </div>
+            </div>
+
+            <div class="log-item">
+              <div class="log-time">10:45 AM</div>
+              <div class="log-content">
+                <h5>Work Order #WO-8942 Issued</h5>
+                <p>Inspection verified by Officer Patel. Work order dispatched to Zone 4 crew.</p>
+              </div>
+            </div>
+
+            <div class="log-item">
+              <div class="log-time">10:00 AM</div>
+              <div class="log-content">
+                <h5>Report Submitted & Queued</h5>
+                <p>Incident logged into central IDRS database.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="action-toolbar">
+        <button class="btn-action-tool btn-dark" onclick="window.print()">
+          <i class="fas fa-print"></i> Print Official Report Receipt
+        </button>
+
+        <button class="btn-action-tool btn-outline" onclick="openModal('subModal')">
+          <i class="fas fa-bell"></i> Subscribe to SMS/Email Alerts
+        </button>
+
+        <button class="btn-action-tool btn-urgent" onclick="openModal('urgentModal')">
+          <i class="fas fa-triangle-exclamation"></i> Request Urgency Priority Update
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Subscription Modal -->
+  <div class="modal-overlay" id="subModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Subscribe to Status Alerts</h3>
+        <button class="btn-close-modal" onclick="closeModal('subModal')">&times;</button>
+      </div>
+      <p style="font-size:13px; color:var(--slate-600); margin-bottom:16px">Get instant SMS or email notifications whenever field officers update your ticket status.</p>
+      <form onsubmit="handleSubscribe(event)">
+        <div style="margin-bottom:14px">
+          <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px">Email or Phone Number</label>
+          <input type="text" placeholder="e.g. user@example.com or 9876543210" required style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid var(--slate-300); outline:none">
+        </div>
+        <button type="submit" class="btn-search" style="width:100%; justify-content:center">Subscribe Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Priority Escalation Modal -->
+  <div class="modal-overlay" id="urgentModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Request Urgency Escalation</h3>
+        <button class="btn-close-modal" onclick="closeModal('urgentModal')">&times;</button>
+      </div>
+      <p style="font-size:13px; color:var(--slate-600); margin-bottom:16px">If the damage condition has worsened or poses immediate risk to public safety, submit a priority bump request.</p>
+      <form onsubmit="handleEscalate(event)">
+        <div style="margin-bottom:14px">
+          <label style="font-size:13px; font-weight:600; display:block; margin-bottom:6px">Describe Hazard Change</label>
+          <textarea placeholder="e.g. Pothole has expanded after heavy rain, traffic is completely blocked..." required style="width:100%; min-height:90px; padding:10px 14px; border-radius:8px; border:1px solid var(--slate-300); outline:none"></textarea>
+        </div>
+        <button type="submit" class="btn-search" style="width:100%; justify-content:center; background-color:var(--danger)">
+          Submit Escalation Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Infrastructure Damage Reporting System (IDRS) | Building Safer Public Spaces</p>
+  </footer>
+
+  <!-- Page Logic Script -->
+  <script>
+    // Sample Demo Ticket Database
+    const demoTickets = {
+      'IDRS-2026-892410': {
+        ticketId: 'IDRS-2026-892410',
+        date: 'August 1, 2026',
+        category: 'Pothole / Road Hazard',
+        statusText: 'Work Crew On-Site',
+        statusClass: 'badge-in-progress',
+        progressPercent: '60%',
+        dept: 'Roads & Public Works Dept (Zone 4)',
+        severity: 'High (8 Hr SLA)',
+        sla: 'Today, 6:00 PM (On Schedule)',
+        location: 'Surat, Gujarat (Near Ring Road Junction)',
+        officer: 'Inspector R. K. Patel',
+        officerTitle: 'Lead Field Engineer • Zone 4 Unit',
+        activeStep: 3,
+        logs: [
+          { time: '11:15 AM', title: 'Repair Crew Arrived On-Site', desc: 'Asphalting crew began hole preparation and safety cone setup.' },
+          { time: '10:45 AM', title: 'Work Order #WO-8942 Issued', desc: 'Inspection verified by Officer Patel. Work order dispatched to Zone 4 crew.' },
+          { time: '10:00 AM', title: 'Report Submitted & Queued', desc: 'Incident logged into central IDRS database.' }
+        ]
+      },
+      'IDRS-2026-471029': {
+        ticketId: 'IDRS-2026-471029',
+        date: 'July 30, 2026',
+        category: 'Water Leakage & Mains',
+        statusText: 'Resolved & Closed',
+        statusClass: 'badge-resolved',
+        progressPercent: '100%',
+        dept: 'Water Supply & Sewerage Board',
+        severity: 'Critical (2 Hr SLA)',
+        sla: 'Completed in 1 Hr 45 Mins',
+        location: 'Ahmedabad, Gujarat (CG Road)',
+        officer: 'Engineer S. Mehta',
+        officerTitle: 'Senior Hydraulic Supervisor',
+        activeStep: 5,
+        logs: [
+          { time: '04:30 PM', title: 'Final Inspection & Case Closed', desc: 'Water pipe valve seal repaired and pressure tested successfully.' },
+          { time: '03:15 PM', title: 'Pipe Welding Complete', desc: 'Damaged main segment replaced.' },
+          { time: '02:00 PM', title: 'Emergency Dispatch', desc: 'Water shutoff initiated for main line repair.' }
+        ]
+      }
+    };
+
+    function quickFill(ticketId) {
+      document.getElementById('ticketInput').value = ticketId;
+      handleSearch(new Event('submit'));
+    }
+
+    function handleSearch(e) {
+      if (e) e.preventDefault();
+      const inputVal = document.getElementById('ticketInput').value.trim();
+      if (!inputVal) return;
+
+      // Check demo records first
+      if (demoTickets[inputVal]) {
+        renderDashboard(demoTickets[inputVal]);
+        return;
+      }
+
+      // Check server API /report_status endpoint
+      fetch(`/report_status/${inputVal}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderDashboard({
+              ticketId: inputVal,
+              date: data.date || 'August 1, 2026',
+              category: data.category || 'Infrastructure Damage',
+              statusText: 'Under Verification',
+              statusClass: 'badge-inspection',
+              progressPercent: '40%',
+              dept: 'Municipal Services Administration',
+              severity: data.severity || 'Medium',
+              sla: 'Within 24 Hours',
+              location: `${data.city || 'Local City'}, ${data.state || ''} (${data.location || 'Reported Location'})`,
+              officer: 'Duty Operations Officer',
+              officerTitle: 'Municipal Operations Desk',
+              activeStep: 2,
+              logs: [
+                { time: 'Just Now', title: 'Record Loaded from Server', desc: `File ${inputVal} retrieved successfully.` },
+                { time: 'Reported Date', title: 'Report Recorded', desc: 'Incident stored in municipal record folder.' }
+              ]
+            });
+          } else {
+            showGenericRecord(inputVal);
+          }
+        })
+        .catch(() => {
+          showGenericRecord(inputVal);
+        });
+    }
+
+    function showGenericRecord(ticketId) {
+      renderDashboard({
+        ticketId: ticketId,
+        date: 'August 1, 2026',
+        category: 'Public Infrastructure Incident',
+        statusText: 'Under Field Review',
+        statusClass: 'badge-inspection',
+        progressPercent: '40%',
+        dept: 'Public Works Rapid Action Cell',
+        severity: 'Medium Severity',
+        sla: 'Est. 24 Hours SLA',
+        location: 'Reported Area, District 1',
+        officer: 'Duty Field Inspector',
+        officerTitle: 'Rapid Response Desk',
+        activeStep: 2,
+        logs: [
+          { time: '10:30 AM', title: 'Inspection Dispatched', desc: 'Field inspector assigned to review reported location.' },
+          { time: '10:00 AM', title: 'Report Logged', desc: `Ticket ${ticketId} registered.` }
+        ]
+      });
+    }
+
+    function renderDashboard(data) {
+      document.getElementById('dispTicketId').textContent = data.ticketId;
+      document.getElementById('dispDate').textContent = data.date;
+      document.getElementById('dispCategory').textContent = data.category;
+      
+      const badge = document.getElementById('dispStatusBadge');
+      badge.className = `status-badge-lg ${data.statusClass}`;
+      document.getElementById('dispStatusText').textContent = data.statusText;
+
+      document.getElementById('timelineFill').style.width = data.progressPercent;
+      
+      for (let i = 1; i <= 5; i++) {
+        const step = document.getElementById(`tStep${i}`);
+        step.classList.remove('completed', 'active');
+        if (i < data.activeStep) step.classList.add('completed');
+        else if (i === data.activeStep) step.classList.add('active');
+      }
+
+      document.getElementById('dispDept').textContent = data.dept;
+      document.getElementById('dispSeverity').textContent = data.severity;
+      document.getElementById('dispSLA').textContent = data.sla;
+      document.getElementById('dispLocation').textContent = data.location;
+      document.getElementById('dispOfficer').textContent = data.officer;
+      document.getElementById('dispOfficerTitle').textContent = data.officerTitle;
+
+      // Render Logs
+      const feed = document.getElementById('logFeed');
+      feed.innerHTML = data.logs.map((log, index) => `
+        <div class="log-item ${index === 0 ? 'latest' : ''}">
+          <div class="log-time">${log.time}</div>
+          <div class="log-content">
+            <h5>${log.title}</h5>
+            <p>${log.desc}</p>
+          </div>
+        </div>
+      `).join('');
+
+      const dashboard = document.getElementById('dashboard');
+      dashboard.style.display = 'block';
+      dashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      alert('Subscription saved! You will receive live status updates whenever this ticket progresses.');
+      closeModal('subModal');
+    }
+
+    function handleEscalate(e) {
+      e.preventDefault();
+      alert('Priority escalation request submitted to Municipal Operations Center.');
+      closeModal('urgentModal');
+    }
+  </script>
+</body>
+
+</html>

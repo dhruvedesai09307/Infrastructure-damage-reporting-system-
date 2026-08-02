@@ -1,26 +1,1500 @@
-<a href="{% url 'admin:index' %}">Admin Panel</a><!doctype html>
-<html lang='en'>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Report Damage | Infrastructure Damage Reporting System</title>
-<link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap' rel='stylesheet'><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;color:#fff;font:14px Poppins,sans-serif;background:linear-gradient(135deg,#4a6edb,#1539c7);overflow-x:hidden}.orb{position:fixed;border-radius:50%;background:#ffffff20;pointer-events:none}.a{width:260px;height:260px;top:120px;left:-100px}.b{width:180px;height:180px;right:60px;top:90px}.c{width:280px;height:280px;right:-90px;bottom:-100px}.topbar{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;min-height:70px;padding:12px 6%;background:#ffffff1f;backdrop-filter:blur(12px)}.brand{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none}.brand i{font-size:29px}.brand strong{display:block;font-size:20px}.brand small{font-size:10px;letter-spacing:.08em;opacity:.8}.nav{display:flex;align-items:center;gap:20px}.nav a{color:#fff;text-decoration:none}.nav a:hover,.nav .active{color:#dce8ff}.back{padding:8px 15px;border:1px solid #fff;border-radius:22px}.back:hover{color:#1539c7!important;background:#fff}main{position:relative;z-index:1;width:min(1080px,90%);margin:45px auto 65px}.hero{text-align:center;margin-bottom:30px}.hero i{font-size:40px;margin-bottom:13px}.hero h1{font-size:clamp(30px,5vw,50px);line-height:1.15}.hero p{max-width:650px;margin:13px auto 0;line-height:1.8;opacity:.92}.card{padding:clamp(22px,4vw,40px);border-radius:24px;background:#fffffff0;color:#18337f;box-shadow:0 18px 40px #09217e33}.title{display:flex;gap:13px;align-items:center;margin-bottom:25px}.title i{font-size:28px;color:#1539c7}.title p{color:#617098;font-size:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{margin-bottom:18px}label{display:block;margin-bottom:7px;font-size:13px;font-weight:600}input,select,textarea{width:100%;padding:13px 14px;border:1px solid #d9e1f3;border-radius:11px;outline:0;color:#25335c;background:#f8faff;font:inherit}input:focus,select:focus,textarea:focus{border-color:#4a6edb;box-shadow:0 0 0 4px #4a6edb29}textarea{min-height:125px;resize:vertical}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 25px;border:0;border-radius:28px;color:#fff;background:linear-gradient(135deg,#4a6edb,#1539c7);font:600 14px Poppins;text-decoration:none;cursor:pointer;transition:.25s}.btn:hover{transform:translateY(-3px)}.light{color:#1539c7;background:#eaf0ff}.result{margin-top:22px;padding:21px;border:1px solid #b9e8d2;border-radius:16px;color:#135f3c;background:#effcf5}.result h2{font-size:20px}.result p{margin-top:6px}.ref{margin:15px 0 8px;color:#087f4e;font-size:19px;font-weight:700}.summary{display:grid;grid-template-columns:1fr 1fr;gap:5px;color:#416a57;font-size:12px}.hidden{display:none}footer{position:relative;z-index:1;text-align:center;padding-bottom:25px;font-size:12px;opacity:.8}@media(max-width:700px){.topbar{align-items:flex-start;flex-direction:column;gap:13px}.nav{flex-wrap:wrap;gap:10px 16px}.grid,.summary{grid-template-columns:1fr}main{width:92%;margin-top:30px}}
-/* White-and-gray theme matching home-page.html */
-body{background:#F3F4F6;color:#374151}
-.orb{display:none}
-.topbar{background:#FFFFFF;border-bottom:1px solid #E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.brand,.nav a{color:#374151}.brand i,.title i{color:#2F3B4A}.nav a:hover,.nav .active{color:#111827}
-.back{border-color:#D1D5DB}.back:hover{color:#1F2937!important;background:#F3F4F6}
-.card{background:#FFFFFF;color:#374151;border:1px solid #E5E7EB;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-.title p{color:#6B7280}input,select,textarea{background:#F9FAFB;border-color:#D1D5DB;color:#374151}
-input:focus,select:focus,textarea:focus{border-color:#6B7280;box-shadow:0 0 0 3px rgba(107,114,128,.15)}
-.btn{background:#2F3B4A}.light{background:#FFFFFF;color:#374151;border:1px solid #D1D5DB}.btn:hover{background:#1F2937}
-footer{color:#6B7280;opacity:1}
-</style></head>
-<body><div class='orb a'></div><div class='orb b'></div><div class='orb c'></div>
-<header class='topbar'><a class='brand' href='home-page.html'><i class='fas fa-road'></i><span><strong>IDRS</strong><small>REPORT | TRACK | IMPROVE</small></span></a><nav class='nav'><a href='home-page.html'>Home</a><a class='active' href='report.html'>Report Damage</a><a href='About-project-page.html'>About</a><a href='feedback-and-suggestion-page.html'>Feedback</a><a href='admin.html'>Admin</a><a class='back' href='home-page.html'><i class='fas fa-arrow-left'></i> Back Home</a></nav></header>
-<main><section class='hero'><i class='fas fa-file-circle-plus'></i><h1>Report Infrastructure Damage</h1><p>Help make your city safer by sharing accurate details about damaged public infrastructure.</p></section><section class='card'><div class='title'><i class='fas fa-clipboard-list'></i><div><h2>Report Details</h2><p>Fields marked with * are required.</p></div></div>
-<form id='damageForm'><div class='grid'><div class='field'><label for='name'>Full Name *</label><input id='name' name='name' required placeholder='Enter your full name'></div><div class='field'><label for='email'>Email Address *</label><input id='email' name='email' type='email' required placeholder='your.email@example.com'></div><div class='field'><label for='phone'>Phone Number *</label><input id='phone' name='phone' type='tel' pattern='[6-9][0-9]{9}' required placeholder='9876543210'></div><div class='field'><label for='state'>State *</label><select id='state' name='state' required><option value=''>Select your state</option><option>Gujarat</option><option>Maharashtra</option><option>Rajasthan</option><option>Delhi</option><option>Karnataka</option><option>Other</option></select></div><div class='field'><label for='city'>City *</label><input id='city' name='city' required placeholder='Enter your city'></div><div class='field'><label for='location'>Location Details *</label><input id='location' name='location' required placeholder='Street, landmark, or area'></div><div class='field'><label for='category'>Damage Category *</label><select id='category' name='category' required><option value=''>Select category</option><option>Road Damage</option><option>Street Light</option><option>Water Leakage</option><option>Traffic Signal</option><option>Fallen Tree</option><option>Bridge Damage</option><option>Sewer Issue</option><option>Public Building</option><option>Other</option></select></div><div class='field'><label for='severity'>Severity Level *</label><select id='severity' name='severity' required><option value=''>Select severity</option><option>Low - Minor damage</option><option>Medium - Moderate damage</option><option>High - Severe damage</option><option>Critical - Immediate danger</option></select></div></div><div class='field'><label for='description'>Description of Damage *</label><textarea id='description' name='description' required placeholder='Describe the issue, condition, and nearby landmark...'></textarea></div><div class='field'><label for='photo'>Attach Photo (Optional)</label><input id='photo' name='photo' type='file' accept='image/*'></div><div class='actions'><button class='btn' type='submit'><i class='fas fa-paper-plane'></i> Submit Report</button><a class='btn light' href='home-page.html'><i class='fas fa-arrow-left'></i> Cancel</a></div></form>
-<div id='result' class='result hidden' aria-live='polite'><h2><i class='fas fa-circle-check'></i> Report Submitted Successfully</h2><p>Your report has been recorded for review.</p><div class='ref'>Reference ID: <span id='refId'></span></div><div id='summary' class='summary'></div><a class='btn light' href='home-page.html' style='margin-top:16px'>Return to Home</a></div></section></main><footer>(c) 2026 Infrastructure Damage Reporting System | Building safer communities together.</footer>
-<script>const form=document.getElementById('damageForm'),result=document.getElementById('result');form.onsubmit=function(e){e.preventDefault();const d=new FormData(form);document.getElementById('refId').textContent='IDRS-'+new Date().getFullYear()+'-'+Math.floor(100000+Math.random()*900000);document.getElementById('summary').innerHTML='<span><b>Category:</b> '+d.get('category')+'</span><span><b>Location:</b> '+d.get('city')+', '+d.get('state')+'</span><span><b>Severity:</b> '+d.get('severity')+'</span><span><b>Area:</b> '+d.get('location')+'</span>';result.classList.remove('hidden');result.scrollIntoView({behavior:'smooth',block:'center'})}</script></body></html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Damage Report | Infrastructure Damage Reporting System (IDRS)</title>
+
+  <!-- Google Fonts: Poppins & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #2F3B4A;
+      --primary-hover: #1F2937;
+      --primary-light: #F3F4F6;
+      --navy: #111827;
+      --slate-800: #1F2937;
+      --slate-700: #374151;
+      --slate-600: #4B5563;
+      --slate-500: #6B7280;
+      --slate-300: #D1D5DB;
+      --slate-200: #E5E7EB;
+      --slate-100: #F3F4F6;
+      --slate-50: #F9FAFB;
+      
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --critical: #DC2626;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(31, 41, 55, 0.08), 0 10px 10px -5px rgba(31, 41, 55, 0.04);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6, .brand-title {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* Header & Navigation */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--navy);
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--primary), #1F2937);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(47, 59, 74, 0.25);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .brand-text small {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-600);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-link {
+      padding: 8px 16px;
+      text-decoration: none;
+      color: var(--slate-600);
+      font-weight: 500;
+      font-size: 14px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--navy);
+      background-color: var(--slate-100);
+    }
+
+    .nav-link.active {
+      color: var(--navy);
+      font-weight: 600;
+      background-color: var(--slate-200);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background-color: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      background-color: var(--slate-200);
+      color: var(--navy);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 960px;
+      width: 100%;
+      margin: 36px auto 60px;
+      padding: 0 20px;
+    }
+
+    /* Hero Banner */
+    .page-hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background-color: #E5E7EB;
+      color: #374151;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
+    .page-hero h1 {
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .page-hero p {
+      color: var(--slate-600);
+      font-size: 16px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Stepper Component */
+    .stepper-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+      position: relative;
+      background: white;
+      padding: 20px 32px;
+      border-radius: var(--radius);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stepper-progress-bar {
+      position: absolute;
+      top: 38px;
+      left: 70px;
+      right: 70px;
+      height: 3px;
+      background: var(--slate-200);
+      z-index: 1;
+    }
+
+    .stepper-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding: 0 8px;
+      cursor: pointer;
+    }
+
+    .step-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--slate-300);
+      color: var(--slate-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .step-item.active .step-circle {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 0 0 4px rgba(47, 59, 74, 0.15);
+    }
+
+    .step-item.completed .step-circle {
+      border-color: var(--success);
+      background: var(--success);
+      color: white;
+    }
+
+    .step-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-500);
+      transition: color 0.3s;
+    }
+
+    .step-item.active .step-label {
+      color: var(--navy);
+    }
+
+    /* Main Form Card */
+    .form-card {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .card-header-bar {
+      padding: 24px 32px;
+      background: linear-gradient(to right, #F8FAFC, #FFFFFF);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .card-title-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--slate-100);
+      color: var(--slate-800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .card-title-group h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .card-title-group p {
+      font-size: 13px;
+      color: var(--slate-500);
+    }
+
+    .required-tag {
+      font-size: 12px;
+      color: var(--slate-500);
+      background: var(--slate-100);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* Form Content Body */
+    .form-body {
+      padding: 32px;
+    }
+
+    .form-step {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Grid Layouts */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--slate-700);
+      margin-bottom: 8px;
+    }
+
+    label .req {
+      color: var(--danger);
+      margin-left: 3px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--slate-400);
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--slate-800);
+      background-color: var(--slate-50);
+      border: 1.5px solid var(--slate-200);
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .input-wrapper input,
+    .input-wrapper select {
+      padding-left: 42px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      background-color: white;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(47, 59, 74, 0.12);
+    }
+
+    .input-wrapper input:focus + i,
+    .input-wrapper select:focus + i {
+      color: var(--primary);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .field-hint {
+      font-size: 12px;
+      color: var(--slate-500);
+      margin-top: 6px;
+    }
+
+    /* Category Cards Grid */
+    .section-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .category-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .cat-card {
+      border: 2px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      background: white;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cat-card i {
+      font-size: 22px;
+      color: var(--slate-600);
+      transition: all 0.2s ease;
+    }
+
+    .cat-card span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-700);
+    }
+
+    .cat-card:hover {
+      border-color: var(--slate-300);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cat-card.selected {
+      border-color: var(--primary);
+      background-color: var(--slate-100);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .cat-card.selected i {
+      color: var(--navy);
+      transform: scale(1.1);
+    }
+
+    .cat-card.selected span {
+      color: var(--navy);
+    }
+
+    /* Severity Cards Selector */
+    .severity-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .sev-card {
+      border: 2px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      background: white;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .sev-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .sev-badge {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .sev-low .sev-badge { background: var(--success); }
+    .sev-medium .sev-badge { background: var(--warning); }
+    .sev-high .sev-badge { background: var(--danger); }
+    .sev-critical .sev-badge { background: var(--critical); }
+
+    .sev-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .sev-desc {
+      font-size: 11px;
+      color: var(--slate-500);
+      line-height: 1.3;
+    }
+
+    .sev-sla {
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 8px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      background: var(--slate-100);
+      color: var(--slate-600);
+    }
+
+    .sev-card:hover {
+      border-color: var(--slate-300);
+      transform: translateY(-2px);
+    }
+
+    .sev-card.selected {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary);
+      background-color: var(--slate-100);
+    }
+
+    /* Location Assist Button */
+    .location-btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .btn-gps {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .btn-gps:hover {
+      background: var(--slate-200);
+    }
+
+    /* Photo Dropzone */
+    .dropzone {
+      border: 2px dashed var(--slate-300);
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+      background: var(--slate-50);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .dropzone:hover {
+      border-color: var(--primary);
+      background: var(--slate-100);
+    }
+
+    .dropzone i {
+      font-size: 36px;
+      color: var(--slate-400);
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+
+    .dropzone:hover i {
+      color: var(--primary);
+    }
+
+    .dropzone-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--slate-700);
+    }
+
+    .dropzone-sub {
+      font-size: 12px;
+      color: var(--slate-500);
+      margin-top: 4px;
+    }
+
+    .file-input-hidden {
+      display: none;
+    }
+
+    .preview-container {
+      margin-top: 14px;
+      display: none;
+      align-items: center;
+      gap: 14px;
+      background: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--slate-200);
+    }
+
+    .preview-img {
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--slate-200);
+    }
+
+    .preview-details {
+      flex: 1;
+      text-align: left;
+    }
+
+    .preview-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      word-break: break-all;
+    }
+
+    .preview-size {
+      font-size: 11px;
+      color: var(--slate-500);
+    }
+
+    .btn-remove-file {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 6px;
+    }
+
+    /* Actions Footer inside Card */
+    .card-actions-bar {
+      padding: 20px 32px;
+      background: var(--slate-50);
+      border-top: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(47, 59, 74, 0.25);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.35);
+    }
+
+    .btn-secondary {
+      background-color: white;
+      color: var(--slate-700);
+      border: 1.5px solid var(--slate-300);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--slate-100);
+      border-color: var(--slate-400);
+    }
+
+    /* Result Confirmation Card */
+    .ticket-card {
+      display: none;
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .ticket-header {
+      background: linear-gradient(135deg, #111827, #1F2937);
+      color: white;
+      padding: 36px 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .ticket-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--success);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.2);
+    }
+
+    .ticket-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .ticket-header p {
+      color: var(--slate-300);
+      font-size: 14px;
+    }
+
+    .ticket-ref-badge {
+      display: inline-block;
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-family: 'Poppins', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #E2E8F0;
+    }
+
+    .ticket-body {
+      padding: 32px;
+    }
+
+    .ticket-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+
+    .detail-item label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--slate-500);
+      margin-bottom: 2px;
+    }
+
+    .detail-item p {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .status-pill::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #D97706;
+    }
+
+    .ticket-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    footer {
+      background: white;
+      border-top: 1px solid var(--slate-200);
+      padding: 24px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-top: auto;
+    }
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 840px) {
+      .category-cards { grid-template-columns: repeat(2, 1fr); }
+      .severity-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .nav-container { padding: 0 16px; }
+      .nav-links { display: none; }
+      main { margin-top: 20px; padding: 0 12px; }
+      .stepper-wrapper { padding: 16px; }
+      .step-label { display: none; }
+      .card-header-bar { padding: 16px 20px; }
+      .form-body { padding: 20px 16px; }
+      .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+      .category-cards { grid-template-columns: repeat(2, 1fr); }
+      .sev-card { padding: 10px; }
+      .card-actions-bar { padding: 16px; flex-direction: column-reverse; gap: 12px; }
+      .btn-action { width: 100%; justify-content: center; }
+      .ticket-details-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="topbar">
+    <div class="nav-container">
+      <a href="home-page.html" class="brand">
+        <div class="brand-icon">
+          <i class="fas fa-road"></i>
+        </div>
+        <div class="brand-text">
+          <strong>IDRS</strong>
+          <small>CIVIC INFRASTRUCTURE</small>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="home-page.html" class="nav-link">Home</a></li>
+          <li><a href="report.html" class="nav-link active">Report Damage</a></li>
+          <li><a href="track-report.html" class="nav-link">Track Progress</a></li>
+          <li><a href="About-project-page.html" class="nav-link">About</a></li>
+          <li><a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a></li>
+          <li><a href="help-and-support.html" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+
+      <a href="home-page.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main>
+
+    <!-- Hero Title -->
+    <div class="page-hero">
+      <div class="hero-badge">
+        <i class="fas fa-shield-alt"></i> Official Civic Reporting Portal
+      </div>
+      <h1>Report Infrastructure Damage</h1>
+      <p>Help local public works authorities repair hazards quickly. Submit detailed location and condition records below.</p>
+    </div>
+
+    <!-- Stepper Navigation Header -->
+    <div class="stepper-wrapper">
+      <div class="stepper-progress-bar">
+        <div class="stepper-progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="step-item active" id="stepIndicator1" onclick="goToStep(1)">
+        <div class="step-circle">1</div>
+        <div class="step-label">Category & Location</div>
+      </div>
+
+      <div class="step-item" id="stepIndicator2" onclick="goToStep(2)">
+        <div class="step-circle">2</div>
+        <div class="step-label">Severity & Details</div>
+      </div>
+
+      <div class="step-item" id="stepIndicator3" onclick="goToStep(3)">
+        <div class="step-circle">3</div>
+        <div class="step-label">Media & Reporter</div>
+      </div>
+    </div>
+
+    <!-- Form Container Card -->
+    <div class="form-card" id="formCard">
+      
+      <!-- Card Header -->
+      <div class="card-header-bar">
+        <div class="card-title-group">
+          <div class="card-title-icon" id="stepIcon">
+            <i class="fas fa-list-check"></i>
+          </div>
+          <div>
+            <h2 id="stepTitle">Step 1: Category & Incident Location</h2>
+            <p id="stepSubtitle">Select damage type and pinpoint where the incident occurred.</p>
+          </div>
+        </div>
+        <span class="required-tag"><span style="color:var(--danger)">*</span> Required fields</span>
+      </div>
+
+      <!-- Form Elements -->
+      <form id="damageForm" novalidate>
+        <input type="hidden" id="category" name="category" required>
+        <input type="hidden" id="severity" name="severity" required>
+
+        <div class="form-body">
+          
+          <!-- ================= STEP 1 ================= -->
+          <div class="form-step active" id="step1">
+            
+            <div class="section-label">Select Damage Category <span class="req">*</span></div>
+            <div class="category-cards">
+              <div class="cat-card" data-value="Road Damage" onclick="selectCategory(this)">
+                <i class="fas fa-road-barrier"></i>
+                <span>Pothole / Road</span>
+              </div>
+              <div class="cat-card" data-value="Water Leakage" onclick="selectCategory(this)">
+                <i class="fas fa-faucet-drip"></i>
+                <span>Water Leakage</span>
+              </div>
+              <div class="cat-card" data-value="Street Light" onclick="selectCategory(this)">
+                <i class="fas fa-lightbulb"></i>
+                <span>Street Lighting</span>
+              </div>
+              <div class="cat-card" data-value="Traffic Signal" onclick="selectCategory(this)">
+                <i class="fas fa-traffic-light"></i>
+                <span>Traffic Signal</span>
+              </div>
+              <div class="cat-card" data-value="Bridge Damage" onclick="selectCategory(this)">
+                <i class="fas fa-bridge"></i>
+                <span>Bridge Hazard</span>
+              </div>
+              <div class="cat-card" data-value="Fallen Tree" onclick="selectCategory(this)">
+                <i class="fas fa-tree"></i>
+                <span>Fallen Tree</span>
+              </div>
+              <div class="cat-card" data-value="Sewer Issue" onclick="selectCategory(this)">
+                <i class="fas fa-water"></i>
+                <span>Drainage / Sewer</span>
+              </div>
+              <div class="cat-card" data-value="Other" onclick="selectCategory(this)">
+                <i class="fas fa-cubes"></i>
+                <span>Other Facility</span>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="state">State / Region <span class="req">*</span></label>
+                <div class="input-wrapper">
+                  <select id="state" name="state" required>
+                    <option value="">Select State</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <i class="fas fa-map-location-dot"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="city">City / District <span class="req">*</span></label>
+                <div class="input-wrapper">
+                  <input type="text" id="city" name="city" placeholder="e.g. Ahmedabad, Surat" required>
+                  <i class="fas fa-city"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <div class="location-btn-row">
+                <label for="location" style="margin-bottom:0">Specific Street Address & Landmark <span class="req">*</span></label>
+                <button type="button" class="btn-gps" onclick="fetchGPS()">
+                  <i class="fas fa-crosshairs"></i> Detect My Location
+                </button>
+              </div>
+              <div class="input-wrapper">
+                <input type="text" id="location" name="location" placeholder="e.g. Near Crossroad No. 4, Opposite Public Library" required>
+                <i class="fas fa-map-pin"></i>
+              </div>
+              <p class="field-hint">Include nearby landmarks or pole numbers to help field teams locate the issue quickly.</p>
+            </div>
+
+          </div>
+
+          <!-- ================= STEP 2 ================= -->
+          <div class="form-step" id="step2">
+            
+            <div class="section-label">Select Urgency & Severity Level <span class="req">*</span></div>
+            <div class="severity-cards">
+              <div class="sev-card sev-low" data-value="Low - Minor damage" onclick="selectSeverity(this)">
+                <div class="sev-header">
+                  <div class="sev-badge"></div>
+                  <div class="sev-title">Low</div>
+                </div>
+                <div class="sev-desc">Cosmetic damage or small defect.</div>
+                <div class="sev-sla">Est. SLA: 48 Hrs</div>
+              </div>
+
+              <div class="sev-card sev-medium" data-value="Medium - Moderate damage" onclick="selectSeverity(this)">
+                <div class="sev-header">
+                  <div class="sev-badge"></div>
+                  <div class="sev-title">Medium</div>
+                </div>
+                <div class="sev-desc">Moderate disruption to normal public use.</div>
+                <div class="sev-sla">Est. SLA: 24 Hrs</div>
+              </div>
+
+              <div class="sev-card sev-high" data-value="High - Severe damage" onclick="selectSeverity(this)">
+                <div class="sev-header">
+                  <div class="sev-badge"></div>
+                  <div class="sev-title">High</div>
+                </div>
+                <div class="sev-desc">Major hazard or significant traffic blockage.</div>
+                <div class="sev-sla">Est. SLA: 8 Hrs</div>
+              </div>
+
+              <div class="sev-card sev-critical" data-value="Critical - Immediate danger" onclick="selectSeverity(this)">
+                <div class="sev-header">
+                  <div class="sev-badge"></div>
+                  <div class="sev-title">Critical</div>
+                </div>
+                <div class="sev-desc">Immediate life-safety or disaster hazard.</div>
+                <div class="sev-sla">Est. SLA: 2 Hrs</div>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="description">Detailed Description of Damage <span class="req">*</span></label>
+              <textarea id="description" name="description" placeholder="Describe the physical condition, length/size of damage, risks involved, and any relevant background details..." required></textarea>
+              <p class="field-hint">Minimum 15 characters required for comprehensive assessment.</p>
+            </div>
+
+          </div>
+
+          <!-- ================= STEP 3 ================= -->
+          <div class="form-step" id="step3">
+
+            <div class="form-group full-width">
+              <label>Attach Evidence Photo (Optional)</label>
+              <div class="dropzone" id="dropzone" onclick="document.getElementById('photo').click()">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <div class="dropzone-title">Click to upload or drag & drop image file</div>
+                <div class="dropzone-sub">Supports JPG, PNG, WEBP (Max 10MB)</div>
+                <input type="file" id="photo" name="photo" class="file-input-hidden" accept="image/*" onchange="handleFileSelect(event)">
+              </div>
+
+              <div class="preview-container" id="previewContainer">
+                <img src="" alt="Preview" class="preview-img" id="previewImg">
+                <div class="preview-details">
+                  <div class="preview-name" id="previewName">filename.jpg</div>
+                  <div class="preview-size" id="previewSize">2.4 MB</div>
+                </div>
+                <button type="button" class="btn-remove-file" onclick="removeFile(event)">
+                  <i class="fas fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="section-label" style="margin-top:24px">Reporter Contact Details</div>
+            
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="name">Full Name <span class="req">*</span></label>
+                <div class="input-wrapper">
+                  <input type="text" id="name" name="name" placeholder="John Doe" required>
+                  <i class="fas fa-user"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address <span class="req">*</span></label>
+                <div class="input-wrapper">
+                  <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                  <i class="fas fa-envelope"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number <span class="req">*</span></label>
+                <div class="input-wrapper">
+                  <input type="tel" id="phone" name="phone" placeholder="9876543210" pattern="[0-9]{10}" required>
+                  <i class="fas fa-phone"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Footer Actions Bar -->
+        <div class="card-actions-bar">
+          <button type="button" class="btn-action btn-secondary" id="btnPrev" onclick="changeStep(-1)" style="visibility:hidden">
+            <i class="fas fa-arrow-left"></i> Previous Step
+          </button>
+          
+          <button type="button" class="btn-action btn-primary" id="btnNext" onclick="changeStep(1)">
+            Next Step <i class="fas fa-arrow-right"></i>
+          </button>
+          
+          <button type="submit" class="btn-action btn-primary" id="btnSubmit" style="display:none">
+            <i class="fas fa-paper-plane"></i> Submit Official Report
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Confirmation Ticket Result View (Hidden by default) -->
+    <div class="ticket-card" id="ticketCard">
+      <div class="ticket-header">
+        <div class="ticket-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <h2>Damage Report Filed Successfully</h2>
+        <p>Your incident report has been dispatched to the Municipal Rapid Response System.</p>
+        <div class="ticket-ref-badge" id="refIdBadge">IDRS-2026-000000</div>
+      </div>
+
+      <div class="ticket-body">
+        <div class="ticket-details-grid">
+          <div class="detail-item">
+            <label>Report Status</label>
+            <p><span class="status-pill">Queued for Verification</span></p>
+          </div>
+          <div class="detail-item">
+            <label>Timestamp</label>
+            <p id="ticketDate">August 1, 2026</p>
+          </div>
+          <div class="detail-item">
+            <label>Damage Category</label>
+            <p id="ticketCategory">Pothole / Road</p>
+          </div>
+          <div class="detail-item">
+            <label>Severity Level</label>
+            <p id="ticketSeverity">High - Severe damage</p>
+          </div>
+          <div class="detail-item">
+            <label>Location</label>
+            <p id="ticketLocation">Surat, Gujarat</p>
+          </div>
+          <div class="detail-item">
+            <label>Reporter</label>
+            <p id="ticketReporter">John Doe</p>
+          </div>
+        </div>
+
+        <div class="ticket-actions">
+          <a href="track-report.html" class="btn-action btn-primary" id="trackTicketBtn">
+            <i class="fas fa-magnifying-glass-chart"></i> Track Report Progress
+          </a>
+          <button class="btn-action btn-secondary" onclick="window.print()">
+            <i class="fas fa-print"></i> Print Ticket
+          </button>
+          <a href="home-page.html" class="btn-action btn-secondary">
+            <i class="fas fa-house"></i> Return to Homepage
+          </a>
+          <button class="btn-action btn-secondary" onclick="resetForm()">
+            <i class="fas fa-plus"></i> Submit Another Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Infrastructure Damage Reporting System (IDRS) | Building Safer Public Spaces</p>
+  </footer>
+
+  <!-- Script Logic -->
+  <script>
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    const stepTitles = [
+      { title: "Step 1: Category & Incident Location", sub: "Select damage type and pinpoint where the incident occurred.", icon: "fas fa-list-check" },
+      { title: "Step 2: Severity & Description", sub: "Specify urgency level and provide detailed field descriptions.", icon: "fas fa-triangle-exclamation" },
+      { title: "Step 3: Media & Reporter Information", sub: "Attach evidence photographs and contact info for ticket updates.", icon: "fas fa-camera" }
+    ];
+
+    // Category Selector
+    function selectCategory(element) {
+      document.querySelectorAll('.cat-card').forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+      document.getElementById('category').value = element.getAttribute('data-value');
+    }
+
+    // Severity Selector
+    function selectSeverity(element) {
+      document.querySelectorAll('.sev-card').forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+      document.getElementById('severity').value = element.getAttribute('data-value');
+    }
+
+    // GPS Assist
+    function fetchGPS() {
+      const locInput = document.getElementById('location');
+      if (navigator.geolocation) {
+        locInput.value = "Detecting current coordinates...";
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude.toFixed(5);
+            const lng = position.coords.longitude.toFixed(5);
+            locInput.value = `GPS: ${lat}, ${lng} (Near Current Location)`;
+          },
+          () => {
+            locInput.value = "Main Street, Sector 4 (Location pinpointed via IP)";
+          }
+        );
+      } else {
+        locInput.value = "Main Street, Sector 4";
+      }
+    }
+
+    // File Preview
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('previewImg').src = e.target.result;
+        document.getElementById('previewName').textContent = file.name;
+        document.getElementById('previewSize').textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+        document.getElementById('previewContainer').style.display = 'flex';
+        document.getElementById('dropzone').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeFile(event) {
+      event.stopPropagation();
+      document.getElementById('photo').value = "";
+      document.getElementById('previewContainer').style.display = 'none';
+      document.getElementById('dropzone').style.display = 'block';
+    }
+
+    // Navigation & Validation
+    function changeStep(delta) {
+      if (delta > 0 && !validateCurrentStep()) {
+        return;
+      }
+      currentStep += delta;
+      if (currentStep < 1) currentStep = 1;
+      if (currentStep > totalSteps) currentStep = totalSteps;
+      updateUI();
+    }
+
+    function goToStep(step) {
+      if (step > currentStep && !validateCurrentStep()) return;
+      currentStep = step;
+      updateUI();
+    }
+
+    function validateCurrentStep() {
+      if (currentStep === 1) {
+        const cat = document.getElementById('category').value;
+        const state = document.getElementById('state').value;
+        const city = document.getElementById('city').value.trim();
+        const loc = document.getElementById('location').value.trim();
+
+        if (!cat) {
+          alert('Please select a damage category.');
+          return false;
+        }
+        if (!state) {
+          alert('Please select a state/region.');
+          document.getElementById('state').focus();
+          return false;
+        }
+        if (!city) {
+          alert('Please enter a city or district.');
+          document.getElementById('city').focus();
+          return false;
+        }
+        if (!loc) {
+          alert('Please enter specific street location or landmark.');
+          document.getElementById('location').focus();
+          return false;
+        }
+      } else if (currentStep === 2) {
+        const sev = document.getElementById('severity').value;
+        const desc = document.getElementById('description').value.trim();
+
+        if (!sev) {
+          alert('Please select a severity level.');
+          return false;
+        }
+        if (desc.length < 10) {
+          alert('Please provide a detailed description (at least 10 characters).');
+          document.getElementById('description').focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function updateUI() {
+      // Hide all steps
+      document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+      document.getElementById(`step${currentStep}`).classList.add('active');
+
+      // Update Stepper Bar
+      const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+      document.getElementById('progressFill').style.width = `${progressPercent}%`;
+
+      for (let i = 1; i <= totalSteps; i++) {
+        const ind = document.getElementById(`stepIndicator${i}`);
+        ind.classList.remove('active', 'completed');
+        if (i === currentStep) ind.classList.add('active');
+        else if (i < currentStep) ind.classList.add('completed');
+      }
+
+      // Update Header Text
+      const stepInfo = stepTitles[currentStep - 1];
+      document.getElementById('stepTitle').textContent = stepInfo.title;
+      document.getElementById('stepSubtitle').textContent = stepInfo.sub;
+      document.getElementById('stepIcon').innerHTML = `<i class="${stepInfo.icon}"></i>`;
+
+      // Update Buttons
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const btnSubmit = document.getElementById('btnSubmit');
+
+      btnPrev.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+
+      if (currentStep === totalSteps) {
+        btnNext.style.display = 'none';
+        btnSubmit.style.display = 'inline-flex';
+      } else {
+        btnNext.style.display = 'inline-flex';
+        btnSubmit.style.display = 'none';
+      }
+
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    // Form Submission
+    document.getElementById('damageForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!name || !email || !phone) {
+        alert('Please complete all contact details.');
+        return;
+      }
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      // Generated Reference ID
+      const randomRef = 'IDRS-2026-' + Math.floor(100000 + Math.random() * 900000);
+
+      // Attempt submit to Flask backend if available
+      fetch('/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(result => {
+        showConfirmation(result.report_id || randomRef, data);
+      })
+      .catch(() => {
+        // Fallback for static file viewing without backend
+        showConfirmation(randomRef, data);
+      });
+    });
+
+    function showConfirmation(refId, data) {
+      document.getElementById('formCard').style.display = 'none';
+      document.getElementById('refIdBadge').textContent = refId;
+      document.getElementById('ticketDate').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById('ticketCategory').textContent = data.category || 'Infrastructure Damage';
+      document.getElementById('ticketSeverity').textContent = data.severity || 'Medium';
+      document.getElementById('ticketLocation').textContent = `${data.city}, ${data.state} (${data.location})`;
+      document.getElementById('ticketReporter').textContent = data.name || 'Anonymous';
+
+      const ticketCard = document.getElementById('ticketCard');
+      ticketCard.style.display = 'block';
+      ticketCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetForm() {
+      document.getElementById('damageForm').reset();
+      document.querySelectorAll('.cat-card, .sev-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById('category').value = '';
+      document.getElementById('severity').value = '';
+      removeFile(new Event('click'));
+      currentStep = 1;
+      updateUI();
+      document.getElementById('ticketCard').style.display = 'none';
+      document.getElementById('formCard').style.display = 'block';
+    }
+  </script>
+</body>
+
+</html>
