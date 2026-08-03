@@ -216,10 +216,7 @@ color:#2563EB;
 
 
 
-/* Paste ALL the CSS from Part 2 here */
-/* ===================== */
 /* Common Section Styles */
-/* ===================== */
 
 .logo{
     display:flex;
@@ -299,9 +296,6 @@ color:#2563EB;
 .categories{
     padding:100px 8%;
 }
-/* ===================== */
-/* Statistics Section */
-/* ===================== */
 
 .statistics{
 
@@ -311,10 +305,6 @@ grid-template-columns:repeat(4,1fr);
 gap:25px;
 
 }
-
-/* ===================== */
-/* How It Works */
-/* ===================== */
 
 .how-it-works{
 
@@ -389,10 +379,6 @@ color:#6B7280;
 
 }
 
-/* ===================== */
-/* CTA */
-/* ===================== */
-
 .cta{
 
 padding:70px 8% 100px;
@@ -445,9 +431,6 @@ background:#1F2937;
 transform:translateY(-4px);
 
 }
-/* ===================== */
-/* Recent Reports */
-/* ===================== */
 
 .recent-reports{
 
@@ -576,7 +559,6 @@ td a{
 text-decoration:none;
 color:#2563EB;
 font-weight:600;
-font-weight:600;
 
 }
 
@@ -585,9 +567,6 @@ td a:hover{
 text-decoration:underline;
 
 }
-/* ===================== */
-/* Map */
-/* ===================== */
 
 .map-section{
 
@@ -630,10 +609,6 @@ font-size:18px;
 color:#6B7280;
 
 }
-
-/* ===================== */
-/* Emergency */
-/* ===================== */
 
 .emergency{
 
@@ -679,10 +654,6 @@ margin-top:15px;
 font-size:32px;
 
 }
-
-/* ===================== */
-/* Features */
-/* ===================== */
 
 .features{
 
@@ -737,9 +708,6 @@ line-height:28px;
 color:#6B7280;
 
 }
-/* ===================== */
-/* FAQ */
-/* ===================== */
 
 .faq{
 
@@ -784,10 +752,6 @@ color:#6B7280;
 
 }
 
-/* ===================== */
-/* Footer */
-/* ===================== */
-
 footer{
 
 margin-top:80px;
@@ -800,215 +764,108 @@ backdrop-filter:blur(12px);
 }
 
 .footer-container{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
 
-display:grid;
-grid-template-columns:2fr 1fr 1fr;
-gap:50px;
-
+.footer-about h2{
+    font-size:28px;
+    margin-bottom:15px;
 }
 
 .footer-about p{
+    line-height:26px;
+    color:#6B7280;
+}
 
-margin-top:20px;
-line-height:30px;
-color:#6B7280;
-
+.footer-links h3,
+.footer-contact h3{
+    margin-bottom:20px;
 }
 
 .footer-links ul{
-
-list-style:none;
-margin-top:20px;
-
+    list-style:none;
 }
 
 .footer-links li{
-
-margin:12px 0;
-
+    margin-bottom:10px;
 }
 
 .footer-links a{
-
-color:#374151;
-
-text-decoration:none;
-
+    color:#6B7280;
+    text-decoration:none;
+    transition:.3s;
 }
 
 .footer-links a:hover{
-color:#2563EB;
-text-decoration:underline;
-
+    color:#2563EB;
 }
 
 .footer-contact p{
-
-margin:15px 0;
-
+    margin-bottom:12px;
+    color:#6B7280;
 }
 
 .footer-contact i{
-
-margin-right:10px;
-
+    margin-right:10px;
+    color:#2563EB;
 }
 
 hr{
-
-margin:40px 0;
-border:1px solid #D1D5DB;
-background:white;
-transition:.3s;
-height:1px;
-background:rgba(255,255,255,.2);
-
+    margin:40px 0 20px;
+    border:0;
+    border-top:1px solid #E5E7EB;
 }
 
 .copyright{
-
-text-align:center;
-font-size:15px;
-opacity:.8;
-
-}
-
-/* ===================== */
-/* Responsive Design */
-/* ===================== */
-
-@media (max-width:1100px){
-
-.hero{
-    flex-direction:column;
     text-align:center;
-}
-
-.hero-left,
-.hero-right{
-    width:100%;
-}
-
-.hero-right{
-    margin-top:40px;
-}
-
-.statistics,
-.category-grid,
-.steps-container,
-.emergency-grid,
-.feature-grid,
-.footer-container{
-    grid-template-columns:1fr;
-}
-
-.hero-buttons{
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.report-controls{
-    flex-direction:column;
-    align-items:center;
-}
-
-.report-controls input:focus{
-
-border-color:#2563EB;
-
-box-shadow:0 0 0 3px rgba(37,99,235,.15);
-
-}
-
-.hero-left h1{
-    font-size:42px;
-    line-height:55px;
-}
-
-.topbar{
-    padding:0 15px;
-}
-
-.logo-text p{
-    display:none;
-}
-
-.cta-content{
-    padding:35px 20px;
-}
-
-.cta-content h2{
-    font-size:32px;
-}
-
-table{
-    min-width:700px;
-}
-
-}
-
-/* Close Button */
-
-.close-btn{
-    position:absolute;
-    top:18px;
-    right:18px;
-    width:36px;
-    height:36px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:24px;
-    color:#374151;
-    cursor:pointer;
-    z-index:3000;
-}
-
-.close-btn:hover{
-    transform:scale(1.1);
+    color:#9CA3AF;
+    font-size:14px;
 }
 
 .side-menu{
     position:fixed;
-    left:-260px;
     top:0;
-    width:250px;
+    left:-300px;
+    width:280px;
     height:100%;
     background:#FFFFFF;
     border-right:1px solid #E5E7EB;
-    box-shadow:5px 0 20px rgba(0,0,0,.08);
-    padding-top:70px;
-    overflow-y:auto;
-    transition:.35s;
-    z-index:2000;
+    padding:30px 20px;
+    transition:.4s ease;
+    z-index:1001;
+    box-shadow:4px 0 15px rgba(0,0,0,.08);
+}
+
+.close-btn{
+    text-align:right;
+    font-size:22px;
+    cursor:pointer;
+    margin-bottom:25px;
+    color:#374151;
 }
 
 .side-menu a{
-
-display:block;
-
-padding:18px 25px;
-
-color:#374151;
-
-text-decoration:none;
-
-font-size:18px;
-
-transition:.3s;
-
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 16px;
+    color:#374151;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:500;
+    border-radius:10px;
+    margin-bottom:8px;
+    transition:.2s;
 }
 
 .side-menu a:hover{
-
-background:#F3F4F6;
-
+    background:#F3F4F6;
 }
 
 .side-menu.show{
-
-left:0;
-
+    left:0;
 }
 </style>
 
@@ -1035,11 +892,6 @@ left:0;
         <i class="fas fa-right-from-bracket"></i>
         Logout
     </button>
-<<<<<<< HEAD
-    <a href="admin-login.html" class="btn1" style="margin-left:10px;">Admin</a>
-
-=======
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 </header>
 
 <div id="sideMenu" class="side-menu">
@@ -1052,11 +904,7 @@ left:0;
         <i class="fas fa-house"></i> Dashboard
     </a>
 
-<<<<<<< HEAD
-<a href="#report" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
-=======
-<a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
 
     <a href="track-report.html" onclick="toggleMenu()">
         <i class="fas fa-magnifying-glass-chart"></i> Track Report Progress
@@ -1067,8 +915,8 @@ left:0;
     </a>
 
     <a href="./community-awareness-page.html" onclick="toggleMenu()">
-    <i class="fas fa-users"></i> Community Awareness
-</a>
+        <i class="fas fa-users"></i> Community Awareness
+    </a>
 
     <a href="./feedback-and-suggestion-page.html" onclick="toggleMenu()">
         <i class="fas fa-comment-dots"></i> Feedback & Suggestions
@@ -1078,19 +926,20 @@ left:0;
         <i class="fas fa-shield-halved"></i> Safety Tips
     </a>
 
-<a href="./terms-and-condition-page.html" onclick="toggleMenu()">
-    <i class="fas fa-file-contract"></i> Terms & Conditions
-</a>
-<<<<<<< HEAD
-=======
+    <a href="./terms-and-condition-page.html" onclick="toggleMenu()">
+        <i class="fas fa-file-contract"></i> Terms & Conditions
+    </a>
 
-<a href="./help-and-support.html" onclick="toggleMenu()">
-    <i class="fas fa-headset"></i> Help & Support
-</a>
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
+    <a href="./help-and-support.html" onclick="toggleMenu()">
+        <i class="fas fa-headset"></i> Help & Support
+    </a>
 
-    <a href="#contact" onclick="toggleMenu()">
-        <i class="fas fa-phone"></i> Contact
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()">
+        <i class="fas fa-user-shield"></i> Privacy Policy
+    </a>
+
+    <a href="admin-login.html" onclick="toggleMenu()">
+        <i class="fas fa-lock"></i> Admin Portal
     </a>
 
     <a href="#" onclick="logout(); return false;">
@@ -1098,6 +947,7 @@ left:0;
     </a>
 
 </div>
+
 <section class="hero">
 
 <div class="hero-left">
@@ -1122,11 +972,7 @@ Together we can help authorities maintain safer cities.
 
 <div class="hero-buttons">
 
-<<<<<<< HEAD
-<a href="#report" class="btn1">
-=======
 <a href="report.html" class="btn1">
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 
 <i class="fas fa-plus-circle"></i>
 
@@ -1175,9 +1021,6 @@ Our platform enables citizens to instantly report infrastructure issues with pho
 </div>
 
 </section>
-<!-- ===================== -->
-<!-- Statistics Section -->
-<!-- ===================== -->
 
 <section class="statistics">
 
@@ -1222,10 +1065,6 @@ Our platform enables citizens to instantly report infrastructure issues with pho
 </div>
 
 </section>
-
-<!-- ===================== -->
-<!-- Damage Categories -->
-<!-- ===================== -->
 
 <section class="categories">
 
@@ -1326,9 +1165,6 @@ Select the type of infrastructure issue you wish to report.
 </div>
 
 </section>
-<!-- ===================== -->
-<!-- How It Works -->
-<!-- ===================== -->
 
 <section class="how-it-works">
 
@@ -1394,10 +1230,6 @@ Follow these simple steps to report any infrastructure damage.
 
 </section>
 
-<!-- ===================== -->
-<!-- CTA Section -->
-<!-- ===================== -->
-
 <section id="report" class="cta">
 
 <div class="cta-content">
@@ -1423,9 +1255,6 @@ Report Damage Now
 </div>
 
 </section>
-<!-- ===================== -->
-<!-- Recent Reports Section -->
-<!-- ===================== -->
 
 <section id="track" class="recent-reports">
 
@@ -1489,7 +1318,7 @@ Search
 
 <td><span class="status resolved">Resolved</span></td>
 
-<td><a href="#">View</a></td>
+<td><a href="track-report.html">View</a></td>
 
 </tr>
 
@@ -1505,7 +1334,7 @@ Search
 
 <td><span class="status progress">In Progress</span></td>
 
-<td><a href="#">View</a></td>
+<td><a href="track-report.html">View</a></td>
 
 </tr>
 
@@ -1521,7 +1350,7 @@ Search
 
 <td><span class="status pending">Pending</span></td>
 
-<td><a href="#">View</a></td>
+<td><a href="track-report.html">View</a></td>
 
 </tr>
 
@@ -1537,7 +1366,7 @@ Search
 
 <td><span class="status resolved">Resolved</span></td>
 
-<td><a href="#">View</a></td>
+<td><a href="track-report.html">View</a></td>
 
 </tr>
 
@@ -1548,9 +1377,6 @@ Search
 </div>
 
 </section>
-<!-- ===================== -->
-<!-- Map Section -->
-<!-- ===================== -->
 
 <section class="map-section">
 
@@ -1581,10 +1407,6 @@ Google Maps Integration Coming Soon
 </div>
 
 </section>
-
-<!-- ===================== -->
-<!-- Emergency Contacts -->
-<!-- ===================== -->
 
 <section class="emergency">
 
@@ -1645,10 +1467,6 @@ Quick access to important emergency services.
 </div>
 
 </section>
-
-<!-- ===================== -->
-<!-- Why Choose IDRS -->
-<!-- ===================== -->
 
 <section id="about" class="features">
 
@@ -1729,9 +1547,6 @@ Designed to make reporting faster, smarter and more transparent.
 </div>
 
 </section>
-<!-- ===================== -->
-<!-- FAQ Section -->
-<!-- ===================== -->
 
 <section class="faq">
 
@@ -1769,10 +1584,6 @@ Everything you need to know about reporting infrastructure damage.
 
 </section>
 
-<!-- ===================== -->
-<!-- Footer -->
-<!-- ===================== -->
-
 <footer id="contact">
 
 <div class="footer-container">
@@ -1798,21 +1609,14 @@ authorities to respond efficiently.
 <ul>
 
 <li><a href="#top">Home</a></li>
-<<<<<<< HEAD
-<li><a href="#report">Report Damage</a></li>
-<li><a href="#track">Track Report</a></li>
-=======
 <li><a href="report.html">Report Damage</a></li>
 <li><a href="track-report.html">Track Report Progress</a></li>
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 <li><a href="./About-project-page.html">About Project</a></li>
 <li><a href="./feedback-and-suggestion-page.html">Feedback & Suggestions</a></li>
 <li><a href="./safety-tips-page.html">Safety Tips</a></li>
 <li><a href="./terms-and-condition-page.html">Terms & Conditions</a></li>
-<<<<<<< HEAD
-=======
+<li><a href="Privacy-Policy-page.html">Privacy Policy</a></li>
 <li><a href="./help-and-support.html">Help & Support</a></li>
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 <li><a href="#contact">Contact</a></li>
 
 </ul>
@@ -1842,6 +1646,7 @@ authorities to respond efficiently.
 </div>
 
 </footer>
+
 <script>
 
 function toggleMenu(){

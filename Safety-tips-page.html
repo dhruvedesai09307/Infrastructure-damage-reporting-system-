@@ -1409,9 +1409,6 @@ should always come first.
 
 <div class="faq-item">
 
-<<<<<<< HEAD
-<div class="question" onclick="toggleFAQ(
-=======
     <div class="question" onclick="toggleFAQ(this)">
         What should I do if the damage is an emergency?
         <i class="fa-solid fa-chevron-down"></i>
@@ -1422,4 +1419,24 @@ should always come first.
     </div>
 
 </div>
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
+</div>
+</section>
+
+<footer>
+<div class="copyright">
+© 2026 Infrastructure Damage Reporting System | Safety Guidelines
+</div>
+</footer>
+
+<script>
+function toggleFAQ(element) {
+  const item = element.parentElement;
+  item.classList.toggle('active');
+  const answer = item.querySelector('.answer');
+  if (answer) {
+    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+  }
+}
+</script>
+</body>
+</html>

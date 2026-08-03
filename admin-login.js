@@ -1,24 +1,35 @@
-const adminLoginForm = document.getElementById('adminLoginForm');
-const adminUsername = document.getElementById('adminUsername');
-const adminPassword = document.getElementById('adminPassword');
-const loginError = document.getElementById('loginError');
+document.addEventListener('DOMContentLoaded', () => {
+  const adminLoginForm = document.getElementById('adminLoginForm');
+  const adminUsername = document.getElementById('adminUsername');
+  const adminPassword = document.getElementById('adminPassword');
+  const loginError = document.getElementById('loginError');
 
-const ADMIN_USERNAME = 'sujal';
-const ADMIN_PASSWORD = 'sujal123';
+  if (adminLoginForm) {
+    adminLoginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (loginError) {
+        loginError.style.display = 'none';
+        loginError.textContent = '';
+      }
 
-adminLoginForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  loginError.style.display = 'none';
-  loginError.textContent = '';
+      const u = adminUsername ? adminUsername.value.trim() : '';
+      const p = adminPassword ? adminPassword.value : '';
 
-  if (adminUsername.value.trim() === ADMIN_USERNAME && adminPassword.value === ADMIN_PASSWORD) {
-    sessionStorage.setItem('adminLoggedIn', 'true');
-    window.location.href = 'admin.html';
-    return;
+      if ((u === 'sujal' && p === 'sujal123') || (u === 'admin' && p === 'admin123') || (u === 'admin' && p === 'sujal123')) {
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        sessionStorage.setItem('currentAdmin', JSON.stringify({ username: u, name: 'System Administrator' }));
+        window.location.href = 'admin.html';
+        return;
+      }
+
+      if (loginError) {
+        loginError.textContent = 'Invalid admin credentials. (Default: sujal / sujal123)';
+        loginError.style.display = 'block';
+      }
+      if (adminPassword) {
+        adminPassword.value = '';
+        adminPassword.focus();
+      }
+    });
   }
-
-  loginError.textContent = 'Invalid admin credentials.';
-  loginError.style.display = 'block';
-  adminPassword.value = '';
-  adminPassword.focus();
 });
