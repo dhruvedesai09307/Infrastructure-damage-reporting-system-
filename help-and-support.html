@@ -42,6 +42,7 @@ overflow-x:hidden;
 /* ============================= */
 
 .topbar{
+<<<<<<< HEAD
 
 position:fixed;
 top:0;
@@ -57,6 +58,23 @@ align-items:center;
 padding:0 30px;
 z-index:1000;
 
+=======
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    background:#FFFFFF;
+    border-bottom:1px solid #E5E7EB;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 40px;
+    z-index:1000;
+>>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 }
 
 .logo{
@@ -88,6 +106,7 @@ color:#6B7280;
 
 }
 
+<<<<<<< HEAD
 .menu-icon{
 
 font-size:26px;
@@ -167,6 +186,52 @@ right:18px;
 font-size:24px;
 cursor:pointer;
 
+=======
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#374151;
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#2563EB;
+}
+
+.nav-links a.active{
+    background:#E5E7EB;
+    padding:10px 16px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.home-btn{
+    padding:10px 22px;
+    border:1px solid #D1D5DB;
+    border-radius:12px;
+    text-decoration:none;
+    color:#374151;
+    font-weight:600;
+    transition:.3s;
+}
+
+.home-btn:hover{
+    background:#F3F4F6;
+}
+
+.logo{
+    text-decoration:none;
+}
+
+.logo:hover{
+    cursor:pointer;
+>>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 }
 
 /* ============================= */
@@ -428,6 +493,7 @@ line-height:55px;
 
 <header class="topbar">
 
+<<<<<<< HEAD
 <div class="menu-icon" onclick="toggleMenu()">
 
 <i class="fas fa-bars"></i>
@@ -481,6 +547,42 @@ Logout
 <a href="./help-and-support-page.html"><i class="fas fa-circle-question"></i> Help & Support</a>
 
 </div>
+=======
+    <div class="logo">
+
+        <i class="fas fa-road"></i>
+
+        <div class="logo-text">
+            <h2>IDRS</h2>
+            <p>CIVIC INFRASTRUCTURE</p>
+        </div>
+
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="home-page.html">Home</a>
+
+        <a href="report.html">Report Damage</a>
+
+        <a href="track-report.html">Track Progress</a>
+
+        <a href="About-project-page.html">About</a>
+
+        <a href="feedback-and-suggestion-page.html">Feedback</a>
+
+        <a href="help-and-support.html" class="active">Support</a>
+
+    </nav>
+
+    <a href="home-page.html" class="home-btn">
+        <i class="fas fa-arrow-left"></i> Home
+    </a>
+
+</header>
+
+
+>>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 
 <section class="hero">
 

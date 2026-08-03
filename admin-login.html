@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,5 +46,38 @@
       window.location.href = 'admin.html';
     });
   </script>
+=======
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;font-family:Poppins,sans-serif}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(-45deg,#0047ab,#0a66c2,#6cb4ee,#eaf6ff);background-size:400% 400%;animation:bg 12s ease infinite;color:#fff}
+    @keyframes bg{50%{background-position:100% 50%}}
+    .card{width:min(420px,90%);padding:38px;background:#ffffff2e;backdrop-filter:blur(22px);border:1px solid #ffffff55;border-radius:25px;box-shadow:0 20px 40px #0004}
+    .card h1,.card p{text-align:center}.card p{opacity:.9}.field{margin:18px 0}.field label{display:block;margin-bottom:8px;font-weight:600}.field input{width:100%;padding:14px;border:0;border-radius:12px;font-size:15px}.button{width:100%;padding:14px;border:0;border-radius:12px;background:#fff;color:#0047ab;font-size:16px;font-weight:700;cursor:pointer}.error{display:none;background:#fee2e2;color:#991b1b;padding:10px;border-radius:8px}.back{display:block;text-align:center;color:#fff;margin-top:20px}
+    body{background:#F3F4F6;color:#374151}
+    .card{background:#FFFFFF;border-color:#E5E7EB;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+    .card h1{color:#111827}.card p,.back{color:#6B7280}.field input{background:#F9FAFB;border:1px solid #D1D5DB;color:#374151}.button{background:#2F3B4A;color:#FFFFFF}.button:hover{background:#1F2937}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Admin Access</h1>
+    <p>Manage infrastructure damage reports</p>
+    <div id="loginError" class="error" role="alert"></div>
+    <form id="adminLoginForm">
+      <div class="field"><label for="adminUsername">Username</label><input id="adminUsername" required autocomplete="username"></div>
+      <div class="field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" required autocomplete="current-password"></div>
+      <button class="button" type="submit">Login as Admin</button>
+    </form>
+    <a class="back" href="home-page.html">← Back to home</a>
+  </main>
+  <script src="admin-login.js"></script>
+>>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
 </body>
 </html>

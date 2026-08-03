@@ -1,4 +1,5 @@
 <!doctype html>
+<<<<<<< HEAD
 <html lang='en'>
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
@@ -24,3 +25,46 @@ th{background:#F3F4F6}td{color:#374151}tbody tr:hover{background:#F9FAFB}.action
 <section class='stats'><article class='stat'><i class='fas fa-file-circle-plus'></i><h2>12,580</h2><p>Total Reports</p></article><article class='stat'><i class='fas fa-circle-check'></i><h2>10,962</h2><p>Resolved Cases</p></article><article class='stat'><i class='fas fa-hourglass-half'></i><h2>1,321</h2><p>Under Review</p></article><article class='stat'><i class='fas fa-triangle-exclamation'></i><h2>297</h2><p>High Priority</p></article></section>
 <section class='panel'><div class='panel-head'><div><h2>Recent Reports</h2><p>Search reports and update their status.</p></div><div class='tools'><input id='search' type='search' placeholder='Search ID or location'><select id='filter'><option value='all'>All statuses</option><option value='Resolved'>Resolved</option><option value='In Progress'>In Progress</option><option value='Pending'>Pending</option></select></div></div><div class='table-wrap'><table><thead><tr><th>Report ID</th><th>Category</th><th>Location</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id='reports'><tr data-status='Resolved'><td>#1001</td><td>Road Damage</td><td>Patan</td><td>24 Jul 2026</td><td><span class='status resolved'>Resolved</span></td><td><button class='action'>Review</button></td></tr><tr data-status='In Progress'><td>#1002</td><td>Street Light</td><td>Ahmedabad</td><td>23 Jul 2026</td><td><span class='status progress'>In Progress</span></td><td><button class='action'>Review</button></td></tr><tr data-status='Pending'><td>#1003</td><td>Water Leakage</td><td>Mehsana</td><td>22 Jul 2026</td><td><span class='status pending'>Pending</span></td><td><button class='action'>Review</button></td></tr><tr data-status='Resolved'><td>#1004</td><td>Bridge Damage</td><td>Palanpur</td><td>21 Jul 2026</td><td><span class='status resolved'>Resolved</span></td><td><button class='action'>Review</button></td></tr></tbody></table></div><div class='notice'><i class='fas fa-circle-info'></i> Dashboard actions are currently frontend-only. Connect them to your backend API to persist status updates.</div></section></main><footer>(c) 2026 Infrastructure Damage Reporting System | Admin Portal</footer>
 <script>const search=document.getElementById('search'),filter=document.getElementById('filter'),rows=[...document.querySelectorAll('#reports tr')];function update(){const term=search.value.toLowerCase(),status=filter.value;rows.forEach(row=>{const matchesText=row.textContent.toLowerCase().includes(term),matchesStatus=status==='all'||row.dataset.status===status;row.style.display=matchesText&&matchesStatus?'':'none'})}search.oninput=update;filter.onchange=update;document.querySelectorAll('.action').forEach(button=>button.onclick=()=>alert('Report review details will be connected to the admin API.'));document.getElementById('adminLogout').onclick=function(event){event.preventDefault();sessionStorage.removeItem('currentAdmin');window.location.href='admin-login.html';}</script></body></html>
+=======
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;font-family:Poppins,sans-serif}
+    body{margin:0;min-height:100vh;background:#F3F4F6;color:#374151}
+    .top{padding:22px 6%;display:flex;justify-content:space-between;align-items:center;background:#FFFFFF;border-bottom:1px solid #E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+    .top a,.top strong{color:#374151;text-decoration:none}.wrap{max-width:1050px;margin:auto;padding:42px 24px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .stat,.report{background:#FFFFFF;border:1px solid #E5E7EB;border-radius:16px;padding:22px;box-shadow:0 10px 25px rgba(0,0,0,.08)}.stat strong{font-size:2rem;display:block;color:#111827}.toolbar{margin:26px 0;display:flex;gap:12px}.button{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}.danger{background:#EF4444;color:#FFFFFF}.light{background:#2F3B4A;color:#FFFFFF}.light:hover{background:#1F2937}.report{margin:14px 0}.muted{color:#6B7280}@media(max-width:650px){.stats{grid-template-columns:1fr}.top{display:block}.top a{display:inline-block;margin-top:12px}}
+  </style>
+</head>
+<body>
+  <header class="top"><strong>Infrastructure Report System · Admin</strong><a href="home-page.html">Home</a></header>
+  <main class="wrap">
+    <h1>Admin Dashboard</h1>
+    <div class="stats">
+      <div class="stat"><strong id="total">0</strong>Total Reports</div>
+      <div class="stat"><strong id="critical">0</strong>Critical Reports</div>
+      <div class="stat"><strong id="resolved">0%</strong>Resolution Rate</div>
+    </div>
+    <div class="toolbar"><button class="button light" id="logout">Logout</button><button class="button danger" id="clear">Clear Reports</button></div>
+    <section id="list"><p class="muted">Loading reports...</p></section>
+  </main>
+  <script>
+    if (sessionStorage.getItem('adminLoggedIn') !== 'true') location.href = 'admin-login.html';
+    const reports = () => JSON.parse(localStorage.getItem('reports') || '[]');
+    function render() {
+      const data = reports();
+      total.textContent = data.length;
+      critical.textContent = data.filter((report) => String(report.severity).startsWith('Critical')).length;
+      list.innerHTML = data.length ? data.slice().reverse().map((report) => `<article class="report"><strong>${report.category || 'Infrastructure issue'}</strong><p>${report.state || ''}, ${report.city || ''} · ${report.location || ''}</p><p>${report.description || ''}</p><small>Submitted by ${report.fullName || 'User'} · ${report.email || ''}</small></article>`).join('') : '<p class="muted">No reports submitted yet.</p>';
+    }
+    render();
+    logout.onclick = () => { sessionStorage.removeItem('adminLoggedIn'); location.href = 'admin-login.html'; };
+    clear.onclick = () => { if (confirm('Clear all reports?')) { localStorage.removeItem('reports'); render(); } };
+  </script>
+</body>
+</html>
+>>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
