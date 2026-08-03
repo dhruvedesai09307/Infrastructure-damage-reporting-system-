@@ -121,7 +121,7 @@ body{
 
     align-items:center;
 
-    padding:0 30px;
+    padding:0 40px;
 
     z-index:1000;
 
@@ -201,7 +201,11 @@ body{
 
     align-items:center;
 
-    gap:10px;
+    gap:6px;
+
+    margin-left:auto;
+
+    margin-right:150px;
 
 }
 
@@ -212,11 +216,13 @@ body{
 
     color:#374151;
 
-    padding:10px 15px;
+    padding:12px 16px;
 
     border-radius:10px;
 
-    font-size:14px;
+    font-size:15px;
+
+    font-weight:500;
 
     transition:.3s;
 
@@ -239,6 +245,61 @@ body{
     color:#2F3B4A;
 
     font-weight:600;
+
+}
+
+.home-button{
+
+    position:absolute;
+
+    right:40px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:11px 20px;
+
+    border:1px solid #D1D5DB;
+
+    border-radius:12px;
+
+    color:#374151;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+.home-button:hover{
+
+    background:#F3F4F6;
+
+    border-color:#9CA3AF;
+
+}
+
+@media(max-width:1050px){
+
+    .menu-icon{
+
+        display:block;
+
+    }
+
+    .nav-links,
+    .home-button{
+
+        display:none;
+
+    }
 
 }
 
@@ -1675,7 +1736,7 @@ footer hr{
                 <h2>IDRS</h2>
 
                 <p>
-                    Infrastructure Damage Reporting System
+                    CIVIC INFRASTRUCTURE
                 </p>
 
             </div>
@@ -1686,39 +1747,20 @@ footer hr{
 
 
     <!-- Desktop navigation -->
-
-    <nav class="nav-links">
-
-        <a href="home-page.html">
-
-            <i class="fas fa-house"></i>
-
-            Home
-
-        </a>
-
-
-        <a href="feedback-and-suggestion-page.html">
-
-            <i class="fas fa-comment-dots"></i>
-
-            Feedback
-
-        </a>
-
-
-        <a
-            href="terms-and-condition-page.html"
-            class="active"
-        >
-
-            <i class="fas fa-file-contract"></i>
-
-            Terms & Conditions
-
-        </a>
-
+    <nav class="nav-links" aria-label="Primary navigation">
+        <a href="home-page.html">Home</a>
+        <a href="report.html">Report Damage</a>
+        <!-- Replace #track-progress with your tracking page when it is created. -->
+        <a href="#track-progress">Track Progress</a>
+        <a href="About-project-page.html">About</a>
+        <a href="feedback-and-suggestion-page.html">Feedback</a>
+        <a href="help-and-support.html">Support</a>
     </nav>
+
+    <a class="home-button" href="home-page.html">
+        <i class="fas fa-arrow-left"></i>
+        Home
+    </a>
 
 </header>
 
@@ -4293,4 +4335,3 @@ window.addEventListener("load", function(){
 ===================================================== -->
 
 </html>
->>>>>>> 97c788d7fc974ba2cac0d67ea9376689de3eb90b
