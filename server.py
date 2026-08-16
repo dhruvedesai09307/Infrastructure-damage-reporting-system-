@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from flask import Flask, request, jsonify, send_from_directory
 import os
 import datetime
@@ -99,6 +100,39 @@ def update_report_status():
                 f.write(f"{key}: {value}\n")
                 
         return jsonify({'success': True, 'report_id': filename, 'status': new_status})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/chat', methods=['POST'])
+def chat_ai():
+    try:
+        req = request.get_json(force=True) or {}
+        message = req.get('message', '').strip()
+        
+        if not message:
+            return jsonify({'success': False, 'reply': 'Please provide a message.'}), 400
+            
+        # Optional Gemini API integration if API key is in environment
+        api_key = os.environ.get('GEMINI_API_KEY') or os.environ.get('GOOGLE_API_KEY')
+        if api_key:
+            try:
+                # pyrefly: ignore [missing-import]
+                import google.generativeai as genai
+                genai.configure(api_key=api_key)
+                model = genai.GenerativeModel('gemini-1.5-flash')
+                sys_prompt = (
+                    "You are the IDRS (Infrastructure Damage Reporting System) Civic AI Assistant. "
+                    "Help citizens report potholes, water leaks, broken streetlights, bridge defects, and structural issues. "
+                    "Guide them to report at report.html and track complaints at track-report.html. "
+                    "Keep answers helpful, direct, polite, and concise."
+                )
+                response = model.generate_content(f"{sys_prompt}\n\nUser: {message}")
+                if response and response.text:
+                    return jsonify({'success': True, 'reply': response.text})
+            except Exception as ai_err:
+                print(f"Gemini API fallback to rule engine: {ai_err}")
+
+        return jsonify({'success': True, 'reply': None})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 

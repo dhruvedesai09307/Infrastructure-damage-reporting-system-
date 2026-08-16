@@ -17,6 +17,9 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+<!-- IDRS AI Chatbot Styles -->
+<link rel="stylesheet" href="chatbot.css">
+
 <style>
 
 *{
@@ -1657,11 +1660,15 @@ document.getElementById("sideMenu").classList.toggle("show");
 
 function logout(){
 
-window.location.href="login-page.html";
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("currentUser");
+  window.location.href="login-page.html";
 
 }
 
 </script>
+<!-- IDRS AI Chatbot Script -->
+<script src="chatbot.js"></script>
 </body>
 
 </html>

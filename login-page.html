@@ -2,845 +2,572 @@
 <html lang="en">
 
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Infrastructure Damage Reporting System</title>
-
-<!-- Google Font -->
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Font Awesome -->
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-
-height:100vh;
-background:#F3F4F6;
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
-
-
-}
-
-/* Header */
-
-header{
-
-position:absolute;
-
-top:0;
-
-left:0;
-
-width:100%;
-
-padding:20px 60px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-background:white;
-color:#111827;
-border-bottom:1px solid #E5E7EB;
-box-shadow:0 2px 8px rgba(0,0,0,.05);
-transition:all .8s ease;
-
-}
-
-.hide-header{
-    opacity:0;
-    transform:translateY(-100%);
-    pointer-events:none;
-}
-
-header h1{
-
-font-size:28px;
-
-font-weight:700;
-
-}
-
-header p{
-
-font-size:14px;
-
-color:#6B7280;
-
-}
-
-/* Login Card */
-
-.container{
-    background:#FFFFFF;
-    border-radius:18px;
-    border:1px solid #E5E7EB;
-    box-shadow:0 10px 35px rgba(0,0,0,.08);
-    color:#111827;
-    animation:fadeUp 1.2s;
-    width:460px;
-    padding:40px;
-    transition:all .8s ease;
-}
-@keyframes fadeUp{
-
-from{
-
-opacity:0;
-
-transform:translateY(60px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-.logo{
-
-text-align:center;
-
-font-size:60px;
-
-margin-bottom:10px;
-
-color:#374151;
-
-}
-
-.container h2{
-
-text-align:center;
-
-margin-bottom:8px;
-
-font-size:30px;
-
-}
-
-.subtitle{
-
-text-align:center;
-
-font-size:14px;
-
-margin-bottom:30px;
-
-color:#6B7280;
-
-}
-
-.input-group{
-
-margin-bottom:20px;
-
-}
-
-.input-group label{
-
-display:block;
-
-margin-bottom:8px;
-
-color:#374151;
-
-font-weight:500;
-
-}
-
-.input-box{
-
-position:relative;
-
-}
-
-.input-box i{
-
-position:absolute;
-
-left:15px;
-
-top:16px;
-
-font-size:18px;
-
-}
-
-.input-box input{
-
-width:100%;
-padding:15px 45px;
-border:1px solid #D1D5DB;
-border-radius:10px;
-outline:none;
-font-size:15px;
-background:#F9FAFB;
-color:#333;
-transition:.3s;
-
-}
-
-.input-box input:focus{
-
-border-color:#2563EB;
-box-shadow:0 0 0 3px rgba(37,99,235,.15);
-
-}
-/* Password Toggle Icon */
-
-.toggle-password{
-
-position:absolute;
-
-right:15px;
-
-top:16px;
-
-cursor:pointer;
-
-color:#6B7280;
-
-font-size:18px;
-
-}
-
-/* Password Strength */
-
-.strength{
-
-margin-top:8px;
-
-height:8px;
-
-background:#E5E7EB;
-
-border-radius:20px;
-
-overflow:hidden;
-
-}
-
-.strength-bar{
-
-height:100%;
-
-width:0%;
-
-background:red;
-
-transition:.4s;
-
-}
-
-/* Remember Me */
-
-.options{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-top:20px;
-
-margin-bottom:25px;
-
-font-size:14px;
-
-}
-
-.options a{
-
-color:#2563EB;
-
-text-decoration:none;
-
-transition:.3s;
-
-}
-
-.options a:hover{
-
-text-decoration:underline;
-
-}
-
-.options label{
-
-display:flex;
-
-align-items:center;
-
-gap:6px;
-
-cursor:pointer;
-
-}
-
-/* Login Button */
-
-.login-btn{
-
-width:100%;
-padding:15px;
-border:none;
-border-radius:10px;
-background:#2F3B4A;
-color:white;
-font-size:17px;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
-}
-
-.login-btn:hover{
-
-background:#1F2937;
-
-color:white;
-
-box-shadow:0 8px 18px rgba(0,0,0,.15);
-
-}
-
-/* Register Button */
-
-.register-btn{
-
-width:100%;
-padding:14px;
-margin-top:15px;
-border:1px solid #D1D5DB;
-border-radius:10px;
-background:white;
-color:#374151;
-font-size:16px;
-cursor:pointer;
-transition:.35s;
-
-
-}
-
-.register-btn:hover{
-
-background:#F3F4F6;
-color:#374151;
-border-color:#C7CDD4;
-
-
-}
-
-/* Statistics */
-
-.stats{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:12px;
-
-margin-top:28px;
-
-}
-
-.card{
-
-background:#F9FAFB;
-
-border:1px solid #E5E7EB;
-
-padding:15px;
-
-border-radius:15px;
-
-text-align:center;
-
-transition:.3s;
-
-}
-
-.card:hover{
-
-  background:#F3F4F6;
-
-}
-
-.card h3{
-
-font-size:22px;
-
-margin-bottom:5px;
-
-}
-
-.card p{
-
-font-size:13px;
-
-}
-
-/* Footer */
-
-.footer{
-
-margin-top:25px;
-
-text-align:center;
-
-font-size:12px;
-
-color:#6B7280;
-
-}
-
-/* Mobile */
-
-@media(max-width:768px){
-
-.container{
-
-width:90%;
-
-padding:30px;
-
-}
-
-header{
-
-padding:20px;
-
-}
-
-header h1{
-
-font-size:20px;
-
-}
-
-header p{
-
-display:none;
-
-}
-
-.stats{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-button{
-letter-spacing:.3px;
-}
-
-input{
-transition:.25s;
-}
-
-.container h2{
-font-size:34px;
-font-weight:700;
-}
-
-.card h3{
-color:#374151;
-}
-
-.card p{
-color:#6B7280;
-}
-
-::placeholder{
-color:#9CA3AF;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | Infrastructure Damage Reporting System</title>
+
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- IDRS AI Chatbot Styles -->
+  <link rel="stylesheet" href="chatbot.css">
+
+  <style>
+    :root {
+      --primary: #2F3B4A;
+      --primary-hover: #1F2937;
+      --blue: #2563EB;
+      --blue-hover: #1D4ED8;
+      --navy: #111827;
+      --slate-700: #374151;
+      --slate-600: #4B5563;
+      --slate-500: #6B7280;
+      --slate-400: #9CA3AF;
+      --slate-200: #E5E7EB;
+      --slate-100: #F3F4F6;
+      --slate-50: #F9FAFB;
+      --shadow-card: 0 12px 35px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* ===================================== */
+    /* Top Header Branding (No Redirection Links) */
+    /* ===================================== */
+    .topbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 76px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--slate-200);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 8%;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .logo i {
+      font-size: 32px;
+      color: var(--primary);
+    }
+
+    .logo-text h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text p {
+      font-size: 11.5px;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    /* ===================================== */
+    /* Main Login Container */
+    /* ===================================== */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .login-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-card);
+      width: 100%;
+      max-width: 460px;
+      padding: 40px 36px;
+      animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .portal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: #EFF6FF;
+      color: var(--blue);
+      border: 1px solid #DBEAFE;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .card-header p {
+      font-size: 13.5px;
+      color: var(--slate-500);
+      line-height: 1.5;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--slate-700);
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper .field-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--slate-400);
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 13px 44px 13px 44px;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 12px;
+      outline: none;
+      font-size: 14px;
+      background: var(--slate-50);
+      color: var(--navy);
+      transition: all 0.2s ease;
+    }
+
+    .input-wrapper input:focus {
+      background: #FFFFFF;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+    .input-wrapper input:focus + .field-icon {
+      color: var(--blue);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: var(--slate-400);
+      font-size: 16px;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .toggle-password:hover {
+      color: var(--navy);
+    }
+
+    /* Password Strength Meter */
+    .strength-meter {
+      margin-top: 8px;
+      height: 6px;
+      background: var(--slate-200);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .strength-bar {
+      height: 100%;
+      width: 0%;
+      background: #EF4444;
+      border-radius: 10px;
+      transition: all 0.35s ease;
+    }
+
+    .strength-text {
+      font-size: 11.5px;
+      margin-top: 5px;
+      text-align: right;
+      font-weight: 600;
+      min-height: 16px;
+    }
+
+    /* Options Row */
+    .options-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--slate-600);
+      cursor: pointer;
+      font-weight: 500;
+      user-select: none;
+    }
+
+    .remember-me input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+      color: var(--blue-hover);
+    }
+
+    /* Buttons */
+    .btn-submit {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(47, 59, 74, 0.2);
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.3);
+    }
+
+    .btn-register {
+      width: 100%;
+      padding: 12px;
+      margin-top: 14px;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 12px;
+      background: #FFFFFF;
+      color: var(--slate-700);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-register:hover {
+      background: var(--slate-50);
+      color: var(--navy);
+      border-color: var(--slate-400);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12.5px;
+      color: var(--slate-500);
+      border-top: 1px solid var(--slate-200);
+      background: #FFFFFF;
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 640px) {
+      .topbar {
+        padding: 0 4%;
+        height: 68px;
+      }
+      .logo-text p {
+        display: none;
+      }
+      .login-card {
+        padding: 30px 22px;
+      }
+      .card-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
+  <!-- Top Header (Clean Branding, No Redirections) -->
+  <header class="topbar">
+    <div class="logo">
+      <i class="fas fa-road"></i>
+      <div class="logo-text">
+        <h2>IDRS</h2>
+        <p>Infrastructure Damage Reporting System</p>
+      </div>
+    </div>
+  </header>
 
-<header>
+  <!-- Main Login Form Area -->
+  <main class="main-wrapper">
+    <div class="login-card">
+      <div class="card-header">
+        <div class="portal-badge">
+          <i class="fas fa-shield-halved"></i> Official Civic Portal
+        </div>
+        <h1>Account Sign In</h1>
+        <p>Enter your credentials to access the IDRS portal</p>
+      </div>
 
-<div>
-
-<h1><i class="fa-solid fa-road"></i>
-
-Infrastructure Damage Reporting System
-
-</h1>
-
-<p>Report • Track • Improve Public Infrastructure</p>
-
-</div>
-
-</header>
-
-<div class="container">
-
-<div class="logo">
-
-<i class="fa-solid fa-city"></i>
-
-</div>
-
-<h2>Welcome Back</h2>
-
-<p class="subtitle">
-
-Login using your Email Address or Mobile Number
-
-</p>
-<form id="loginForm">
-
-    <!-- Email / Mobile -->
-
-    <div class="input-group">
-
-        <label>Email Address or Mobile Number</label>
-
-        <div class="input-box">
-
-            <i class="fa-solid fa-user"></i>
-
-            <input
-                type="text"
-                id="email"
-                placeholder="Enter Email or Mobile Number"
-                required
-                pattern="(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)|(^[6-9]\d{9}$)"
-                title="Enter a valid Email or 10-digit Indian Mobile Number">
-
+      <form id="loginForm">
+        <!-- Email or Mobile Number -->
+        <div class="form-group">
+          <label for="email">Email Address or Mobile Number</label>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="email" 
+              placeholder="Enter Email or Mobile Number" 
+              required
+              autocomplete="username"
+            >
+            <i class="fas fa-user field-icon"></i>
+          </div>
         </div>
 
-    </div>
-
-    <!-- Password -->
-
-    <div class="input-group">
-
-        <label>Password</label>
-
-        <div class="input-box">
-
-            <i class="fa-solid fa-lock"></i>
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter Password"
-                required>
-
-            <span class="toggle-password" id="togglePassword">
-
-                <i class="fa-solid fa-eye"></i>
-
+        <!-- Password with Strength Meter -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <input 
+              type="password" 
+              id="password" 
+              placeholder="Enter Password" 
+              required
+              autocomplete="current-password"
+            >
+            <i class="fas fa-lock field-icon"></i>
+            <span class="toggle-password" id="togglePassword" title="Show/Hide Password">
+              <i class="fas fa-eye"></i>
             </span>
-
-        </div>
-
-        <div class="strength">
-
+          </div>
+          
+          <!-- Dynamic Password Strength Bar -->
+          <div class="strength-meter">
             <div class="strength-bar" id="strengthBar"></div>
-
+          </div>
+          <div class="strength-text" id="strengthText"></div>
         </div>
 
+        <!-- Options -->
+        <div class="options-row">
+          <label class="remember-me">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-link" id="forgotPasswordLink">Forgot Password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit" id="loginBtn">
+          <i class="fas fa-right-to-bracket"></i> Login
+        </button>
+
+        <!-- Register / Create Account -->
+        <button type="button" class="btn-register" id="registerBtn">
+          <i class="fas fa-user-plus"></i> Create New Account
+        </button>
+      </form>
     </div>
+  </main>
 
-    <!-- Options -->
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Infrastructure Damage Reporting System &bull; Diploma Project
+  </footer>
 
-    <div class="options">
+  <script>
+    // =====================================
+    // Show / Hide Password Toggle
+    // =====================================
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
 
-        <label>
-
-            <input type="checkbox">
-
-            Remember Me
-
-        </label>
-
-        <a href="#">Forgot Password?</a>
-
-    </div>
-
-    <!-- Login -->
-
-    <button type="submit" class="login-btn">
-
-        <i class="fa-solid fa-right-to-bracket"></i>
-
-        Login
-
-    </button>
-
-    <!-- Register -->
-
-    <button type="button" class="register-btn">
-
-        <i class="fa-solid fa-user-plus"></i>
-
-        Create New Account
-
-    </button>
-
-</form>
-
-<!-- Statistics -->
-
-<div class="stats">
-
-    <div class="card">
-
-        <h3>12,580</h3>
-
-        <p>Reports Submitted</p>
-
-    </div>
-
-    <div class="card">
-
-        <h3>10,962</h3>
-
-        <p>Issues Resolved</p>
-
-    </div>
-
-    <div class="card">
-
-        <h3>87%</h3>
-
-        <p>Resolution Rate</p>
-
-    </div>
-
-</div>
-
-<div class="footer">
-
-    © 2026 Infrastructure Damage Reporting System
-
-    <br>
-
-    Developed for Educational Purpose
-
-</div>
-
-</div>
-
-<script>
-    // ================================
-// Show / Hide Password
-// ================================
-
-const password = document.getElementById("password");
-const togglePassword = document.getElementById("togglePassword");
-
-togglePassword.addEventListener("click", function () {
-
-    const icon = this.querySelector("i");
-
-    if(password.type === "password"){
-
-        password.type = "text";
-
+    togglePassword.addEventListener("click", function () {
+      const icon = this.querySelector("i");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
         icon.classList.remove("fa-eye");
         icon.classList.add("fa-eye-slash");
-
-    }
-
-    else{
-
-        password.type = "password";
-
+      } else {
+        passwordInput.type = "password";
         icon.classList.remove("fa-eye-slash");
         icon.classList.add("fa-eye");
+      }
+    });
 
-    }
+    // =====================================
+    // Dynamic Password Strength Checker
+    // =====================================
+    const strengthBar = document.getElementById("strengthBar");
+    const strengthText = document.getElementById("strengthText");
 
-});
+    passwordInput.addEventListener("input", function () {
+      const val = passwordInput.value;
+      let strength = 0;
 
-// ================================
-// Password Strength Checker
-// ================================
+      if (val.length >= 8) strength++;
+      if (/[A-Z]/.test(val)) strength++;
+      if (/[0-9]/.test(val)) strength++;
+      if (/[!@#$%^&*(),.?":{}|<>]/.test(val)) strength++;
 
-const strengthBar = document.getElementById("strengthBar");
-
-password.addEventListener("input", function(){
-
-    let value = password.value;
-
-    let strength = 0;
-
-    if(value.length >= 8)
-        strength++;
-
-    if(/[A-Z]/.test(value))
-        strength++;
-
-    if(/[0-9]/.test(value))
-        strength++;
-
-    if(/[!@#$%^&*(),.?":{}|<>]/.test(value))
-        strength++;
-
-    switch(strength){
-
-        case 0:
-
-            strengthBar.style.width="0%";
+      if (val.length === 0) {
+        strengthBar.style.width = "0%";
+        strengthText.textContent = "";
+      } else {
+        switch (strength) {
+          case 0:
+          case 1:
+            strengthBar.style.width = "25%";
+            strengthBar.style.background = "#EF4444";
+            strengthText.textContent = "Weak Password";
+            strengthText.style.color = "#EF4444";
             break;
-
-        case 1:
-
-            strengthBar.style.width="25%";
-            strengthBar.style.background="red";
+          case 2:
+            strengthBar.style.width = "50%";
+            strengthBar.style.background = "#F59E0B";
+            strengthText.textContent = "Medium Password";
+            strengthText.style.color = "#F59E0B";
             break;
-
-        case 2:
-
-            strengthBar.style.width="50%";
-            strengthBar.style.background="orange";
+          case 3:
+            strengthBar.style.width = "75%";
+            strengthBar.style.background = "#3B82F6";
+            strengthText.textContent = "Good Password";
+            strengthText.style.color = "#3B82F6";
             break;
-
-        case 3:
-
-            strengthBar.style.width="75%";
-            strengthBar.style.background="gold";
+          case 4:
+            strengthBar.style.width = "100%";
+            strengthBar.style.background = "#10B981";
+            strengthText.textContent = "Strong Password";
+            strengthText.style.color = "#10B981";
             break;
+        }
+      }
+    });
 
-        case 4:
+    // =====================================
+    // Login Submission & Access Storage
+    // =====================================
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
 
-            strengthBar.style.width="100%";
-            strengthBar.style.background="limegreen";
-            break;
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const pass = passwordInput.value.trim();
 
-    }
-
-});
-// ================================
-// Login Validation
-// ================================
-
-const loginForm = document.getElementById("loginForm");
-const loginButton = document.querySelector(".login-btn");
-
-loginForm.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    const email = document.getElementById("email").value.trim();
-    const pass = password.value.trim();
-
-    if(email === "" || pass === ""){
-
+      if (!email || !pass) {
         alert("Please fill in all fields.");
         return;
+      }
 
-    }
+      // Record active login state
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("currentUser", email);
 
-    loginButton.innerHTML =
-    '<i class="fa-solid fa-spinner fa-spin"></i> Logging In...';
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging In...';
+      loginBtn.disabled = true;
 
-    loginButton.disabled = true;
-
-    setTimeout(function(){
-
-        //alert("Welcome to Infrastructure Damage Reporting System!");
-
+      setTimeout(function () {
         window.location.href = "home-page.html";
+      }, 1000);
+    });
 
-    },2000);
+    // Register Button
+    document.getElementById("registerBtn").addEventListener("click", function () {
+      alert("Registration feature will be available in the next release.");
+    });
 
-});
-// ================================
-// Register Button
-// ================================
-
-const registerBtn = document.querySelector(".register-btn");
-
-registerBtn.addEventListener("click", function(){
-
-    alert("Registration page will be available soon.");
-
-});
-
-// ================================
-// Forgot Password
-// ================================
-
-const forgotLink = document.querySelector(".options a");
-
-forgotLink.addEventListener("click", function(e){
-
-    e.preventDefault();
-
-    alert("Password recovery feature coming soon.");
-
-});
-
-// ================================
-// Welcome Message
-// ================================
-
-window.addEventListener("load", function () {
-
-    console.log("Infrastructure Damage Reporting System Loaded Successfully");
-
-    // Hide the header after 3 seconds
-    setTimeout(function () {
-
-        const header = document.querySelector("header");
-        const container = document.querySelector(".container");
-
-
-        header.style.transition = "all 0.8s ease";
-        header.style.opacity = "0";
-        header.style.transform = "translateY(-100%)";
-        container.style.transform = "translateY(-45px)";
-
-        // Remove it completely after animation
-        setTimeout(function () {
-            header.style.display = "none";
-        }, 800);
-
-    }, 3000);
-
-});
-</script>
+    // Forgot Password
+    document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("Password recovery instructions have been sent.");
+    });
+  </script>
 
 </body>
 
 </html>
-
