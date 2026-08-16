@@ -107,13 +107,13 @@ body{
 
     width:100%;
 
-    height:70px;
+    height:76px;
 
     background:#FFFFFF;
 
     border-bottom:1px solid #E5E7EB;
 
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    box-shadow:0 2px 10px rgba(0,0,0,0.04);
 
     display:flex;
 
@@ -121,7 +121,7 @@ body{
 
     align-items:center;
 
-    padding:0 40px;
+    padding:0 8%;
 
     z-index:1000;
 
@@ -201,35 +201,38 @@ body{
 
     align-items:center;
 
-    gap:6px;
+    gap:10px;
 
-    margin-left:auto;
-
-    margin-right:150px;
+    list-style:none;
+    margin:0;
+    padding:0;
 
 }
 
 
-.nav-links a{
+.nav-link{
 
     text-decoration:none;
 
-    color:#374151;
+    color:#4B5563;
 
-    padding:12px 16px;
+    padding:9px 16px;
 
     border-radius:10px;
 
-    font-size:15px;
+    font-size:14.5px;
 
     font-weight:500;
 
-    transition:.3s;
+    transition:.2s;
+    display:inline-flex;
+    align-items:center;
+    white-space:nowrap;
 
 }
 
 
-.nav-links a:hover{
+.nav-link:hover{
 
     background:#F3F4F6;
 
@@ -238,51 +241,43 @@ body{
 }
 
 
-.nav-links .active{
+.nav-link.active{
 
-    background:#EEF2F7;
+    background:#EFF6FF;
 
-    color:#2F3B4A;
+    color:#2563EB;
 
-    font-weight:600;
+    font-weight:700;
+    border:1px solid #DBEAFE;
 
 }
 
-.home-button{
+.home-icon-btn{
 
-    position:absolute;
-
-    right:40px;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    padding:11px 20px;
-
-    border:1px solid #D1D5DB;
-
+    width:44px;
+    height:44px;
     border-radius:12px;
-
+    background:#FFFFFF;
+    border:1.5px solid #E5E7EB;
     color:#374151;
-
-    font-size:15px;
-
-    font-weight:600;
-
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
     text-decoration:none;
-
-    transition:.25s;
+    transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
+    box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    flex-shrink:0;
 
 }
 
-.home-button:hover{
+.home-icon-btn:hover{
 
-    background:#F3F4F6;
-
-    border-color:#9CA3AF;
+    background:#2563EB;
+    color:#FFFFFF;
+    border-color:#2563EB;
+    transform:translateY(-2px);
+    box-shadow:0 6px 16px rgba(37,99,235,0.25);
 
 }
 
@@ -1699,21 +1694,17 @@ footer hr{
 
     <!-- Logo -->
 
-    <a href="home-page.html" style="text-decoration:none;">
+    <a href="home-page.html" class="logo" style="text-decoration:none;">
 
-        <div class="logo">
+        <i class="fas fa-road"></i>
 
-            <i class="fas fa-road"></i>
+        <div class="logo-text">
 
-            <div class="logo-text">
+            <h2>IDRS</h2>
 
-                <h2>IDRS</h2>
-
-                <p>
-                    CIVIC INFRASTRUCTURE
-                </p>
-
-            </div>
+            <p>
+                Infrastructure Damage Reporting System
+            </p>
 
         </div>
 
@@ -1722,18 +1713,16 @@ footer hr{
 
     <!-- Desktop navigation -->
     <nav class="nav-links" aria-label="Primary navigation">
-        <a href="home-page.html">Home</a>
-        <a href="report.html">Report Damage</a>
-        <!-- Replace #track-progress with your tracking page when it is created. -->
-        <a href="#track-progress">Track Progress</a>
-        <a href="About-project-page.html">About</a>
-        <a href="feedback-and-suggestion-page.html">Feedback</a>
-        <a href="help-and-support.html">Support</a>
+        <a href="home-page.html" class="nav-link">Home</a>
+        <a href="report.html" class="nav-link">Report Damage</a>
+        <a href="track-report.html" class="nav-link">Track Progress</a>
+        <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
+        <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
 
-    <a class="home-button" href="home-page.html">
-        <i class="fas fa-arrow-left"></i>
-        Home
+    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+        <i class="fas fa-house"></i>
     </a>
 
 </header>

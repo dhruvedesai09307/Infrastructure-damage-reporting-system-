@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -72,64 +73,137 @@
       left: 12%;
     }
 
+    /* ===== UNIFIED TOPBAR ===== */
     header {
-      height: 82px;
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 76px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E5E7EB;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 0 7%;
-      background: rgba(125, 156, 226, 0.25);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-      position: relative;
-      z-index: 2;
+      align-items: center;
+      padding: 0 8%;
+      z-index: 1000;
     }
 
-    .brand {
+    .logo {
       display: flex;
       align-items: center;
-      gap: 11px;
-    }
-
-    .brand-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      font-size: 24px;
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    .brand h1 {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .brand span {
-      display: block;
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    nav {
-      display: flex;
-      gap: 24px;
-    }
-
-    nav a {
-      color: var(--text-muted);
+      gap: 12px;
       text-decoration: none;
-      font-size: 14px;
-      transition: 0.25s;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
     }
 
-    nav a:hover,
-    nav a.active {
-      color: var(--white);
-      font-weight: 600;
+    .logo:hover {
+      transform: scale(1.02);
     }
+
+    .logo i {
+      font-size: 32px;
+      color: #2F3B4A;
+      transition: color 0.2s ease;
+    }
+
+    .logo:hover i {
+      color: #2563EB;
+    }
+
+    .logo-text h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text p {
+      font-size: 11.5px;
+      color: #6B7280;
+      font-weight: 500;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #4B5563;
+      font-weight: 500;
+      font-size: 14.5px;
+      padding: 9px 16px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: #2563EB;
+      background: #F3F4F6;
+    }
+
+    .nav-link.active {
+      color: #2563EB;
+      font-weight: 700;
+      background: #EFF6FF;
+      border: 1px solid #DBEAFE;
+    }
+
+    .home-icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid #E5E7EB;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+    }
+
+    .home-icon-btn:hover {
+      background: #2563EB;
+      color: #FFFFFF;
+      border-color: #2563EB;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    }
+
+    @media (max-width: 1080px) {
+      header {
+        padding: 0 4%;
+      }
+
+      header nav {
+        gap: 6px;
+      }
+
+      .nav-link {
+        font-size: 13.5px;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      header nav {
+        display: none;
+      }
+    }
+
+
+
 
     .profile {
       width: 40px;
@@ -262,7 +336,7 @@
       font-size: 19px;
     }
 
-    .rating-options input:checked + label,
+    .rating-options input:checked+label,
     .rating-options label:hover {
       color: #164fcb;
       background: var(--white);
@@ -303,22 +377,22 @@
     }
 
     .back-home-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 28px;
-  background: white;
-  color: #11469f;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: 0.25s;
-}
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: white;
+      color: #11469f;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: 0.25s;
+    }
 
-.back-home-btn:hover {
-  background: #eef3ff;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(8, 35, 112, 0.25);
-}
+    .back-home-btn:hover {
+      background: #eef3ff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(8, 35, 112, 0.25);
+    }
 
     .info-card {
       margin-bottom: 20px;
@@ -440,113 +514,239 @@
         grid-template-columns: 1fr;
       }
     }
+
     /* Login-page palette: white surfaces, light grey background, deep navy accents */
-    :root{--deep-blue:#0d2749;--primary-blue:#31435a;--blue:#52657c;--light-blue:#9aa5b4;--soft-blue:#697586;--white:#ffffff;--glass:#ffffff;--glass-border:#e1e5ea;--text-muted:#697586;--input-text:#10243e}
-    body{color:#10243e;background:#f4f5f7}
-    .circle{display:none}
-    header{background:#fff;border-bottom:1px solid #e3e6ea;box-shadow:0 2px 8px rgba(13,39,73,.06)}
-    .brand-icon{background:#edf0f4;color:#0d2749}.brand span,nav a{color:#697586}nav a:hover,nav a.active{color:#0d2749}.profile{border-color:#d8dde4;background:#f7f8fa;color:#0d2749}
-    .page-heading h2,.glass-card h3,.info-card h4{color:#0d2749}.page-heading p,.card-description,.info-card p{color:#697586}
-    .glass-card{background:#fff;border-color:#e1e5ea;box-shadow:0 10px 28px rgba(13,39,73,.08);backdrop-filter:none}
-    input,select,textarea{background:#f9fafb;border:1px solid #d8dde4;color:#10243e}input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px #e8edf2;border-color:#52657c}
-    .rating-options label{border-color:#d8dde4;background:#f7f8fa}.rating-options input:checked + label,.rating-options label:hover{background:#31435a;color:#fff}
-    .checkbox-area{color:#697586}.checkbox-area input{accent-color:#31435a}.submit-btn{background:#31435a;color:#fff}.submit-btn:hover{background:#0d2749;box-shadow:0 10px 20px rgba(13,39,73,.18)}
-    .back-home-btn{background:#fff;color:#31435a;border:1px solid #d8dde4}.back-home-btn:hover{background:#f1f3f5;box-shadow:0 10px 20px rgba(13,39,73,.12)}
-    .feedback-type,.stat-box{background:#f5f7f9;border:1px solid #e1e5ea}.stat-box span{color:#697586}footer{color:#697586}
+    :root {
+      --deep-blue: #0d2749;
+      --primary-blue: #31435a;
+      --blue: #52657c;
+      --light-blue: #9aa5b4;
+      --soft-blue: #697586;
+      --white: #ffffff;
+      --glass: #ffffff;
+      --glass-border: #e1e5ea;
+      --text-muted: #697586;
+      --input-text: #10243e
+    }
+
+    body {
+      color: #10243e;
+      background: #f4f5f7
+    }
+
+    .circle {
+      display: none
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e3e6ea;
+      box-shadow: 0 2px 8px rgba(13, 39, 73, .06)
+    }
+
+    .brand-icon {
+      background: #edf0f4;
+      color: #0d2749
+    }
+
+    .brand span,
+    nav a {
+      color: #697586
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #0d2749
+    }
+
+    .profile {
+      border-color: #d8dde4;
+      background: #f7f8fa;
+      color: #0d2749
+    }
+
+    .page-heading h2,
+    .glass-card h3,
+    .info-card h4 {
+      color: #0d2749
+    }
+
+    .page-heading p,
+    .card-description,
+    .info-card p {
+      color: #697586
+    }
+
+    .glass-card {
+      background: #fff;
+      border-color: #e1e5ea;
+      box-shadow: 0 10px 28px rgba(13, 39, 73, .08);
+      backdrop-filter: none
+    }
+
+    input,
+    select,
+    textarea {
+      background: #f9fafb;
+      border: 1px solid #d8dde4;
+      color: #10243e
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 3px #e8edf2;
+      border-color: #52657c
+    }
+
+    .rating-options label {
+      border-color: #d8dde4;
+      background: #f7f8fa
+    }
+
+    .rating-options input:checked+label,
+    .rating-options label:hover {
+      background: #31435a;
+      color: #fff
+    }
+
+    .checkbox-area {
+      color: #697586
+    }
+
+    .checkbox-area input {
+      accent-color: #31435a
+    }
+
+    .submit-btn {
+      background: #31435a;
+      color: #fff
+    }
+
+    .submit-btn:hover {
+      background: #0d2749;
+      box-shadow: 0 10px 20px rgba(13, 39, 73, .18)
+    }
+
+    .back-home-btn {
+      background: #fff;
+      color: #31435a;
+      border: 1px solid #d8dde4
+    }
+
+    .back-home-btn:hover {
+      background: #f1f3f5;
+      box-shadow: 0 10px 20px rgba(13, 39, 73, .12)
+    }
+
+    .feedback-type,
+    .stat-box {
+      background: #f5f7f9;
+      border: 1px solid #e1e5ea
+    }
+
+    .stat-box span {
+      color: #697586
+    }
+
+    footer {
+      color: #697586
+    }
 
     /* =====================================================
    HOME PAGE FONT MATCH
 ===================================================== */
 
-* {
-    font-family: 'Poppins', sans-serif;
-}
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
 
 
-/* Main heading */
+    /* Main heading */
 
-.page-heading h2 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-}
-
-
-/* Paragraphs */
-
-.page-heading p,
-.card-description,
-.input-group label,
-input,
-select,
-textarea,
-button,
-nav a,
-.brand h1,
-.brand span,
-footer {
-    font-family: 'Poppins', sans-serif;
-}
+    .page-heading h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+    }
 
 
-/* Navigation */
+    /* Paragraphs */
 
-nav a {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-
-/* Form labels */
-
-.input-group label {
-    font-size: 13px;
-    font-weight: 600;
-}
-
-
-/* Form text */
-
-input,
-select,
-textarea {
-    font-size: 13px;
-    font-weight: 400;
-}
+    .page-heading p,
+    .card-description,
+    .input-group label,
+    input,
+    select,
+    textarea,
+    button,
+    nav a,
+    .brand h1,
+    .brand span,
+    footer {
+      font-family: 'Poppins', sans-serif;
+    }
 
 
-/* Main card heading */
+    /* Navigation */
 
-.glass-card h3 {
-    font-size: 22px;
-    font-weight: 700;
-}
-
-
-/* Side card headings */
-
-.info-card h4 {
-    font-size: 16px;
-    font-weight: 700;
-}
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+    }
 
 
-/* Side card text */
+    /* Form labels */
 
-.info-card p,
-.feedback-type,
-.stat-box span {
-    font-size: 13px;
-    font-weight: 400;
-}
+    .input-group label {
+      font-size: 13px;
+      font-weight: 600;
+    }
 
 
-/* Buttons */
+    /* Form text */
 
-.submit-btn,
-button {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-}
+    input,
+    select,
+    textarea {
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+
+    /* Main card heading */
+
+    .glass-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+
+    /* Side card headings */
+
+    .info-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+
+    /* Side card text */
+
+    .info-card p,
+    .feedback-type,
+    .stat-box span {
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+
+    /* Buttons */
+
+    .submit-btn,
+    button {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+
     /* Header matching the reference page */
     header {
       height: 70px;
@@ -643,7 +843,9 @@ button {
     }
 
     @media (max-width: 850px) {
-      header nav { display: none; }
+      header nav {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -655,39 +857,36 @@ button {
   <div class="circle circle-four"></div>
 
   <header>
-    <div class="brand">
-      <div class="brand-icon">⚠</div>
-      <div>
-        <h1>IDRS</h1>
-        <span>Report • Track • Improve Public Infrastructure</span>
+    <a href="home-page.html" class="logo">
+      <i class="fas fa-road"></i>
+      <div class="logo-text">
+        <h2>IDRS</h2>
+        <p>Infrastructure Damage Reporting System</p>
       </div>
-    </div>
-
+    </a>
     <nav aria-label="Primary navigation">
-      <a href="home-page.html">Home</a>
-      <a href="report.html">Report Damage</a>
-      <!-- Replace #track-progress when you create the tracking page. -->
-      <a href="#track-progress">Track Progress</a>
-      <a href="About-project-page.html">About</a>
-      <a href="feedback-and-suggestion-page.html" class="active">Feedback</a>
-      <a href="help-and-support.html">Support</a>
+      <a href="home-page.html" class="nav-link">Home</a>
+      <a href="report.html" class="nav-link">Report Damage</a>
+      <a href="track-report.html" class="nav-link">Track Progress</a>
+      <a href="About-project-page.html" class="nav-link">About</a>
+      <a href="feedback-and-suggestion-page.html" class="nav-link active">Feedback</a>
+      <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
-
-    <a class="home-button" href="home-page.html">&larr; Home</a>
-
-    <div class="profile">👤</div>
+    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+      <i class="fas fa-house"></i>
+    </a>
   </header>
 
   <main>
 
     <div class="page-heading">
-  <h2>Feedback & Suggestions</h2>
-  <p>Your feedback helps us improve public infrastructure reporting services.</p>
+      <h2>Feedback & Suggestions</h2>
+      <p>Your feedback helps us improve public infrastructure reporting services.</p>
 
-  <a href="home-page.html" class="back-home-btn">
-    ← Back to Home
-  </a>
-</div>
+      <a href="home-page.html" class="back-home-btn">
+        ← Back to Home
+      </a>
+    </div>
 
     <div class="layout">
       <section class="glass-card">
@@ -751,10 +950,7 @@ button {
 
           <div class="input-group">
             <label for="message">Your Feedback or Suggestion</label>
-            <textarea
-              id="message"
-              placeholder="Write your feedback, issue, or suggestion here..."
-            ></textarea>
+            <textarea id="message" placeholder="Write your feedback, issue, or suggestion here..."></textarea>
           </div>
 
           <div class="checkbox-area">
@@ -822,4 +1018,5 @@ button {
     © 2026 Infrastructure Damage Reporting System · Building safer communities together.
   </footer>
 </body>
+
 </html>
