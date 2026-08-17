@@ -1,13 +1,16 @@
-# pyrefly: ignore [missing-import]
 from flask import Flask, request, jsonify, send_from_directory
 import os
 import datetime
+from models import db, Report, Admin
 
 app = Flask(__name__)
 
-REPORTS_DIR = os.path.join(os.getcwd(), 'reports')
-if not os.path.exists(REPORTS_DIR):
-    os.makedirs(REPORTS_DIR)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/idrs-db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def home():
@@ -17,58 +20,37 @@ def home():
 def submit_report():
     try:
         data = request.get_json(force=True) or {}
-        report_count = len([f for f in os.listdir(REPORTS_DIR) if f.endswith('.txt') or f.endswith('.json')])
-        report_num = report_count + 1
-        report_id = f"report_{report_num}.txt"
-        report_path = os.path.join(REPORTS_DIR, report_id)
-        
-        if 'status' not in data:
-            data['status'] = 'Pending'
-        if 'date' not in data:
-            data['date'] = datetime.datetime.now().strftime("%d %b %Y")
-        if 'report_id' not in data:
-            data['report_id'] = report_id
 
-        with open(report_path, 'w', encoding='utf-8') as f:
-            for key, value in data.items():
-                f.write(f"{key}: {value}\n")
+        report_count = Report.query.count()
+        report_id = f"report_{report_count + 1}"
 
-        return jsonify({'success': True, 'report_id': report_id, 'data': data})
+        new_report = Report(
+            report_id=report_id,
+            title=data.get('title', ''),
+            description=data.get('description', ''),
+            category=data.get('category', ''),
+            location=data.get('location', ''),
+            status='Pending'
+        )
+        db.session.add(new_report)
+        db.session.commit()
+
+        return jsonify({'success': True, 'report_id': report_id, 'data': new_report.to_dict()})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 400
 
 @app.route('/report_status/<report_id>', methods=['GET'])
 def get_report_status(report_id):
-    clean_id = report_id.strip()
-    filename = clean_id if clean_id.endswith('.txt') else f"{clean_id}.txt"
-    report_path = os.path.join(REPORTS_DIR, filename)
-    
-    if os.path.exists(report_path):
-        data = {}
-        with open(report_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                if ':' in line:
-                    key, val = line.split(':', 1)
-                    data[key.strip()] = val.strip()
-        return jsonify({'success': True, 'report_id': filename, **data})
+    report = Report.query.filter_by(report_id=report_id.strip()).first()
+    if report:
+        return jsonify({'success': True, **report.to_dict()})
     else:
         return jsonify({'success': False, 'message': 'Report ID not found in server records.'}), 404
 
 @app.route('/api/reports', methods=['GET'])
 def list_reports():
-    reports_list = []
-    if os.path.exists(REPORTS_DIR):
-        for filename in os.listdir(REPORTS_DIR):
-            if filename.endswith('.txt'):
-                report_path = os.path.join(REPORTS_DIR, filename)
-                data = {'report_id': filename}
-                with open(report_path, 'r', encoding='utf-8') as f:
-                    for line in f:
-                        if ':' in line:
-                            key, val = line.split(':', 1)
-                            data[key.strip()] = val.strip()
-                reports_list.append(data)
-    return jsonify({'success': True, 'reports': reports_list})
+    reports = Report.query.all()
+    return jsonify({'success': True, 'reports': [r.to_dict() for r in reports]})
 
 @app.route('/api/report_status/update', methods=['POST'])
 def update_report_status():
@@ -76,30 +58,18 @@ def update_report_status():
         req = request.get_json(force=True) or {}
         report_id = req.get('report_id', '').strip()
         new_status = req.get('status', '').strip()
-        
+
         if not report_id or not new_status:
             return jsonify({'success': False, 'message': 'report_id and status are required'}), 400
-            
-        filename = report_id if report_id.endswith('.txt') else f"{report_id}.txt"
-        report_path = os.path.join(REPORTS_DIR, filename)
-        
-        if not os.path.exists(report_path):
+
+        report = Report.query.filter_by(report_id=report_id).first()
+        if not report:
             return jsonify({'success': False, 'message': 'Report not found'}), 404
-            
-        data = {}
-        with open(report_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                if ':' in line:
-                    key, val = line.split(':', 1)
-                    data[key.strip()] = val.strip()
-                    
-        data['status'] = new_status
-        
-        with open(report_path, 'w', encoding='utf-8') as f:
-            for key, value in data.items():
-                f.write(f"{key}: {value}\n")
-                
-        return jsonify({'success': True, 'report_id': filename, 'status': new_status})
+
+        report.status = new_status
+        db.session.commit()
+
+        return jsonify({'success': True, 'report_id': report_id, 'status': new_status})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -108,15 +78,13 @@ def chat_ai():
     try:
         req = request.get_json(force=True) or {}
         message = req.get('message', '').strip()
-        
+
         if not message:
             return jsonify({'success': False, 'reply': 'Please provide a message.'}), 400
-            
-        # Optional Gemini API integration if API key is in environment
+
         api_key = os.environ.get('GEMINI_API_KEY') or os.environ.get('GOOGLE_API_KEY')
         if api_key:
             try:
-                # pyrefly: ignore [missing-import]
                 import google.generativeai as genai
                 genai.configure(api_key=api_key)
                 model = genai.GenerativeModel('gemini-1.5-flash')
