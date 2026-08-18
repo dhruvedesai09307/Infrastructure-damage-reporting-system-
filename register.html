@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Create Account | Infrastructure Damage Reporting System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    body { min-height:100vh; background:#F3F4F6; color:#374151; display:flex; align-items:center; justify-content:center; }
+    .card { width:min(440px,92%); padding:40px; background:#FFFFFF; border:1px solid #E5E7EB; border-radius:24px; box-shadow:0 10px 30px rgba(0,0,0,.08); }
+    h1 { text-align:center; font-size:24px; font-weight:800; color:#111827; margin-bottom:6px; }
+    .subtitle { text-align:center; color:#6B7280; font-size:14px; margin-bottom:24px; }
+    .field { margin:18px 0; }
+    .field label { display:block; margin-bottom:8px; font-weight:600; font-size:14px; }
+    .field input { width:100%; padding:12px 14px; border:1px solid #D1D5DB; border-radius:10px; font-size:15px; background:#F9FAFB; outline:none; }
+    .field input:focus { border-color:#2563EB; background:#fff; }
+    .button { width:100%; padding:14px; border:0; border-radius:10px; background:#2F3B4A; color:#fff; font-size:15px; font-weight:700; cursor:pointer; margin-top:10px; }
+    .button:hover { background:#1F2937; }
+    .msg { display:none; padding:12px; border-radius:10px; font-size:13px; margin-bottom:16px; text-align:center; }
+    .error { background:#fee2e2; color:#991b1b; }
+    .success { background:#dcfce7; color:#166534; }
+    .back { display:block; text-align:center; margin-top:22px; color:#4B5563; text-decoration:none; font-size:14px; font-weight:500; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Create Account</h1>
+    <p class="subtitle">Register to report and track infrastructure issues</p>
+    <div id="msgBox" class="msg" role="alert"></div>
+    <form id="registerForm">
+      <div class="field"><label for="name">Full Name</label><input id="name" required></div>
+      <div class="field"><label for="email">Email Address</label><input id="email" type="email" required></div>
+      <div class="field"><label for="password">Password</label><input id="password" type="password" required></div>
+      <button class="button" type="submit"><i class="fas fa-user-plus"></i> Create Account</button>
+    </form>
+    <a class="back" href="login-page.html">Already have an account? Login</a>
+  </main>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msgBox = document.getElementById('msgBox');
+      msgBox.style.display = 'none';
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const result = await res.json();
+
+        msgBox.style.display = 'block';
+        if (result.success) {
+          msgBox.className = 'msg success';
+          msgBox.textContent = 'Account created! Redirecting to login...';
+          setTimeout(() => window.location.href = 'login-page.html', 1500);
+        } else {
+          msgBox.className = 'msg error';
+          msgBox.textContent = result.message || 'Registration failed.';
+        }
+      } catch (err) {
+        msgBox.style.display = 'block';
+        msgBox.className = 'msg error';
+        msgBox.textContent = 'Could not connect to server.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1008,6 +1008,50 @@
   <footer>
     © 2026 Infrastructure Damage Reporting System · Building safer communities together.
   </footer>
+
+  <script>
+  document.querySelector('.glass-card form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const category = document.getElementById('category').value;
+    const location = document.getElementById('location').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const anonymous = document.getElementById('anonymous').checked;
+
+    const ratingInput = document.querySelector('input[name="rating"]:checked');
+    let rating = null;
+    if (ratingInput) {
+      const ratingMap = { r1: 1, r2: 2, r3: 3, r4: 4, r5: 5 };
+      rating = ratingMap[ratingInput.id];
+    }
+
+    if (!message) {
+      alert('Please write your feedback before submitting.');
+      return;
+    }
+
+    try {
+      const res = await fetch('/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, category, location, message, rating, anonymous })
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        alert('Thank you for your feedback!');
+        e.target.reset();
+      } else {
+        alert(result.message || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      alert('Could not connect to server. Please try again.');
+    }
+  });
+</script>
+
 </body>
 
 </html>

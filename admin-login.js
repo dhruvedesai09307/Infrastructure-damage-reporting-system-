@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginError = document.getElementById('loginError');
 
   if (adminLoginForm) {
-    adminLoginForm.addEventListener('submit', (event) => {
+    adminLoginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (loginError) {
         loginError.style.display = 'none';
@@ -15,20 +15,35 @@ document.addEventListener('DOMContentLoaded', () => {
       const u = adminUsername ? adminUsername.value.trim() : '';
       const p = adminPassword ? adminPassword.value : '';
 
-      if ((u === 'sujal' && p === 'sujal123') || (u === 'admin' && p === 'admin123') || (u === 'admin' && p === 'sujal123')) {
-        sessionStorage.setItem('adminLoggedIn', 'true');
-        sessionStorage.setItem('currentAdmin', JSON.stringify({ username: u, name: 'System Administrator' }));
-        window.location.href = 'admin.html';
-        return;
-      }
+      try {
+        const response = await fetch('/admin-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: u, password: p })
+        });
 
-      if (loginError) {
-        loginError.textContent = 'Invalid admin credentials. (Default: sujal / sujal123)';
-        loginError.style.display = 'block';
-      }
-      if (adminPassword) {
-        adminPassword.value = '';
-        adminPassword.focus();
+        const result = await response.json();
+
+        if (result.success) {
+          sessionStorage.setItem('adminLoggedIn', 'true');
+          sessionStorage.setItem('adminToken', result.token);
+          sessionStorage.setItem('currentAdmin', JSON.stringify({ username: u }));
+          window.location.href = 'admin.html';
+        } else {
+          if (loginError) {
+            loginError.textContent = result.message || 'Invalid admin credentials.';
+            loginError.style.display = 'block';
+          }
+          if (adminPassword) {
+            adminPassword.value = '';
+            adminPassword.focus();
+          }
+        }
+      } catch (err) {
+        if (loginError) {
+          loginError.textContent = 'Could not connect to server. Please try again.';
+          loginError.style.display = 'block';
+        }
       }
     });
   }
