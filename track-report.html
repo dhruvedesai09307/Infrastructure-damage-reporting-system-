@@ -1083,6 +1083,18 @@
       }
     };
 
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const idParam = urlParams.get('id');
+      if (idParam) {
+        const inputElem = document.getElementById('ticketInput');
+        if (inputElem) {
+          inputElem.value = idParam;
+          handleSearch();
+        }
+      }
+    });
+
     function quickFill(ticketId) {
       document.getElementById('ticketInput').value = ticketId;
       handleSearch(new Event('submit'));
@@ -1099,14 +1111,48 @@
         return;
       }
 
+      // Check localStorage for user submitted reports
+      const localReports = JSON.parse(localStorage.getItem('reports') || '[]');
+      const searchLower = inputVal.toLowerCase();
+      const matchedReport = localReports.find(r => {
+        if (!r) return false;
+        const rId = (r.report_id || r.refId || '').toLowerCase();
+        const rName = (r.name || r.fullName || '').toLowerCase();
+        return rId === searchLower || rId.includes(searchLower) || (rName && rName === searchLower) || (rName && searchLower.length > 2 && rName.includes(searchLower));
+      });
+
+      if (matchedReport) {
+        const isResolved = (matchedReport.status || '').toLowerCase() === 'resolved';
+        renderDashboard({
+          ticketId: matchedReport.report_id || matchedReport.refId || inputVal,
+          date: matchedReport.date || 'Today',
+          category: matchedReport.category || 'Infrastructure Damage',
+          statusText: isResolved ? 'Resolved & Closed' : (matchedReport.status || 'Under Field Review'),
+          statusClass: isResolved ? 'badge-resolved' : 'badge-in-progress',
+          progressPercent: isResolved ? '100%' : '60%',
+          dept: 'Public Works Rapid Response Cell',
+          severity: matchedReport.severity || 'Medium Severity',
+          sla: isResolved ? 'Completed' : 'Within 24 Hours',
+          location: `${matchedReport.city || ''}, ${matchedReport.state || ''} (${matchedReport.location || 'Reported Location'})`,
+          officer: matchedReport.name || matchedReport.fullName || 'Registered Citizen',
+          officerTitle: 'Ticket Submitter',
+          activeStep: isResolved ? 5 : 3,
+          logs: [
+            { time: 'Just Now', title: 'Live Tracking Active', desc: `Status verified for ticket ${matchedReport.report_id || matchedReport.refId}.` },
+            { time: matchedReport.date || 'Today', title: 'Report Submitted', desc: `Filed by ${matchedReport.name || matchedReport.fullName || 'Citizen'}.` }
+          ]
+        });
+        return;
+      }
+
       // Check server API /report_status endpoint
-      fetch(`/report_status/${inputVal}`)
+      fetch(`/report_status/${encodeURIComponent(inputVal)}`)
         .then(res => res.json())
         .then(data => {
           if (data.success) {
             renderDashboard({
               ticketId: inputVal,
-              date: data.date || 'August 1, 2026',
+              date: data.date || 'Today',
               category: data.category || 'Infrastructure Damage',
               statusText: 'Under Verification',
               statusClass: 'badge-inspection',

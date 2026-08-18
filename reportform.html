@@ -9,7 +9,7 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
     body{background:#F3F4F6;min-height:100vh;overflow-x:hidden;color:#374151;position:relative;}
-    .topbar{position:fixed;top:0;left:0;width:100%;height:70px;background:#FFFFFF;border-bottom:1px solid #E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;padding:0 30px;z-index:1000;}
+    .topbar{position:sticky;top:0;left:0;width:100%;height:76px;background:#FFFFFF;border-bottom:1px solid #E5E7EB;box-shadow:0 2px 10px rgba(0,0,0,0.04);display:flex;justify-content:space-between;align-items:center;padding:0 8%;z-index:1000;}
     .container{max-width:850px;margin:100px auto 60px;padding:0 20px;}
     .hero{text-align:center;margin-bottom:30px;}
     .hero h1{font-size:32px;color:#111827;margin-bottom:8px;}
@@ -26,7 +26,8 @@
     .form-actions{text-align:center;margin-top:20px;}
     .result{display:none;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:14px;padding:24px;text-align:center;margin-top:20px;}
     .result h2{color:#065F46;font-size:22px;margin-bottom:8px;}
-    @media (max-width: 600px){ .form-grid{grid-template-columns:1fr} }
+    .home-icon-btn { width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #E5E7EB; color: #374151; display: flex; align-items: center; justify-content: center; font-size: 17px; text-decoration: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); flex-shrink: 0; }
+    .home-icon-btn:hover { background: #2563EB; color: #FFFFFF; border-color: #2563EB; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25); }
   </style>
 </head>
 <body>
@@ -37,8 +38,9 @@
       <a href="About-project-page.html" style="text-decoration:none;color:#374151;">About</a>
       <a href="track-report.html" style="text-decoration:none;color:#374151;">Track</a>
       <a href="login-page.html" style="text-decoration:none;color:#374151;">Login</a>
-      <a href="admin-login.html" style="text-decoration:none;color:#374151;">Admin</a>
-    </nav>
+    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+      <i class="fas fa-house"></i>
+    </a>
   </header>
 
   <div class="container">
@@ -68,16 +70,37 @@
           <label for="state">State *</label>
           <select id="state" name="state" required>
             <option value="">Select your state</option>
-            <option>Gujarat</option>
-            <option>Maharashtra</option>
+            <option>Andhra Pradesh</option>
+            <option>Arunachal Pradesh</option>
+            <option>Assam</option>
+            <option>Bihar</option>
+            <option>Chhattisgarh</option>
             <option>Delhi</option>
+            <option>Goa</option>
+            <option>Gujarat</option>
+            <option>Haryana</option>
+            <option>Himachal Pradesh</option>
+            <option>Jammu and Kashmir</option>
+            <option>Jharkhand</option>
             <option>Karnataka</option>
-            <option>Tamil Nadu</option>
-            <option>Uttar Pradesh</option>
-            <option>Rajasthan</option>
-            <option>West Bengal</option>
+            <option>Kerala</option>
             <option>Madhya Pradesh</option>
+            <option>Maharashtra</option>
+            <option>Manipur</option>
+            <option>Meghalaya</option>
+            <option>Mizoram</option>
+            <option>Nagaland</option>
+            <option>Odisha</option>
             <option>Punjab</option>
+            <option>Rajasthan</option>
+            <option>Sikkim</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Tripura</option>
+            <option>Uttar Pradesh</option>
+            <option>Uttarakhand</option>
+            <option>West Bengal</option>
+            <option>Other / Union Territory</option>
           </select>
         </div>
       </div>

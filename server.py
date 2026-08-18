@@ -26,8 +26,10 @@ def submit_report():
     try:
         data = request.get_json(force=True) or {}
 
+        raw_name = data.get('name') or data.get('fullName') or data.get('username') or 'USER'
+        clean_name = ''.join(c for c in str(raw_name) if c.isalnum()).upper() or 'USER'
         report_count = Report.query.count()
-        report_id = f"report_{report_count + 1}"
+        report_id = f"IDRS-{clean_name}-{report_count + 1:03d}"
 
         new_report = Report(
             report_id=report_id,

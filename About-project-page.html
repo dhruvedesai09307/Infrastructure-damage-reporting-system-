@@ -55,30 +55,34 @@
     .logo:hover { transform: scale(1.02); }
     .logo i { font-size: 32px; color: #2F3B4A; transition: color 0.2s ease; }
     .logo:hover i { color: #2563EB; }
-    .logo-text h2 { font-size: 24px; font-weight: 800; color: #111827; line-height: 1.1; letter-spacing: -0.5px; }
+    .logo-text h2 { font-size: 24px; font-weight: 800; color: #111827; line-height: 1.1; letter-spacing: -0.5px; font-family: 'Poppins', sans-serif; }
     .logo-text p { font-size: 11.5px; color: #6B7280; font-weight: 500; }
     .nav-links {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
         list-style: none;
         margin: 0;
         padding: 0;
     }
     .nav-link {
+        padding: 8px 16px;
         text-decoration: none;
         color: #4B5563;
         font-weight: 500;
-        font-size: 14.5px;
-        padding: 9px 16px;
-        border-radius: 10px;
+        font-size: 14px;
+        border-radius: 8px;
         transition: all 0.2s ease;
-        display: inline-flex;
-        align-items: center;
-        white-space: nowrap;
     }
-    .nav-link:hover { color: #2563EB; background: #F3F4F6; }
-    .nav-link.active { color: #2563EB; font-weight: 700; background: #EFF6FF; border: 1px solid #DBEAFE; }
+    .nav-link:hover {
+        color: #111827;
+        background-color: #F3F4F6;
+    }
+    .nav-link.active {
+        color: #111827;
+        font-weight: 600;
+        background-color: #E5E7EB;
+    }
     .home-icon-btn {
         width: 44px; height: 44px;
         border-radius: 12px;
@@ -559,7 +563,7 @@ margin-top: 5px;
 </head>
 <body>
 
-  <!-- Unified Topbar - Help & Support Page Theme -->
+  <!-- Top Navigation Header -->
   <header class="topbar">
     <a href="home-page.html" class="logo">
       <i class="fas fa-road"></i>
