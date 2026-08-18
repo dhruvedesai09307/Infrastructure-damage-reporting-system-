@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify, send_from_directory
+from models import db, Report, Admin, User, Feedback
 import os
 import datetime
+import jwt
+from functools import wraps
 from models import db, Report, Admin
 from dotenv import load_dotenv
 load_dotenv()
@@ -12,14 +15,113 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     "connect_args": {"ssl": {"ssl_mode": "REQUIRED"}}
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'change-this-to-something-random-later'
 db.init_app(app)
 
 with app.app_context():
     db.create_all()
 
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.headers.get('Authorization')
+        if not token:
+            return jsonify({'success': False, 'message': 'Token is missing'}), 401
+        try:
+            token = token.replace('Bearer ', '')
+            jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        except Exception:
+            return jsonify({'success': False, 'message': 'Token is invalid or expired'}), 401
+        return f(*args, **kwargs)
+    return decorated
+
+
 @app.route('/')
 def home():
     return send_from_directory(os.getcwd(), 'home-page.html')
+
+@app.route('/feedback', methods=['POST'])
+def submit_feedback():
+    try:
+        data = request.get_json(force=True) or {}
+
+        new_feedback = Feedback(
+            name=data.get('name', '').strip(),
+            email=data.get('email', '').strip(),
+            category=data.get('category', '').strip(),
+            location=data.get('location', '').strip(),
+            rating=data.get('rating'),
+            message=data.get('message', '').strip(),
+            anonymous=data.get('anonymous', False)
+        )
+        db.session.add(new_feedback)
+        db.session.commit()
+
+        return jsonify({'success': True, 'message': 'Thank you for your feedback!'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/register', methods=['POST'])
+def register_user():
+    try:
+        data = request.get_json(force=True) or {}
+        name = data.get('name', '').strip()
+        email = data.get('email', '').strip()
+        password = data.get('password', '').strip()
+
+        if not email or not password:
+            return jsonify({'success': False, 'message': 'Email and password are required'}), 400
+
+        existing = User.query.filter_by(email=email).first()
+        if existing:
+            return jsonify({'success': False, 'message': 'An account with this email already exists'}), 400
+
+        new_user = User(name=name, email=email)
+        new_user.set_password(password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        return jsonify({'success': True, 'message': 'Account created successfully'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/user-login', methods=['POST'])
+def user_login():
+    data = request.get_json(force=True) or {}
+    email = data.get('email', '').strip()
+    password = data.get('password', '').strip()
+
+    user = User.query.filter_by(email=email).first()
+    if not user or not user.check_password(password):
+        return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
+
+    token = jwt.encode(
+        {'email': user.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=6)},
+        app.config['SECRET_KEY'],
+        algorithm='HS256'
+    )
+    return jsonify({'success': True, 'token': token, 'name': user.name})
+
+
+@app.route('/admin-login', methods=['POST'])
+def admin_login():
+    data = request.get_json(force=True) or {}
+    username = data.get('username', '').strip()
+    password = data.get('password', '').strip()
+
+    admin = Admin.query.filter_by(username=username).first()
+    if not admin or not admin.check_password(password):
+        return jsonify({'success': False, 'message': 'Invalid username or password'}), 401
+
+    token = jwt.encode(
+        {'username': admin.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=6)},
+        app.config['SECRET_KEY'],
+        algorithm='HS256'
+    )
+    return jsonify({'success': True, 'token': token})
+
 
 @app.route('/report', methods=['POST'])
 def submit_report():
@@ -44,6 +146,7 @@ def submit_report():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 400
 
+
 @app.route('/report_status/<report_id>', methods=['GET'])
 def get_report_status(report_id):
     report = Report.query.filter_by(report_id=report_id.strip()).first()
@@ -52,12 +155,15 @@ def get_report_status(report_id):
     else:
         return jsonify({'success': False, 'message': 'Report ID not found in server records.'}), 404
 
+
 @app.route('/api/reports', methods=['GET'])
 def list_reports():
     reports = Report.query.all()
     return jsonify({'success': True, 'reports': [r.to_dict() for r in reports]})
 
+
 @app.route('/api/report_status/update', methods=['POST'])
+@token_required
 def update_report_status():
     try:
         req = request.get_json(force=True) or {}
@@ -77,6 +183,7 @@ def update_report_status():
         return jsonify({'success': True, 'report_id': report_id, 'status': new_status})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
+
 
 @app.route('/api/chat', methods=['POST'])
 def chat_ai():
@@ -109,9 +216,11 @@ def chat_ai():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
+
 @app.route('/<path:filename>')
 def serve_static(filename):
     return send_from_directory(os.getcwd(), filename)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

@@ -528,13 +528,13 @@
       }
     });
 
-    // =====================================
-    // Login Submission & Access Storage
+        // =====================================
+    // Login Submission (Real Backend)
     // =====================================
     const loginForm = document.getElementById("loginForm");
     const loginBtn = document.getElementById("loginBtn");
 
-    loginForm.addEventListener("submit", function (e) {
+    loginForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       const email = document.getElementById("email").value.trim();
       const pass = passwordInput.value.trim();
@@ -544,23 +544,38 @@
         return;
       }
 
-      // Record active login state
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("currentUser", email);
-
       loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging In...';
       loginBtn.disabled = true;
 
-      setTimeout(function () {
-        window.location.href = "home-page.html";
-      }, 1000);
+      try {
+        const res = await fetch('/user-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, password: pass })
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("currentUser", email);
+          localStorage.setItem("userToken", result.token);
+          window.location.href = "home-page.html";
+        } else {
+          alert(result.message || "Login failed.");
+          loginBtn.innerHTML = '<i class="fas fa-right-to-bracket"></i> Login';
+          loginBtn.disabled = false;
+        }
+      } catch (err) {
+        alert("Could not connect to server.");
+        loginBtn.innerHTML = '<i class="fas fa-right-to-bracket"></i> Login';
+        loginBtn.disabled = false;
+      }
     });
 
     // Register Button
     document.getElementById("registerBtn").addEventListener("click", function () {
-      alert("Registration feature will be available in the next release.");
+      window.location.href = "register.html";
     });
-
     // Forgot Password
     document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
       e.preventDefault();
