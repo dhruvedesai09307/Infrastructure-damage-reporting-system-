@@ -216,11 +216,16 @@
       const target = allReports.find(r => r.report_id === reportId);
       if (target) target.status = newStatus;
 
-      // Update backend
+      // Update backend with Auth token header
       try {
+        const token = sessionStorage.getItem('adminToken');
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
         await fetch('/api/report_status/update', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: headers,
           body: JSON.stringify({ report_id: reportId, status: newStatus })
         });
       } catch(e) {

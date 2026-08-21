@@ -10,16 +10,63 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    "connect_args": {"ssl": {"ssl_mode": "REQUIRED"}}
-}
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'change-this-to-something-random-later'
-db.init_app(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-with app.app_context():
-    db.create_all()
+db_url = os.environ.get('DATABASE_URL')
+
+def ensure_columns():
+    with app.app_context():
+        try:
+            from sqlalchemy import inspect, text
+            inspector = inspect(db.engine)
+            if 'report' in inspector.get_table_names():
+                existing_cols = [c['name'] for c in inspector.get_columns('report')]
+                for col_name, col_type in [
+                    ('city', 'VARCHAR(100)'),
+                    ('state', 'VARCHAR(100)'),
+                    ('name', 'VARCHAR(100)'),
+                    ('email', 'VARCHAR(120)'),
+                    ('phone', 'VARCHAR(50)'),
+                    ('severity', 'VARCHAR(50)')
+                ]:
+                    if col_name not in existing_cols:
+                        try:
+                            db.session.execute(text(f"ALTER TABLE report ADD COLUMN {col_name} {col_type}"))
+                            db.session.commit()
+                        except Exception as alter_err:
+                            db.session.rollback()
+                            print(f"Column {col_name} migration note: {alter_err}")
+        except Exception as err:
+            print(f"Column migration check note: {err}")
+
+def setup_database():
+    if db_url:
+        try:
+            app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+            if 'mysql' in db_url or 'postgres' in db_url:
+                app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+                    "connect_args": {"ssl": {"ssl_mode": "REQUIRED"}}
+                }
+            db.init_app(app)
+            with app.app_context():
+                db.create_all()
+                ensure_columns()
+            return
+        except Exception as e:
+            print(f"Primary database connection failed ({e}). Falling back to local SQLite database.")
+
+    # Fallback to local SQLite
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idrs.db'
+    app.config.pop('SQLALCHEMY_ENGINE_OPTIONS', None)
+    if 'sqlalchemy' in app.extensions:
+        del app.extensions['sqlalchemy']
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+        ensure_columns()
+
+setup_database()
 
 
 def token_required(f):
@@ -135,10 +182,16 @@ def submit_report():
 
         new_report = Report(
             report_id=report_id,
-            title=data.get('title', ''),
+            title=data.get('title', '') or data.get('category', 'Damage Report'),
             description=data.get('description', ''),
             category=data.get('category', ''),
             location=data.get('location', ''),
+            city=data.get('city', ''),
+            state=data.get('state', ''),
+            name=raw_name,
+            email=data.get('email', ''),
+            phone=data.get('phone', ''),
+            severity=data.get('severity', 'Medium'),
             status='Pending'
         )
         db.session.add(new_report)

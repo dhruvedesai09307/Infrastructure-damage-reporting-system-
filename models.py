@@ -11,6 +11,12 @@ class Report(db.Model):
     description = db.Column(db.Text)
     category = db.Column(db.String(100))
     location = db.Column(db.String(200))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(120))
+    phone = db.Column(db.String(50))
+    severity = db.Column(db.String(50))
     status = db.Column(db.String(50), default='Pending')
     image_path = db.Column(db.String(300))
     date = db.Column(db.String(50), default=lambda: datetime.datetime.now().strftime("%d %b %Y"))
@@ -22,6 +28,13 @@ class Report(db.Model):
             "description": self.description,
             "category": self.category,
             "location": self.location,
+            "city": self.city or "",
+            "state": self.state or "",
+            "name": self.name or "",
+            "fullName": self.name or "Citizen",
+            "email": self.email or "",
+            "phone": self.phone or "",
+            "severity": self.severity or "Medium",
             "status": self.status,
             "image_path": self.image_path,
             "date": self.date

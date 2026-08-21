@@ -1150,23 +1150,43 @@
         .then(res => res.json())
         .then(data => {
           if (data.success) {
+            const rawStatus = (data.status || 'Pending').trim();
+            const lowerStatus = rawStatus.toLowerCase();
+
+            let statusText = 'Under Field Review';
+            let statusClass = 'badge-inspection';
+            let progressPercent = '40%';
+            let activeStep = 2;
+
+            if (lowerStatus === 'resolved' || lowerStatus.includes('resolve')) {
+              statusText = 'Resolved & Closed';
+              statusClass = 'badge-resolved';
+              progressPercent = '100%';
+              activeStep = 5;
+            } else if (lowerStatus === 'in progress' || lowerStatus.includes('progress')) {
+              statusText = 'In Progress (Repair Active)';
+              statusClass = 'badge-in-progress';
+              progressPercent = '65%';
+              activeStep = 3;
+            }
+
             renderDashboard({
-              ticketId: inputVal,
+              ticketId: data.report_id || inputVal,
               date: data.date || 'Today',
               category: data.category || 'Infrastructure Damage',
-              statusText: 'Under Verification',
-              statusClass: 'badge-inspection',
-              progressPercent: '40%',
+              statusText: statusText,
+              statusClass: statusClass,
+              progressPercent: progressPercent,
               dept: 'Municipal Services Administration',
               severity: data.severity || 'Medium',
-              sla: 'Within 24 Hours',
-              location: `${data.city || 'Local City'}, ${data.state || ''} (${data.location || 'Reported Location'})`,
-              officer: 'Duty Operations Officer',
-              officerTitle: 'Municipal Operations Desk',
-              activeStep: 2,
+              sla: lowerStatus.includes('resolve') ? 'Completed' : 'Within 24 Hours',
+              location: `${data.city || 'Local City'}${data.state ? ', ' + data.state : ''} (${data.location || 'Reported Location'})`,
+              officer: data.name || data.fullName || 'Registered Citizen',
+              officerTitle: 'Ticket Submitter',
+              activeStep: activeStep,
               logs: [
-                { time: 'Just Now', title: 'Record Loaded from Server', desc: `File ${inputVal} retrieved successfully.` },
-                { time: 'Reported Date', title: 'Report Recorded', desc: 'Incident stored in municipal record folder.' }
+                { time: 'Just Now', title: 'Record Loaded from Server', desc: `Status: ${rawStatus} for ticket ${data.report_id || inputVal}.` },
+                { time: data.date || 'Reported Date', title: 'Report Recorded', desc: 'Incident stored in municipal database record.' }
               ]
             });
           } else {
