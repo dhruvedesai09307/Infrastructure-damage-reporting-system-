@@ -68,88 +68,62 @@
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background: #FFFFFF;
-      border-bottom: 1px solid var(--slate-200);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    }
-
-    .nav-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 8%;
+      width: 100%;
       height: 76px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E5E7EB;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      padding: 0 8%;
+      z-index: 1000;
     }
-
-    .brand {
+    .menu-icon {
+      font-size: 26px;
+      cursor: pointer;
+      color: #374151;
+      display: none;
+    }
+    .logo {
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      color: var(--navy);
     }
-
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, var(--primary), #1F2937);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 20px;
-      box-shadow: 0 4px 10px rgba(47, 59, 74, 0.25);
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: var(--navy);
-      line-height: 1.2;
-    }
-
-    .brand-text small {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--slate-600);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-    }
-
+    .logo i { font-size: 32px; color: #2F3B4A; }
+    .logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
+    .logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       list-style: none;
+      margin: 0;
+      padding: 0;
     }
-
     .nav-link {
-      padding: 8px 16px;
       text-decoration: none;
-      color: var(--slate-600);
+      color: #4B5563;
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-size: 14.5px;
       font-weight: 500;
-      font-size: 14px;
-      border-radius: 8px;
-      transition: all 0.2s ease;
+      transition: .2s;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
     }
-
     .nav-link:hover {
-      color: var(--navy);
-      background-color: var(--slate-100);
+      background: #F3F4F6;
+      color: #2563EB;
     }
-
     .nav-link.active {
-      color: var(--navy);
-      font-weight: 600;
-      background-color: var(--slate-200);
+      background: #EFF6FF;
+      color: #2563EB;
+      font-weight: 700;
+      border: 1px solid #DBEAFE;
     }
-
     .home-icon-btn {
       width: 44px;
       height: 44px;
@@ -166,13 +140,47 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
       flex-shrink: 0;
     }
-
     .home-icon-btn:hover {
       background: #2563EB;
       color: #FFFFFF;
       border-color: #2563EB;
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    }
+    @media (max-width: 1050px) {
+      .menu-icon { display: block; }
+      .nav-links, .home-button, .home-icon-btn { display: none; }
+    }
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -290px;
+      width: 280px;
+      height: 100vh;
+      background: #FFFFFF;
+      border-right: 1px solid #E5E7EB;
+      box-shadow: 5px 0 20px rgba(0,0,0,.10);
+      padding-top: 80px;
+      transition: .35s;
+      z-index: 3000;
+    }
+    .side-menu.show { left: 0; }
+    .side-menu a {
+      display: block;
+      padding: 18px 25px;
+      color: #374151;
+      text-decoration: none;
+      font-size: 16px;
+      transition: .3s;
+    }
+    .side-menu a:hover { background: #F3F4F6; color: #2563EB; }
+    .close-menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 25px;
+      cursor: pointer;
+      color: #374151;
     }
 
     /* Main Container */
@@ -919,31 +927,44 @@
 
   <!-- Top Navigation Header -->
   <header class="topbar">
-    <div class="nav-container">
-      <a href="home-page.html" class="logo" style="text-decoration:none; display:flex; align-items:center; gap:12px; flex-shrink:0;">
-        <i class="fas fa-road" style="font-size:32px; color:#2F3B4A;"></i>
-        <div>
-          <div style="font-size:24px; font-weight:800; color:#111827; line-height:1.1; letter-spacing:-0.5px; font-family:'Poppins',sans-serif;">IDRS</div>
-          <div style="font-size:11.5px; color:#6B7280; font-weight:500;">Infrastructure Damage Reporting System</div>
-        </div>
-      </a>
-
-      <nav>
-        <ul class="nav-links">
-          <li><a href="home-page.html" class="nav-link">Home</a></li>
-          <li><a href="report.html" class="nav-link active">Report Damage</a></li>
-          <li><a href="track-report.html" class="nav-link">Track Progress</a></li>
-          <li><a href="About-project-page.html" class="nav-link">About</a></li>
-          <li><a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a></li>
-          <li><a href="help-and-support.html" class="nav-link">Support</a></li>
-        </ul>
-      </nav>
-
-      <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-        <i class="fas fa-house"></i>
-      </a>
+    <div class="menu-icon" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
     </div>
+
+    <a href="home-page.html" class="logo" style="text-decoration:none;">
+        <i class="fas fa-road"></i>
+        <div class="logo-text">
+            <h2>IDRS</h2>
+            <p>Infrastructure Damage Reporting System</p>
+        </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+        <a href="home-page.html" class="nav-link">Home</a>
+        <a href="report.html" class="nav-link active">Report Damage</a>
+        <a href="track-report.html" class="nav-link">Track Progress</a>
+        <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
+        <a href="help-and-support.html" class="nav-link">Support</a>
+    </nav>
+
+    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+        <i class="fas fa-house"></i>
+    </a>
   </header>
+
+  <!-- MOBILE SIDE MENU -->
+  <div class="side-menu" id="sideMenu">
+    <div class="close-menu" onclick="toggleMenu()">
+        <i class="fas fa-times"></i>
+    </div>
+    <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
+    <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+  </div>
 
   <!-- Main Content Area -->
   <main>
@@ -1409,6 +1430,35 @@
       }
     }
 
+    function isValidStreetAddress(value) {
+      const trimmed = value.trim();
+      if (trimmed.length < 12) return false;
+      if (!/[A-Za-z]/.test(trimmed)) return false;
+      if (!/\d/.test(trimmed)) return false;
+      const genericWords = /^(unknown|n\/a|not available|no landmark|test address)$/i;
+      return !genericWords.test(trimmed);
+    }
+
+    function isValidDamageDescription(value) {
+      const trimmed = value.trim();
+      return trimmed.length >= 15 && /[A-Za-z]/.test(trimmed) && /\d|[A-Za-z]/.test(trimmed);
+    }
+
+    function isValidFullName(value) {
+      const trimmed = value.trim();
+      return /^[A-Za-z][A-Za-z\s.'-]{1,49}$/.test(trimmed) && (trimmed.split(/\s+/).length >= 2);
+    }
+
+    function isValidEmail(value) {
+      const trimmed = value.trim();
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed);
+    }
+
+    function isValidPhone(value) {
+      const digits = value.replace(/\D/g, '');
+      return /^[6-9]\d{9}$/.test(digits);
+    }
+
     // Real GPS & Reverse Geocoding Assist
     async function fetchGPS() {
       const locInput = document.getElementById('location');
@@ -1473,10 +1523,25 @@
       }
     }
 
+    function isValidPhotoFile(file) {
+      if (!file) return true;
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+      const maxSize = 10 * 1024 * 1024;
+      return allowedTypes.includes(file.type) && file.size <= maxSize;
+    }
+
     // File Preview
     function handleFileSelect(event) {
       const file = event.target.files[0];
       if (!file) return;
+
+      if (!isValidPhotoFile(file)) {
+        alert('Please upload a valid image in JPG, PNG, or WEBP format with size under 10MB.');
+        event.target.value = '';
+        document.getElementById('previewContainer').style.display = 'none';
+        document.getElementById('dropzone').style.display = 'block';
+        return;
+      }
 
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -1535,7 +1600,12 @@
           return false;
         }
         if (!loc) {
-          alert('Please enter specific street location or landmark.');
+          alert('Please enter a specific street address and landmark.');
+          document.getElementById('location').focus();
+          return false;
+        }
+        if (!isValidStreetAddress(loc)) {
+          alert('Please enter a valid street address with a landmark or house/building number (for example: 12 Main Road, Near City Library).');
           document.getElementById('location').focus();
           return false;
         }
@@ -1547,8 +1617,8 @@
           alert('Please select a severity level.');
           return false;
         }
-        if (desc.length < 10) {
-          alert('Please provide a detailed description (at least 10 characters).');
+        if (!isValidDamageDescription(desc)) {
+          alert('Please provide a detailed damage description with at least 15 valid characters.');
           document.getElementById('description').focus();
           return false;
         }
@@ -1603,9 +1673,35 @@
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const phone = document.getElementById('phone').value.trim();
+      const photoInput = document.getElementById('photo');
+      const photoFile = photoInput && photoInput.files ? photoInput.files[0] : null;
 
       if (!name || !email || !phone) {
         alert('Please complete all contact details.');
+        return;
+      }
+
+      if (!isValidFullName(name)) {
+        alert('Please enter a valid full name with at least first and last name.');
+        document.getElementById('name').focus();
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        document.getElementById('email').focus();
+        return;
+      }
+
+      if (!isValidPhone(phone)) {
+        alert('Please enter a valid 10-digit mobile number starting with 6 to 9.');
+        document.getElementById('phone').focus();
+        return;
+      }
+
+      if (photoFile && !isValidPhotoFile(photoFile)) {
+        alert('Please upload a valid photo in JPG, PNG, or WEBP format under 10MB.');
+        photoInput.value = '';
         return;
       }
 
@@ -1674,6 +1770,21 @@
       document.getElementById('formCard').style.display = 'block';
     }
   </script>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("sideMenu");
+      if (menu) menu.classList.toggle("show");
+    }
+
+    document.querySelectorAll(".side-menu a").forEach(function(link) {
+      link.addEventListener("click", function() {
+        const menu = document.getElementById("sideMenu");
+        if (menu) menu.classList.remove("show");
+      });
+    });
+  </script>
+
   <!-- IDRS AI Chatbot Script -->
   <script src="chatbot.js"></script>
 </body>
