@@ -88,6 +88,20 @@ def token_required(f):
 def home():
     return send_from_directory(os.getcwd(), 'home-page.html')
 
+@app.route('/api/feedback', methods=['GET'])
+def list_feedback():
+    feedback = Feedback.query.all()
+    return jsonify({'success': True, 'feedback': [f.to_dict() for f in feedback]})
+
+
+@app.route('/api/users', methods=['GET'])
+def list_users():
+    users = User.query.all()
+    return jsonify({'success': True, 'users': [{'name': u.name, 'email': u.email} for u in users]})
+
+
+
+
 @app.route('/feedback', methods=['POST'])
 def submit_feedback():
     try:
