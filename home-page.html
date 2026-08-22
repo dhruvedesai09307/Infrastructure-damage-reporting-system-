@@ -1030,43 +1030,27 @@ Our platform enables citizens to instantly report infrastructure issues with pho
 <section class="statistics">
 
 <div class="stat-card">
-
 <i class="fas fa-file-circle-check"></i>
-
-<h2>12,580</h2>
-
+<h2 id="statTotal">0</h2>
 <p>Total Reports</p>
-
 </div>
 
 <div class="stat-card">
-
 <i class="fas fa-circle-check"></i>
-
-<h2>10,962</h2>
-
+<h2 id="statResolved">0</h2>
 <p>Resolved Cases</p>
-
 </div>
 
 <div class="stat-card">
-
 <i class="fas fa-hourglass-half"></i>
-
-<h2>1,321</h2>
-
+<h2 id="statPending">0</h2>
 <p>Under Review</p>
-
 </div>
 
 <div class="stat-card">
-
 <i class="fas fa-shield-halved"></i>
-
-<h2>87%</h2>
-
+<h2 id="statSuccessRate">0%</h2>
 <p>Success Rate</p>
-
 </div>
 
 </section>
@@ -1309,72 +1293,7 @@ Search
 
 </thead>
 
-<tbody>
-
-<tr>
-
-<td>#1001</td>
-
-<td>Road Damage</td>
-
-<td>Patan</td>
-
-<td>24 Jul 2026</td>
-
-<td><span class="status resolved">Resolved</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
-<tr>
-
-<td>#1002</td>
-
-<td>Street Light</td>
-
-<td>Ahmedabad</td>
-
-<td>23 Jul 2026</td>
-
-<td><span class="status progress">In Progress</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
-<tr>
-
-<td>#1003</td>
-
-<td>Water Leakage</td>
-
-<td>Mehsana</td>
-
-<td>22 Jul 2026</td>
-
-<td><span class="status pending">Pending</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
-<tr>
-
-<td>#1004</td>
-
-<td>Bridge Damage</td>
-
-<td>Palanpur</td>
-
-<td>21 Jul 2026</td>
-
-<td><span class="status resolved">Resolved</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
+<tbody id="recentReportsBody">
 </tbody>
 
 </table>
@@ -1669,6 +1588,10 @@ function logout(){
 }
 
 </script>
+
+
+
+
 <!-- IDRS AI Chatbot Script -->
 <script src="chatbot.js"></script>
 </body>

@@ -88,6 +88,23 @@ def token_required(f):
 def home():
     return send_from_directory(os.getcwd(), 'home-page.html')
 
+@app.route('/api/stats', methods=['GET'])
+def get_stats():
+    total = Report.query.count()
+    resolved = Report.query.filter_by(status='Resolved').count()
+    pending = Report.query.filter(Report.status.in_(['Pending', 'In Progress'])).count()
+    success_rate = round((resolved / total) * 100) if total > 0 else 0
+
+    return jsonify({
+        'success': True,
+        'total': total,
+        'resolved': resolved,
+        'pending': pending,
+        'success_rate': success_rate
+    })
+
+
+
 @app.route('/api/feedback', methods=['GET'])
 def list_feedback():
     feedback = Feedback.query.all()
