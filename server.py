@@ -4,7 +4,6 @@ import os
 import datetime
 import jwt
 from functools import wraps
-from models import db, Report, Admin
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -20,6 +19,7 @@ def ensure_columns():
         try:
             from sqlalchemy import inspect, text
             inspector = inspect(db.engine)
+            # Migrate 'report' table columns
             if 'report' in inspector.get_table_names():
                 existing_cols = [c['name'] for c in inspector.get_columns('report')]
                 for col_name, col_type in [
@@ -37,6 +37,16 @@ def ensure_columns():
                         except Exception as alter_err:
                             db.session.rollback()
                             print(f"Column {col_name} migration note: {alter_err}")
+            # Migrate 'user' table – add phone column if missing
+            if 'user' in inspector.get_table_names():
+                existing_user_cols = [c['name'] for c in inspector.get_columns('user')]
+                if 'phone' not in existing_user_cols:
+                    try:
+                        db.session.execute(text("ALTER TABLE user ADD COLUMN phone VARCHAR(20) UNIQUE"))
+                        db.session.commit()
+                    except Exception as alter_err:
+                        db.session.rollback()
+                        print(f"User phone column migration note: {alter_err}")
         except Exception as err:
             print(f"Column migration check note: {err}")
 
@@ -168,19 +178,118 @@ def register_user():
 @app.route('/user-login', methods=['POST'])
 def user_login():
     data = request.get_json(force=True) or {}
-    email = data.get('email', '').strip()
+    identifier = data.get('email', '').strip()  # can be email OR mobile number
     password = data.get('password', '').strip()
 
-    user = User.query.filter_by(email=email).first()
+    # Support login by email or mobile number
+    user = User.query.filter(
+        (User.email == identifier) | (User.phone == identifier)
+    ).first()
     if not user or not user.check_password(password):
-        return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
+        return jsonify({'success': False, 'message': 'Invalid email/mobile or password'}), 401
 
     token = jwt.encode(
-        {'email': user.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=6)},
+        {'email': user.email, 'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=6)},
         app.config['SECRET_KEY'],
         algorithm='HS256'
     )
     return jsonify({'success': True, 'token': token, 'name': user.name})
+
+
+# ── Helper: extract email from Bearer token ────────────────────────────────
+def get_email_from_token():
+    token = request.headers.get('Authorization', '').replace('Bearer ', '')
+    if not token:
+        return None
+    try:
+        data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        return data.get('email')
+    except Exception:
+        return None
+
+
+@app.route('/api/user/profile', methods=['GET'])
+def get_user_profile():
+    email = get_email_from_token()
+    if not email:
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'success': False, 'message': 'User not found'}), 404
+    return jsonify({
+        'success': True,
+        'name': user.name or '',
+        'email': user.email,
+        'phone': user.phone or '',
+    })
+
+
+@app.route('/api/user/profile/update', methods=['POST'])
+def update_user_profile():
+    email = get_email_from_token()
+    if not email:
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+    try:
+        data = request.get_json(force=True) or {}
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            return jsonify({'success': False, 'message': 'User not found'}), 404
+
+        new_name = data.get('name', '').strip()
+        new_phone = data.get('phone', '').strip()
+
+        if new_name:
+            user.name = new_name
+        if new_phone:
+            # Check uniqueness only if phone is changing
+            if new_phone != (user.phone or ''):
+                existing = User.query.filter(User.phone == new_phone, User.email != email).first()
+                if existing:
+                    return jsonify({'success': False, 'message': 'Phone number already in use'}), 400
+            user.phone = new_phone
+
+        db.session.commit()
+        return jsonify({'success': True, 'message': 'Profile updated successfully'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/user/change-password', methods=['POST'])
+def change_user_password():
+    email = get_email_from_token()
+    if not email:
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+    try:
+        data = request.get_json(force=True) or {}
+        old_password = data.get('old_password', '').strip()
+        new_password = data.get('new_password', '').strip()
+
+        if not old_password or not new_password:
+            return jsonify({'success': False, 'message': 'All password fields are required'}), 400
+        if len(new_password) < 6:
+            return jsonify({'success': False, 'message': 'New password must be at least 6 characters'}), 400
+
+        user = User.query.filter_by(email=email).first()
+        if not user or not user.check_password(old_password):
+            return jsonify({'success': False, 'message': 'Current password is incorrect'}), 401
+
+        user.set_password(new_password)
+        db.session.commit()
+        return jsonify({'success': True, 'message': 'Password changed successfully'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/user/reports', methods=['GET'])
+def get_user_reports():
+    email = get_email_from_token()
+    if not email:
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+    reports = Report.query.filter_by(email=email).order_by(Report.id.desc()).all()
+    return jsonify({'success': True, 'reports': [r.to_dict() for r in reports]})
+
 
 
 @app.route('/admin-login', methods=['POST'])
@@ -194,7 +303,7 @@ def admin_login():
         return jsonify({'success': False, 'message': 'Invalid username or password'}), 401
 
     token = jwt.encode(
-        {'username': admin.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=6)},
+        {'username': admin.username, 'exp': datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=6)},
         app.config['SECRET_KEY'],
         algorithm='HS256'
     )

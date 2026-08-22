@@ -80,6 +80,30 @@ transition:.3s;
     background:#1F2937;
 }
 
+.profile-chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 14px 7px 8px;
+    background:#F3F4F6;
+    border:1px solid #E5E7EB;
+    border-radius:30px;
+    text-decoration:none;
+    color:#374151;
+    font-size:13.5px;
+    font-weight:600;
+    transition:all .2s;
+    cursor:pointer;
+}
+.profile-chip:hover{background:#E5E7EB;border-color:#D1D5DB;}
+.profile-chip-avatar{
+    width:30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,#2563EB,#3B82F6);
+    color:#fff;font-size:13px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+}
+
 
 /* Hero Section */
 
@@ -893,10 +917,10 @@ hr{
         </div>
     </div>
 
-    <button class="logout-btn" onclick="logout()">
-        <i class="fas fa-right-from-bracket"></i>
-        Logout
-    </button>
+    <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
+        <span class="profile-chip-avatar" id="navAvatar">?</span>
+        <span id="navUserName">Profile</span>
+    </a>
 </header>
 
 <div id="sideMenu" class="side-menu">
@@ -945,6 +969,10 @@ hr{
 
     <a href="admin-login.html" onclick="toggleMenu()">
         <i class="fas fa-lock"></i> Admin Portal
+    </a>
+
+    <a href="user-profile.html" onclick="toggleMenu()">
+        <i class="fas fa-user-circle"></i> My Profile
     </a>
 
     <a href="#" onclick="logout(); return false;">
@@ -1583,9 +1611,23 @@ function logout(){
 
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("currentUser");
+  localStorage.removeItem("userToken");
+  localStorage.removeItem("currentUserName");
   window.location.href="login-page.html";
 
 }
+
+// Populate profile chip with user initials + name from localStorage
+(function(){
+  var name = localStorage.getItem('currentUserName') || localStorage.getItem('currentUser') || '';
+  var avatarEl = document.getElementById('navAvatar');
+  var nameEl   = document.getElementById('navUserName');
+  if(name && avatarEl){
+    var initials = name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+    avatarEl.textContent = initials;
+    if(nameEl) nameEl.textContent = name.split(' ')[0]; // first name only
+  }
+})();
 
 </script>
 <!-- IDRS AI Chatbot Script -->
