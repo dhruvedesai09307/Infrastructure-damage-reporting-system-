@@ -1588,12 +1588,60 @@ function logout(){
 }
 
 </script>
-
-
-
-
 <!-- IDRS AI Chatbot Script -->
 <script src="chatbot.js"></script>
+
+<script>
+async function loadHomeStats() {
+  try {
+    const res = await fetch('/api/stats');
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('statTotal').textContent = data.total;
+      document.getElementById('statResolved').textContent = data.resolved;
+      document.getElementById('statPending').textContent = data.pending;
+      document.getElementById('statSuccessRate').textContent = data.success_rate + '%';
+    }
+  } catch (err) {
+    console.error('Could not load stats', err);
+  }
+}
+
+async function loadRecentReports() {
+  try {
+    const res = await fetch('/api/reports');
+    const data = await res.json();
+    const tbody = document.getElementById('recentReportsBody');
+    tbody.innerHTML = '';
+
+    if (data.success && data.reports.length > 0) {
+      const recent = data.reports.slice(-4).reverse();
+      recent.forEach(r => {
+        const statusClass = r.status === 'Resolved' ? 'resolved' :
+                             r.status === 'In Progress' ? 'progress' : 'pending';
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${r.report_id}</td>
+          <td>${r.category}</td>
+          <td>${r.location}</td>
+          <td>${r.date}</td>
+          <td><span class="status ${statusClass}">${r.status}</span></td>
+          <td><a href="track-report.html">View</a></td>
+        `;
+        tbody.appendChild(row);
+      });
+    } else {
+      tbody.innerHTML = '<tr><td colspan="6">No reports yet.</td></tr>';
+    }
+  } catch (err) {
+    console.error('Could not load reports', err);
+  }
+}
+
+loadHomeStats();
+loadRecentReports();
+</script>
+
 </body>
 
 </html>
