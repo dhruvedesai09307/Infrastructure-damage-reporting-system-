@@ -18,6 +18,8 @@ class Report(db.Model):
     phone = db.Column(db.String(50))
     severity = db.Column(db.String(50))
     status = db.Column(db.String(50), default='Pending')
+    assigned_dept = db.Column(db.String(100), default='Unassigned')
+    admin_notes = db.Column(db.Text, default='')
     image_path = db.Column(db.String(300))
     date = db.Column(db.String(50), default=lambda: datetime.datetime.now().strftime("%d %b %Y"))
 
@@ -36,6 +38,8 @@ class Report(db.Model):
             "phone": self.phone or "",
             "severity": self.severity or "Medium",
             "status": self.status,
+            "assigned_dept": self.assigned_dept or "Unassigned",
+            "admin_notes": self.admin_notes or "",
             "image_path": self.image_path,
             "date": self.date
         }

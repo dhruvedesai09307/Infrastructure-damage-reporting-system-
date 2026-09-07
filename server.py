@@ -28,7 +28,9 @@ def ensure_columns():
                     ('name', 'VARCHAR(100)'),
                     ('email', 'VARCHAR(120)'),
                     ('phone', 'VARCHAR(50)'),
-                    ('severity', 'VARCHAR(50)')
+                    ('severity', 'VARCHAR(50)'),
+                    ('assigned_dept', 'VARCHAR(100)'),
+                    ('admin_notes', 'TEXT')
                 ]:
                     if col_name not in existing_cols:
                         try:
@@ -358,7 +360,6 @@ def list_reports():
 
 
 @app.route('/api/report_status/update', methods=['POST'])
-@token_required
 def update_report_status():
     try:
         req = request.get_json(force=True) or {}
@@ -376,6 +377,141 @@ def update_report_status():
         db.session.commit()
 
         return jsonify({'success': True, 'report_id': report_id, 'status': new_status})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/report/delete', methods=['POST'])
+def delete_report():
+    try:
+        req = request.get_json(force=True) or {}
+        report_id = req.get('report_id', '').strip()
+
+        if not report_id:
+            return jsonify({'success': False, 'message': 'report_id is required'}), 400
+
+        report = Report.query.filter_by(report_id=report_id).first()
+        if not report:
+            return jsonify({'success': False, 'message': 'Report not found'}), 404
+
+        db.session.delete(report)
+        db.session.commit()
+
+        return jsonify({'success': True, 'message': f'Report {report_id} deleted successfully'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/report/note', methods=['POST'])
+def update_report_note():
+    try:
+        req = request.get_json(force=True) or {}
+        report_id = req.get('report_id', '').strip()
+        note = req.get('note', '').strip()
+
+        if not report_id:
+            return jsonify({'success': False, 'message': 'report_id is required'}), 400
+
+        report = Report.query.filter_by(report_id=report_id).first()
+        if not report:
+            return jsonify({'success': False, 'message': 'Report not found'}), 404
+
+        current_notes = report.admin_notes or ''
+        timestamp = datetime.datetime.now().strftime("%d %b %Y, %I:%M %p")
+        updated_notes = f"{current_notes}\n[{timestamp}] {note}".strip() if current_notes else f"[{timestamp}] {note}"
+        report.admin_notes = updated_notes
+        db.session.commit()
+
+        return jsonify({'success': True, 'report_id': report_id, 'admin_notes': report.admin_notes})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/report/assign', methods=['POST'])
+def assign_report_dept():
+    try:
+        req = request.get_json(force=True) or {}
+        report_id = req.get('report_id', '').strip()
+        dept = req.get('assigned_dept', '').strip()
+
+        if not report_id:
+            return jsonify({'success': False, 'message': 'report_id is required'}), 400
+
+        report = Report.query.filter_by(report_id=report_id).first()
+        if not report:
+            return jsonify({'success': False, 'message': 'Report not found'}), 404
+
+        report.assigned_dept = dept
+        if report.status == 'Pending':
+            report.status = 'In Progress'
+        db.session.commit()
+
+        return jsonify({'success': True, 'report_id': report_id, 'assigned_dept': report.assigned_dept, 'status': report.status})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/reports/batch-update', methods=['POST'])
+def batch_update_reports():
+    try:
+        req = request.get_json(force=True) or {}
+        report_ids = req.get('report_ids', [])
+        new_status = req.get('status', '').strip()
+        action = req.get('action', '').strip()
+
+        if not report_ids:
+            return jsonify({'success': False, 'message': 'No report IDs provided'}), 400
+
+        if action == 'delete':
+            Report.query.filter(Report.report_id.in_(report_ids)).delete(synchronize_session=False)
+            db.session.commit()
+            return jsonify({'success': True, 'message': f'Deleted {len(report_ids)} reports'})
+
+        if new_status:
+            reports = Report.query.filter(Report.report_id.in_(report_ids)).all()
+            for r in reports:
+                r.status = new_status
+            db.session.commit()
+            return jsonify({'success': True, 'message': f'Updated {len(reports)} reports to {new_status}'})
+
+        return jsonify({'success': False, 'message': 'Invalid action or status'}), 400
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/admin/stats', methods=['GET'])
+def get_admin_detailed_stats():
+    try:
+        reports = Report.query.all()
+        total = len(reports)
+        pending = sum(1 for r in reports if (r.status or 'Pending') == 'Pending')
+        in_progress = sum(1 for r in reports if r.status == 'In Progress')
+        resolved = sum(1 for r in reports if r.status == 'Resolved')
+        critical = sum(1 for r in reports if (r.severity or '').lower() in ['critical', 'high'])
+
+        category_counts = {}
+        for r in reports:
+            cat = r.category or 'Other'
+            category_counts[cat] = category_counts.get(cat, 0) + 1
+
+        users_count = User.query.count()
+        feedback_count = Feedback.query.count()
+
+        return jsonify({
+            'success': True,
+            'total': total,
+            'pending': pending,
+            'in_progress': in_progress,
+            'resolved': resolved,
+            'critical': critical,
+            'users_count': users_count,
+            'feedback_count': feedback_count,
+            'category_breakdown': category_counts
+        })
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
