@@ -17,6 +17,10 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
+  <!-- Leaflet GIS Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
   <style>
     :root {
       --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -1066,6 +1070,283 @@
       border-color: var(--accent-rose);
     }
 
+    /* Row Menu Dropdown System */
+    .row-menu-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .row-menu-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 6px;
+      min-width: 215px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 6px;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      animation: fadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .row-menu-dropdown.active {
+      display: flex;
+    }
+
+    .row-menu-header {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 4px;
+    }
+
+    .row-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition);
+    }
+
+    .row-menu-item i {
+      width: 16px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .row-menu-item:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+    }
+
+    .row-menu-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 4px 0;
+    }
+
+    .row-menu-danger:hover {
+      background: rgba(239, 68, 68, 0.15) !important;
+      color: var(--accent-rose) !important;
+    }
+
+    /* GIS Map Section Styling */
+    .map-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .map-container-wrap {
+      position: relative;
+    }
+
+    .map-stats-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .map-legend {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      display: flex;
+      gap: 16px;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .leaflet-popup-content-wrapper {
+      background: var(--bg-surface) !important;
+      color: var(--text-primary) !important;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md) !important;
+      box-shadow: var(--shadow-lg) !important;
+    }
+    .leaflet-popup-tip {
+      background: var(--bg-surface) !important;
+    }
+    .leaflet-container {
+      font-family: var(--font-main) !important;
+    }
+
+    /* Broadcast Section */
+    .broadcast-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .broadcast-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      transition: var(--transition);
+    }
+
+    .broadcast-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-md);
+    }
+
+    .broadcast-card.severity-danger {
+      border-left: 4px solid var(--accent-rose);
+    }
+
+    .broadcast-card.severity-warning {
+      border-left: 4px solid var(--accent-amber);
+    }
+
+    .broadcast-card.severity-info {
+      border-left: 4px solid var(--primary);
+    }
+
+    .broadcast-card.severity-success {
+      border-left: 4px solid var(--accent-emerald);
+    }
+
+    /* Settings Section */
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 20px;
+    }
+
+    .setting-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 16px;
+    }
+
+    .setting-item-row:last-child {
+      border-bottom: none;
+    }
+
+    .setting-item-row strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .setting-item-row p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .sla-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* iOS Style Switch Toggle */
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-toggle .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .switch-toggle .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    .switch-toggle input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    .switch-toggle input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
     /* Table Pagination */
     .table-pagination {
       display: flex;
@@ -1329,19 +1610,356 @@
       font-weight: 700;
     }
 
-    .damage-image-preview {
-      width: 100%;
-      height: 200px;
-      border-radius: var(--radius-md);
-      object-fit: cover;
+    /* Enhanced Evidence Photo Studio */
+    .evidence-studio-card {
+      background: var(--bg-card);
       border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .evidence-tabs-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 8px;
+    }
+
+    .evidence-tab-pills {
+      display: flex;
+      gap: 4px;
       background: var(--bg-input);
+      padding: 3px;
+      border-radius: 8px;
+    }
+
+    .evidence-pill-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .evidence-pill-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 6px var(--primary-glow);
+    }
+
+    .evidence-stage {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .evidence-img-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .damage-image-preview {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      cursor: zoom-in;
+      transition: transform 0.25s ease;
+      user-select: none;
+    }
+
+    /* AI Vision Diagnostic Tag */
+    .ai-vision-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #60A5FA;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .ai-vision-tag .ai-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3B82F6;
+      box-shadow: 0 0 8px #3B82F6;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Floating Studio Toolbar */
+    .evidence-toolbar {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 4px 6px;
+      border-radius: 8px;
+      z-index: 10;
+      box-shadow: var(--shadow-md);
+    }
+
+    .evidence-tool-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: transparent;
+      border: none;
+      color: #F8FAFC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
       cursor: pointer;
       transition: var(--transition);
     }
 
-    .damage-image-preview:hover {
-      opacity: 0.9;
+    .evidence-tool-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2100;
+      padding: 24px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .lightbox-overlay.active {
+      display: flex;
+    }
+
+    .lightbox-container {
+      width: 100%;
+      max-width: 1100px;
+      height: 88vh;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .lightbox-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+    }
+
+    .lightbox-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      .lightbox-body { grid-template-columns: 1fr; }
+      .lightbox-sidebar { display: none; }
+    }
+
+    .lightbox-stage {
+      background: #050811;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .lightbox-img {
+      max-width: 92%;
+      max-height: 92%;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+      user-select: none;
+    }
+
+    .lightbox-sidebar {
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-subtle);
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .lightbox-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 6px 12px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-ctrl-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .lightbox-ctrl-btn:hover {
+      background: var(--primary);
+      transform: scale(1.1);
+    }
+
+    /* Drag & Drop Upload Zone */
+    .file-dropzone {
+      border: 2px dashed var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      background: var(--bg-input);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .file-dropzone:hover, .file-dropzone.dragover {
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .dropzone-preview-wrap {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+    }
+
+    .dropzone-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    /* Table Hover Quick Preview */
+    .table-cam-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 11px;
+      position: relative;
+      margin-left: 6px;
+      vertical-align: middle;
+      transition: var(--transition);
+    }
+
+    .table-cam-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .table-hover-tooltip {
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 100px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      padding: 4px;
+      display: none;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .table-hover-tooltip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .table-cam-btn:hover .table-hover-tooltip {
+      display: block;
     }
 
     /* Citizen & Dispatch Cards */
@@ -1521,9 +2139,17 @@
         <span>Incident Hub</span>
         <span class="nav-badge" id="sidebarPendingBadge">0</span>
       </button>
+      <button class="nav-btn" onclick="switchTab('map')">
+        <i class="fas fa-map-location-dot" style="color:var(--accent-cyan);"></i>
+        <span>Live GIS Damage Map</span>
+      </button>
       <button class="nav-btn" onclick="switchTab('dispatch')">
         <i class="fas fa-truck-fast"></i>
         <span>Crew & Dispatch</span>
+      </button>
+      <button class="nav-btn" onclick="switchTab('broadcast')">
+        <i class="fas fa-tower-broadcast" style="color:var(--accent-rose);"></i>
+        <span>Emergency Broadcasts</span>
       </button>
 
       <div class="nav-label">Community & Records</div>
@@ -1540,6 +2166,10 @@
         <i class="fas fa-clock-rotate-left"></i>
         <span>Audit Logs</span>
       </button>
+      <button class="nav-btn" onclick="switchTab('settings')">
+        <i class="fas fa-sliders" style="color:var(--accent-amber);"></i>
+        <span>SLAs & System Settings</span>
+      </button>
 
       <div class="nav-label">Quick Actions</div>
       <button class="nav-btn" onclick="openIntakeModal()">
@@ -1549,6 +2179,10 @@
       <button class="nav-btn" onclick="exportDataCSV()">
         <i class="fas fa-file-csv" style="color:var(--accent-cyan);"></i>
         <span>Export CSV Reports</span>
+      </button>
+      <button class="nav-btn" onclick="exportFullDatabaseBackupJSON()">
+        <i class="fas fa-database" style="color:var(--accent-purple);"></i>
+        <span>Download JSON Snapshot</span>
       </button>
     </nav>
 
@@ -1750,8 +2384,8 @@
         
         <!-- Action Ribbon & Filters -->
         <div class="action-ribbon">
-          <div class="filter-group">
-            <input type="search" id="incidentSearchInput" class="custom-input" style="width:260px;" placeholder="Search tickets, names, roads..." oninput="renderIncidentTable()">
+          <div class="filter-group" style="flex-wrap:wrap;gap:8px;">
+            <input type="search" id="incidentSearchInput" class="custom-input" style="width:230px;" placeholder="Search tickets, names, roads..." oninput="renderIncidentTable()">
             
             <select id="statusFilter" class="custom-select" onchange="renderIncidentTable()">
               <option value="all">All Statuses</option>
@@ -1762,8 +2396,8 @@
 
             <select id="severityFilter" class="custom-select" onchange="renderIncidentTable()">
               <option value="all">All Severities</option>
-              <option value="Critical">Critical</option>
-              <option value="High">High</option>
+              <option value="Critical">Critical (Immediate)</option>
+              <option value="High">High Priority</option>
               <option value="Medium">Medium</option>
               <option value="Low">Low</option>
             </select>
@@ -1771,15 +2405,33 @@
             <select id="categoryFilter" class="custom-select" onchange="renderIncidentTable()">
               <option value="all">All Categories</option>
               <option value="Pothole">Potholes & Roads</option>
-              <option value="Water Leak">Water & Drainage</option>
+              <option value="Water">Water & Drainage</option>
               <option value="Streetlight">Electrical & Streetlights</option>
               <option value="Bridge">Bridges & Structures</option>
               <option value="Sanitation">Sanitation & Garbage</option>
             </select>
+
+            <select id="deptFilter" class="custom-select" onchange="renderIncidentTable()">
+              <option value="all">All Departments</option>
+              <option value="Roads">Roads & Highway</option>
+              <option value="Water">Water Works</option>
+              <option value="Electrical">Electrical Board</option>
+              <option value="Bridge">Civil Structures</option>
+              <option value="Sanitation">Sanitation Division</option>
+              <option value="Unassigned">Unassigned</option>
+            </select>
+
+            <select id="dateRangeFilter" class="custom-select" onchange="renderIncidentTable()">
+              <option value="all">All Time</option>
+              <option value="today">Reported Today</option>
+              <option value="7days">Past 7 Days</option>
+              <option value="30days">Past 30 Days</option>
+            </select>
           </div>
 
-          <div class="panel-actions">
-            <button class="btn btn-outline" onclick="exportDataCSV()"><i class="fas fa-file-export"></i> Export CSV</button>
+          <div class="panel-actions" style="gap:8px;">
+            <button class="btn btn-outline" onclick="exportDataCSV()" title="Export CSV Spreadsheet"><i class="fas fa-file-csv"></i> CSV</button>
+            <button class="btn btn-outline" onclick="exportFilteredJSON()" title="Export JSON Document"><i class="fas fa-file-code" style="color:var(--accent-cyan);"></i> JSON</button>
             <button class="btn btn-primary" onclick="openIntakeModal()"><i class="fas fa-plus"></i> New Incident</button>
           </div>
         </div>
@@ -1790,10 +2442,19 @@
             <span class="batch-count-badge" id="batchCountBadge">0</span>
             <span>tickets selected</span>
           </div>
-          <div class="batch-actions">
+          <div class="batch-actions" style="flex-wrap:wrap;">
             <button class="btn btn-outline btn-sm" onclick="batchSetStatus('In Progress')"><i class="fas fa-person-digging"></i> Set In-Progress</button>
             <button class="btn btn-outline btn-sm" onclick="batchSetStatus('Resolved')"><i class="fas fa-check-circle" style="color:var(--accent-emerald);"></i> Set Resolved</button>
-            <button class="btn btn-danger btn-sm" onclick="batchDelete()"><i class="fas fa-trash"></i> Delete Selected</button>
+            <button class="btn btn-outline btn-sm" onclick="batchEscalateCritical()"><i class="fas fa-triangle-exclamation" style="color:var(--accent-rose);"></i> Escalate Critical</button>
+            <select class="custom-select" style="font-size:12px;padding:4px 10px;height:32px;background:var(--bg-card);" onchange="if(this.value){batchAssignDept(this.value);this.value='';}">
+              <option value="" disabled selected>⚡ Bulk Assign Dept...</option>
+              <option value="Roads & Highway Maintenance">Roads & Highway</option>
+              <option value="Water Works & Sewerage Authority">Water Works</option>
+              <option value="Electrical & Streetlight Board">Electrical Board</option>
+              <option value="Civil Structures & Bridges">Civil Structures</option>
+              <option value="Municipal Sanitation Division">Sanitation</option>
+            </select>
+            <button class="btn btn-danger btn-sm" onclick="batchDelete()"><i class="fas fa-trash"></i> Delete</button>
             <button class="btn btn-outline btn-sm" onclick="clearBatchSelection()"><i class="fas fa-xmark"></i> Clear</button>
           </div>
         </div>
@@ -1833,6 +2494,49 @@
 
       </section>
 
+      <!-- ======================================================== -->
+      <!-- TAB: LIVE GIS DAMAGE MAP & INCIDENT HEATMAP -->
+      <!-- ======================================================== -->
+      <section id="tab-map" class="tab-view">
+        <div class="map-controls-bar">
+          <div class="filter-group" style="flex-wrap:wrap;gap:8px;">
+            <select id="mapCategoryFilter" class="custom-select" onchange="updateMapMarkers()">
+              <option value="all">All Map Categories</option>
+              <option value="Pothole">Potholes & Roads</option>
+              <option value="Water">Water & Drainage</option>
+              <option value="Streetlight">Electrical & Streetlights</option>
+              <option value="Bridge">Bridges & Structures</option>
+              <option value="Sanitation">Sanitation</option>
+            </select>
+            <select id="mapSeverityFilter" class="custom-select" onchange="updateMapMarkers()">
+              <option value="all">All Severities</option>
+              <option value="Critical">Critical Only</option>
+              <option value="High">High & Above</option>
+              <option value="Medium">Medium & Low</option>
+            </select>
+            <select id="mapStatusFilter" class="custom-select" onchange="updateMapMarkers()">
+              <option value="all">All Statuses</option>
+              <option value="Pending">Pending Review</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="map-stats-pill">
+            <i class="fas fa-map-pin" style="color:var(--primary);"></i>
+            <span>Plotted Incidents on GIS Grid: <strong id="mapPlottedCount" style="color:var(--primary);margin-left:4px;">0</strong></span>
+          </div>
+        </div>
+
+        <div class="map-container-wrap">
+          <div id="adminDamageMap" style="width:100%;height:620px;border-radius:var(--radius-lg);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md);z-index:1;"></div>
+          <div class="map-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#EF4444;box-shadow:0 0 8px #EF4444;"></span> Critical (Hazard)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#F59E0B;box-shadow:0 0 8px #F59E0B;"></span> High Priority</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#3B82F6;box-shadow:0 0 8px #3B82F6;"></span> Medium / Low</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#10B981;box-shadow:0 0 8px #10B981;"></span> Resolved</div>
+          </div>
+        </div>
+      </section>
 
       <!-- ======================================================== -->
       <!-- TAB 3: CITIZEN REGISTRY -->
@@ -1955,6 +2659,88 @@
         </div>
       </section>
 
+      <!-- ======================================================== -->
+      <!-- TAB: EMERGENCY BROADCAST & ALERT CENTER -->
+      <!-- ======================================================== -->
+      <section id="tab-broadcast" class="tab-view">
+        <div class="broadcast-layout">
+          <!-- Form to broadcast -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fas fa-bullhorn" style="color:var(--accent-rose);"></i>
+                <div>
+                  <h3>Issue Public Municipal Broadcast Alert</h3>
+                  <span>Publish live emergency or maintenance announcements across public citizen portals</span>
+                </div>
+              </div>
+            </div>
+            <form id="broadcastAlertForm" onsubmit="handleBroadcastSubmit(event)" style="padding:22px;">
+              <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:14px;">
+                <div>
+                  <label style="font-size:12.5px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Alert Headline</label>
+                  <input type="text" id="bcTitle" class="custom-input" style="width:100%;" placeholder="e.g. Red Alert: Waterlogging near Link Road Flyover" required>
+                </div>
+                <div>
+                  <label style="font-size:12.5px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Severity Classification</label>
+                  <select id="bcSeverity" class="custom-select" style="width:100%;">
+                    <option value="danger">High Emergency (Red)</option>
+                    <option value="warning" selected>Caution Alert (Amber)</option>
+                    <option value="info">Civic Advisory (Blue)</option>
+                    <option value="success">Restoration Notice (Green)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+                <div>
+                  <label style="font-size:12.5px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Affected Zones / City Wards</label>
+                  <input type="text" id="bcZones" class="custom-input" style="width:100%;" placeholder="e.g. Ward 4, Andheri West, Dadar" required>
+                </div>
+                <div>
+                  <label style="font-size:12.5px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Lead Department Authority</label>
+                  <select id="bcDept" class="custom-select" style="width:100%;">
+                    <option value="Municipal Disaster Relief Authority">Municipal Disaster Relief Authority</option>
+                    <option value="Roads & Highway Maintenance">Roads & Highway Maintenance</option>
+                    <option value="Water Works & Sewerage">Water Works & Sewerage</option>
+                    <option value="Electrical & Power Board">Electrical & Power Board</option>
+                    <option value="All Civic Response Units">All Civic Response Units</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="margin-bottom:16px;">
+                <label style="font-size:12.5px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Public Advisory Message & Instructions</label>
+                <textarea id="bcMessage" class="custom-input" style="width:100%;height:85px;resize:vertical;" placeholder="Specify safety instructions, traffic diversions, or emergency hotline details..." required></textarea>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary);cursor:pointer;">
+                  <input type="checkbox" id="bcPinToHeader" checked> Pin directly to Overview Screen Emergency Banner
+                </label>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Publish Broadcast Alert</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Active Broadcasts Stream -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fas fa-tower-broadcast" style="color:var(--accent-cyan);"></i>
+                <div>
+                  <h3>Active Broadcast Stream</h3>
+                  <span>Live published public announcements</span>
+                </div>
+              </div>
+              <span class="nav-badge" id="activeBroadcastsBadge" style="background:var(--primary-glow);color:var(--primary);font-size:12px;">0 Active</span>
+            </div>
+            <div id="broadcastsFeed" style="padding:22px;display:flex;flex-direction:column;gap:14px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- ======================================================== -->
       <!-- TAB 6: AUDIT LOGS -->
@@ -1987,6 +2773,136 @@
                 <!-- Populated dynamically -->
               </tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- TAB 7: SLAs & SYSTEM SETTINGS -->
+      <!-- ======================================================== -->
+      <section id="tab-settings" class="tab-view">
+        <div class="settings-grid">
+          <!-- Department SLA Targets -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fas fa-stopwatch" style="color:var(--accent-amber);"></i>
+                <div>
+                  <h3>Department SLA Target Rules</h3>
+                  <span>Max allowable resolution turnaround before breach</span>
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="saveSLASettings()"><i class="fas fa-floppy-disk"></i> Save SLA Rules</button>
+            </div>
+            <div style="padding:20px;">
+              <div class="setting-item-row">
+                <div>
+                  <strong>Critical Priority SLA</strong>
+                  <p>Immediate hazard, structural crack, major sinkhole</p>
+                </div>
+                <div class="sla-input-wrap">
+                  <input type="number" id="slaCritical" class="custom-input" style="width:80px;" value="4" min="1" max="72">
+                  <span>Hours</span>
+                </div>
+              </div>
+              <div class="setting-item-row">
+                <div>
+                  <strong>High Priority SLA</strong>
+                  <p>Arterial road potholes, main water bursts</p>
+                </div>
+                <div class="sla-input-wrap">
+                  <input type="number" id="slaHigh" class="custom-input" style="width:80px;" value="12" min="1" max="120">
+                  <span>Hours</span>
+                </div>
+              </div>
+              <div class="setting-item-row">
+                <div>
+                  <strong>Medium Priority SLA</strong>
+                  <p>Residential street defects, minor drainage</p>
+                </div>
+                <div class="sla-input-wrap">
+                  <input type="number" id="slaMedium" class="custom-input" style="width:80px;" value="48" min="1" max="240">
+                  <span>Hours</span>
+                </div>
+              </div>
+              <div class="setting-item-row">
+                <div>
+                  <strong>Low Priority SLA</strong>
+                  <p>Signage, cosmetic fixes, general civic cleanup</p>
+                </div>
+                <div class="sla-input-wrap">
+                  <input type="number" id="slaLow" class="custom-input" style="width:80px;" value="96" min="1" max="360">
+                  <span>Hours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Telemetry & Preferences -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fas fa-sliders" style="color:var(--primary);"></i>
+                <div>
+                  <h3>Live Telemetry & Dashboard Preferences</h3>
+                  <span>Audio alerts, polling interval, and warning banners</span>
+                </div>
+              </div>
+            </div>
+            <div style="padding:20px;">
+              <div class="setting-item-row">
+                <div>
+                  <strong>Live Polling Interval</strong>
+                  <p>Real-time database query frequency</p>
+                </div>
+                <select id="settingAutoRefresh" class="custom-select" onchange="changeAutoRefreshInterval(this.value)">
+                  <option value="10000">Every 10 seconds (Ultra-Fast)</option>
+                  <option value="30000" selected>Every 30 seconds (Standard)</option>
+                  <option value="60000">Every 1 minute</option>
+                  <option value="300000">Every 5 minutes</option>
+                  <option value="0">Manual Refresh Only</option>
+                </select>
+              </div>
+              <div class="setting-item-row">
+                <div>
+                  <strong>Synthesized Acoustic Chimes</strong>
+                  <p>Audio notification upon status updates and deletions</p>
+                </div>
+                <label class="switch-toggle">
+                  <input type="checkbox" id="settingSoundToggle" checked onchange="toggleSoundFromSetting(this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item-row">
+                <div>
+                  <strong>Emergency Safety Banner</strong>
+                  <p>Display persistent high-visibility alert banner on overview</p>
+                </div>
+                <label class="switch-toggle">
+                  <input type="checkbox" id="settingMonsoonToggle" checked onchange="toggleEmergencyBanner(this.checked)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Management & Backups -->
+          <div class="panel-card" style="grid-column: 1/-1;">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fas fa-database" style="color:var(--accent-emerald);"></i>
+                <div>
+                  <h3>Database Archival & Maintenance Utilities</h3>
+                  <span>One-click JSON snapshot, CSV export, and cache management</span>
+                </div>
+              </div>
+            </div>
+            <div style="padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+              <button class="btn btn-primary" onclick="exportFullDatabaseBackupJSON()"><i class="fas fa-cloud-arrow-down"></i> Download Complete Database Snapshot (JSON)</button>
+              <button class="btn btn-outline" onclick="exportDataCSV()"><i class="fas fa-file-csv"></i> Download CSV Spreadsheet</button>
+              <button class="btn btn-outline" onclick="loadSampleCivicData()"><i class="fas fa-wand-magic-sparkles"></i> Populate Sample Civic Data</button>
+              <button class="btn btn-danger" onclick="clearLocalDataCache()"><i class="fas fa-trash-arrow-up"></i> Flush Browser Cache & Offline Storage</button>
+            </div>
           </div>
         </div>
       </section>
@@ -2075,10 +2991,49 @@
               <div class="info-row"><span class="info-label">Location:</span><span class="info-val" id="modalCitizenLocation">Civic area</span></div>
             </div>
 
-            <div class="dossier-section">
-              <div class="dossier-title"><i class="fas fa-camera"></i> Evidence Photo Attachment</div>
-              <img id="modalDamageImage" class="damage-image-preview" src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60" alt="Damage evidence" onclick="window.open(this.src, '_blank')">
-              <span style="font-size:11px;color:var(--text-muted);display:block;margin-top:6px;text-align:center;"><i class="fas fa-magnifying-glass-plus"></i> Click image to open full resolution</span>
+            <div class="dossier-section" style="padding:0;overflow:hidden;">
+              <div class="evidence-tabs-header">
+                <div class="evidence-tab-pills">
+                  <button type="button" class="evidence-pill-btn active" id="pillEvidenceBefore" onclick="switchEvidenceTab('before')">
+                    <i class="fas fa-camera"></i> Initial Report
+                  </button>
+                  <button type="button" class="evidence-pill-btn" id="pillEvidenceAfter" onclick="switchEvidenceTab('after')">
+                    <i class="fas fa-circle-check" style="color:var(--accent-emerald);"></i> Restoration Proof
+                  </button>
+                </div>
+                <button type="button" class="btn btn-outline btn-sm" onclick="triggerRestorationPhotoUpload()" title="Attach / Update Field Repair Verification Photo">
+                  <i class="fas fa-upload"></i> <span id="uploadProofBtnText">Upload Proof</span>
+                </button>
+                <input type="file" id="restorationProofInput" accept="image/*" style="display:none;" onchange="handleRestorationPhotoUpload(event)">
+              </div>
+
+              <div class="evidence-stage">
+                <!-- AI Vision Badge -->
+                <div class="ai-vision-tag" id="aiVisionTag">
+                  <span class="ai-dot"></span>
+                  <span id="aiVisionText">AI Vision: High Severity Road Defect (94%)</span>
+                </div>
+
+                <!-- Image container with pan/zoom/rotate -->
+                <div class="evidence-img-container" id="evidenceImgContainer">
+                  <img id="modalDamageImage" class="damage-image-preview" src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60" alt="Damage evidence" onclick="openImageLightbox(this.src, 'Damage Evidence Photo')">
+                </div>
+
+                <!-- Floating Evidence Toolbar -->
+                <div class="evidence-toolbar">
+                  <button type="button" class="evidence-tool-btn" onclick="rotateEvidencePhoto()" title="Rotate 90°"><i class="fas fa-rotate-right"></i></button>
+                  <button type="button" class="evidence-tool-btn" onclick="zoomEvidencePhoto(0.2)" title="Zoom In"><i class="fas fa-magnifying-glass-plus"></i></button>
+                  <button type="button" class="evidence-tool-btn" onclick="zoomEvidencePhoto(-0.2)" title="Zoom Out"><i class="fas fa-magnifying-glass-minus"></i></button>
+                  <button type="button" class="evidence-tool-btn" onclick="resetEvidencePhotoTransform()" title="Reset View"><i class="fas fa-arrows-rotate"></i></button>
+                  <button type="button" class="evidence-tool-btn" onclick="openImageLightbox(document.getElementById('modalDamageImage').src, 'Damage Evidence Photo')" title="Fullscreen Lightbox"><i class="fas fa-expand"></i></button>
+                  <button type="button" class="evidence-tool-btn" onclick="downloadEvidencePhoto()" title="Download High-Res"><i class="fas fa-download"></i></button>
+                  <button type="button" class="evidence-tool-btn" onclick="copyEvidencePhotoUrl()" title="Copy Image Link"><i class="fas fa-copy"></i></button>
+                </div>
+              </div>
+              <div style="padding:8px 12px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--text-muted);background:var(--bg-surface);border-top:1px solid var(--border-subtle);">
+                <span id="evidencePhotoMeta"><i class="fas fa-circle-info"></i> Click image to open Fullscreen Lightbox Studio</span>
+                <span id="evidencePhotoResolution" style="font-family:var(--font-mono);color:var(--primary);">HD 1080p</span>
+              </div>
             </div>
           </div>
         </div>
@@ -2155,9 +3110,30 @@
             <input type="text" id="intakeLocation" class="custom-input" style="width:100%;" placeholder="e.g. Near Metro Pillar 142, Link Road" required>
           </div>
 
-          <div>
+          <div style="margin-bottom:14px;">
             <label style="font-size:12.5px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Detailed Damage Description</label>
-            <textarea id="intakeDescription" class="custom-input" style="width:100%;height:80px;resize:vertical;" placeholder="Describe dimensions, traffic risk, or structural danger..." required></textarea>
+            <textarea id="intakeDescription" class="custom-input" style="width:100%;height:75px;resize:vertical;" placeholder="Describe dimensions, traffic risk, or structural danger..." required></textarea>
+          </div>
+
+          <!-- Drag & Drop Photo Attachment -->
+          <div>
+            <label style="font-size:12.5px;font-weight:600;color:var(--text-secondary);display:block;margin-bottom:6px;">Evidence Photo Attachment (Optional)</label>
+            <div class="file-dropzone" id="intakeDropzone" onclick="document.getElementById('intakePhotoInput').click()">
+              <input type="file" id="intakePhotoInput" accept="image/*" style="display:none;" onchange="handleIntakePhotoSelect(event)">
+              <div id="dropzoneEmptyState">
+                <i class="fas fa-cloud-arrow-up" style="font-size:24px;color:var(--primary);margin-bottom:6px;display:block;"></i>
+                <strong style="font-size:13px;color:var(--text-primary);">Click or drag & drop evidence photo</strong>
+                <p style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">PNG, JPG, WEBP up to 10MB</p>
+              </div>
+              <div class="dropzone-preview-wrap" id="dropzonePreviewWrap">
+                <img id="intakePreviewImg" class="dropzone-thumb" src="" alt="Preview">
+                <div style="flex:1;text-align:left;">
+                  <strong id="intakeFileName" style="font-size:12.5px;color:var(--text-primary);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">image.jpg</strong>
+                  <span id="intakeFileSize" style="font-size:11px;color:var(--accent-emerald);">Ready to attach</span>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" onclick="event.stopPropagation(); removeIntakePhoto()" title="Remove image"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2166,6 +3142,63 @@
           <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Register Work Order</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ADVANCED IMAGE LIGHTBOX STUDIO -->
+  <!-- ======================================================== -->
+  <div class="lightbox-overlay" id="imageLightboxModal">
+    <div class="lightbox-container">
+      <div class="lightbox-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <i class="fas fa-image" style="color:var(--primary);font-size:18px;"></i>
+          <div>
+            <h3 id="lightboxTitle" style="font-size:15px;color:var(--text-primary);">Evidence Photo Studio</h3>
+            <span id="lightboxSubtitle" style="font-size:11.5px;color:var(--text-muted);">National Municipal Infrastructure Registry</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button class="btn btn-outline btn-sm" onclick="downloadLightboxPhoto()"><i class="fas fa-download"></i> Download Original</button>
+          <button class="btn btn-outline btn-sm" onclick="printLightboxPhoto()"><i class="fas fa-print"></i> Print Evidence</button>
+          <button class="modal-close-btn" onclick="closeImageLightbox()"><i class="fas fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <div class="lightbox-body">
+        <div class="lightbox-stage" id="lightboxStage">
+          <img id="lightboxImage" class="lightbox-img" src="" alt="High-Res Evidence">
+          
+          <div class="lightbox-controls">
+            <button class="lightbox-ctrl-btn" onclick="rotateLightboxPhoto()" title="Rotate 90°"><i class="fas fa-rotate-right"></i></button>
+            <button class="lightbox-ctrl-btn" onclick="zoomLightboxPhoto(0.25)" title="Zoom In"><i class="fas fa-plus"></i></button>
+            <button class="lightbox-ctrl-btn" onclick="zoomLightboxPhoto(-0.25)" title="Zoom Out"><i class="fas fa-minus"></i></button>
+            <button class="lightbox-ctrl-btn" onclick="resetLightboxPhotoTransform()" title="Fit to Screen"><i class="fas fa-compress"></i></button>
+          </div>
+        </div>
+
+        <div class="lightbox-sidebar">
+          <div>
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);display:block;margin-bottom:8px;">Incident Metadata</span>
+            <div class="info-row"><span class="info-label">Ticket ID:</span><span class="info-val" id="lbMetaTicket">--</span></div>
+            <div class="info-row"><span class="info-label">Category:</span><span class="info-val" id="lbMetaCategory">--</span></div>
+            <div class="info-row"><span class="info-label">Severity:</span><span class="info-val" id="lbMetaSeverity">--</span></div>
+            <div class="info-row"><span class="info-label">Location:</span><span class="info-val" id="lbMetaLocation">--</span></div>
+            <div class="info-row"><span class="info-label">Reporter:</span><span class="info-val" id="lbMetaReporter">--</span></div>
+          </div>
+
+          <div style="background:var(--bg-card);padding:14px;border-radius:var(--radius-md);border:1px solid var(--border-subtle);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:#60A5FA;font-weight:700;font-size:12.5px;">
+              <i class="fas fa-microchip"></i> AI Structural Diagnosis
+            </div>
+            <p id="lbAiReport" style="font-size:12px;color:var(--text-secondary);line-height:1.5;">Defect surface area verified with civic municipal geometry. Priority patch dispatched.</p>
+          </div>
+
+          <div style="margin-top:auto;">
+            <button class="btn btn-outline btn-sm" style="width:100%;" onclick="copyEvidencePhotoUrl()"><i class="fas fa-link"></i> Copy Direct Image Link</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2181,12 +3214,25 @@
     let allReports = [];
     let allUsers = [];
     let allFeedback = [];
+    let allBroadcasts = [];
     let auditLogs = [];
     let selectedReportIds = new Set();
     let currentInspectorReport = null;
     let audioAlertsEnabled = true;
     let autoRefreshTimer = null;
     let charts = {};
+    let leafletMap = null;
+    let mapMarkers = [];
+    let currentSLAConfig = { Critical: 4, High: 12, Medium: 48, Low: 96 };
+
+    // Evidence Photo Studio & Lightbox State
+    let currentEvidenceMode = 'before';
+    let currentEvidenceRotate = 0;
+    let currentEvidenceZoom = 1;
+    let currentLightboxRotate = 0;
+    let currentLightboxZoom = 1;
+    let selectedIntakePhotoBase64 = '';
+    let restorationProofs = {};
 
     // Pagination State
     let currentPage = 1;
@@ -2222,15 +3268,62 @@
       initTheme();
       initAdminProfile();
       startLiveClock();
+      loadSLASettings();
+      loadBroadcasts();
+      loadRestorationProofs();
       loadAllData();
       startAutoRefresh(30000); // 30s auto refresh
 
-      // Keyboard Shortcut Ctrl+K
+      // Drag and drop for manual intake dropzone
+      const dropzone = document.getElementById('intakeDropzone');
+      if (dropzone) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+          dropzone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.add('dragover');
+          }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+          dropzone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.remove('dragover');
+          }, false);
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+          const dt = e.dataTransfer;
+          const files = dt.files;
+          if (files && files.length > 0) {
+            processIntakePhotoFile(files[0]);
+          }
+        }, false);
+      }
+
+      // Close row menus when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.row-menu-wrap')) {
+          closeAllRowMenus();
+        }
+      });
+
+      // Keyboard Shortcut Ctrl+K & Escape Key
       document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
           e.preventDefault();
           const s = document.getElementById('globalSearchInput');
           if (s) s.focus();
+        }
+        if (e.key === 'Escape') {
+          const lb = document.getElementById('imageLightboxModal');
+          if (lb && lb.classList.contains('active')) {
+            closeImageLightbox();
+          } else {
+            closeInspectorModal();
+            closeIntakeModal();
+          }
         }
       });
     });
@@ -2295,21 +3388,28 @@
       const targetView = document.getElementById(`tab-${tabId}`);
       if (targetView) targetView.classList.add('active');
 
-      const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+      const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick')?.includes(`switchTab('${tabId}')`));
       if (activeBtn) activeBtn.classList.add('active');
 
       const titleEl = document.getElementById('currentSectionTitle');
       const titles = {
         overview: '<i class="fas fa-chart-pie" style="color:var(--primary);"></i> Executive Overview',
         incidents: '<i class="fas fa-list-check" style="color:var(--primary);"></i> Incident Management Hub',
+        map: '<i class="fas fa-map-location-dot" style="color:var(--accent-cyan);"></i> Live GIS Damage Map & Incident Heatmap',
         citizens: '<i class="fas fa-users" style="color:var(--primary);"></i> Citizen Registry',
         feedback: '<i class="fas fa-comments" style="color:var(--primary);"></i> Citizen Feedback & Ratings',
         dispatch: '<i class="fas fa-truck-fast" style="color:var(--primary);"></i> Crew & Dispatch Operations',
-        audit: '<i class="fas fa-clock-rotate-left" style="color:var(--primary);"></i> System Audit Logs'
+        broadcast: '<i class="fas fa-tower-broadcast" style="color:var(--accent-rose);"></i> Emergency Broadcast & Public Alert Center',
+        audit: '<i class="fas fa-clock-rotate-left" style="color:var(--primary);"></i> System Audit Logs',
+        settings: '<i class="fas fa-sliders" style="color:var(--accent-amber);"></i> SLAs & System Configuration'
       };
       if (titleEl && titles[tabId]) titleEl.innerHTML = titles[tabId];
 
       if (tabId === 'overview') rebuildCharts();
+      if (tabId === 'map') initOrResizeMap();
+      if (tabId === 'broadcast') renderBroadcasts();
+      if (tabId === 'settings') loadSLASettings();
+
       if (window.innerWidth <= 768) {
         document.getElementById('appSidebar')?.classList.remove('open');
       }
@@ -2613,14 +3713,38 @@
       const statusFilter = document.getElementById('statusFilter')?.value || 'all';
       const severityFilter = document.getElementById('severityFilter')?.value || 'all';
       const categoryFilter = document.getElementById('categoryFilter')?.value || 'all';
+      const deptFilter = document.getElementById('deptFilter')?.value || 'all';
+      const dateRangeFilter = document.getElementById('dateRangeFilter')?.value || 'all';
 
       const filtered = allReports.filter(r => {
         const fullText = `${r.report_id} ${r.title||''} ${r.description||''} ${r.category||''} ${r.city||''} ${r.state||''} ${r.name||''} ${r.fullName||''} ${r.phone||''} ${r.email||''}`.toLowerCase();
         const matchesSearch = !search || fullText.includes(search);
         const matchesStatus = statusFilter === 'all' || (r.status || 'Pending') === statusFilter;
-        const matchesSeverity = severityFilter === 'all' || (r.severity || 'Medium').toLowerCase() === severityFilter.toLowerCase();
+        
+        let matchesSeverity = true;
+        if (severityFilter !== 'all') {
+          matchesSeverity = (r.severity || 'Medium').toLowerCase() === severityFilter.toLowerCase();
+        }
+
         const matchesCategory = categoryFilter === 'all' || (r.category || '').toLowerCase().includes(categoryFilter.toLowerCase());
-        return matchesSearch && matchesStatus && matchesSeverity && matchesCategory;
+
+        let matchesDept = true;
+        if (deptFilter !== 'all') {
+          if (deptFilter === 'Unassigned') {
+            matchesDept = !r.assigned_dept || r.assigned_dept === 'Unassigned';
+          } else {
+            matchesDept = (r.assigned_dept || '').toLowerCase().includes(deptFilter.toLowerCase());
+          }
+        }
+
+        let matchesDate = true;
+        if (dateRangeFilter === 'today') {
+          const todayStr = new Date().toDateString();
+          const rDate = r.date ? new Date(r.date).toDateString() : '';
+          matchesDate = rDate === todayStr || (r.date || '').toLowerCase().includes('today') || (r.date || '').toLowerCase().includes('recent');
+        }
+
+        return matchesSearch && matchesStatus && matchesSeverity && matchesCategory && matchesDept && matchesDate;
       });
 
       // Pagination
@@ -2660,6 +3784,15 @@
           else if (severity.toLowerCase() === 'low') sevClass = 'severity-low';
 
           const catIcon = getCategoryIcon(r.category);
+          const photoUrl = r.image_path || (r.image || '');
+          const camThumbHtml = photoUrl ? `
+            <span class="table-cam-btn" onclick="openImageLightbox('${photoUrl}', '${r.report_id} Evidence')" title="Click or hover to inspect photo">
+              <i class="fas fa-camera"></i>
+              <div class="table-hover-tooltip">
+                <img src="${photoUrl}" alt="Evidence Thumbnail">
+              </div>
+            </span>
+          ` : '';
 
           return `
             <tr class="${isSelected ? 'selected' : ''}">
@@ -2674,7 +3807,7 @@
               <td>
                 <div class="category-cell">
                   <div class="category-icon">${catIcon}</div>
-                  <div>${r.category || 'Infrastructure'}</div>
+                  <div>${r.category || 'Infrastructure'} ${camThumbHtml}</div>
                 </div>
               </td>
               <td>
@@ -2709,12 +3842,28 @@
               </td>
               <td style="text-align:right;">
                 <div class="action-btn-group" style="justify-content:flex-end;">
-                  <button class="icon-action-btn" onclick="openInspectorModal('${r.report_id}')" title="View Full Dossier">
+                  <button class="icon-action-btn" onclick="openInspectorModal('${r.report_id}')" title="Inspect Dossier">
                     <i class="fas fa-eye"></i>
                   </button>
-                  <button class="icon-action-btn btn-trash" onclick="deleteSingleIncident('${r.report_id}')" title="Delete Record">
-                    <i class="fas fa-trash"></i>
-                  </button>
+                  <div class="row-menu-wrap">
+                    <button class="icon-action-btn" onclick="event.stopPropagation(); toggleRowMenu('${r.report_id}')" title="More Options">
+                      <i class="fas fa-ellipsis-vertical"></i>
+                    </button>
+                    <div class="row-menu-dropdown" id="rowMenu_${r.report_id}">
+                      <div class="row-menu-header">Ticket #${r.report_id}</div>
+                      <button class="row-menu-item" onclick="openInspectorModal('${r.report_id}')"><i class="fas fa-file-waveform" style="color:var(--primary);"></i> View Full Dossier</button>
+                      <button class="row-menu-item" onclick="handleStatusChange('${r.report_id}', 'In Progress')"><i class="fas fa-person-digging" style="color:var(--accent-cyan);"></i> Set In Progress</button>
+                      <button class="row-menu-item" onclick="handleStatusChange('${r.report_id}', 'Resolved')"><i class="fas fa-circle-check" style="color:var(--accent-emerald);"></i> Mark Resolved</button>
+                      <button class="row-menu-item" onclick="escalateTicketSeverity('${r.report_id}')"><i class="fas fa-triangle-exclamation" style="color:var(--accent-rose);"></i> Escalate to Critical</button>
+                      <button class="row-menu-item" onclick="quickAssignDept('${r.report_id}')"><i class="fas fa-building-flag" style="color:var(--accent-amber);"></i> Assign Department</button>
+                      <div class="row-menu-divider"></div>
+                      <button class="row-menu-item" onclick="quickAddAdminNote('${r.report_id}')"><i class="fas fa-pen-to-square"></i> Add Work Note</button>
+                      <button class="row-menu-item" onclick="printSingleWorkOrder('${r.report_id}')"><i class="fas fa-print"></i> Print Work Order</button>
+                      <button class="row-menu-item" onclick="exportSingleTicketJSON('${r.report_id}')"><i class="fas fa-file-code" style="color:var(--accent-purple);"></i> Export JSON Dossier</button>
+                      <div class="row-menu-divider"></div>
+                      <button class="row-menu-item row-menu-danger" onclick="deleteSingleIncident('${r.report_id}')"><i class="fas fa-trash"></i> Delete Ticket</button>
+                    </div>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -2935,7 +4084,7 @@
     }
 
     // ========================================================
-    // DOSSIER INSPECTOR MODAL
+    // DOSSIER INSPECTOR MODAL & EVIDENCE STUDIO
     // ========================================================
     function openInspectorModal(reportId) {
       const rep = allReports.find(r => r.report_id === reportId);
@@ -2964,11 +4113,33 @@
       document.getElementById('modalDeptSelect').value = rep.assigned_dept || 'Roads & Highway Maintenance';
       document.getElementById('modalNotesLog').textContent = rep.admin_notes || 'No internal notes added yet.';
 
-      // Image
-      const imgEl = document.getElementById('modalDamageImage');
-      if (imgEl) {
-        imgEl.src = rep.image_path || 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60';
+      // Lightbox metadata preload
+      const lbTicket = document.getElementById('lbMetaTicket');
+      const lbCat = document.getElementById('lbMetaCategory');
+      const lbSev = document.getElementById('lbMetaSeverity');
+      const lbLoc = document.getElementById('lbMetaLocation');
+      const lbRep = document.getElementById('lbMetaReporter');
+      const lbAi = document.getElementById('lbAiReport');
+
+      if (lbTicket) lbTicket.textContent = rep.report_id;
+      if (lbCat) lbCat.textContent = rep.category || 'Infrastructure';
+      if (lbSev) lbSev.textContent = sev;
+      if (lbLoc) lbLoc.textContent = rep.location || rep.city || 'Civic Zone';
+      if (lbRep) lbRep.textContent = rep.fullName || rep.name || 'Citizen';
+      if (lbAi) lbAi.textContent = `Automated vision diagnostics confirmed ${sev.toLowerCase()} severity ${rep.category || 'infrastructure defect'}. Structural coordinates cataloged.`;
+
+      // AI Vision tag text
+      const aiText = document.getElementById('aiVisionText');
+      if (aiText) {
+        const conf = sev.toLowerCase() === 'critical' ? '98%' : sev.toLowerCase() === 'high' ? '92%' : '87%';
+        aiText.textContent = `AI Vision: ${sev} Severity ${rep.category || 'Anomaly'} (${conf} Conf.)`;
       }
+
+      // Reset Evidence Studio State
+      currentEvidenceMode = 'before';
+      currentEvidenceRotate = 0;
+      currentEvidenceZoom = 1;
+      updateEvidencePhotoView();
 
       // Update Stepper
       updateModalStepper(rep.status || 'Pending');
@@ -3067,7 +4238,253 @@
     }
 
     // ========================================================
-    // MANUAL INCIDENT INTAKE FORM
+    // EVIDENCE PHOTO ATTACHMENT STUDIO ENGINE
+    // ========================================================
+    function loadRestorationProofs() {
+      const saved = localStorage.getItem('idrs_restoration_proofs');
+      if (saved) {
+        try { restorationProofs = JSON.parse(saved); } catch(e){}
+      }
+    }
+
+    function saveRestorationProofs() {
+      localStorage.setItem('idrs_restoration_proofs', JSON.stringify(restorationProofs));
+    }
+
+    function switchEvidenceTab(mode) {
+      currentEvidenceMode = mode;
+      currentEvidenceRotate = 0;
+      currentEvidenceZoom = 1;
+
+      const pillBefore = document.getElementById('pillEvidenceBefore');
+      const pillAfter = document.getElementById('pillEvidenceAfter');
+
+      if (pillBefore && pillAfter) {
+        if (mode === 'before') {
+          pillBefore.classList.add('active');
+          pillAfter.classList.remove('active');
+        } else {
+          pillBefore.classList.remove('active');
+          pillAfter.classList.add('active');
+        }
+      }
+
+      updateEvidencePhotoView();
+    }
+
+    function updateEvidencePhotoView() {
+      if (!currentInspectorReport) return;
+
+      const imgEl = document.getElementById('modalDamageImage');
+      const pillBefore = document.getElementById('pillEvidenceBefore');
+      const pillAfter = document.getElementById('pillEvidenceAfter');
+      const uploadBtnText = document.getElementById('uploadProofBtnText');
+      const metaEl = document.getElementById('evidencePhotoMeta');
+      const resBadge = document.getElementById('evidencePhotoResolution');
+
+      if (pillBefore && pillAfter) {
+        if (currentEvidenceMode === 'before') {
+          pillBefore.classList.add('active');
+          pillAfter.classList.remove('active');
+        } else {
+          pillBefore.classList.remove('active');
+          pillAfter.classList.add('active');
+        }
+      }
+
+      const repId = currentInspectorReport.report_id;
+      const citizenPhoto = currentInspectorReport.image_path || (currentInspectorReport.image || 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60');
+      const proofPhoto = restorationProofs[repId];
+
+      if (imgEl) {
+        if (currentEvidenceMode === 'before') {
+          imgEl.src = citizenPhoto;
+          if (uploadBtnText) uploadBtnText.textContent = proofPhoto ? 'Replace Proof' : 'Upload Proof';
+          if (metaEl) metaEl.innerHTML = `<i class="fas fa-camera"></i> Citizen Initial Evidence &bull; Date: ${currentInspectorReport.date || 'Recent'}`;
+          if (resBadge) resBadge.textContent = 'Initial Proof';
+        } else {
+          if (proofPhoto) {
+            imgEl.src = proofPhoto;
+            if (metaEl) metaEl.innerHTML = `<i class="fas fa-shield-check" style="color:var(--accent-emerald);"></i> Field Crew Repair Verification Proof Attached`;
+            if (resBadge) resBadge.textContent = 'Restored Proof';
+          } else {
+            imgEl.src = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&auto=format&fit=crop&q=60';
+            if (metaEl) metaEl.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:var(--accent-amber);"></i> No repair proof uploaded yet. Click Upload Proof above.`;
+            if (resBadge) resBadge.textContent = 'Pending Upload';
+          }
+          if (uploadBtnText) uploadBtnText.textContent = proofPhoto ? 'Update Proof' : 'Upload Proof';
+        }
+        applyEvidenceTransform();
+      }
+    }
+
+    function rotateEvidencePhoto() {
+      currentEvidenceRotate = (currentEvidenceRotate + 90) % 360;
+      applyEvidenceTransform();
+    }
+
+    function zoomEvidencePhoto(delta) {
+      currentEvidenceZoom = Math.min(Math.max(currentEvidenceZoom + delta, 0.5), 3.0);
+      applyEvidenceTransform();
+    }
+
+    function resetEvidencePhotoTransform() {
+      currentEvidenceRotate = 0;
+      currentEvidenceZoom = 1;
+      applyEvidenceTransform();
+    }
+
+    function applyEvidenceTransform() {
+      const img = document.getElementById('modalDamageImage');
+      if (img) {
+        img.style.transform = `scale(${currentEvidenceZoom}) rotate(${currentEvidenceRotate}deg)`;
+        img.style.transition = 'transform 0.25s ease';
+      }
+    }
+
+    function triggerRestorationPhotoUpload() {
+      const fileInput = document.getElementById('restorationProofInput');
+      if (fileInput) fileInput.click();
+    }
+
+    function handleRestorationPhotoUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file || !currentInspectorReport) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result;
+        restorationProofs[currentInspectorReport.report_id] = base64;
+        saveRestorationProofs();
+        
+        switchEvidenceTab('after');
+        showToast('success', `Restoration proof attached for ticket ${currentInspectorReport.report_id}`);
+        logAuditEvent('Proof Upload', `Attached restoration photo for ${currentInspectorReport.report_id}`, 'Success');
+      };
+      reader.readAsDataURL(file);
+      event.target.value = '';
+    }
+
+    function downloadEvidencePhoto() {
+      const img = document.getElementById('modalDamageImage');
+      if (!img || !img.src) return;
+      const a = document.createElement('a');
+      a.href = img.src;
+      a.download = `IDRS_${currentInspectorReport ? currentInspectorReport.report_id : 'Evidence'}_${currentEvidenceMode.toUpperCase()}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast('info', 'Downloading evidence photo...');
+    }
+
+    function copyEvidencePhotoUrl() {
+      const img = document.getElementById('modalDamageImage') || document.getElementById('lightboxImage');
+      if (!img || !img.src) return;
+      navigator.clipboard.writeText(img.src).then(() => {
+        showToast('success', 'Image URL copied to clipboard');
+      }).catch(() => {
+        showToast('info', 'Image URL: ' + img.src.substring(0, 50) + '...');
+      });
+    }
+
+    // ========================================================
+    // ADVANCED FULLSCREEN LIGHTBOX CONTROLLER
+    // ========================================================
+    function openImageLightbox(src, title) {
+      const lb = document.getElementById('imageLightboxModal');
+      const img = document.getElementById('lightboxImage');
+      const titleEl = document.getElementById('lightboxTitle');
+
+      if (!lb || !img) return;
+
+      img.src = src || (currentInspectorReport && currentInspectorReport.image_path) || 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60';
+      if (titleEl && title) titleEl.textContent = title;
+
+      if (currentInspectorReport) {
+        const lbTicket = document.getElementById('lbMetaTicket');
+        const lbCat = document.getElementById('lbMetaCategory');
+        const lbSev = document.getElementById('lbMetaSeverity');
+        const lbLoc = document.getElementById('lbMetaLocation');
+        const lbRep = document.getElementById('lbMetaReporter');
+
+        if (lbTicket) lbTicket.textContent = currentInspectorReport.report_id;
+        if (lbCat) lbCat.textContent = currentInspectorReport.category || 'Infrastructure';
+        if (lbSev) lbSev.textContent = currentInspectorReport.severity || 'Medium';
+        if (lbLoc) lbLoc.textContent = currentInspectorReport.location || currentInspectorReport.city || 'Civic Zone';
+        if (lbRep) lbRep.textContent = currentInspectorReport.fullName || currentInspectorReport.name || 'Citizen';
+      }
+
+      currentLightboxRotate = 0;
+      currentLightboxZoom = 1;
+      applyLightboxTransform();
+
+      lb.classList.add('active');
+    }
+
+    function closeImageLightbox() {
+      document.getElementById('imageLightboxModal')?.classList.remove('active');
+    }
+
+    function rotateLightboxPhoto() {
+      currentLightboxRotate = (currentLightboxRotate + 90) % 360;
+      applyLightboxTransform();
+    }
+
+    function zoomLightboxPhoto(delta) {
+      currentLightboxZoom = Math.min(Math.max(currentLightboxZoom + delta, 0.5), 3.5);
+      applyLightboxTransform();
+    }
+
+    function resetLightboxPhotoTransform() {
+      currentLightboxRotate = 0;
+      currentLightboxZoom = 1;
+      applyLightboxTransform();
+    }
+
+    function applyLightboxTransform() {
+      const img = document.getElementById('lightboxImage');
+      if (img) {
+        img.style.transform = `scale(${currentLightboxZoom}) rotate(${currentLightboxRotate}deg)`;
+        img.style.transition = 'transform 0.25s ease';
+      }
+    }
+
+    function downloadLightboxPhoto() {
+      const img = document.getElementById('lightboxImage');
+      if (!img || !img.src) return;
+      const a = document.createElement('a');
+      a.href = img.src;
+      a.download = `IDRS_HighRes_Evidence_${Date.now()}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast('info', 'Downloading high-resolution evidence photo...');
+    }
+
+    function printLightboxPhoto() {
+      const img = document.getElementById('lightboxImage');
+      if (!img || !img.src) return;
+      const printWin = window.open('', '_blank');
+      if (printWin) {
+        printWin.document.write(`
+          <html>
+            <head><title>Evidence Photo Print</title></head>
+            <body style="margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#fff;">
+              <div style="text-align:center;">
+                <h2 style="font-family:sans-serif;margin-bottom:12px;">Municipal Infrastructure Damage Evidence</h2>
+                <img src="${img.src}" style="max-width:90vw;max-height:80vh;object-fit:contain;border:1px solid #ccc;border-radius:8px;">
+              </div>
+            </body>
+          </html>
+        `);
+        printWin.document.close();
+        printWin.focus();
+        setTimeout(() => { printWin.print(); printWin.close(); }, 400);
+      }
+    }
+
+    // ========================================================
+    // MANUAL INCIDENT INTAKE FORM & PHOTO DROPZONE
     // ========================================================
     function openIntakeModal() {
       document.getElementById('intakeModal')?.classList.add('active');
@@ -3075,6 +4492,47 @@
 
     function closeIntakeModal() {
       document.getElementById('intakeModal')?.classList.remove('active');
+    }
+
+    function handleIntakePhotoSelect(event) {
+      const file = event.target.files && event.target.files[0];
+      if (file) processIntakePhotoFile(file);
+    }
+
+    function processIntakePhotoFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('error', 'Please select a valid image file (PNG, JPG, WEBP)');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        selectedIntakePhotoBase64 = e.target.result;
+        
+        const previewImg = document.getElementById('intakePreviewImg');
+        const previewWrap = document.getElementById('dropzonePreviewWrap');
+        const emptyState = document.getElementById('dropzoneEmptyState');
+        const fileNameEl = document.getElementById('intakeFileName');
+        const fileSizeEl = document.getElementById('intakeFileSize');
+
+        if (previewImg) previewImg.src = selectedIntakePhotoBase64;
+        if (fileNameEl) fileNameEl.textContent = file.name;
+        if (fileSizeEl) fileSizeEl.textContent = `${(file.size / (1024 * 1024)).toFixed(2)} MB • Ready to attach`;
+        if (emptyState) emptyState.style.display = 'none';
+        if (previewWrap) previewWrap.style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeIntakePhoto() {
+      selectedIntakePhotoBase64 = '';
+      const input = document.getElementById('intakePhotoInput');
+      if (input) input.value = '';
+
+      const previewWrap = document.getElementById('dropzonePreviewWrap');
+      const emptyState = document.getElementById('dropzoneEmptyState');
+      if (previewWrap) previewWrap.style.display = 'none';
+      if (emptyState) emptyState.style.display = 'block';
     }
 
     async function handleManualIntakeSubmit(e) {
@@ -3090,7 +4548,8 @@
 
       const payload = {
         name, fullName: name, phone, category, severity, city, state, location, description,
-        title: `${category} at ${location}`
+        title: `${category} at ${location}`,
+        image_path: selectedIntakePhotoBase64 || 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=600&auto=format&fit=crop&q=60'
       };
 
       try {
@@ -3115,11 +4574,12 @@
       }
 
       notifySuccess();
-      showToast('success', `New work order ${payload.report_id} registered successfully!`);
+      showToast('success', `New work order ${payload.report_id} registered successfully with evidence photo!`);
       logAuditEvent('Manual Intake', `Logged new ticket ${payload.report_id} for ${name}`, 'Created');
       
       closeIntakeModal();
       document.getElementById('manualIntakeForm')?.reset();
+      removeIntakePhoto();
       updateKPIs();
       rebuildCharts();
       renderIncidentTable();
@@ -3303,6 +4763,589 @@
       notifySuccess();
       showToast('success', `Exported ${allReports.length} records to CSV!`);
       logAuditEvent('Export CSV', `Exported ${allReports.length} records`, 'Complete');
+    }
+
+    // ========================================================
+    // ROW ACTION DROPDOWN SYSTEM
+    // ========================================================
+    function toggleRowMenu(reportId) {
+      const dropdown = document.getElementById(`rowMenu_${reportId}`);
+      if (!dropdown) return;
+      const wasActive = dropdown.classList.contains('active');
+      closeAllRowMenus();
+      if (!wasActive) {
+        dropdown.classList.add('active');
+      }
+    }
+
+    function closeAllRowMenus() {
+      document.querySelectorAll('.row-menu-dropdown').forEach(d => d.classList.remove('active'));
+    }
+
+    function exportSingleTicketJSON(reportId) {
+      const r = allReports.find(x => x.report_id === reportId);
+      if (!r) return;
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(r, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `IDRS_Dossier_${reportId}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('info', `Downloaded JSON dossier for ticket ${reportId}`);
+      closeAllRowMenus();
+    }
+
+    function escalateTicketSeverity(reportId) {
+      const r = allReports.find(x => x.report_id === reportId);
+      if (!r) return;
+      r.severity = 'Critical';
+      notifyAlert();
+      showToast('error', `Ticket ${reportId} escalated to CRITICAL priority!`);
+      logAuditEvent('Severity Escalation', `Escalated ticket ${reportId} -> Critical`, 'Urgent');
+      closeAllRowMenus();
+      updateKPIs();
+      rebuildCharts();
+      renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
+    }
+
+    function quickAssignDept(reportId) {
+      const depts = [
+        'Roads & Highway Maintenance',
+        'Water Works & Sewerage Authority',
+        'Electrical & Streetlight Board',
+        'Civil Structures & Bridges',
+        'Municipal Sanitation Division'
+      ];
+      const choice = prompt(`Assign department for ticket ${reportId}:\n1. Roads & Highway\n2. Water Works & Sewerage\n3. Electrical Board\n4. Civil Structures & Bridges\n5. Municipal Sanitation\nEnter number (1-5):`, "1");
+      if (!choice) return;
+      const idx = parseInt(choice, 10) - 1;
+      if (idx >= 0 && idx < depts.length) {
+        const r = allReports.find(x => x.report_id === reportId);
+        if (r) {
+          r.assigned_dept = depts[idx];
+          if (r.status === 'Pending') r.status = 'In Progress';
+          showToast('success', `Assigned ${reportId} to ${depts[idx]}`);
+          logAuditEvent('Dept Assign', `Assigned ${reportId} -> ${depts[idx]}`, 'Success');
+          closeAllRowMenus();
+          updateDeptCounts();
+          renderIncidentTable();
+        }
+      }
+    }
+
+    function quickAddAdminNote(reportId) {
+      const note = prompt(`Add internal administrative memo for ticket ${reportId}:`);
+      if (!note || !note.trim()) return;
+      const r = allReports.find(x => x.report_id === reportId);
+      if (r) {
+        const timestamp = new Date().toLocaleTimeString();
+        r.admin_notes = `${r.admin_notes || ''}\n[${timestamp}] ${note.trim()}`.trim();
+        showToast('info', `Administrative memo recorded for ${reportId}`);
+        logAuditEvent('Admin Memo', `Added note to ${reportId}`, 'Logged');
+        closeAllRowMenus();
+      }
+    }
+
+    function printSingleWorkOrder(reportId) {
+      closeAllRowMenus();
+      openInspectorModal(reportId);
+      setTimeout(() => window.print(), 350);
+    }
+
+    function batchEscalateCritical() {
+      if (selectedReportIds.size === 0) {
+        showToast('error', 'Select at least one ticket to escalate');
+        return;
+      }
+      selectedReportIds.forEach(id => {
+        const t = allReports.find(r => r.report_id === id);
+        if (t) t.severity = 'Critical';
+      });
+
+      notifyAlert();
+      showToast('error', `Escalated ${selectedReportIds.size} tickets to CRITICAL priority!`);
+      logAuditEvent('Batch Escalate', `Escalated ${selectedReportIds.size} tickets -> Critical`, 'Urgent');
+      clearBatchSelection();
+      updateKPIs();
+      rebuildCharts();
+      renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
+    }
+
+    function batchAssignDept(deptName) {
+      if (selectedReportIds.size === 0) {
+        showToast('error', 'Select at least one ticket to assign');
+        return;
+      }
+      selectedReportIds.forEach(id => {
+        const t = allReports.find(r => r.report_id === id);
+        if (t) {
+          t.assigned_dept = deptName;
+          if (t.status === 'Pending') t.status = 'In Progress';
+        }
+      });
+
+      notifySuccess();
+      showToast('success', `Assigned ${selectedReportIds.size} tickets to ${deptName}`);
+      logAuditEvent('Batch Assign', `Assigned ${selectedReportIds.size} tickets -> ${deptName}`, 'Success');
+      clearBatchSelection();
+      updateDeptCounts();
+      renderIncidentTable();
+    }
+
+    function exportFilteredJSON() {
+      if (allReports.length === 0) {
+        showToast('error', 'No incident records to export');
+        return;
+      }
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allReports, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `IDRS_Incidents_Filtered_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      notifySuccess();
+      showToast('success', `Exported ${allReports.length} incidents to JSON!`);
+    }
+
+    // ========================================================
+    // GIS MAP ENGINE (LEAFLET.JS)
+    // ========================================================
+    const CITY_COORDS = {
+      mumbai: [19.0760, 72.8777],
+      delhi: [28.6139, 77.2090],
+      bangalore: [12.9716, 77.5946],
+      bengaluru: [12.9716, 77.5946],
+      pune: [18.5204, 73.8567],
+      hyderabad: [17.3850, 78.4867],
+      chennai: [13.0827, 80.2707],
+      kolkata: [22.5726, 88.3639],
+      ahmedabad: [23.0225, 72.5714],
+      surat: [21.1702, 72.8311],
+      jaipur: [26.9124, 75.7873],
+      lucknow: [26.8467, 80.9462],
+      nagpur: [21.1458, 79.0882],
+      indore: [22.7196, 75.8577],
+      thane: [19.2183, 72.9781],
+      bhopal: [23.2599, 77.4126],
+      visakhapatnam: [17.6868, 83.2185],
+      patna: [25.5941, 85.1376],
+      vadodara: [22.3072, 73.1812],
+      ghaziabad: [28.6692, 77.4538],
+      default: [19.0760, 72.8777]
+    };
+
+    function getReportCoordinates(report, index) {
+      const cityKey = (report.city || '').toLowerCase().trim();
+      let baseCoords = CITY_COORDS[cityKey];
+      if (!baseCoords) {
+        for (let k in CITY_COORDS) {
+          if (cityKey.includes(k) || (report.location||'').toLowerCase().includes(k)) {
+            baseCoords = CITY_COORDS[k];
+            break;
+          }
+        }
+      }
+      if (!baseCoords) baseCoords = CITY_COORDS['default'];
+
+      const hash = (report.report_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) + (index * 7);
+      const latOffset = ((hash % 100) - 50) * 0.0008;
+      const lngOffset = (((hash * 13) % 100) - 50) * 0.0008;
+      return [baseCoords[0] + latOffset, baseCoords[1] + lngOffset];
+    }
+
+    function initOrResizeMap() {
+      const container = document.getElementById('adminDamageMap');
+      if (!container) return;
+
+      if (!leafletMap && typeof L !== 'undefined') {
+        leafletMap = L.map('adminDamageMap').setView([19.0760, 72.8777], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(leafletMap);
+      }
+
+      setTimeout(() => {
+        if (leafletMap) {
+          leafletMap.invalidateSize();
+          updateMapMarkers();
+        }
+      }, 200);
+    }
+
+    function updateMapMarkers() {
+      if (!leafletMap || typeof L === 'undefined') return;
+
+      mapMarkers.forEach(m => leafletMap.removeLayer(m));
+      mapMarkers = [];
+
+      const catFilter = document.getElementById('mapCategoryFilter')?.value || 'all';
+      const sevFilter = document.getElementById('mapSeverityFilter')?.value || 'all';
+      const statusFilter = document.getElementById('mapStatusFilter')?.value || 'all';
+
+      const filtered = allReports.filter(r => {
+        const matchesCat = catFilter === 'all' || (r.category || '').toLowerCase().includes(catFilter.toLowerCase());
+        const sev = (r.severity || 'Medium').toLowerCase();
+        let matchesSev = true;
+        if (sevFilter === 'Critical') matchesSev = sev === 'critical';
+        else if (sevFilter === 'High') matchesSev = sev === 'critical' || sev === 'high';
+        else if (sevFilter === 'Medium') matchesSev = sev === 'medium' || sev === 'low';
+        
+        const matchesStatus = statusFilter === 'all' || (r.status || 'Pending') === statusFilter;
+        return matchesCat && matchesSev && matchesStatus;
+      });
+
+      const plottedEl = document.getElementById('mapPlottedCount');
+      if (plottedEl) plottedEl.textContent = filtered.length;
+
+      const latLngs = [];
+
+      filtered.forEach((r, idx) => {
+        const coords = getReportCoordinates(r, idx);
+        latLngs.push(coords);
+
+        let pinColor = '#3B82F6';
+        const s = (r.status || 'Pending');
+        const sev = (r.severity || 'Medium').toLowerCase();
+
+        if (s === 'Resolved') pinColor = '#10B981';
+        else if (sev === 'critical') pinColor = '#EF4444';
+        else if (sev === 'high') pinColor = '#F59E0B';
+
+        const customIcon = L.divIcon({
+          className: 'custom-map-pin',
+          html: `<div style="background:${pinColor};width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 12px ${pinColor};cursor:pointer;"></div>`,
+          iconSize: [16, 16],
+          iconAnchor: [8, 8]
+        });
+
+        const marker = L.marker(coords, { icon: customIcon }).addTo(leafletMap);
+        
+        const popupContent = `
+          <div style="font-family:sans-serif;min-width:210px;padding:4px;">
+            <div style="font-weight:700;font-size:13px;color:#0F172A;margin-bottom:4px;">${r.title || r.category || 'Incident'}</div>
+            <div style="font-size:11px;color:#64748B;margin-bottom:6px;"><strong>ID:</strong> ${r.report_id} &bull; <strong>Status:</strong> ${r.status || 'Pending'}</div>
+            <div style="font-size:11.5px;color:#334155;margin-bottom:8px;">${(r.location || r.city || '')}</div>
+            <div style="display:flex;gap:6px;">
+              <button onclick="openInspectorModal('${r.report_id}')" style="background:#3B82F6;color:#fff;border:none;border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-weight:700;">Inspect Dossier</button>
+            </div>
+          </div>
+        `;
+
+        marker.bindPopup(popupContent);
+        mapMarkers.push(marker);
+      });
+
+      if (latLngs.length > 0) {
+        try {
+          leafletMap.fitBounds(L.latLngBounds(latLngs), { padding: [40, 40], maxZoom: 14 });
+        } catch(e){}
+      }
+    }
+
+    // ========================================================
+    // EMERGENCY BROADCAST CONTROLLER
+    // ========================================================
+    function loadBroadcasts() {
+      const saved = localStorage.getItem('idrs_broadcasts');
+      if (saved) {
+        try { allBroadcasts = JSON.parse(saved); } catch(e){}
+      }
+      if (!allBroadcasts || allBroadcasts.length === 0) {
+        allBroadcasts = [
+          {
+            id: 'BC-2026-001',
+            title: 'Monsoon Alert & Eastern Expressway Underpass Diversion',
+            severity: 'danger',
+            zones: 'Ward 4, Andheri East, Highway Junction',
+            dept: 'Municipal Disaster Relief Authority',
+            message: 'Active waterlogging reported under flyover. Traffic diverted to SV Road. Emergency dewatering pumps operating.',
+            pinned: true,
+            active: true,
+            date: 'Today, 09:30 AM'
+          },
+          {
+            id: 'BC-2026-002',
+            title: 'Scheduled High-Voltage Transformer Maintenance & Grid Check',
+            severity: 'warning',
+            zones: 'Civic Sector 9, North District',
+            dept: 'Electrical & Power Board',
+            message: 'Grid optimization scheduled tonight. Streetlights in Sector 9 operating on backup solar circuitry.',
+            pinned: false,
+            active: true,
+            date: 'Yesterday, 04:15 PM'
+          }
+        ];
+      }
+      renderBroadcasts();
+    }
+
+    function renderBroadcasts() {
+      const feed = document.getElementById('broadcastsFeed');
+      const badge = document.getElementById('activeBroadcastsBadge');
+      if (!feed) return;
+
+      const activeCount = allBroadcasts.filter(b => b.active).length;
+      if (badge) badge.textContent = `${activeCount} Active`;
+
+      if (allBroadcasts.length === 0) {
+        feed.innerHTML = `
+          <div style="text-align:center;padding:30px;color:var(--text-muted);">
+            <i class="fas fa-tower-broadcast" style="font-size:28px;margin-bottom:8px;display:block;opacity:0.5;"></i>
+            <strong>No emergency broadcast announcements published</strong>
+          </div>
+        `;
+        return;
+      }
+
+      feed.innerHTML = allBroadcasts.map(b => {
+        let sevBadge = `<span class="nav-badge" style="background:rgba(239,68,68,0.2);color:#F87171;">HIGH EMERGENCY</span>`;
+        if (b.severity === 'warning') sevBadge = `<span class="nav-badge" style="background:rgba(245,158,11,0.2);color:#FBBF24;">CAUTION ALERT</span>`;
+        else if (b.severity === 'info') sevBadge = `<span class="nav-badge" style="background:rgba(59,130,246,0.2);color:#60A5FA;">ADVISORY</span>`;
+        else if (b.severity === 'success') sevBadge = `<span class="nav-badge" style="background:rgba(16,185,129,0.2);color:#34D399;">RESTORED</span>`;
+
+        return `
+          <div class="broadcast-card severity-${b.severity}">
+            <div style="flex:1;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;">
+                ${sevBadge}
+                <strong style="font-size:15px;color:var(--text-primary);">${b.title}</strong>
+                <span style="font-size:11.5px;color:var(--text-muted);">${b.date}</span>
+              </div>
+              <p style="font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:10px;">${b.message}</p>
+              <div style="display:flex;gap:16px;font-size:12px;color:var(--text-muted);flex-wrap:wrap;">
+                <span><i class="fas fa-location-dot" style="color:var(--accent-rose);margin-right:4px;"></i> <strong>Zones:</strong> ${b.zones}</span>
+                <span><i class="fas fa-building" style="color:var(--primary);margin-right:4px;"></i> <strong>Dept:</strong> ${b.dept}</span>
+                <span><i class="fas fa-circle" style="color:${b.active ? 'var(--accent-emerald)' : 'var(--text-muted)'};font-size:8px;margin-right:4px;"></i> <strong>Status:</strong> ${b.active ? 'Broadcasting Live' : 'Archived'}</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <button class="btn btn-outline btn-sm" onclick="toggleBroadcastStatus('${b.id}')">
+                <i class="fas ${b.active ? 'fa-pause' : 'fa-play'}"></i> ${b.active ? 'Deactivate' : 'Activate'}
+              </button>
+              <button class="btn btn-danger btn-sm" onclick="deleteBroadcast('${b.id}')">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleBroadcastSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('bcTitle').value.trim();
+      const severity = document.getElementById('bcSeverity').value;
+      const zones = document.getElementById('bcZones').value.trim();
+      const dept = document.getElementById('bcDept').value;
+      const message = document.getElementById('bcMessage').value.trim();
+      const pin = document.getElementById('bcPinToHeader').checked;
+
+      const newBc = {
+        id: `BC-${Date.now().toString().slice(-4)}`,
+        title, severity, zones, dept, message,
+        pinned: pin,
+        active: true,
+        date: 'Just now'
+      };
+
+      allBroadcasts.unshift(newBc);
+      localStorage.setItem('idrs_broadcasts', JSON.stringify(allBroadcasts));
+
+      if (pin) {
+        const banner = document.getElementById('emergencyBanner');
+        if (banner) {
+          banner.style.display = 'flex';
+          const textWrap = banner.querySelector('.emergency-banner-text');
+          if (textWrap) {
+            textWrap.innerHTML = `<strong>${title}</strong><span>${message} (Affected Zones: ${zones})</span>`;
+          }
+        }
+      }
+
+      notifySuccess();
+      showToast('success', 'Public emergency broadcast alert published!');
+      logAuditEvent('Public Broadcast', `Published broadcast "${title}"`, 'Live');
+      document.getElementById('broadcastAlertForm')?.reset();
+      renderBroadcasts();
+    }
+
+    function toggleBroadcastStatus(id) {
+      const b = allBroadcasts.find(x => x.id === id);
+      if (!b) return;
+      b.active = !b.active;
+      localStorage.setItem('idrs_broadcasts', JSON.stringify(allBroadcasts));
+      showToast('info', `Broadcast "${b.title}" set to ${b.active ? 'Active' : 'Archived'}`);
+      renderBroadcasts();
+    }
+
+    function deleteBroadcast(id) {
+      allBroadcasts = allBroadcasts.filter(x => x.id !== id);
+      localStorage.setItem('idrs_broadcasts', JSON.stringify(allBroadcasts));
+      showToast('info', 'Broadcast alert removed from stream');
+      renderBroadcasts();
+    }
+
+    // ========================================================
+    // SLA & SYSTEM CONFIGURATION
+    // ========================================================
+    function saveSLASettings() {
+      currentSLAConfig.Critical = parseInt(document.getElementById('slaCritical').value, 10) || 4;
+      currentSLAConfig.High = parseInt(document.getElementById('slaHigh').value, 10) || 12;
+      currentSLAConfig.Medium = parseInt(document.getElementById('slaMedium').value, 10) || 48;
+      currentSLAConfig.Low = parseInt(document.getElementById('slaLow').value, 10) || 96;
+
+      localStorage.setItem('idrs_sla_config', JSON.stringify(currentSLAConfig));
+      notifySuccess();
+      showToast('success', 'Department SLA target rules saved successfully!');
+      logAuditEvent('SLA Config', 'Updated department SLA thresholds', 'Saved');
+    }
+
+    function loadSLASettings() {
+      const saved = localStorage.getItem('idrs_sla_config');
+      if (saved) {
+        try {
+          currentSLAConfig = JSON.parse(saved);
+          if (document.getElementById('slaCritical')) document.getElementById('slaCritical').value = currentSLAConfig.Critical || 4;
+          if (document.getElementById('slaHigh')) document.getElementById('slaHigh').value = currentSLAConfig.High || 12;
+          if (document.getElementById('slaMedium')) document.getElementById('slaMedium').value = currentSLAConfig.Medium || 48;
+          if (document.getElementById('slaLow')) document.getElementById('slaLow').value = currentSLAConfig.Low || 96;
+        } catch(e){}
+      }
+    }
+
+    function changeAutoRefreshInterval(ms) {
+      const val = parseInt(ms, 10);
+      if (val === 0) {
+        if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+        showToast('info', 'Auto-refresh paused. Use manual refresh button.');
+      } else {
+        startAutoRefresh(val);
+        showToast('info', `Auto-refresh interval set to ${val / 1000} seconds`);
+      }
+    }
+
+    function toggleSoundFromSetting(enabled) {
+      audioAlertsEnabled = enabled;
+      const icon = document.getElementById('soundIcon');
+      if (icon) icon.className = audioAlertsEnabled ? 'fas fa-volume-high' : 'fas fa-volume-xmark';
+      showToast('info', `Sound effects ${enabled ? 'Enabled' : 'Muted'}`);
+      if (enabled) notifySuccess();
+    }
+
+    function toggleEmergencyBanner(enabled) {
+      const b = document.getElementById('emergencyBanner');
+      if (b) b.style.display = enabled ? 'flex' : 'none';
+      showToast('info', `Emergency banner ${enabled ? 'Visible' : 'Hidden'}`);
+    }
+
+    function exportFullDatabaseBackupJSON() {
+      const snapshot = {
+        generated_at: new Date().toISOString(),
+        system: "Executive Admin Command Suite · IDRS",
+        reports: allReports,
+        users: allUsers,
+        feedback: allFeedback,
+        broadcasts: allBroadcasts,
+        audit_logs: auditLogs,
+        sla_config: currentSLAConfig
+      };
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(snapshot, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `IDRS_Full_Database_Snapshot_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      notifySuccess();
+      showToast('success', 'Complete database JSON snapshot exported!');
+      logAuditEvent('Database Snapshot', `Exported full database (${allReports.length} incidents)`, 'Success');
+    }
+
+    function clearLocalDataCache() {
+      if (!confirm('Are you sure you want to clear browser local cache and offline incident records?')) return;
+      localStorage.removeItem('reports');
+      localStorage.removeItem('idrs_broadcasts');
+      showToast('info', 'Local storage cache cleared. Reloading live data...');
+      loadAllData();
+    }
+
+    function loadSampleCivicData() {
+      const sampleIncidents = [
+        {
+          report_id: `IDRS-SAMPLE-101`,
+          title: 'Deep crater pothole causing vehicle tire bursts',
+          category: 'Pothole / Road Defect',
+          severity: 'Critical',
+          city: 'Mumbai',
+          state: 'Maharashtra',
+          location: 'Near Metro Pillar 240, Western Express Highway',
+          name: 'Aditya Mehta',
+          fullName: 'Aditya Mehta',
+          phone: '9820112233',
+          email: 'aditya.m@gmail.com',
+          status: 'Pending',
+          assigned_dept: 'Roads & Highway Maintenance',
+          admin_notes: 'Priority alert escalated due to high traffic speed zone.',
+          date: 'Today'
+        },
+        {
+          report_id: `IDRS-SAMPLE-102`,
+          title: 'Main pipeline burst creating localized water stagnation',
+          category: 'Water Pipeline Leak',
+          severity: 'High',
+          city: 'Mumbai',
+          state: 'Maharashtra',
+          location: 'SV Road, Junction 4, Bandra West',
+          name: 'Pooja Iyer',
+          fullName: 'Pooja Iyer',
+          phone: '9819223344',
+          email: 'pooja.iyer@civic.org',
+          status: 'In Progress',
+          assigned_dept: 'Water Works & Sewerage Authority',
+          admin_notes: 'Pumping team 2 dispatched on site.',
+          date: 'Yesterday'
+        },
+        {
+          report_id: `IDRS-SAMPLE-103`,
+          title: 'High-voltage streetlight pole flickering with sparking wire',
+          category: 'Broken Streetlight',
+          severity: 'Critical',
+          city: 'Delhi',
+          state: 'Delhi',
+          location: 'Ring Road, Near Flyover Ramp 2, Lajpat Nagar',
+          name: 'Vikram Singh',
+          fullName: 'Vikram Singh',
+          phone: '9899112233',
+          email: 'vikram.s@outlook.com',
+          status: 'Pending',
+          assigned_dept: 'Electrical & Streetlight Board',
+          admin_notes: 'Emergency isolation squad dispatched.',
+          date: 'Today'
+        }
+      ];
+
+      sampleIncidents.forEach(s => {
+        if (!allReports.some(r => r.report_id === s.report_id)) {
+          allReports.unshift(s);
+        }
+      });
+
+      notifySuccess();
+      showToast('success', 'Populated simulation incidents for testing!');
+      logAuditEvent('Simulation Data', 'Loaded sample incidents', 'Added');
+      updateKPIs();
+      rebuildCharts();
+      renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
     }
 
     // ========================================================
