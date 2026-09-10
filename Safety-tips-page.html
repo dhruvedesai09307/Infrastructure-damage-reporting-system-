@@ -57,7 +57,7 @@ body{
     text-decoration: none;
 }
 
-.logo i { font-size: 32px; color: #2F3B4A; }
+.logo i { font-size: 32px; color: #2563EB; }
 .logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
 .logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
 
@@ -161,19 +161,6 @@ body{
     color: #374151;
 }
 
-.home-icon-btn:hover {
-    background: #2563EB;
-    color: #FFFFFF;
-    border-color: #2563EB;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
-}
-
-@media (max-width: 640px) {
-    .nav-container { padding: 0 16px; }
-    .nav-links { display: none; }
-}
-
 /* ================= MAIN ================= */
 
 .container{
@@ -192,9 +179,10 @@ body{
 .page-icon{
     width:62px;
     height:62px;
-    background:#e8edf3;
-    color:#29384b;
-    border-radius:13px;
+    background:#EFF6FF;
+    color:#2563EB;
+    border:1px solid #DBEAFE;
+    border-radius:14px;
     margin:auto;
     display:flex;
     align-items:center;
@@ -207,6 +195,10 @@ body{
     font-size:36px;
     color:#253447;
     margin-bottom:7px;
+}
+
+.page-title h2 span{
+    color:#2563EB;
 }
 
 .page-title p{
@@ -235,8 +227,8 @@ body{
 }
 
 .search-box input:focus{
-    border-color:#8b9caf;
-    box-shadow:0 0 0 3px rgba(41,56,75,.06);
+    border-color:#2563EB;
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
 }
 
 .search-box i{
@@ -268,12 +260,13 @@ body{
 .stat-icon{
     width:42px;
     height:42px;
-    border-radius:8px;
-    background:#edf1f5;
+    border-radius:10px;
+    background:#EFF6FF;
+    border:1px solid #DBEAFE;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#29384b;
+    color:#2563EB;
 }
 
 .stat strong{
@@ -333,9 +326,10 @@ body{
 .icon{
     width:47px;
     height:47px;
-    border-radius:9px;
-    background:#edf2f7;
-    color:#29384b;
+    border-radius:10px;
+    background:#EFF6FF;
+    color:#2563EB;
+    border:1px solid #DBEAFE;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -370,7 +364,7 @@ body{
 }
 
 .tips i{
-    color:#55789d;
+    color:#2563EB;
     margin-top:3px;
 }
 
@@ -454,7 +448,7 @@ body{
 .step-number{
     width:40px;
     height:40px;
-    background:#29384b;
+    background:#2563EB;
     color:#fff;
     border-radius:50%;
     display:flex;
@@ -530,7 +524,7 @@ body{
 }
 
 .question i{
-    color:#7d8994;
+    color:#2563EB;
     transition:.25s;
 }
 .answer{
@@ -572,13 +566,18 @@ body{
 }
 
 .cta a{
-    background:white;
-    color:#29384b;
+    background:#2563EB;
+    color:#FFFFFF;
     text-decoration:none;
-    padding:10px 19px;
-    border-radius:6px;
+    padding:11px 22px;
+    border-radius:8px;
     font-size:16px;
-    font-weight:700;
+    font-weight:600;
+    transition:.2s;
+}
+
+.cta a:hover{
+    background:#1D4ED8;
 }
 
 /* ================= FOOTER ================= */
@@ -748,7 +747,7 @@ footer p{
 <i class="fa-solid fa-shield-halved"></i>
 </div>
 
-<h2>Safety Tips</h2>
+<h2>Safety <span>Tips & Guidelines</span></h2>
 
 <p>
 Important safety information for reporting infrastructure issues safely.
@@ -1462,7 +1461,7 @@ should always come first.
 
 </div>
 </div>
-</section>
+</main>
 
 <footer>
 <div class="copyright">
@@ -1471,6 +1470,15 @@ should always come first.
 </footer>
 
 <script>
+function searchTips() {
+    const query = document.getElementById("search").value.toLowerCase().trim();
+    const cards = document.querySelectorAll("#cards .card");
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? "block" : "none";
+    });
+}
+
 function toggleFAQ(element) {
   const item = element.parentElement;
   item.classList.toggle('active');

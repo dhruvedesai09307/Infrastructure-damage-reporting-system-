@@ -91,7 +91,7 @@
       gap: 12px;
       text-decoration: none;
     }
-    .logo i { font-size: 32px; color: #2F3B4A; }
+    .logo i { font-size: 32px; color: #2563EB; }
     .logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
     .logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
     .nav-links {
@@ -203,8 +203,9 @@
       align-items: center;
       gap: 6px;
       padding: 6px 14px;
-      background-color: #E5E7EB;
-      color: #374151;
+      background-color: #EFF6FF;
+      color: #2563EB;
+      border: 1px solid #DBEAFE;
       border-radius: 20px;
       font-size: 12px;
       font-weight: 600;
@@ -218,6 +219,10 @@
       color: var(--navy);
       letter-spacing: -0.5px;
       margin-bottom: 10px;
+    }
+
+    .page-hero h1 span {
+      color: #2563EB;
     }
 
     .page-hero p {
@@ -253,7 +258,7 @@
 
     .stepper-progress-fill {
       height: 100%;
-      background: var(--primary);
+      background: #2563EB;
       width: 0%;
       transition: width 0.4s ease;
     }
@@ -286,10 +291,10 @@
     }
 
     .step-item.active .step-circle {
-      border-color: var(--primary);
-      background: var(--primary);
+      border-color: #2563EB;
+      background: #2563EB;
       color: white;
-      box-shadow: 0 0 0 4px rgba(47, 59, 74, 0.15);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
     }
 
     .step-item.completed .step-circle {
@@ -306,7 +311,7 @@
     }
 
     .step-item.active .step-label {
-      color: var(--navy);
+      color: #2563EB;
     }
 
     /* Main Form Card */
@@ -337,8 +342,9 @@
       width: 42px;
       height: 42px;
       border-radius: 10px;
-      background: var(--slate-100);
-      color: var(--slate-800);
+      background: #EFF6FF;
+      color: #2563EB;
+      border: 1px solid #DBEAFE;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -456,13 +462,13 @@
     select:focus,
     textarea:focus {
       background-color: white;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(47, 59, 74, 0.12);
+      border-color: #2563EB;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
     }
 
     .input-wrapper input:focus + i,
     .input-wrapper select:focus + i {
-      color: var(--primary);
+      color: #2563EB;
     }
 
     textarea {
@@ -525,18 +531,18 @@
     }
 
     .cat-card.selected {
-      border-color: var(--primary);
-      background-color: var(--slate-100);
-      box-shadow: 0 0 0 2px var(--primary);
+      border-color: #2563EB;
+      background-color: #EFF6FF;
+      box-shadow: 0 0 0 2px #2563EB;
     }
 
     .cat-card.selected i {
-      color: var(--navy);
+      color: #2563EB;
       transform: scale(1.1);
     }
 
     .cat-card.selected span {
-      color: var(--navy);
+      color: #2563EB;
     }
 
     /* Severity Cards Selector */
@@ -620,7 +626,7 @@
     .btn-gps {
       background: none;
       border: none;
-      color: var(--primary);
+      color: #2563EB;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
@@ -750,15 +756,15 @@
     }
 
     .btn-primary {
-      background-color: var(--primary);
+      background-color: #2563EB;
       color: white;
-      box-shadow: 0 4px 12px rgba(47, 59, 74, 0.25);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
     }
 
     .btn-primary:hover {
-      background-color: var(--primary-hover);
+      background-color: #1D4ED8;
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(31, 41, 55, 0.35);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
     }
 
     .btn-secondary {
@@ -974,7 +980,7 @@
       <div class="hero-badge">
         <i class="fas fa-shield-alt"></i> Official Civic Reporting Portal
       </div>
-      <h1>Report Infrastructure Damage</h1>
+      <h1>Report <span>Infrastructure Damage</span></h1>
       <p>Help local public works authorities repair hazards quickly. Submit detailed location and condition records below.</p>
     </div>
 
