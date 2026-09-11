@@ -525,6 +525,7 @@ def chat_ai():
         if not message:
             return jsonify({'success': False, 'reply': 'Please provide a message.'}), 400
 
+        # 1. Try Gemini API if key is available
         api_key = os.environ.get('GEMINI_API_KEY') or os.environ.get('GOOGLE_API_KEY')
         if api_key:
             try:
@@ -532,16 +533,17 @@ def chat_ai():
                 genai.configure(api_key=api_key)
                 model = genai.GenerativeModel('gemini-1.5-flash')
                 sys_prompt = (
-                    "You are the IDRS (Infrastructure Damage Reporting System) Civic AI Assistant. "
-                    "Help citizens report potholes, water leaks, broken streetlights, bridge defects, and structural issues. "
-                    "Guide them to report at report.html and track complaints at track-report.html. "
-                    "Keep answers helpful, direct, polite, and concise."
+                    "You are the IDRS (Infrastructure Damage Reporting System) Civic AI Assistant — a friendly, witty, intelligent, and deeply helpful companion. "
+                    "You love having fun, engaging conversations, answering general questions, telling jokes, giving advice, doing trivia, and chatting about any topic. "
+                    "When citizens ask about civic infrastructure (potholes, water leaks, streetlights, bridges, garbage, traffic lights, tracking complaints), "
+                    "provide expert municipal advice, SLAs, and guide them to report.html or track-report.html. "
+                    "Keep your tone warm, charismatic, knowledgeable, and enjoyable to talk to!"
                 )
                 response = model.generate_content(f"{sys_prompt}\n\nUser: {message}")
                 if response and response.text:
                     return jsonify({'success': True, 'reply': response.text})
             except Exception as ai_err:
-                print(f"Gemini API fallback to rule engine: {ai_err}")
+                print(f"Gemini API note: {ai_err}")
 
         return jsonify({'success': True, 'reply': None})
     except Exception as e:

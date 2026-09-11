@@ -1,6 +1,21 @@
 /* ===================================================
-   IDRS Civic AI Chatbot Assistant - Stylesheet
+   IDRS Civic AI Chatbot Assistant - Comprehensive Stylesheet
    =================================================== */
+
+:root {
+  --idrs-primary: #2F3B4A;
+  --idrs-primary-dark: #1F2937;
+  --idrs-blue: #2563EB;
+  --idrs-blue-hover: #1D4ED8;
+  --idrs-emerald: #10B981;
+  --idrs-amber: #F59E0B;
+  --idrs-rose: #EF4444;
+  --idrs-surface: #FFFFFF;
+  --idrs-bg-subtle: #F8FAFC;
+  --idrs-border: #E5E7EB;
+  --idrs-text-main: #1F2937;
+  --idrs-text-muted: #6B7280;
+}
 
 /* Chatbot Floating Trigger Button */
 .idrs-chatbot-toggle {
@@ -12,7 +27,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #2F3B4A 0%, #1F2937 100%);
   color: #FFFFFF;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 10px 25px -3px rgba(31, 41, 55, 0.35), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -101,13 +116,13 @@
   position: fixed;
   bottom: 102px;
   right: 28px;
-  width: 380px;
+  width: 420px;
   max-width: calc(100vw - 36px);
-  height: 560px;
+  height: 620px;
   max-height: calc(100vh - 120px);
   background: #FFFFFF;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px -10px rgba(17, 24, 39, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  border-radius: 22px;
+  box-shadow: 0 20px 45px -10px rgba(17, 24, 39, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -117,7 +132,7 @@
   transform: translateY(20px) scale(0.95);
   transform-origin: bottom right;
   transition: all 0.3s cubic-bezier(0.34, 1.3, 0.64, 1);
-  font-family: 'Inter', 'Poppins', sans-serif;
+  font-family: 'Poppins', -apple-system, sans-serif;
 }
 
 .idrs-chat-window.open {
@@ -126,15 +141,27 @@
   transform: translateY(0) scale(1);
 }
 
+/* Maximized View Mode */
+.idrs-chat-window.maximized {
+  width: 680px;
+  height: 740px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 60px);
+  bottom: 30px;
+  right: 30px;
+  border-radius: 24px;
+}
+
 /* Chat Header */
 .idrs-chat-header {
-  padding: 16px 20px;
+  padding: 14px 18px;
   background: linear-gradient(135deg, #2F3B4A 0%, #1F2937 100%);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .idrs-header-bot-info {
@@ -162,6 +189,9 @@
   letter-spacing: -0.2px;
   margin: 0;
   color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .idrs-bot-status {
@@ -178,6 +208,7 @@
   height: 7px;
   background-color: #10B981;
   border-radius: 50%;
+  box-shadow: 0 0 6px #10B981;
 }
 
 .idrs-header-actions {
@@ -206,15 +237,16 @@
   color: #FFFFFF;
 }
 
-/* Quick Suggestion Chips Bar */
+/* Quick Action Chips Bar */
 .idrs-quick-chips-wrapper {
-  padding: 10px 14px;
+  padding: 8px 12px;
   background: #F9FAFB;
   border-bottom: 1px solid #E5E7EB;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   overflow-x: auto;
   scrollbar-width: none;
+  flex-shrink: 0;
 }
 
 .idrs-quick-chips-wrapper::-webkit-scrollbar {
@@ -235,6 +267,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  flex-shrink: 0;
 }
 
 .idrs-chip:hover {
@@ -245,12 +278,7 @@
 }
 
 .idrs-chip i {
-  color: #2563EB;
-  font-size: 11px;
-}
-
-.idrs-chip:hover i {
-  color: #FFFFFF;
+  font-size: 12px;
 }
 
 /* Messages Body Area */
@@ -269,7 +297,7 @@
 .idrs-msg-row {
   display: flex;
   gap: 10px;
-  max-width: 88%;
+  max-width: 90%;
   animation: idrs-msg-appear 0.25s ease forwards;
 }
 
@@ -288,9 +316,9 @@
 }
 
 .idrs-msg-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
   background: #2F3B4A;
   color: #60A5FA;
   display: flex;
@@ -301,13 +329,20 @@
   margin-top: 2px;
 }
 
+.idrs-msg-content-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 100%;
+}
+
 .idrs-msg-bubble {
   padding: 12px 16px;
   border-radius: 16px;
   font-size: 14px;
   line-height: 1.55;
   word-break: break-word;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .idrs-msg-row.bot-msg .idrs-msg-bubble {
@@ -323,24 +358,89 @@
   border-top-right-radius: 4px;
 }
 
-.idrs-msg-time {
-  font-size: 10px;
+/* Message Meta & Action Bar */
+.idrs-msg-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 4px;
+  font-size: 11px;
   color: #9CA3AF;
-  margin-top: 4px;
-  text-align: right;
 }
 
-.idrs-msg-row.user-msg .idrs-msg-time {
-  color: rgba(255, 255, 255, 0.7);
+.idrs-msg-time {
+  font-size: 11px;
+  color: #9CA3AF;
 }
 
-/* Rich Message Cards inside Chat */
+.idrs-msg-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.idrs-meta-btn {
+  background: transparent;
+  border: none;
+  color: #9CA3AF;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.idrs-meta-btn:hover {
+  color: #2563EB;
+  background: #EFF6FF;
+}
+
+.idrs-meta-btn.liked {
+  color: #10B981;
+}
+
+.idrs-meta-btn.disliked {
+  color: #EF4444;
+}
+
+/* Inline Dynamic Action Chips */
+.idrs-inline-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.idrs-inline-chip {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.idrs-inline-chip:hover {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: #2563EB;
+  transform: translateY(-1px);
+}
+
+/* Rich Message Cards */
 .idrs-chat-card {
   margin-top: 10px;
   background: #F3F4F6;
   border: 1px solid #E5E7EB;
   border-radius: 12px;
-  padding: 12px;
+  padding: 12px 14px;
 }
 
 .idrs-chat-card-title {
@@ -371,11 +471,282 @@
   font-size: 13px;
   font-weight: 600;
   border-radius: 8px;
-  transition: background 0.2s;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .idrs-chat-btn-action:hover {
   background: #1D4ED8;
+  transform: translateY(-1px);
+}
+
+/* ===================================== */
+/* In-Chat Interactive Forms & Wizards   */
+/* ===================================== */
+.idrs-wizard-card {
+  margin-top: 8px;
+  background: #FFFFFF;
+  border: 1.5px solid #DBEAFE;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.idrs-wizard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.idrs-wizard-step-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2563EB;
+  background: #EFF6FF;
+  padding: 3px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.idrs-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.idrs-cat-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  background: #F9FAFB;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  gap: 4px;
+}
+
+.idrs-cat-btn i {
+  font-size: 18px;
+  color: #2563EB;
+}
+
+.idrs-cat-btn span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.idrs-cat-btn:hover, .idrs-cat-btn.selected {
+  background: #EFF6FF;
+  border-color: #2563EB;
+  color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.12);
+}
+
+.idrs-severity-options {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.idrs-sev-btn {
+  flex: 1;
+  padding: 7px 4px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid #E5E7EB;
+  background: #F9FAFB;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.idrs-sev-btn.sev-critical:hover, .idrs-sev-btn.sev-critical.selected {
+  background: #FEF2F2;
+  border-color: #EF4444;
+  color: #DC2626;
+}
+
+.idrs-sev-btn.sev-high:hover, .idrs-sev-btn.sev-high.selected {
+  background: #FFFBEB;
+  border-color: #F59E0B;
+  color: #D97706;
+}
+
+.idrs-sev-btn.sev-med:hover, .idrs-sev-btn.sev-med.selected {
+  background: #EFF6FF;
+  border-color: #3B82F6;
+  color: #2563EB;
+}
+
+.idrs-wizard-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  background: #F9FAFB;
+  margin-bottom: 8px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.idrs-wizard-input:focus {
+  background: #FFFFFF;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.idrs-gps-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563EB;
+  background: #EFF6FF;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+
+.idrs-gps-btn:hover {
+  background: #DBEAFE;
+}
+
+/* Star Rating Selector in Feedback Form */
+.idrs-star-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.idrs-star-btn {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #D1D5DB;
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.idrs-star-btn.active, .idrs-star-btn:hover {
+  color: #F59E0B;
+  transform: scale(1.15);
+}
+
+/* Live Ticket Stepper Card */
+.idrs-stepper-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0 14px;
+  position: relative;
+  padding: 0 4px;
+}
+
+.idrs-stepper-wrap::before {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: #E5E7EB;
+  z-index: 1;
+}
+
+.idrs-stepper-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.idrs-stepper-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #F3F4F6;
+  border: 2px solid #D1D5DB;
+  color: #9CA3AF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.idrs-stepper-step.completed .idrs-stepper-dot {
+  background: #10B981;
+  border-color: #10B981;
+  color: #FFFFFF;
+}
+
+.idrs-stepper-step.active .idrs-stepper-dot {
+  background: #2563EB;
+  border-color: #2563EB;
+  color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+}
+
+.idrs-stepper-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #6B7280;
+  text-align: center;
+}
+
+.idrs-stepper-step.active .idrs-stepper-label {
+  color: #1F2937;
+  font-weight: 700;
+}
+
+/* Stats Pill Cards */
+.idrs-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.idrs-stat-box {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.idrs-stat-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2563EB;
+}
+
+.idrs-stat-lbl {
+  font-size: 11px;
+  color: #6B7280;
+  font-weight: 600;
 }
 
 /* Typing Indicator Animation */
@@ -413,21 +784,65 @@
   40% { transform: scale(1); }
 }
 
-/* Chat Input Bar */
+/* Autocomplete Popover */
+.idrs-autocomplete-popover {
+  position: absolute;
+  bottom: 64px;
+  left: 14px;
+  right: 14px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+  max-height: 180px;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  z-index: 10001;
+}
+
+.idrs-autocomplete-popover.show {
+  display: flex;
+}
+
+.idrs-autocomplete-item {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #F3F4F6;
+  transition: background 0.15s;
+}
+
+.idrs-autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.idrs-autocomplete-item:hover {
+  background: #EFF6FF;
+  color: #2563EB;
+}
+
+/* Chat Input Footer */
 .idrs-chat-footer {
-  padding: 12px 14px;
+  padding: 10px 14px;
   background: #FFFFFF;
   border-top: 1px solid #E5E7EB;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .idrs-chat-form {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: #F3F4F6;
   border: 1.5px solid #E5E7EB;
   border-radius: 25px;
-  padding: 6px 8px 6px 14px;
+  padding: 5px 6px 5px 12px;
   transition: all 0.2s;
 }
 
@@ -449,14 +864,15 @@
 
 .idrs-chat-input::placeholder {
   color: #9CA3AF;
+  font-size: 13px;
 }
 
-.idrs-send-btn {
-  width: 36px;
-  height: 36px;
+.idrs-input-btn {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: #2F3B4A;
-  color: #FFFFFF;
+  background: transparent;
+  color: #6B7280;
   border: none;
   display: flex;
   align-items: center;
@@ -467,8 +883,32 @@
   flex-shrink: 0;
 }
 
+.idrs-input-btn:hover {
+  color: #2563EB;
+  background: #EFF6FF;
+}
+
+/* Voice Mic Pulse */
+.idrs-mic-btn.listening {
+  background: #EF4444 !important;
+  color: #FFFFFF !important;
+  animation: idrs-mic-pulse 1.2s infinite ease-in-out;
+}
+
+@keyframes idrs-mic-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.idrs-send-btn {
+  background: #2F3B4A;
+  color: #FFFFFF;
+}
+
 .idrs-send-btn:hover {
   background: #1F2937;
+  color: #FFFFFF;
   transform: scale(1.05);
 }
 
@@ -497,5 +937,13 @@
     max-height: 100vh;
     border-radius: 0;
     margin: 0;
+  }
+
+  .idrs-chat-window.maximized {
+    width: 100vw;
+    height: 100vh;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
   }
 }
