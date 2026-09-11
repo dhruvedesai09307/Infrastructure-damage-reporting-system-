@@ -80,7 +80,7 @@
   color: #FFFFFF;
   padding: 8px 16px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   white-space: nowrap;
@@ -157,7 +157,7 @@
 }
 
 .idrs-bot-text h4 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.2px;
   margin: 0;
@@ -168,7 +168,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
+  font-size: 12px;
   color: #D1D5DB;
   font-weight: 500;
 }
@@ -226,7 +226,7 @@
   background: #FFFFFF;
   border: 1px solid #D1D5DB;
   border-radius: 16px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: #374151;
   white-space: nowrap;
@@ -304,7 +304,7 @@
 .idrs-msg-bubble {
   padding: 12px 16px;
   border-radius: 16px;
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.55;
   word-break: break-word;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -344,7 +344,7 @@
 }
 
 .idrs-chat-card-title {
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 700;
   color: #111827;
   margin-bottom: 6px;
@@ -354,7 +354,7 @@
 }
 
 .idrs-chat-card-desc {
-  font-size: 11.5px;
+  font-size: 13px;
   color: #4B5563;
   line-height: 1.45;
   margin-bottom: 8px;
@@ -368,7 +368,7 @@
   background: #2563EB;
   color: #FFFFFF !important;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   border-radius: 8px;
   transition: background 0.2s;
@@ -442,7 +442,7 @@
   border: none;
   background: transparent;
   outline: none;
-  font-size: 13.5px;
+  font-size: 14px;
   color: #1F2937;
   font-family: inherit;
 }
