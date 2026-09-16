@@ -33,9 +33,9 @@
 }
 
 /* ==========================================================================
-   Executive Admin Dark Theme Overrides ([data-theme="dark"])
+   Executive Admin Dark Theme Overrides (html[data-theme="dark"])
    ========================================================================== */
-[data-theme="dark"] {
+html[data-theme="dark"] {
   --bg-body: #090D16;
   --bg-surface: #0F172A;
   --bg-card: #0F172A;
@@ -59,7 +59,7 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
 
-  /* Slate Variable Overrides for Pages using CSS Variables */
+  /* Slate Color Variables Override for Pages */
   --slate-900: #F8FAFC;
   --slate-800: #F1F5F9;
   --slate-700: #CBD5E1;
@@ -76,12 +76,12 @@
   --theme-btn-border: rgba(255, 255, 255, 0.15);
 }
 
-/* Base Body Transition & Theme Styles */
+/* Smooth Body Transition & Background */
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-[data-theme="dark"] body {
+html[data-theme="dark"] body {
   background-color: #090D16 !important;
   background-image: 
     radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
@@ -89,218 +89,376 @@ body {
   color: #F8FAFC !important;
 }
 
-/* Navbars & Headers */
-[data-theme="dark"] .topbar,
-[data-theme="dark"] .app-topbar,
-[data-theme="dark"] header.topbar,
-[data-theme="dark"] header {
-  background: rgba(15, 23, 42, 0.9) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* ==========================================================================
+   Header, Navigation & Topbar
+   ========================================================================== */
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .app-topbar,
+html[data-theme="dark"] header.topbar,
+html[data-theme="dark"] header {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+  background: rgba(15, 23, 42, 0.92) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
   border-bottom-color: rgba(255, 255, 255, 0.1) !important;
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] .logo-text h2,
-[data-theme="dark"] .logo h2,
-[data-theme="dark"] .brand-title {
+html[data-theme="dark"] .logo-text h2,
+html[data-theme="dark"] .logo h2,
+html[data-theme="dark"] .brand-title {
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] .logo-text p,
-[data-theme="dark"] .subtitle,
-[data-theme="dark"] .card-subtitle {
+html[data-theme="dark"] .logo-text p,
+html[data-theme="dark"] .subtitle,
+html[data-theme="dark"] .card-subtitle {
   color: #94A3B8 !important;
 }
 
-[data-theme="dark"] .profile-chip {
-  background: #1E293B !important;
+html[data-theme="dark"] .nav-link {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .nav-link:hover,
+html[data-theme="dark"] .nav-link.active {
+  background-color: #1E293B !important;
+  color: #60A5FA !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .profile-chip {
+  background-color: #1E293B !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] .profile-chip:hover {
-  background: #25334D !important;
+html[data-theme="dark"] .profile-chip:hover {
+  background-color: #25334D !important;
+  border-color: #3B82F6 !important;
 }
 
-/* Side Menu / Navigation Drawers */
-[data-theme="dark"] .side-menu,
-[data-theme="dark"] .sidebar {
-  background: #0F172A !important;
+/* Side Menu / Drawers */
+html[data-theme="dark"] .side-menu,
+html[data-theme="dark"] .sidebar {
+  background-color: #0F172A !important;
   border-right-color: rgba(255, 255, 255, 0.1) !important;
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] .side-menu a,
-[data-theme="dark"] .sidebar-nav a {
+html[data-theme="dark"] .side-menu a,
+html[data-theme="dark"] .sidebar-nav a {
   color: #CBD5E1 !important;
 }
 
-[data-theme="dark"] .side-menu a:hover,
-[data-theme="dark"] .sidebar-nav a:hover,
-[data-theme="dark"] .side-menu a.active,
-[data-theme="dark"] .sidebar-nav a.active {
-  background: #1E293B !important;
+html[data-theme="dark"] .side-menu a:hover,
+html[data-theme="dark"] .sidebar-nav a:hover,
+html[data-theme="dark"] .side-menu a.active,
+html[data-theme="dark"] .sidebar-nav a.active {
+  background-color: #1E293B !important;
   color: #3B82F6 !important;
 }
 
-[data-theme="dark"] .close-btn {
-  color: #94A3B8 !important;
+html[data-theme="dark"] .close-btn,
+html[data-theme="dark"] .close-menu {
+  color: #CBD5E1 !important;
 }
 
-/* Cards & Surface Containers */
-[data-theme="dark"] .card,
-[data-theme="dark"] .info-card,
-[data-theme="dark"] .login-card,
-[data-theme="dark"] .register-card,
-[data-theme="dark"] .report-card,
-[data-theme="dark"] .stat-card,
-[data-theme="dark"] .step-card,
-[data-theme="dark"] .faq-card,
-[data-theme="dark"] .tips-card,
-[data-theme="dark"] .awareness-card,
-[data-theme="dark"] .policy-card,
-[data-theme="dark"] .terms-card,
-[data-theme="dark"] .hero-right,
-[data-theme="dark"] .content-card,
-[data-theme="dark"] .sidebar-card,
-[data-theme="dark"] .profile-card,
-[data-theme="dark"] .form-card,
-[data-theme="dark"] .card-box,
-[data-theme="dark"] .detail-card,
-[data-theme="dark"] .quick-action-card,
-[data-theme="dark"] .metric-card,
-[data-theme="dark"] .filter-card,
-[data-theme="dark"] .table-card {
+/* ==========================================================================
+   Universal Card Containers & Boxes (Fixes All Blank White Cards)
+   ========================================================================== */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .info-card,
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .category-card,
+html[data-theme="dark"] .step-box,
+html[data-theme="dark"] .step-card,
+html[data-theme="dark"] .emergency-card,
+html[data-theme="dark"] .map-box,
+html[data-theme="dark"] .recent-box,
+html[data-theme="dark"] .callout-card,
+html[data-theme="dark"] .feature-card,
+html[data-theme="dark"] .cta-box,
+html[data-theme="dark"] .faq-card,
+html[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .tips-card,
+html[data-theme="dark"] .tips-box,
+html[data-theme="dark"] .awareness-card,
+html[data-theme="dark"] .policy-card,
+html[data-theme="dark"] .terms-card,
+html[data-theme="dark"] .guideline-box,
+html[data-theme="dark"] .resource-card,
+html[data-theme="dark"] .hero-card,
+html[data-theme="dark"] .article-card,
+html[data-theme="dark"] .support-card,
+html[data-theme="dark"] .contact-box,
+html[data-theme="dark"] .feedback-card,
+html[data-theme="dark"] .about-card,
+html[data-theme="dark"] .training-card,
+html[data-theme="dark"] .module-box,
+html[data-theme="dark"] .quiz-card,
+html[data-theme="dark"] .cert-card,
+html[data-theme="dark"] .report-card,
+html[data-theme="dark"] .form-card,
+html[data-theme="dark"] .report-form,
+html[data-theme="dark"] .field-group,
+html[data-theme="dark"] .file-upload-box,
+html[data-theme="dark"] .track-card,
+html[data-theme="dark"] .search-box,
+html[data-theme="dark"] .report-details-card,
+html[data-theme="dark"] .timeline-item,
+html[data-theme="dark"] .profile-card,
+html[data-theme="dark"] .stat-item,
+html[data-theme="dark"] .activity-item,
+html[data-theme="dark"] .login-card,
+html[data-theme="dark"] .register-card,
+html[data-theme="dark"] .app-card,
+html[data-theme="dark"] .metric-card,
+html[data-theme="dark"] .chart-card,
+html[data-theme="dark"] .table-card,
+html[data-theme="dark"] .hero-right,
+html[data-theme="dark"] .sidebar-card,
+html[data-theme="dark"] .content-card,
+html[data-theme="dark"] .location-picker-box,
+html[data-theme="dark"] .box,
+html[data-theme="dark"] .container-card,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .card-box {
+  background-color: #0F172A !important;
   background: #0F172A !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.05) !important;
   color: #F8FAFC !important;
 }
 
-/* Headings & Text Overrides */
-[data-theme="dark"] h1,
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] h4,
-[data-theme="dark"] h5,
-[data-theme="dark"] h6 {
+/* Card Hover States in Dark Mode */
+html[data-theme="dark"] .card:hover,
+html[data-theme="dark"] .info-card:hover,
+html[data-theme="dark"] .stat-card:hover,
+html[data-theme="dark"] .category-card:hover,
+html[data-theme="dark"] .step-box:hover,
+html[data-theme="dark"] .step-card:hover,
+html[data-theme="dark"] .emergency-card:hover,
+html[data-theme="dark"] .map-box:hover,
+html[data-theme="dark"] .recent-box:hover,
+html[data-theme="dark"] .callout-card:hover,
+html[data-theme="dark"] .feature-card:hover,
+html[data-theme="dark"] .cta-box:hover,
+html[data-theme="dark"] .faq-card:hover,
+html[data-theme="dark"] .faq-item:hover,
+html[data-theme="dark"] .tips-card:hover,
+html[data-theme="dark"] .awareness-card:hover,
+html[data-theme="dark"] .policy-card:hover,
+html[data-theme="dark"] .terms-card:hover,
+html[data-theme="dark"] .resource-card:hover,
+html[data-theme="dark"] .article-card:hover,
+html[data-theme="dark"] .support-card:hover,
+html[data-theme="dark"] .contact-box:hover,
+html[data-theme="dark"] .feedback-card:hover,
+html[data-theme="dark"] .about-card:hover,
+html[data-theme="dark"] .training-card:hover {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* ==========================================================================
+   Typography & Text Legibility inside Dark Containers
+   ========================================================================== */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] .card-title,
+html[data-theme="dark"] .brand-title,
+html[data-theme="dark"] .step-box h3,
+html[data-theme="dark"] .emergency-card h3,
+html[data-theme="dark"] .emergency-card h2,
+html[data-theme="dark"] .stat-card h2,
+html[data-theme="dark"] .category-card h3,
+html[data-theme="dark"] .hero-left h1 {
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] p,
-[data-theme="dark"] span:not(.btn-text):not(.badge),
-[data-theme="dark"] li,
-[data-theme="dark"] label {
-  color: #CBD5E1;
+html[data-theme="dark"] p,
+html[data-theme="dark"] li,
+html[data-theme="dark"] label,
+html[data-theme="dark"] .section-subtitle,
+html[data-theme="dark"] .subtitle,
+html[data-theme="dark"] .card-subtitle,
+html[data-theme="dark"] .step-box p,
+html[data-theme="dark"] .emergency-card p,
+html[data-theme="dark"] .stat-card p,
+html[data-theme="dark"] .category-card p,
+html[data-theme="dark"] .info-card p,
+html[data-theme="dark"] .hero-left p {
+  color: #CBD5E1 !important;
 }
 
-[data-theme="dark"] .text-muted,
-[data-theme="dark"] .desc,
-[data-theme="dark"] .helper-text,
-[data-theme="dark"] small {
+html[data-theme="dark"] .text-muted,
+html[data-theme="dark"] .desc,
+html[data-theme="dark"] .helper-text,
+html[data-theme="dark"] small {
   color: #94A3B8 !important;
 }
 
-/* Form Inputs & Controls */
-[data-theme="dark"] input[type="text"],
-[data-theme="dark"] input[type="email"],
-[data-theme="dark"] input[type="password"],
-[data-theme="dark"] input[type="number"],
-[data-theme="dark"] input[type="tel"],
-[data-theme="dark"] input[type="date"],
-[data-theme="dark"] input[type="datetime-local"],
-[data-theme="dark"] select,
-[data-theme="dark"] textarea,
-[data-theme="dark"] .form-control,
-[data-theme="dark"] .input-wrap input {
+/* Icons inside Cards */
+html[data-theme="dark"] .step-box i,
+html[data-theme="dark"] .emergency-card i,
+html[data-theme="dark"] .stat-card i,
+html[data-theme="dark"] .category-card i,
+html[data-theme="dark"] .info-list i,
+html[data-theme="dark"] .map-box i,
+html[data-theme="dark"] .card i:not(.prefix-icon):not(.theme-toggle-btn i):not(.fi) {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .step-number {
+  background-color: #2563EB !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* ==========================================================================
+   Tabs, Badges & Interactive Controls
+   ========================================================================== */
+html[data-theme="dark"] .tabs,
+html[data-theme="dark"] .tab-btn {
+  background-color: #1E293B !important;
+  color: #CBD5E1 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .tab-btn.active,
+html[data-theme="dark"] .tab-btn:hover {
+  background-color: #2563EB !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .badge,
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .portal-badge {
+  background-color: #1E293B !important;
+  color: #60A5FA !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* ==========================================================================
+   Form Controls, Inputs, & Buttons
+   ========================================================================== */
+html[data-theme="dark"] input[type="text"],
+html[data-theme="dark"] input[type="email"],
+html[data-theme="dark"] input[type="password"],
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="tel"],
+html[data-theme="dark"] input[type="date"],
+html[data-theme="dark"] input[type="datetime-local"],
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] .input-wrap input,
+html[data-theme="dark"] .search-box input {
   background-color: #1E293B !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   color: #F8FAFC !important;
 }
 
-[data-theme="dark"] input::placeholder,
-[data-theme="dark"] textarea::placeholder,
-[data-theme="dark"] select::placeholder {
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder,
+html[data-theme="dark"] select::placeholder {
   color: #64748B !important;
 }
 
-[data-theme="dark"] input:focus,
-[data-theme="dark"] select:focus,
-[data-theme="dark"] textarea:focus {
+html[data-theme="dark"] input:focus,
+html[data-theme="dark"] select:focus,
+html[data-theme="dark"] textarea:focus {
   border-color: #3B82F6 !important;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important;
   background-color: #141E33 !important;
 }
 
-/* Secondary & Light Buttons in Dark Mode */
-[data-theme="dark"] .btn2,
-[data-theme="dark"] .btn-secondary,
-[data-theme="dark"] .btn-register,
-[data-theme="dark"] .btn-outline {
-  background: #1E293B !important;
+/* Buttons */
+html[data-theme="dark"] .btn2,
+html[data-theme="dark"] .btn-secondary,
+html[data-theme="dark"] .btn-register,
+html[data-theme="dark"] .btn-outline,
+html[data-theme="dark"] .home-icon-btn,
+html[data-theme="dark"] .btn-home {
+  background-color: #1E293B !important;
   color: #F8FAFC !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
-[data-theme="dark"] .btn2:hover,
-[data-theme="dark"] .btn-secondary:hover,
-[data-theme="dark"] .btn-register:hover,
-[data-theme="dark"] .btn-outline:hover {
-  background: #25334D !important;
+html[data-theme="dark"] .btn2:hover,
+html[data-theme="dark"] .btn-secondary:hover,
+html[data-theme="dark"] .btn-register:hover,
+html[data-theme="dark"] .btn-outline:hover,
+html[data-theme="dark"] .home-icon-btn:hover,
+html[data-theme="dark"] .btn-home:hover {
+  background-color: #25334D !important;
   color: #FFFFFF !important;
+  border-color: #3B82F6 !important;
 }
 
-/* Tables */
-[data-theme="dark"] table {
+/* ==========================================================================
+   Tables & Modals
+   ========================================================================== */
+html[data-theme="dark"] table {
   color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-[data-theme="dark"] th {
-  background: #141E33 !important;
+html[data-theme="dark"] th {
+  background-color: #141E33 !important;
+  color: #F8FAFC !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] td {
+  background-color: #0F172A !important;
   color: #CBD5E1 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-[data-theme="dark"] td {
-  background: #0F172A !important;
-  color: #E2E8F0 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-[data-theme="dark"] tr:hover td {
-  background: #1A2642 !important;
+html[data-theme="dark"] tr:hover td {
+  background-color: #1A2642 !important;
 }
 
-/* Modals & Overlays */
-[data-theme="dark"] .modal-content,
-[data-theme="dark"] .modal-body,
-[data-theme="dark"] .modal-header,
-[data-theme="dark"] .modal-footer {
-  background: #0F172A !important;
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .modal-body,
+html[data-theme="dark"] .modal-header,
+html[data-theme="dark"] .modal-footer {
+  background-color: #0F172A !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: #F8FAFC !important;
 }
 
-/* Footers */
-[data-theme="dark"] footer,
-[data-theme="dark"] .footer {
-  background: #0B1120 !important;
+/* ==========================================================================
+   Footers
+   ========================================================================== */
+html[data-theme="dark"] footer,
+html[data-theme="dark"] .footer {
+  background-color: #0B1120 !important;
   border-top-color: rgba(255, 255, 255, 0.08) !important;
   color: #94A3B8 !important;
 }
 
-[data-theme="dark"] footer p,
-[data-theme="dark"] footer a {
+html[data-theme="dark"] footer p,
+html[data-theme="dark"] footer span,
+html[data-theme="dark"] footer a {
   color: #94A3B8 !important;
 }
 
-[data-theme="dark"] footer a:hover {
+html[data-theme="dark"] footer a:hover {
   color: #3B82F6 !important;
 }
 
 /* ==========================================================================
-   Theme Toggle Button Components
+   Theme Toggle Button Styling
    ========================================================================== */
 .theme-toggle-btn {
   display: inline-flex;
@@ -309,7 +467,7 @@ body {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: var(--theme-btn-bg);
+  background-color: var(--theme-btn-bg);
   color: var(--theme-btn-color);
   border: 1px solid var(--theme-btn-border);
   cursor: pointer;
