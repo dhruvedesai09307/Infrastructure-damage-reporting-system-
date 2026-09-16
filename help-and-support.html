@@ -19,8 +19,10 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <!-- IDRS AI Chatbot Styles -->
+  <!-- IDRS AI Chatbot & Universal Theme Styles -->
   <link rel="stylesheet" href="chatbot.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
 
   <style>
     :root {
@@ -451,9 +453,14 @@
         <a href="help-and-support.html" class="nav-link active">Support</a>
     </nav>
 
-    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-        <i class="fas fa-house"></i>
-    </a>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+            <i class="fas fa-house"></i>
+        </a>
+    </div>
   </header>
 
   <!-- MOBILE SIDE MENU -->

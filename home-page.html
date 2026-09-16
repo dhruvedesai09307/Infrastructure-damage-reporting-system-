@@ -17,8 +17,10 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- IDRS AI Chatbot Styles -->
+<!-- IDRS AI Chatbot & Universal Theme Styles -->
 <link rel="stylesheet" href="chatbot.css">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 
 <style>
 
@@ -924,10 +926,15 @@ hr{
         </div>
     </div>
 
-    <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
-        <span class="profile-chip-avatar" id="navAvatar">?</span>
-        <span id="navUserName">Profile</span>
-    </a>
+    <div style="display:flex;align-items:center;gap:12px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
+            <span class="profile-chip-avatar" id="navAvatar">?</span>
+            <span id="navUserName">Profile</span>
+        </a>
+    </div>
 </header>
 
 <div id="sideMenu" class="side-menu">

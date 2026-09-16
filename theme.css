@@ -1,0 +1,338 @@
+/* ==========================================================================
+   IDRS Universal Theme System (Light Default & Executive Admin Dark Theme)
+   ========================================================================== */
+
+:root {
+  /* Light Theme Defaults */
+  --bg-body: #F3F4F6;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --bg-input: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  --border-subtle: #E5E7EB;
+  --border-strong: #D1D5DB;
+  --border-focus: #2563EB;
+
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6B7280;
+
+  --primary: #2563EB;
+  --primary-hover: #1D4ED8;
+  --primary-glow: rgba(37, 99, 235, 0.2);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  --theme-btn-bg: #E2E8F0;
+  --theme-btn-color: #374151;
+  --theme-btn-border: #CBD5E1;
+}
+
+/* ==========================================================================
+   Executive Admin Dark Theme Overrides ([data-theme="dark"])
+   ========================================================================== */
+[data-theme="dark"] {
+  --bg-body: #090D16;
+  --bg-surface: #0F172A;
+  --bg-card: #0F172A;
+  --bg-card-hover: #141E33;
+  --bg-input: #1E293B;
+  --bg-glass: rgba(15, 23, 42, 0.85);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-focus: #3B82F6;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  --primary: #3B82F6;
+  --primary-hover: #2563EB;
+  --primary-glow: rgba(59, 130, 246, 0.25);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+
+  /* Slate Variable Overrides for Pages using CSS Variables */
+  --slate-900: #F8FAFC;
+  --slate-800: #F1F5F9;
+  --slate-700: #CBD5E1;
+  --slate-600: #94A3B8;
+  --slate-500: #64748B;
+  --slate-400: #475569;
+  --slate-300: #334155;
+  --slate-200: #1E293B;
+  --slate-100: #141E33;
+  --slate-50: #090D16;
+
+  --theme-btn-bg: #1E293B;
+  --theme-btn-color: #F59E0B;
+  --theme-btn-border: rgba(255, 255, 255, 0.15);
+}
+
+/* Base Body Transition & Theme Styles */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+  background-color: #090D16 !important;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.12) 0px, transparent 50%) !important;
+  color: #F8FAFC !important;
+}
+
+/* Navbars & Headers */
+[data-theme="dark"] .topbar,
+[data-theme="dark"] .app-topbar,
+[data-theme="dark"] header.topbar,
+[data-theme="dark"] header {
+  background: rgba(15, 23, 42, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .logo-text h2,
+[data-theme="dark"] .logo h2,
+[data-theme="dark"] .brand-title {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .logo-text p,
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .card-subtitle {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .profile-chip {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .profile-chip:hover {
+  background: #25334D !important;
+}
+
+/* Side Menu / Navigation Drawers */
+[data-theme="dark"] .side-menu,
+[data-theme="dark"] .sidebar {
+  background: #0F172A !important;
+  border-right-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .side-menu a,
+[data-theme="dark"] .sidebar-nav a {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .side-menu a:hover,
+[data-theme="dark"] .sidebar-nav a:hover,
+[data-theme="dark"] .side-menu a.active,
+[data-theme="dark"] .sidebar-nav a.active {
+  background: #1E293B !important;
+  color: #3B82F6 !important;
+}
+
+[data-theme="dark"] .close-btn {
+  color: #94A3B8 !important;
+}
+
+/* Cards & Surface Containers */
+[data-theme="dark"] .card,
+[data-theme="dark"] .info-card,
+[data-theme="dark"] .login-card,
+[data-theme="dark"] .register-card,
+[data-theme="dark"] .report-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .step-card,
+[data-theme="dark"] .faq-card,
+[data-theme="dark"] .tips-card,
+[data-theme="dark"] .awareness-card,
+[data-theme="dark"] .policy-card,
+[data-theme="dark"] .terms-card,
+[data-theme="dark"] .hero-right,
+[data-theme="dark"] .content-card,
+[data-theme="dark"] .sidebar-card,
+[data-theme="dark"] .profile-card,
+[data-theme="dark"] .form-card,
+[data-theme="dark"] .card-box,
+[data-theme="dark"] .detail-card,
+[data-theme="dark"] .quick-action-card,
+[data-theme="dark"] .metric-card,
+[data-theme="dark"] .filter-card,
+[data-theme="dark"] .table-card {
+  background: #0F172A !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+  color: #F8FAFC !important;
+}
+
+/* Headings & Text Overrides */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span:not(.btn-text):not(.badge),
+[data-theme="dark"] li,
+[data-theme="dark"] label {
+  color: #CBD5E1;
+}
+
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .desc,
+[data-theme="dark"] .helper-text,
+[data-theme="dark"] small {
+  color: #94A3B8 !important;
+}
+
+/* Form Inputs & Controls */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="tel"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="datetime-local"],
+[data-theme="dark"] select,
+[data-theme="dark"] textarea,
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .input-wrap input {
+  background-color: #1E293B !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder,
+[data-theme="dark"] select::placeholder {
+  color: #64748B !important;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important;
+  background-color: #141E33 !important;
+}
+
+/* Secondary & Light Buttons in Dark Mode */
+[data-theme="dark"] .btn2,
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] .btn-register,
+[data-theme="dark"] .btn-outline {
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .btn2:hover,
+[data-theme="dark"] .btn-secondary:hover,
+[data-theme="dark"] .btn-register:hover,
+[data-theme="dark"] .btn-outline:hover {
+  background: #25334D !important;
+  color: #FFFFFF !important;
+}
+
+/* Tables */
+[data-theme="dark"] table {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] th {
+  background: #141E33 !important;
+  color: #CBD5E1 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] td {
+  background: #0F172A !important;
+  color: #E2E8F0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="dark"] tr:hover td {
+  background: #1A2642 !important;
+}
+
+/* Modals & Overlays */
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .modal-body,
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+/* Footers */
+[data-theme="dark"] footer,
+[data-theme="dark"] .footer {
+  background: #0B1120 !important;
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] footer p,
+[data-theme="dark"] footer a {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] footer a:hover {
+  color: #3B82F6 !important;
+}
+
+/* ==========================================================================
+   Theme Toggle Button Components
+   ========================================================================== */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--theme-btn-bg);
+  color: var(--theme-btn-color);
+  border: 1px solid var(--theme-btn-border);
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.08) rotate(15deg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Floating Toggle Container for Standalone Card Pages */
+.floating-theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
