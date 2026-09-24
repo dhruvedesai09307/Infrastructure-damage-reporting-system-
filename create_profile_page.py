@@ -1,0 +1,354 @@
+# Run this once to create user-profile.html:  python create_profile_page.py
+import os, sys
+
+html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | Infrastructure Damage Reporting System</title>
+  <meta name="description" content="View and manage your IDRS account profile, submitted reports, and security settings.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="chatbot.css">
+  <style>
+    :root{--navy:#111827;--primary:#2F3B4A;--primary-h:#1F2937;--blue:#2563EB;--blue-h:#1D4ED8;--slate-700:#374151;--slate-600:#4B5563;--slate-500:#6B7280;--slate-400:#9CA3AF;--slate-200:#E5E7EB;--slate-100:#F3F4F6;--slate-50:#F9FAFB;--green:#10B981;--red:#EF4444;--shadow:0 12px 35px rgba(0,0,0,.08),0 2px 8px rgba(0,0,0,.04)}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+    body{min-height:100vh;background:var(--slate-100);color:var(--slate-700);display:flex;flex-direction:column}
+    .topbar{position:fixed;top:0;left:0;width:100%;height:68px;background:#fff;border-bottom:1px solid var(--slate-200);box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;padding:0 28px;z-index:100}
+    .logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .logo-wrap i{font-size:28px;color:var(--primary)}
+    .logo-text h2{margin:0;font-size:21px;color:var(--navy);font-weight:800}
+    .logo-text p{margin:0;font-size:11px;color:var(--slate-500)}
+    .topbar-right{display:flex;align-items:center;gap:10px}
+    .btn-home{display:flex;align-items:center;gap:7px;padding:9px 18px;border:1.5px solid var(--slate-200);border-radius:10px;background:#fff;color:var(--slate-700);font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+    .btn-home:hover{background:var(--slate-50);border-color:var(--slate-400)}
+    .btn-logout{display:flex;align-items:center;gap:7px;padding:9px 18px;border:none;border-radius:10px;background:var(--primary);color:#fff;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-logout:hover{background:var(--primary-h)}
+    .page-body{flex:1;max-width:860px;width:100%;margin:100px auto 60px;padding:0 20px}
+    .profile-header{background:linear-gradient(135deg,#1F2937 0%,#374151 100%);border-radius:24px;padding:36px 40px;display:flex;align-items:center;gap:28px;margin-bottom:24px;box-shadow:0 16px 40px rgba(31,41,55,.35);animation:fadeUp .5s cubic-bezier(.16,1,.3,1)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .avatar-circle{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#2563EB,#3B82F6);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 0 0 4px rgba(255,255,255,.15);letter-spacing:-1px}
+    .profile-meta h1{font-size:26px;font-weight:800;color:#fff;margin-bottom:4px;letter-spacing:-.4px}
+    .profile-meta .email-line{color:#9CA3AF;font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+    .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:rgba(37,99,235,.25);color:#93C5FD;border:1px solid rgba(37,99,235,.4);border-radius:20px;font-size:12px;font-weight:600}
+    .tabs{display:flex;background:#fff;border:1px solid var(--slate-200);border-radius:16px;overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow)}
+    .tab-btn{flex:1;padding:15px 12px;border:none;background:transparent;color:var(--slate-500);font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .22s;border-bottom:3px solid transparent}
+    .tab-btn:hover{color:var(--navy);background:var(--slate-50)}
+    .tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);background:#EFF6FF}
+    .card{background:#fff;border:1px solid var(--slate-200);border-radius:20px;padding:36px 40px;box-shadow:var(--shadow);display:none}
+    .card.active{display:block;animation:fadeUp .4s cubic-bezier(.16,1,.3,1)}
+    .card-title{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:9px}
+    .card-title i{color:var(--blue)}
+    .card-subtitle{font-size:13px;color:var(--slate-500);margin-bottom:28px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+    .form-group{margin-bottom:20px}
+    .form-group label{display:block;margin-bottom:7px;color:var(--slate-700);font-weight:600;font-size:13.5px}
+    .input-wrap{position:relative}
+    .input-wrap .fi{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--slate-400);font-size:15px;pointer-events:none;transition:color .2s}
+    .input-wrap input{width:100%;padding:12px 14px 12px 42px;border:1.5px solid var(--slate-200);border-radius:11px;font-size:14px;background:var(--slate-50);color:var(--navy);outline:none;transition:all .2s}
+    .input-wrap input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+    .input-wrap input:focus ~ .fi{color:var(--blue)}
+    .input-wrap input[readonly]{background:var(--slate-100);color:var(--slate-500);cursor:not-allowed}
+    .toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--slate-400);font-size:15px;padding:4px;transition:color .2s}
+    .toggle-pw:hover{color:var(--navy)}
+    .strength-meter{margin-top:8px;height:5px;background:var(--slate-200);border-radius:10px;overflow:hidden}
+    .strength-bar{height:100%;width:0;border-radius:10px;transition:all .35s;background:var(--red)}
+    .strength-label{font-size:11.5px;font-weight:600;min-height:16px;margin-top:4px;text-align:right}
+    .btn-primary{padding:13px 30px;border:none;border-radius:11px;background:var(--primary);color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .22s;box-shadow:0 4px 12px rgba(47,59,74,.22)}
+    .btn-primary:hover{background:var(--primary-h);transform:translateY(-1px)}
+    .btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    #toast{position:fixed;bottom:30px;right:30px;padding:14px 22px;border-radius:12px;font-size:14px;font-weight:600;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2);display:flex;align-items:center;gap:10px;transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.16,1,.3,1);z-index:9999;max-width:340px}
+    #toast.show{transform:translateY(0);opacity:1}
+    #toast.success{background:var(--green)}
+    #toast.error{background:var(--red)}
+    .table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--slate-200)}
+    table{width:100%;border-collapse:collapse;font-size:13.5px}
+    thead th{background:var(--slate-50);padding:13px 16px;text-align:left;font-weight:700;color:var(--slate-600);font-size:12.5px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--slate-200)}
+    tbody tr{transition:background .15s}
+    tbody tr:hover{background:var(--slate-50)}
+    tbody td{padding:13px 16px;border-bottom:1px solid var(--slate-100);color:var(--slate-700)}
+    tbody tr:last-child td{border-bottom:none}
+    .status-pill{display:inline-block;padding:3px 11px;border-radius:20px;font-size:12px;font-weight:600}
+    .status-pill.pending{background:#FEF3C7;color:#92400E}
+    .status-pill.progress{background:#DBEAFE;color:#1E40AF}
+    .status-pill.resolved{background:#D1FAE5;color:#065F46}
+    .track-link{display:inline-flex;align-items:center;gap:5px;color:var(--blue);text-decoration:none;font-weight:600;font-size:13px}
+    .track-link:hover{color:var(--blue-h);text-decoration:underline}
+    .empty-state{text-align:center;padding:50px 20px;color:var(--slate-400)}
+    .empty-state i{font-size:48px;margin-bottom:14px;display:block}
+    .empty-state p{font-size:15px}
+    .reports-count{font-size:13px;color:var(--slate-500);margin-bottom:14px;font-weight:500}
+    @media(max-width:640px){
+      .profile-header{flex-direction:column;text-align:center;padding:28px 24px}
+      .profile-meta .email-line{justify-content:center}
+      .card{padding:28px 22px}
+      .form-row{grid-template-columns:1fr;gap:0}
+      .tab-btn{font-size:12px;gap:5px}
+      .tab-btn span{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="home-page.html" class="logo-wrap">
+      <i class="fas fa-road"></i>
+      <div class="logo-text"><h2>IDRS</h2><p>Infrastructure Damage Reporting System</p></div>
+    </a>
+    <div class="topbar-right">
+      <a href="home-page.html" class="btn-home"><i class="fas fa-house"></i> <span>Home</span></a>
+      <button class="btn-logout" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</button>
+    </div>
+  </header>
+
+  <div id="toast"></div>
+
+  <main class="page-body">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="avatar-circle" id="avatarCircle">?</div>
+      <div class="profile-meta">
+        <h1 id="profileName">Loading...</h1>
+        <div class="email-line"><i class="fas fa-envelope"></i><span id="profileEmail">-</span></div>
+        <div class="badge"><i class="fas fa-shield-halved"></i> Verified Citizen</div>
+      </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" id="tab-edit" role="tab" onclick="switchTab(\'edit\')">
+        <i class="fas fa-user-pen"></i> <span>Edit Profile</span>
+      </button>
+      <button class="tab-btn" id="tab-password" role="tab" onclick="switchTab(\'password\')">
+        <i class="fas fa-key"></i> <span>Change Password</span>
+      </button>
+      <button class="tab-btn" id="tab-reports" role="tab" onclick="switchTab(\'reports\')">
+        <i class="fas fa-file-lines"></i> <span>My Reports</span>
+      </button>
+    </div>
+
+    <!-- Panel: Edit Profile -->
+    <div class="card active" id="panel-edit" role="tabpanel">
+      <div class="card-title"><i class="fas fa-user-pen"></i> Edit Profile</div>
+      <div class="card-subtitle">Update your display name and mobile number.</div>
+      <form id="editForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="editName">Full Name</label>
+            <div class="input-wrap">
+              <input type="text" id="editName" placeholder="Your full name" autocomplete="name">
+              <i class="fas fa-user fi"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="editPhone">Mobile Number</label>
+            <div class="input-wrap">
+              <input type="tel" id="editPhone" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+              <i class="fas fa-phone fi"></i>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Email Address</label>
+          <div class="input-wrap">
+            <input type="email" id="editEmail" readonly title="Email cannot be changed">
+            <i class="fas fa-envelope fi"></i>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="saveProfileBtn">
+          <i class="fas fa-floppy-disk"></i> Save Changes
+        </button>
+      </form>
+    </div>
+
+    <!-- Panel: Change Password -->
+    <div class="card" id="panel-password" role="tabpanel">
+      <div class="card-title"><i class="fas fa-key"></i> Change Password</div>
+      <div class="card-subtitle">Choose a strong password to keep your account secure.</div>
+      <form id="pwForm" novalidate>
+        <div class="form-group">
+          <label for="oldPassword">Current Password</label>
+          <div class="input-wrap">
+            <input type="password" id="oldPassword" placeholder="Enter current password" autocomplete="current-password">
+            <i class="fas fa-lock fi"></i>
+            <span class="toggle-pw" data-target="oldPassword"><i class="fas fa-eye"></i></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <div class="input-wrap">
+            <input type="password" id="newPassword" placeholder="Choose a new password" autocomplete="new-password">
+            <i class="fas fa-lock fi"></i>
+            <span class="toggle-pw" data-target="newPassword"><i class="fas fa-eye"></i></span>
+          </div>
+          <div class="strength-meter"><div class="strength-bar" id="pwStrengthBar"></div></div>
+          <div class="strength-label" id="pwStrengthLabel"></div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+          <div class="input-wrap">
+            <input type="password" id="confirmPassword" placeholder="Repeat new password" autocomplete="new-password">
+            <i class="fas fa-lock fi"></i>
+            <span class="toggle-pw" data-target="confirmPassword"><i class="fas fa-eye"></i></span>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="changePwBtn">
+          <i class="fas fa-shield-halved"></i> Update Password
+        </button>
+      </form>
+    </div>
+
+    <!-- Panel: My Reports -->
+    <div class="card" id="panel-reports" role="tabpanel">
+      <div class="card-title"><i class="fas fa-file-lines"></i> My Submitted Reports</div>
+      <div class="card-subtitle">All infrastructure reports you have filed.</div>
+      <div id="reportsCountLine" class="reports-count"></div>
+      <div class="table-wrap" id="reportsTableWrap">
+        <div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Loading reports...</p></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="chatbot.js"></script>
+  <script>
+    var token = localStorage.getItem(\'userToken\');
+    if (!token) window.location.href = \'login-page.html\';
+    var authHeaders = { \'Content-Type\': \'application/json\', \'Authorization\': \'Bearer \' + token };
+
+    function showToast(msg, type) {
+      type = type || \'success\';
+      var el = document.getElementById(\'toast\');
+      el.className = \'show \' + type;
+      el.innerHTML = \'<i class="fas fa-\' + (type === \'success\' ? \'circle-check\' : \'circle-xmark\') + \'"></i> \' + msg;
+      clearTimeout(el._t);
+      el._t = setTimeout(function () { el.className = \'\'; }, 3500);
+    }
+
+    function switchTab(name) {
+      [\'edit\', \'password\', \'reports\'].forEach(function (t) {
+        document.getElementById(\'tab-\' + t).classList.toggle(\'active\', t === name);
+        document.getElementById(\'panel-\' + t).classList.toggle(\'active\', t === name);
+      });
+      if (name === \'reports\') loadReports();
+    }
+
+    async function loadProfile() {
+      try {
+        var res = await fetch(\'/api/user/profile\', { headers: authHeaders });
+        if (res.status === 401) { logout(); return; }
+        var data = await res.json();
+        if (!data.success) return;
+        var initials = (data.name || data.email || \'?\').split(\' \').map(function (w) { return w[0]; }).join(\'\').toUpperCase().slice(0, 2);
+        document.getElementById(\'avatarCircle\').textContent = initials;
+        document.getElementById(\'profileName\').textContent = data.name || data.email;
+        document.getElementById(\'profileEmail\').textContent = data.email;
+        document.getElementById(\'editName\').value = data.name || \'\';
+        document.getElementById(\'editEmail\').value = data.email || \'\';
+        document.getElementById(\'editPhone\').value = data.phone || \'\';
+        localStorage.setItem(\'currentUserName\', data.name || \'\');
+      } catch (e) { console.error(e); }
+    }
+
+    document.getElementById(\'editForm\').addEventListener(\'submit\', async function (e) {
+      e.preventDefault();
+      var btn = document.getElementById(\'saveProfileBtn\');
+      var name = document.getElementById(\'editName\').value.trim();
+      var phone = document.getElementById(\'editPhone\').value.trim();
+      if (!name) { showToast(\'Name cannot be empty.\', \'error\'); return; }
+      btn.disabled = true;
+      btn.innerHTML = \'<i class="fas fa-spinner fa-spin"></i> Saving...\';
+      try {
+        var res = await fetch(\'/api/user/profile/update\', { method: \'POST\', headers: authHeaders, body: JSON.stringify({ name: name, phone: phone }) });
+        var data = await res.json();
+        if (data.success) {
+          showToast(data.message || \'Profile updated!\');
+          document.getElementById(\'profileName\').textContent = name;
+          var initials = name.split(\' \').map(function (w) { return w[0]; }).join(\'\').toUpperCase().slice(0, 2);
+          document.getElementById(\'avatarCircle\').textContent = initials;
+          localStorage.setItem(\'currentUserName\', name);
+        } else { showToast(data.message || \'Update failed.\', \'error\'); }
+      } catch (e) { showToast(\'Server connection error.\', \'error\'); }
+      btn.disabled = false;
+      btn.innerHTML = \'<i class="fas fa-floppy-disk"></i> Save Changes\';
+    });
+
+    document.getElementById(\'newPassword\').addEventListener(\'input\', function () {
+      var val = this.value, bar = document.getElementById(\'pwStrengthBar\'), lbl = document.getElementById(\'pwStrengthLabel\'), s = 0;
+      if (val.length >= 8) s++; if (/[A-Z]/.test(val)) s++; if (/[0-9]/.test(val)) s++; if (/[^A-Za-z0-9]/.test(val)) s++;
+      if (!val.length) { bar.style.width = \'0\'; lbl.textContent = \'\'; return; }
+      var levels = [{ w: \'25%\', c: \'#EF4444\', t: \'Weak\' }, { w: \'25%\', c: \'#EF4444\', t: \'Weak\' }, { w: \'50%\', c: \'#F59E0B\', t: \'Medium\' }, { w: \'75%\', c: \'#3B82F6\', t: \'Good\' }, { w: \'100%\', c: \'#10B981\', t: \'Strong\' }];
+      var l = levels[s]; bar.style.width = l.w; bar.style.background = l.c; lbl.textContent = l.t + \' Password\'; lbl.style.color = l.c;
+    });
+
+    document.getElementById(\'pwForm\').addEventListener(\'submit\', async function (e) {
+      e.preventDefault();
+      var btn = document.getElementById(\'changePwBtn\');
+      var old = document.getElementById(\'oldPassword\').value, nw = document.getElementById(\'newPassword\').value, conf = document.getElementById(\'confirmPassword\').value;
+      if (!old || !nw || !conf) { showToast(\'All fields are required.\', \'error\'); return; }
+      if (nw !== conf) { showToast(\'New passwords do not match.\', \'error\'); return; }
+      if (nw.length < 6) { showToast(\'Password must be at least 6 characters.\', \'error\'); return; }
+      btn.disabled = true;
+      btn.innerHTML = \'<i class="fas fa-spinner fa-spin"></i> Updating...\';
+      try {
+        var res = await fetch(\'/api/user/change-password\', { method: \'POST\', headers: authHeaders, body: JSON.stringify({ old_password: old, new_password: nw }) });
+        var data = await res.json();
+        if (data.success) {
+          showToast(data.message || \'Password changed!\');
+          document.getElementById(\'pwForm\').reset();
+          document.getElementById(\'pwStrengthBar\').style.width = \'0\';
+          document.getElementById(\'pwStrengthLabel\').textContent = \'\';
+        } else { showToast(data.message || \'Failed to change password.\', \'error\'); }
+      } catch (e) { showToast(\'Server connection error.\', \'error\'); }
+      btn.disabled = false;
+      btn.innerHTML = \'<i class="fas fa-shield-halved"></i> Update Password\';
+    });
+
+    document.querySelectorAll(\'.toggle-pw\').forEach(function (span) {
+      span.addEventListener(\'click\', function () {
+        var input = document.getElementById(this.dataset.target), icon = this.querySelector(\'i\');
+        input.type = input.type === \'password\' ? \'text\' : \'password\';
+        icon.classList.toggle(\'fa-eye\'); icon.classList.toggle(\'fa-eye-slash\');
+      });
+    });
+
+    var reportsLoaded = false;
+    async function loadReports() {
+      if (reportsLoaded) return;
+      var wrap = document.getElementById(\'reportsTableWrap\'), count = document.getElementById(\'reportsCountLine\');
+      try {
+        var res = await fetch(\'/api/user/reports\', { headers: authHeaders });
+        if (res.status === 401) { logout(); return; }
+        var data = await res.json();
+        if (!data.success) { wrap.innerHTML = \'<div class="empty-state"><i class="fas fa-triangle-exclamation"></i><p>Could not load reports.</p></div>\'; return; }
+        reportsLoaded = true;
+        var reports = data.reports || [];
+        count.textContent = reports.length > 0 ? \'Showing \' + reports.length + \' report\' + (reports.length > 1 ? \'s\' : \'\') : \'\';
+        if (reports.length === 0) {
+          wrap.innerHTML = \'<div class="empty-state"><i class="fas fa-folder-open"></i><p>You have not submitted any reports yet.<br><a href="report.html" style="color:var(--blue);font-weight:600;">File your first report &rarr;</a></p></div>\';
+          return;
+        }
+        var rows = reports.map(function (r) {
+          var sc = r.status === \'Resolved\' ? \'resolved\' : r.status === \'In Progress\' ? \'progress\' : \'pending\';
+          return \'<tr><td><code style="font-size:12px;color:var(--navy);font-family:monospace">\' + r.report_id + \'</code></td><td>\' + (r.category || \'-\') + \'</td><td>\' + (r.location || \'-\') + \'</td><td>\' + (r.date || \'-\') + \'</td><td><span class="status-pill \' + sc + \'">\' + r.status + \'</span></td><td><a class="track-link" href="track-report.html"><i class="fas fa-arrow-up-right-from-square"></i> Track</a></td></tr>\';
+        }).join(\'\');
+        wrap.innerHTML = \'<table><thead><tr><th>Report ID</th><th>Category</th><th>Location</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody>\' + rows + \'</tbody></table>\';
+      } catch (e) { wrap.innerHTML = \'<div class="empty-state"><i class="fas fa-triangle-exclamation"></i><p>Server connection error.</p></div>\'; }
+    }
+
+    function logout() {
+      localStorage.removeItem(\'isLoggedIn\'); localStorage.removeItem(\'currentUser\');
+      localStorage.removeItem(\'userToken\'); localStorage.removeItem(\'currentUserName\');
+      window.location.href = \'login-page.html\';
+    }
+    document.getElementById(\'logoutBtn\').addEventListener(\'click\', logout);
+    loadProfile();
+  </script>
+</body>
+</html>'''
+
+dest = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'user-profile.html')
+with open(dest, 'w', encoding='utf-8') as f:
+    f.write(html)
+print(f"Created: {dest}")

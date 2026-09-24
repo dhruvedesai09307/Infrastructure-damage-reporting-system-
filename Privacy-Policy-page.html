@@ -11,6 +11,10 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- IDRS AI Chatbot Assistant & Universal Theme Styles -->
+    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="theme.css">
+    <script src="theme.js"></script>
     <style>
         * {
             margin: 0;
@@ -32,7 +36,6 @@
         .topbar {
             position: sticky;
             top: 0;
-            left: 0;
             width: 100%;
             height: 76px;
             background: #FFFFFF;
@@ -45,41 +48,35 @@
             z-index: 1000;
         }
 
+        .menu-icon {
+            font-size: 26px;
+            cursor: pointer;
+            color: #374151;
+            display: none;
+        }
+
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            transition: transform 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .logo:hover {
-            transform: scale(1.02);
         }
 
         .logo i {
             font-size: 32px;
-            color: #2F3B4A;
-            transition: color 0.2s ease;
-        }
-
-        .logo:hover i {
             color: #2563EB;
         }
 
         .logo-text h2 {
+            margin: 0;
             font-size: 24px;
-            font-weight: 800;
             color: #111827;
-            line-height: 1.1;
-            letter-spacing: -0.5px;
         }
 
         .logo-text p {
-            font-size: 11.5px;
+            margin: 0;
+            font-size: 12px;
             color: #6B7280;
-            font-weight: 500;
         }
 
         .nav-links {
@@ -94,25 +91,25 @@
         .nav-link {
             text-decoration: none;
             color: #4B5563;
-            font-weight: 500;
-            font-size: 14.5px;
             padding: 9px 16px;
             border-radius: 10px;
-            transition: all 0.2s ease;
+            font-size: 14.5px;
+            font-weight: 500;
+            transition: .2s;
             display: inline-flex;
             align-items: center;
             white-space: nowrap;
         }
 
         .nav-link:hover {
-            color: #2563EB;
             background: #F3F4F6;
+            color: #2563EB;
         }
 
         .nav-link.active {
+            background: #EFF6FF;
             color: #2563EB;
             font-weight: 700;
-            background: #EFF6FF;
             border: 1px solid #DBEAFE;
         }
 
@@ -139,6 +136,47 @@
             border-color: #2563EB;
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+        }
+
+        @media (max-width: 1050px) {
+            .menu-icon { display: block; }
+            .nav-links, .home-button, .home-icon-btn { display: none; }
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -290px;
+            width: 280px;
+            height: 100vh;
+            background: #FFFFFF;
+            border-right: 1px solid #E5E7EB;
+            box-shadow: 5px 0 20px rgba(0,0,0,.10);
+            padding-top: 80px;
+            transition: .35s;
+            z-index: 3000;
+        }
+
+        .side-menu.show { left: 0; }
+
+        .side-menu a {
+            display: block;
+            padding: 18px 25px;
+            color: #374151;
+            text-decoration: none;
+            font-size: 15px;
+            transition: .3s;
+        }
+
+        .side-menu a:hover { background: #F3F4F6; color: #2563EB; }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #374151;
         }
 
         @media (max-width: 1080px) {
@@ -178,8 +216,9 @@
         .page-icon {
             width: 60px;
             height: 60px;
-            background: #e8edf3;
-            color: #29384b;
+            background: #EFF6FF;
+            color: #2563EB;
+            border: 1px solid #DBEAFE;
             border-radius: 14px;
             margin: 0 auto 14px;
             display: flex;
@@ -189,10 +228,14 @@
         }
 
         .page-title h2 {
-            font-size: 34px;
+            font-size: 42px;
             color: #253447;
             margin-bottom: 6px;
             font-family: 'Poppins', sans-serif;
+        }
+
+        .page-title h2 span {
+            color: #2563EB;
         }
 
         .page-title p {
@@ -202,9 +245,10 @@
 
         .last-updated {
             margin-top: 10px;
-            font-size: 13px;
-            color: #7b858f;
-            background: #edf1f5;
+            font-size: 14px;
+            color: #2563EB;
+            background: #EFF6FF;
+            border: 1px solid #DBEAFE;
             display: inline-block;
             padding: 4px 16px;
             border-radius: 30px;
@@ -231,22 +275,23 @@
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background: #edf1f5;
+            background: #EFF6FF;
+            border: 1px solid #DBEAFE;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #29384b;
+            color: #2563EB;
             font-size: 20px;
         }
 
         .stat-item strong {
             display: block;
-            font-size: 16px;
+            font-size: 20px;
         }
 
         .stat-item span {
             color: #858e98;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .policy-grid {
@@ -274,8 +319,9 @@
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background: #edf2f7;
-            color: #29384b;
+            background: #EFF6FF;
+            color: #2563EB;
+            border: 1px solid #DBEAFE;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -284,7 +330,7 @@
         }
 
         .policy-card h3 {
-            font-size: 19px;
+            font-size: 20px;
             margin-bottom: 8px;
             color: #1d2b3b;
             font-family: 'Poppins', sans-serif;
@@ -293,7 +339,7 @@
         .policy-card p,
         .policy-card li {
             color: #5e6b78;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .policy-card ul {
@@ -306,11 +352,12 @@
         }
 
         .policy-card .badge {
-            background: #eaf0f6;
-            color: #29384b;
-            font-size: 11px;
+            background: #EFF6FF;
+            color: #2563EB;
+            border: 1px solid #DBEAFE;
+            font-size: 14px;
             font-weight: 600;
-            padding: 3px 12px;
+            padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
             margin-top: 12px;
@@ -335,7 +382,7 @@
 
         .policy-full p {
             color: #4f5d6b;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .cookie-table {
@@ -363,7 +410,7 @@
             background: #f1f4f7;
             font-weight: 600;
             color: #1d2b3b;
-            font-size: 13px;
+            font-size: 15px;
         }
 
         .two-col-list {
@@ -378,12 +425,16 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
+            font-size: 16px;
             color: #4f5d6b;
         }
 
+        .policy-full h3 i {
+            color: #2563EB;
+        }
+
         .two-col-list i {
-            color: #3b5a7a;
+            color: #2563EB;
             font-size: 12px;
         }
 
@@ -401,18 +452,22 @@
         }
 
         .contact-block h4 {
-            font-size: 17px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
             font-family: 'Poppins', sans-serif;
         }
 
+        .contact-block h4 i {
+            color: #2563EB;
+        }
+
         .contact-block a {
-            color: #29384b;
+            color: #2563EB;
             font-weight: 600;
             text-decoration: none;
-            border-bottom: 1px dotted #bcc6d0;
+            border-bottom: 1px dotted #DBEAFE;
         }
 
         footer {
@@ -439,7 +494,7 @@
         }
 
         footer p {
-            font-size: 12px;
+            font-size: 14px;
             margin-top: 4px;
             color: #94a3b8;
         }
@@ -447,7 +502,7 @@
         .footer-links a {
             color: #cbd3db;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 14px;
             margin-left: 16px;
         }
 
@@ -485,27 +540,54 @@
 <body>
 
     <header class="topbar">
-        <a href="home-page.html" class="logo">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <a href="home-page.html" class="logo" style="text-decoration:none;">
             <i class="fas fa-road"></i>
             <div class="logo-text">
                 <h2>IDRS</h2>
                 <p>Infrastructure Damage Reporting System</p>
             </div>
         </a>
-        <nav>
-            <ul class="nav-links">
 
-            </ul>
+        <nav class="nav-links" aria-label="Primary navigation">
+            <a href="home-page.html" class="nav-link">Home</a>
+            <a href="report.html" class="nav-link">Report Damage</a>
+            <a href="track-report.html" class="nav-link">Track Progress</a>
+            <a href="About-project-page.html" class="nav-link">About</a>
+            <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
+            <a href="help-and-support.html" class="nav-link">Support</a>
         </nav>
-        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-            <i class="fas fa-house"></i>
-        </a>
+
+        <div style="display:flex;align-items:center;gap:10px;">
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+                <i class="fas fa-house"></i>
+            </a>
+        </div>
     </header>
+
+    <!-- MOBILE SIDE MENU -->
+    <div class="side-menu" id="sideMenu">
+        <div class="close-menu" onclick="toggleMenu()">
+            <i class="fas fa-times"></i>
+        </div>
+        <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
+        <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+        <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
+        <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+        <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+        <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    </div>
 
     <main class="container">
         <section class="page-title">
             <div class="page-icon"><i class="fa-solid fa-lock"></i></div>
-            <h2>Privacy Policy</h2>
+            <h2>Privacy <span>Policy</span></h2>
             <p>Your privacy matters. We are committed to protecting your personal data.</p>
             <span class="last-updated"><i class="fa-regular fa-calendar"></i> Last updated: August 3, 2026</span>
         </section>
@@ -662,6 +744,21 @@
         </div>
     </footer>
 
+    <script>
+    function toggleMenu(){
+        const menu = document.getElementById("sideMenu");
+        if(menu) menu.classList.toggle("show");
+    }
+
+    document.querySelectorAll(".side-menu a").forEach(function(link){
+        link.addEventListener("click", function(){
+            const menu = document.getElementById("sideMenu");
+            if(menu) menu.classList.remove("show");
+        });
+    });
+    </script>
+    <!-- IDRS AI Chatbot Assistant -->
+    <script src="chatbot.js"></script>
 </body>
 
 </html>

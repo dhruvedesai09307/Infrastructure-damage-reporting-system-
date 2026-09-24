@@ -13,6 +13,11 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+<!-- IDRS AI Chatbot Assistant & Universal Theme Styles -->
+<link rel="stylesheet" href="chatbot.css">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+
 <style>
 
 *{
@@ -31,56 +36,68 @@ body{
 .topbar {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    width: 100%;
+    height: 76px;
     background: #FFFFFF;
     border-bottom: 1px solid #E5E7EB;
     box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-}
-
-.nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 8%;
-    height: 76px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    z-index: 1000;
 }
 
-.brand {
+.menu-icon {
+    font-size: 26px;
+    cursor: pointer;
+    color: #374151;
+    display: none;
+}
+
+.logo {
     display: flex;
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    color: #111827;
 }
+
+.logo i { font-size: 32px; color: #2563EB; }
+.logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
+.logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
-    padding: 8px 16px;
     text-decoration: none;
     color: #4B5563;
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 14.5px;
     font-weight: 500;
-    font-size: 14px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    transition: .2s;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
 .nav-link:hover {
-    color: #111827;
-    background-color: #F3F4F6;
+    background: #F3F4F6;
+    color: #2563EB;
 }
 
 .nav-link.active {
-    color: #111827;
-    font-weight: 600;
-    background-color: #E5E7EB;
+    background: #EFF6FF;
+    color: #2563EB;
+    font-weight: 700;
+    border: 1px solid #DBEAFE;
 }
 
 .home-icon-btn {
@@ -108,9 +125,45 @@ body{
     box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
 }
 
-@media (max-width: 640px) {
-    .nav-container { padding: 0 16px; }
-    .nav-links { display: none; }
+@media (max-width: 1050px) {
+    .menu-icon { display: block; }
+    .nav-links, .home-button, .home-icon-btn { display: none; }
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -290px;
+    width: 280px;
+    height: 100vh;
+    background: #FFFFFF;
+    border-right: 1px solid #E5E7EB;
+    box-shadow: 5px 0 20px rgba(0,0,0,.10);
+    padding-top: 80px;
+    transition: .35s;
+    z-index: 3000;
+}
+
+.side-menu.show { left: 0; }
+
+.side-menu a {
+    display: block;
+    padding: 18px 25px;
+    color: #374151;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.side-menu a:hover { background: #F3F4F6; color: #2563EB; }
+
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #374151;
 }
 
 /* ================= MAIN ================= */
@@ -131,9 +184,10 @@ body{
 .page-icon{
     width:62px;
     height:62px;
-    background:#e8edf3;
-    color:#29384b;
-    border-radius:13px;
+    background:#EFF6FF;
+    color:#2563EB;
+    border:1px solid #DBEAFE;
+    border-radius:14px;
     margin:auto;
     display:flex;
     align-items:center;
@@ -143,14 +197,18 @@ body{
 }
 
 .page-title h2{
-    font-size:36px;
+    font-size:42px;
     color:#253447;
     margin-bottom:7px;
 }
 
+.page-title h2 span{
+    color:#2563EB;
+}
+
 .page-title p{
     color:#7b858f;
-    font-size:18px;
+    font-size:16px;
 }
 
 /* ================= SEARCH ================= */
@@ -174,8 +232,8 @@ body{
 }
 
 .search-box input:focus{
-    border-color:#8b9caf;
-    box-shadow:0 0 0 3px rgba(41,56,75,.06);
+    border-color:#2563EB;
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
 }
 
 .search-box i{
@@ -207,22 +265,23 @@ body{
 .stat-icon{
     width:42px;
     height:42px;
-    border-radius:8px;
-    background:#edf1f5;
+    border-radius:10px;
+    background:#EFF6FF;
+    border:1px solid #DBEAFE;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#29384b;
+    color:#2563EB;
 }
 
 .stat strong{
     display:block;
-    font-size:18px;
+    font-size:20px;
 }
 
 .stat span{
     color:#858e98;
-    font-size:15px;
+    font-size:14px;
 }
 
 /* ================= SECTION ================= */
@@ -232,12 +291,12 @@ body{
 }
 
 .section-heading h3{
-    font-size:32px;
+    font-size:42px;
 }
 
 .section-heading p{
     color:#808a94;
-    font-size:18px;
+    font-size:16px;
     margin-top:4px;
 }
 
@@ -272,9 +331,10 @@ body{
 .icon{
     width:47px;
     height:47px;
-    border-radius:9px;
-    background:#edf2f7;
-    color:#29384b;
+    border-radius:10px;
+    background:#EFF6FF;
+    color:#2563EB;
+    border:1px solid #DBEAFE;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -282,12 +342,12 @@ body{
 }
 
 .card h4{
-    font-size:18px;
+    font-size:20px;
 }
 
 .card small{
     color:#84909b;
-    font-size:15px;
+    font-size:14px;
 }
 
 .card p{
@@ -304,12 +364,12 @@ body{
     display:flex;
     gap:9px;
     color:#596673;
-    font-size:16px;
+    font-size:18px;
     margin:8px 0;
 }
 
 .tips i{
-    color:#55789d;
+    color:#2563EB;
     margin-top:3px;
 }
 
@@ -355,7 +415,7 @@ body{
 }
 
 .box-title h4{
-    font-size:18px;
+    font-size:20px;
 }
 
 .item{
@@ -393,7 +453,7 @@ body{
 .step-number{
     width:40px;
     height:40px;
-    background:#29384b;
+    background:#2563EB;
     color:#fff;
     border-radius:50%;
     display:flex;
@@ -404,13 +464,13 @@ body{
 }
 
 .step h4{
-    font-size:17px;
+    font-size:20px;
     margin-bottom:5px;
 }
 
 .step p{
     color:#7e8993;
-    font-size:15px;
+    font-size:16px;
 }
 
 /* ================= ALERT ================= */
@@ -432,13 +492,13 @@ body{
 }
 
 .alert h4{
-    font-size:17px;
+    font-size:20px;
     margin-bottom:3px;
 }
 
 .alert p{
     color:#756e65;
-    font-size:15px;
+    font-size:16px;
 }
 
 /* ================= FAQ ================= */
@@ -464,12 +524,12 @@ body{
     justify-content:space-between;
     align-items:center;
     cursor:pointer;
-    font-size:17px;
+    font-size:18px;
     font-weight:600;
 }
 
 .question i{
-    color:#7d8994;
+    color:#2563EB;
     transition:.25s;
 }
 .answer{
@@ -500,24 +560,29 @@ body{
 }
 
 .cta h3{
-    font-size:28px;
+    font-size:42px;
     margin-bottom:6px;
 }
 
 .cta p{
     color:#d1d8df;
-    font-size:16px;
+    font-size:18px;
     margin-bottom:17px;
 }
 
 .cta a{
-    background:white;
-    color:#29384b;
+    background:#2563EB;
+    color:#FFFFFF;
     text-decoration:none;
-    padding:10px 19px;
-    border-radius:6px;
+    padding:11px 22px;
+    border-radius:8px;
     font-size:16px;
-    font-weight:700;
+    font-weight:600;
+    transition:.2s;
+}
+
+.cta a:hover{
+    background:#1D4ED8;
 }
 
 /* ================= FOOTER ================= */
@@ -538,18 +603,18 @@ footer{
 
 footer h4{
     color:#fff;
-    font-size:13px;
+    font-size:14px;
 }
 
 footer p{
-    font-size:11px;
+    font-size:14px;
     margin-top:4px;
 }
 
 .footer-links a{
     color:#cbd3db;
     text-decoration:none;
-    font-size:11px;
+    font-size:14px;
     margin-left:15px;
 }
 
@@ -634,31 +699,49 @@ footer p{
 <!-- ================= HEADER ================= -->
 
 <header class="topbar">
-    <div class="nav-container">
-        <a href="home-page.html" class="logo" style="text-decoration:none; display:flex; align-items:center; gap:12px; flex-shrink:0;">
-            <i class="fas fa-road" style="font-size:32px; color:#2F3B4A;"></i>
-            <div>
-                <div style="font-size:24px; font-weight:800; color:#111827; line-height:1.1; letter-spacing:-0.5px; font-family:'Poppins',sans-serif;">IDRS</div>
-                <div style="font-size:11.5px; color:#6B7280; font-weight:500;">Infrastructure Damage Reporting System</div>
-            </div>
-        </a>
+    <div class="menu-icon" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="home-page.html" class="nav-link">Home</a></li>
-                <li><a href="report.html" class="nav-link">Report Damage</a></li>
-                <li><a href="track-report.html" class="nav-link">Track Progress</a></li>
-                <li><a href="About-project-page.html" class="nav-link">About</a></li>
-                <li><a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a></li>
-                <li><a href="help-and-support.html" class="nav-link">Support</a></li>
-            </ul>
-        </nav>
+    <a href="home-page.html" class="logo" style="text-decoration:none;">
+        <i class="fas fa-road"></i>
+        <div class="logo-text">
+            <h2>IDRS</h2>
+            <p>Infrastructure Damage Reporting System</p>
+        </div>
+    </a>
 
+    <nav class="nav-links" aria-label="Primary navigation">
+        <a href="home-page.html" class="nav-link">Home</a>
+        <a href="report.html" class="nav-link">Report Damage</a>
+        <a href="track-report.html" class="nav-link">Track Progress</a>
+        <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
+        <a href="help-and-support.html" class="nav-link">Support</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
         <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
             <i class="fas fa-house"></i>
         </a>
     </div>
 </header>
+
+<!-- MOBILE SIDE MENU -->
+<div class="side-menu" id="sideMenu">
+    <div class="close-menu" onclick="toggleMenu()">
+        <i class="fas fa-times"></i>
+    </div>
+    <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
+    <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+</div>
 
 
 <!-- ================= CONTENT ================= -->
@@ -674,7 +757,7 @@ footer p{
 <i class="fa-solid fa-shield-halved"></i>
 </div>
 
-<h2>Safety Tips</h2>
+<h2>Safety <span>Tips & Guidelines</span></h2>
 
 <p>
 Important safety information for reporting infrastructure issues safely.
@@ -1388,7 +1471,7 @@ should always come first.
 
 </div>
 </div>
-</section>
+</main>
 
 <footer>
 <div class="copyright">
@@ -1397,6 +1480,15 @@ should always come first.
 </footer>
 
 <script>
+function searchTips() {
+    const query = document.getElementById("search").value.toLowerCase().trim();
+    const cards = document.querySelectorAll("#cards .card");
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? "block" : "none";
+    });
+}
+
 function toggleFAQ(element) {
   const item = element.parentElement;
   item.classList.toggle('active');
@@ -1405,6 +1497,20 @@ function toggleFAQ(element) {
     answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
   }
 }
+
+function toggleMenu(){
+    const menu = document.getElementById("sideMenu");
+    if(menu) menu.classList.toggle("show");
+}
+
+document.querySelectorAll(".side-menu a").forEach(function(link){
+    link.addEventListener("click", function(){
+        const menu = document.getElementById("sideMenu");
+        if(menu) menu.classList.remove("show");
+    });
+});
 </script>
+<!-- IDRS AI Chatbot Assistant -->
+<script src="chatbot.js"></script>
 </body>
 </html>

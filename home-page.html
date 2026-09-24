@@ -17,8 +17,10 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- IDRS AI Chatbot Styles -->
+<!-- IDRS AI Chatbot & Universal Theme Styles -->
 <link rel="stylesheet" href="chatbot.css">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 
 <style>
 
@@ -80,6 +82,30 @@ transition:.3s;
     background:#1F2937;
 }
 
+.profile-chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 14px 7px 8px;
+    background:#F3F4F6;
+    border:1px solid #E5E7EB;
+    border-radius:30px;
+    text-decoration:none;
+    color:#374151;
+    font-size:13.5px;
+    font-weight:600;
+    transition:all .2s;
+    cursor:pointer;
+}
+.profile-chip:hover{background:#E5E7EB;border-color:#D1D5DB;}
+.profile-chip-avatar{
+    width:30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,#2563EB,#3B82F6);
+    color:#fff;font-size:13px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+}
+
 
 /* Hero Section */
 
@@ -134,7 +160,7 @@ gap:20px;
 
 .btn1{
 
-background:#2F3B4A;
+background:#2563EB;
 color:white;
 border:none;
 padding:15px 34px;
@@ -143,6 +169,10 @@ text-decoration:none;
 font-weight:600;
 transition:.3s;
 
+}
+
+.btn1:hover{
+background:#1D4ED8;
 }
 
 .btn2{
@@ -230,8 +260,7 @@ color:#2563EB;
 
 .logo i{
     font-size:32px;
-    color:#2F3B4A;
-
+    color:#2563EB;
 }
 
 .logo-text h2{
@@ -283,6 +312,7 @@ color:#2563EB;
 .category-card i{
     font-size:45px;
     margin-bottom:20px;
+    color:#2563EB;
 }
 
 .stat-card h2{
@@ -353,7 +383,7 @@ left:50%;
 transform:translateX(-50%);
 width:42px;
 height:42px;
-background:#2F3B4A;
+background:#2563EB;
 color:white;
 border-radius:50%;
 display:flex;
@@ -367,6 +397,7 @@ font-weight:700;
 
 font-size:50px;
 margin:30px 0 20px;
+color:#2563EB;
 
 }
 
@@ -420,7 +451,7 @@ opacity:.95;
 
 display:inline-block;
 padding:16px 40px;
-background:#2F3B4A;
+background:#2563EB;
 color:white;
 text-decoration:none;
 font-weight:600;
@@ -431,7 +462,7 @@ transition:.3s;
 
 .cta-btn:hover{
 
-background:#1F2937;
+background:#1D4ED8;
 transform:translateY(-4px);
 
 }
@@ -697,6 +728,7 @@ background:rgba(255,255,255,.18);
 
 font-size:45px;
 margin-bottom:20px;
+color:#2563EB;
 
 }
 
@@ -840,6 +872,7 @@ hr{
     transition:.4s ease;
     z-index:1001;
     box-shadow:4px 0 15px rgba(0,0,0,.08);
+    overflow-y:auto;
 }
 
 .close-btn{
@@ -866,6 +899,7 @@ hr{
 
 .side-menu a:hover{
     background:#F3F4F6;
+    color:#2563EB;
 }
 
 .side-menu.show{
@@ -892,10 +926,15 @@ hr{
         </div>
     </div>
 
-    <button class="logout-btn" onclick="logout()">
-        <i class="fas fa-right-from-bracket"></i>
-        Logout
-    </button>
+    <div style="display:flex;align-items:center;gap:12px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
+            <span class="profile-chip-avatar" id="navAvatar">?</span>
+            <span id="navUserName">Profile</span>
+        </a>
+    </div>
 </header>
 
 <div id="sideMenu" class="side-menu">
@@ -944,6 +983,10 @@ hr{
 
     <a href="admin-login.html" onclick="toggleMenu()">
         <i class="fas fa-lock"></i> Admin Portal
+    </a>
+
+    <a href="user-profile.html" onclick="toggleMenu()">
+        <i class="fas fa-user-circle"></i> My Profile
     </a>
 
     <a href="#" onclick="logout(); return false;">
@@ -1029,43 +1072,27 @@ Our platform enables citizens to instantly report infrastructure issues with pho
 <section class="statistics">
 
 <div class="stat-card">
-
 <i class="fas fa-file-circle-check"></i>
-
-<h2>12,580</h2>
-
+<h2 id="statTotal">0</h2>
 <p>Total Reports</p>
-
 </div>
 
 <div class="stat-card">
-
 <i class="fas fa-circle-check"></i>
-
-<h2>10,962</h2>
-
+<h2 id="statResolved">0</h2>
 <p>Resolved Cases</p>
-
 </div>
 
 <div class="stat-card">
-
 <i class="fas fa-hourglass-half"></i>
-
-<h2>1,321</h2>
-
+<h2 id="statPending">0</h2>
 <p>Under Review</p>
-
 </div>
 
 <div class="stat-card">
-
 <i class="fas fa-shield-halved"></i>
-
-<h2>87%</h2>
-
+<h2 id="statSuccessRate">0%</h2>
 <p>Success Rate</p>
-
 </div>
 
 </section>
@@ -1308,72 +1335,7 @@ Search
 
 </thead>
 
-<tbody>
-
-<tr>
-
-<td>#1001</td>
-
-<td>Road Damage</td>
-
-<td>Patan</td>
-
-<td>24 Jul 2026</td>
-
-<td><span class="status resolved">Resolved</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
-<tr>
-
-<td>#1002</td>
-
-<td>Street Light</td>
-
-<td>Ahmedabad</td>
-
-<td>23 Jul 2026</td>
-
-<td><span class="status progress">In Progress</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
-<tr>
-
-<td>#1003</td>
-
-<td>Water Leakage</td>
-
-<td>Mehsana</td>
-
-<td>22 Jul 2026</td>
-
-<td><span class="status pending">Pending</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
-<tr>
-
-<td>#1004</td>
-
-<td>Bridge Damage</td>
-
-<td>Palanpur</td>
-
-<td>21 Jul 2026</td>
-
-<td><span class="status resolved">Resolved</span></td>
-
-<td><a href="track-report.html">View</a></td>
-
-</tr>
-
+<tbody id="recentReportsBody">
 </tbody>
 
 </table>
@@ -1663,13 +1625,79 @@ function logout(){
 
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("currentUser");
+  localStorage.removeItem("userToken");
+  localStorage.removeItem("currentUserName");
   window.location.href="login-page.html";
 
 }
 
+// Populate profile chip with user initials + name from localStorage
+(function(){
+  var name = localStorage.getItem('currentUserName') || localStorage.getItem('currentUser') || '';
+  var avatarEl = document.getElementById('navAvatar');
+  var nameEl   = document.getElementById('navUserName');
+  if(name && avatarEl){
+    var initials = name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+    avatarEl.textContent = initials;
+    if(nameEl) nameEl.textContent = name.split(' ')[0]; // first name only
+  }
+})();
+
 </script>
 <!-- IDRS AI Chatbot Script -->
 <script src="chatbot.js"></script>
+
+<script>
+async function loadHomeStats() {
+  try {
+    const res = await fetch('/api/stats');
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('statTotal').textContent = data.total;
+      document.getElementById('statResolved').textContent = data.resolved;
+      document.getElementById('statPending').textContent = data.pending;
+      document.getElementById('statSuccessRate').textContent = data.success_rate + '%';
+    }
+  } catch (err) {
+    console.error('Could not load stats', err);
+  }
+}
+
+async function loadRecentReports() {
+  try {
+    const res = await fetch('/api/reports');
+    const data = await res.json();
+    const tbody = document.getElementById('recentReportsBody');
+    tbody.innerHTML = '';
+
+    if (data.success && data.reports.length > 0) {
+      const recent = data.reports.slice(-4).reverse();
+      recent.forEach(r => {
+        const statusClass = r.status === 'Resolved' ? 'resolved' :
+                             r.status === 'In Progress' ? 'progress' : 'pending';
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${r.report_id}</td>
+          <td>${r.category}</td>
+          <td>${r.location}</td>
+          <td>${r.date}</td>
+          <td><span class="status ${statusClass}">${r.status}</span></td>
+          <td><a href="track-report.html">View</a></td>
+        `;
+        tbody.appendChild(row);
+      });
+    } else {
+      tbody.innerHTML = '<tr><td colspan="6">No reports yet.</td></tr>';
+    }
+  } catch (err) {
+    console.error('Could not load reports', err);
+  }
+}
+
+loadHomeStats();
+loadRecentReports();
+</script>
+
 </body>
 
 </html>
