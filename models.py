@@ -25,6 +25,9 @@ class Report(db.Model):
     image_path = db.Column(db.String(300))
     date = db.Column(db.String(50), default=lambda: datetime.datetime.now().strftime("%d %b %Y"))
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
     def to_dict(self):
         return {
             "report_id": self.report_id,
@@ -56,6 +59,9 @@ class Admin(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password).decode('utf-8')
 
@@ -69,6 +75,9 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     phone = db.Column(db.String(20), unique=True, nullable=True)
     password_hash = db.Column(db.String(200), nullable=False)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password).decode('utf-8')
@@ -95,6 +104,9 @@ class Feedback(db.Model):
     message = db.Column(db.Text)
     anonymous = db.Column(db.Boolean, default=False)
     date = db.Column(db.String(50), default=lambda: datetime.datetime.now().strftime("%d %b %Y"))
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def to_dict(self):
         return {
