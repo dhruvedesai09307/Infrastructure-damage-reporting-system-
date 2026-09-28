@@ -1,9 +1,12 @@
+# pyrefly: ignore [missing-import]
 from flask import Flask, request, jsonify, send_from_directory
 from models import db, Report, Admin, User, Feedback
 import os
 import datetime
+# pyrefly: ignore [missing-import]
 import jwt
 from functools import wraps
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,6 +20,7 @@ db_url = os.environ.get('DATABASE_URL')
 def ensure_columns():
     with app.app_context():
         try:
+            # pyrefly: ignore [missing-import]
             from sqlalchemy import inspect, text
             inspector = inspect(db.engine)
             # Migrate 'report' table columns
@@ -592,6 +596,7 @@ def chat_ai():
         api_key = os.environ.get('GEMINI_API_KEY') or os.environ.get('GOOGLE_API_KEY')
         if api_key:
             try:
+                # pyrefly: ignore [missing-import]
                 import google.generativeai as genai
                 genai.configure(api_key=api_key)
                 model = genai.GenerativeModel('gemini-1.5-flash')
