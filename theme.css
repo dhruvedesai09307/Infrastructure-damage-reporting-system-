@@ -168,34 +168,50 @@ html[data-theme="dark"] .close-menu {
 }
 
 /* ==========================================================================
-   Universal Card Containers & Boxes (Fixes All Blank White Cards)
+   Universal Card Containers & Boxes (Fixes All Blank White Cards Across All Pages)
    ========================================================================== */
 html[data-theme="dark"] .card,
 html[data-theme="dark"] .info-card,
 html[data-theme="dark"] .info-box,
 html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .stats-card,
+html[data-theme="dark"] .stat,
 html[data-theme="dark"] .category-card,
 html[data-theme="dark"] .step-box,
 html[data-theme="dark"] .step-card,
+html[data-theme="dark"] .step,
 html[data-theme="dark"] .emergency-card,
 html[data-theme="dark"] .map-box,
 html[data-theme="dark"] .recent-box,
 html[data-theme="dark"] .callout-card,
 html[data-theme="dark"] .feature-card,
+html[data-theme="dark"] .feature,
 html[data-theme="dark"] .cta-box,
+html[data-theme="dark"] .cta-content,
+html[data-theme="dark"] .faq,
 html[data-theme="dark"] .faq-card,
 html[data-theme="dark"] .faq-item,
 html[data-theme="dark"] .tips-card,
 html[data-theme="dark"] .tips-box,
 html[data-theme="dark"] .awareness-card,
+html[data-theme="dark"] .awareness-box,
+html[data-theme="dark"] .responsibility-card,
+html[data-theme="dark"] .impact-item,
 html[data-theme="dark"] .policy-card,
+html[data-theme="dark"] .policy-full,
 html[data-theme="dark"] .terms-card,
+html[data-theme="dark"] .term-section,
+html[data-theme="dark"] .term-box,
+html[data-theme="dark"] .term-card,
 html[data-theme="dark"] .guideline-box,
 html[data-theme="dark"] .resource-card,
 html[data-theme="dark"] .hero-card,
+html[data-theme="dark"] .about-hero,
 html[data-theme="dark"] .article-card,
 html[data-theme="dark"] .support-card,
+html[data-theme="dark"] .help-card,
 html[data-theme="dark"] .contact-box,
+html[data-theme="dark"] .contact-card,
 html[data-theme="dark"] .feedback-card,
 html[data-theme="dark"] .about-card,
 html[data-theme="dark"] .training-card,
@@ -211,6 +227,7 @@ html[data-theme="dark"] .track-card,
 html[data-theme="dark"] .search-box,
 html[data-theme="dark"] .report-details-card,
 html[data-theme="dark"] .timeline-item,
+html[data-theme="dark"] .timeline-box,
 html[data-theme="dark"] .profile-card,
 html[data-theme="dark"] .stat-item,
 html[data-theme="dark"] .activity-item,
@@ -220,14 +237,29 @@ html[data-theme="dark"] .app-card,
 html[data-theme="dark"] .metric-card,
 html[data-theme="dark"] .chart-card,
 html[data-theme="dark"] .table-card,
+html[data-theme="dark"] .table-container,
 html[data-theme="dark"] .hero-right,
+html[data-theme="dark"] .hero-right .right,
+html[data-theme="dark"] .right,
 html[data-theme="dark"] .sidebar-card,
 html[data-theme="dark"] .content-card,
 html[data-theme="dark"] .location-picker-box,
 html[data-theme="dark"] .box,
 html[data-theme="dark"] .container-card,
 html[data-theme="dark"] .panel,
-html[data-theme="dark"] .card-box {
+html[data-theme="dark"] .card-box,
+html[data-theme="dark"] .stepper-wrapper,
+html[data-theme="dark"] .ticket-card,
+html[data-theme="dark"] .benefit,
+html[data-theme="dark"] .campaign-card,
+html[data-theme="dark"] .safety-card,
+html[data-theme="dark"] .environment-card,
+html[data-theme="dark"] .volunteer-card,
+html[data-theme="dark"] .success-card,
+html[data-theme="dark"] .achievement-card,
+html[data-theme="dark"] .testimonial-card,
+html[data-theme="dark"] .gallery-card,
+html[data-theme="dark"] .news-card {
   background-color: #0F172A !important;
   background: #0F172A !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -240,6 +272,7 @@ html[data-theme="dark"] .card:hover,
 html[data-theme="dark"] .info-card:hover,
 html[data-theme="dark"] .info-box:hover,
 html[data-theme="dark"] .stat-card:hover,
+html[data-theme="dark"] .stats-card:hover,
 html[data-theme="dark"] .category-card:hover,
 html[data-theme="dark"] .step-box:hover,
 html[data-theme="dark"] .step-card:hover,
@@ -248,16 +281,21 @@ html[data-theme="dark"] .map-box:hover,
 html[data-theme="dark"] .recent-box:hover,
 html[data-theme="dark"] .callout-card:hover,
 html[data-theme="dark"] .feature-card:hover,
+html[data-theme="dark"] .feature:hover,
 html[data-theme="dark"] .cta-box:hover,
 html[data-theme="dark"] .faq-card:hover,
 html[data-theme="dark"] .faq-item:hover,
 html[data-theme="dark"] .tips-card:hover,
 html[data-theme="dark"] .awareness-card:hover,
+html[data-theme="dark"] .awareness-box:hover,
+html[data-theme="dark"] .responsibility-card:hover,
+html[data-theme="dark"] .impact-item:hover,
 html[data-theme="dark"] .policy-card:hover,
 html[data-theme="dark"] .terms-card:hover,
 html[data-theme="dark"] .resource-card:hover,
 html[data-theme="dark"] .article-card:hover,
 html[data-theme="dark"] .support-card:hover,
+html[data-theme="dark"] .help-card:hover,
 html[data-theme="dark"] .contact-box:hover,
 html[data-theme="dark"] .feedback-card:hover,
 html[data-theme="dark"] .about-card:hover,
@@ -268,24 +306,171 @@ html[data-theme="dark"] .training-card:hover {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.15) !important;
 }
 
-/* Specific Inner Components in Dark Mode */
+/* ==========================================================================
+   Inner Elevated Components, Badges, & Interactive Tiles in Dark Mode
+   ========================================================================== */
 html[data-theme="dark"] .feedback-type,
 html[data-theme="dark"] .stat-box,
 html[data-theme="dark"] .rating-section,
-html[data-theme="dark"] .officer-card {
+html[data-theme="dark"] .officer-card,
+html[data-theme="dark"] .cat-card,
+html[data-theme="dark"] .sev-card,
+html[data-theme="dark"] .dropzone,
+html[data-theme="dark"] .preview-container,
+html[data-theme="dark"] .card-header-bar,
+html[data-theme="dark"] .card-actions-bar,
+html[data-theme="dark"] .ticket-details-grid {
   background-color: #141E33 !important;
   background: #141E33 !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 html[data-theme="dark"] .feedback-type:hover,
-html[data-theme="dark"] .stat-box:hover {
+html[data-theme="dark"] .stat-box:hover,
+html[data-theme="dark"] .cat-card:hover,
+html[data-theme="dark"] .sev-card:hover,
+html[data-theme="dark"] .dropzone:hover {
   background-color: #1E293B !important;
   border-color: rgba(59, 130, 246, 0.4) !important;
 }
 
+/* Selected Category & Severity Cards */
+html[data-theme="dark"] .cat-card.selected {
+  background-color: #1E3A8A !important;
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 2px #3B82F6 !important;
+}
+
+html[data-theme="dark"] .cat-card.selected i,
+html[data-theme="dark"] .cat-card.selected span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .sev-card.selected {
+  background-color: #1E3A8A !important;
+  border-color: #60A5FA !important;
+  box-shadow: 0 0 0 2px #60A5FA !important;
+}
+
+html[data-theme="dark"] .sev-card.selected .sev-title {
+  color: #FFFFFF !important;
+}
+
+/* Stepper Component */
+html[data-theme="dark"] .step-item {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] .step-circle {
+  background-color: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .step-item.active .step-circle {
+  background-color: #2563EB !important;
+  border-color: #3B82F6 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .step-item.completed .step-circle {
+  background-color: #10B981 !important;
+  border-color: #10B981 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .step-label {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .step-item.active .step-label {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .stepper-progress-bar {
+  background-color: #1E293B !important;
+}
+
+/* Icons & Badges in Cards */
+html[data-theme="dark"] .feature-icon,
+html[data-theme="dark"] .icon,
+html[data-theme="dark"] .stat-icon,
+html[data-theme="dark"] .page-icon,
+html[data-theme="dark"] .card-title-icon,
+html[data-theme="dark"] .brand-icon-wrap {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  color: #60A5FA !important;
+}
+
+/* Alert Boxes */
+html[data-theme="dark"] .alert {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+  border-left: 4px solid #F59E0B !important;
+  color: #FDE68A !important;
+}
+
+html[data-theme="dark"] .alert h4,
+html[data-theme="dark"] .alert p {
+  color: #FDE68A !important;
+}
+
+html[data-theme="dark"] .alert i {
+  color: #F59E0B !important;
+}
+
+/* Result & Notification Boxes */
+html[data-theme="dark"] .result {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  color: #34D399 !important;
+}
+
+html[data-theme="dark"] .result h2 {
+  color: #34D399 !important;
+}
+
+html[data-theme="dark"] .msg.error {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #F87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+html[data-theme="dark"] .msg.success {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+html[data-theme="dark"] .logo-badge span {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .do .box-title span {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #34D399 !important;
+}
+
+html[data-theme="dark"] .dont .box-title span {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #F87171 !important;
+}
+
+/* Strong Typography & Descriptions in Inner Cards */
 html[data-theme="dark"] .feedback-type strong,
-html[data-theme="dark"] .officer-info h4 {
+html[data-theme="dark"] .officer-info h4,
+html[data-theme="dark"] .stat strong,
+html[data-theme="dark"] .card-title-group h2,
+html[data-theme="dark"] .sev-title,
+html[data-theme="dark"] .dropzone-title,
+html[data-theme="dark"] .preview-name,
+html[data-theme="dark"] .detail-item p,
+html[data-theme="dark"] .benefit h3,
+html[data-theme="dark"] .feature h3,
+html[data-theme="dark"] .step h4,
+html[data-theme="dark"] .step h3 {
   color: #F8FAFC !important;
 }
 
@@ -294,7 +479,17 @@ html[data-theme="dark"] .stat-box span,
 html[data-theme="dark"] .officer-info p,
 html[data-theme="dark"] .info-key,
 html[data-theme="dark"] .log-time,
-html[data-theme="dark"] .log-content p {
+html[data-theme="dark"] .log-content p,
+html[data-theme="dark"] .stat span,
+html[data-theme="dark"] .card-title-group p,
+html[data-theme="dark"] .sev-desc,
+html[data-theme="dark"] .dropzone-sub,
+html[data-theme="dark"] .preview-size,
+html[data-theme="dark"] .detail-item label,
+html[data-theme="dark"] .field-hint,
+html[data-theme="dark"] .benefit p,
+html[data-theme="dark"] .feature p,
+html[data-theme="dark"] .step p {
   color: #94A3B8 !important;
 }
 
@@ -331,7 +526,8 @@ html[data-theme="dark"] .btn-quick-link:hover {
 }
 
 html[data-theme="dark"] .card-header,
-html[data-theme="dark"] .info-item {
+html[data-theme="dark"] .info-item,
+html[data-theme="dark"] .faq-item {
   border-bottom-color: rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -357,7 +553,9 @@ html[data-theme="dark"] .emergency-card h3,
 html[data-theme="dark"] .emergency-card h2,
 html[data-theme="dark"] .stat-card h2,
 html[data-theme="dark"] .category-card h3,
-html[data-theme="dark"] .hero-left h1 {
+html[data-theme="dark"] .hero-left h1,
+html[data-theme="dark"] .left h1,
+html[data-theme="dark"] .question {
   color: #F8FAFC !important;
 }
 
@@ -372,7 +570,9 @@ html[data-theme="dark"] .emergency-card p,
 html[data-theme="dark"] .stat-card p,
 html[data-theme="dark"] .category-card p,
 html[data-theme="dark"] .info-card p,
-html[data-theme="dark"] .hero-left p {
+html[data-theme="dark"] .hero-left p,
+html[data-theme="dark"] .left p,
+html[data-theme="dark"] .answer {
   color: #CBD5E1 !important;
 }
 
@@ -418,8 +618,10 @@ html[data-theme="dark"] .tab-btn:hover {
 
 html[data-theme="dark"] .badge,
 html[data-theme="dark"] .tag,
-html[data-theme="dark"] .portal-badge {
-  background-color: #1E293B !important;
+html[data-theme="dark"] .portal-badge,
+html[data-theme="dark"] .small-title,
+html[data-theme="dark"] .hero-badge {
+  background-color: rgba(59, 130, 246, 0.15) !important;
   color: #60A5FA !important;
   border-color: rgba(59, 130, 246, 0.3) !important;
 }
@@ -438,9 +640,15 @@ html[data-theme="dark"] select,
 html[data-theme="dark"] textarea,
 html[data-theme="dark"] .form-control,
 html[data-theme="dark"] .input-wrap input,
-html[data-theme="dark"] .search-box input {
+html[data-theme="dark"] .search-box input,
+html[data-theme="dark"] .report-controls input {
   background-color: #1E293B !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] select option {
+  background-color: #0F172A !important;
   color: #F8FAFC !important;
 }
 
@@ -489,6 +697,11 @@ html[data-theme="dark"] table {
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+html[data-theme="dark"] thead {
+  background: #141E33 !important;
+  color: #F8FAFC !important;
+}
+
 html[data-theme="dark"] th {
   background-color: #141E33 !important;
   color: #F8FAFC !important;
@@ -501,7 +714,8 @@ html[data-theme="dark"] td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-html[data-theme="dark"] tr:hover td {
+html[data-theme="dark"] tr:hover td,
+html[data-theme="dark"] tbody tr:hover {
   background-color: #1A2642 !important;
 }
 
