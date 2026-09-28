@@ -168,9 +168,57 @@ html[data-theme="dark"] .close-menu {
 }
 
 /* ==========================================================================
+   Hero Sections Across All Pages in Dark Mode
+   ========================================================================== */
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .page-hero,
+html[data-theme="dark"] .about-hero,
+html[data-theme="dark"] .campaign-section,
+html[data-theme="dark"] .responsibility-section {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .hero h1,
+html[data-theme="dark"] .page-hero h1,
+html[data-theme="dark"] .about-hero h1,
+html[data-theme="dark"] .about-hero h2,
+html[data-theme="dark"] .page-title h2 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .hero p,
+html[data-theme="dark"] .page-hero p,
+html[data-theme="dark"] .about-hero p,
+html[data-theme="dark"] .page-title p {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .breadcrumb a {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .breadcrumb a:hover {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .updated,
+html[data-theme="dark"] .last-updated {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  color: #60A5FA !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ==========================================================================
    Universal Card Containers & Boxes (Fixes All Blank White Cards Across All Pages)
    ========================================================================== */
 html[data-theme="dark"] .card,
+html[data-theme="dark"] .content,
+html[data-theme="dark"] .toc,
 html[data-theme="dark"] .info-card,
 html[data-theme="dark"] .info-box,
 html[data-theme="dark"] .stat-card,
@@ -200,18 +248,17 @@ html[data-theme="dark"] .impact-item,
 html[data-theme="dark"] .policy-card,
 html[data-theme="dark"] .policy-full,
 html[data-theme="dark"] .terms-card,
-html[data-theme="dark"] .term-section,
 html[data-theme="dark"] .term-box,
 html[data-theme="dark"] .term-card,
 html[data-theme="dark"] .guideline-box,
 html[data-theme="dark"] .resource-card,
 html[data-theme="dark"] .hero-card,
-html[data-theme="dark"] .about-hero,
 html[data-theme="dark"] .article-card,
 html[data-theme="dark"] .support-card,
 html[data-theme="dark"] .help-card,
 html[data-theme="dark"] .contact-box,
 html[data-theme="dark"] .contact-card,
+html[data-theme="dark"] .contact-block,
 html[data-theme="dark"] .feedback-card,
 html[data-theme="dark"] .about-card,
 html[data-theme="dark"] .training-card,
@@ -221,10 +268,8 @@ html[data-theme="dark"] .cert-card,
 html[data-theme="dark"] .report-card,
 html[data-theme="dark"] .form-card,
 html[data-theme="dark"] .report-form,
-html[data-theme="dark"] .field-group,
 html[data-theme="dark"] .file-upload-box,
 html[data-theme="dark"] .track-card,
-html[data-theme="dark"] .search-box,
 html[data-theme="dark"] .report-details-card,
 html[data-theme="dark"] .timeline-item,
 html[data-theme="dark"] .timeline-box,
@@ -259,12 +304,161 @@ html[data-theme="dark"] .success-card,
 html[data-theme="dark"] .achievement-card,
 html[data-theme="dark"] .testimonial-card,
 html[data-theme="dark"] .gallery-card,
-html[data-theme="dark"] .news-card {
+html[data-theme="dark"] .news-card,
+html[data-theme="dark"] .cookie-table {
   background-color: #0F172A !important;
   background: #0F172A !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.05) !important;
   color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   Terms & Conditions Page Special Components
+   ========================================================================== */
+html[data-theme="dark"] .toc a {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .toc a:hover {
+  background-color: #1E293B !important;
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .toc a.active {
+  background-color: #1E3A8A !important;
+  color: #93C5FD !important;
+  border-left-color: #3B82F6 !important;
+}
+
+html[data-theme="dark"] .quick-help {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .quick-help h4 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .quick-help p {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .quick-help a {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .toolbar {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .tool-btn {
+  background-color: #1E293B !important;
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .tool-btn:hover {
+  background-color: #25334D !important;
+  border-color: #3B82F6 !important;
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .notice {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border-left: 5px solid #3B82F6 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .notice p {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .notice i {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .term-section {
+  background: transparent !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .term-section p,
+html[data-theme="dark"] .term-section li {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .term-title h2 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .number {
+  background-color: #1E293B !important;
+  color: #60A5FA !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .highlight {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .highlight strong {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .highlight span {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .faq-question {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .faq-question:hover {
+  background-color: #1E293B !important;
+}
+
+html[data-theme="dark"] .faq-answer {
+  background-color: #0F172A !important;
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .accept-box {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .accept-btn {
+  background-color: #3B82F6 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .accept-btn:hover {
+  background-color: #2563EB !important;
+}
+
+html[data-theme="dark"] .support {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .support h2 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .support p {
+  color: #94A3B8 !important;
 }
 
 /* Card Hover States in Dark Mode */

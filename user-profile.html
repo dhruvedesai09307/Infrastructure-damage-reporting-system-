@@ -25,19 +25,33 @@
     body { min-height: 100vh; background: var(--slate-100); color: var(--slate-700); display: flex; flex-direction: column; }
 
     /* ── Topbar ── */
-    .topbar { position: fixed; top: 0; left: 0; width: 100%; height: 68px; background: #fff; border-bottom: 1px solid var(--slate-200); box-shadow: 0 2px 8px rgba(0,0,0,.05); display: flex; justify-content: space-between; align-items: center; padding: 0 28px; z-index: 100; }
+    .topbar { position: sticky; top: 0; left: 0; width: 100%; height: 76px; background: #fff; border-bottom: 1px solid var(--slate-200); box-shadow: 0 2px 10px rgba(0,0,0,.04); display: flex; justify-content: space-between; align-items: center; padding: 0 8%; z-index: 1000; }
+    .menu-icon { font-size: 26px; cursor: pointer; color: #374151; display: none; }
     .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-wrap i { font-size: 32px; color: var(--blue); }
     .logo-text h2 { margin: 0; font-size: 24px; color: var(--navy); font-weight: 800; }
     .logo-text p { margin: 0; font-size: 12px; color: var(--slate-500); }
+    .nav-links { display: flex; align-items: center; gap: 10px; list-style: none; margin: 0; padding: 0; }
+    .nav-link { text-decoration: none; color: #4B5563; padding: 9px 16px; border-radius: 10px; font-size: 14.5px; font-weight: 500; transition: .2s; display: inline-flex; align-items: center; white-space: nowrap; }
+    .nav-link:hover { background: #F3F4F6; color: #2563EB; }
+    .nav-link.active { background: #EFF6FF; color: #2563EB; font-weight: 700; border: 1px solid #DBEAFE; }
+    .home-icon-btn { width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #E5E7EB; color: #374151; display: flex; align-items: center; justify-content: center; font-size: 17px; text-decoration: none; transition: all 0.25s; box-shadow: 0 1px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
+    .home-icon-btn:hover { background: #2563EB; color: #FFFFFF; border-color: #2563EB; transform: translateY(-2px); }
+    @media (max-width: 1050px) {
+        .menu-icon { display: block; }
+        .nav-links, .home-icon-btn { display: none; }
+    }
+    .side-menu { position: fixed; top: 0; left: -290px; width: 280px; height: 100vh; background: #FFFFFF; border-right: 1px solid #E5E7EB; box-shadow: 5px 0 20px rgba(0,0,0,.10); padding-top: 80px; transition: .35s; z-index: 3000; overflow-y: auto; }
+    .side-menu.show { left: 0; }
+    .side-menu a { display: block; padding: 18px 25px; color: #374151; text-decoration: none; font-size: 16px; transition: .3s; }
+    .side-menu a:hover { background: #F3F4F6; color: #2563EB; }
+    .close-menu { position: absolute; top: 20px; right: 20px; font-size: 25px; cursor: pointer; color: #374151; }
     .topbar-right { display: flex; align-items: center; gap: 10px; }
-    .btn-home { display: flex; align-items: center; gap: 7px; padding: 9px 18px; border: 1.5px solid var(--slate-200); border-radius: 10px; background: #fff; color: var(--slate-700); font-size: 14.5px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all .2s; }
-    .btn-home:hover { background: var(--slate-50); border-color: var(--slate-400); }
     .btn-logout { display: flex; align-items: center; gap: 7px; padding: 9px 18px; border: none; border-radius: 10px; background: var(--primary); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; transition: all .2s; }
     .btn-logout:hover { background: var(--primary-h); }
 
     /* ── Page Layout ── */
-    .page-body { flex: 1; max-width: 860px; width: 100%; margin: 100px auto 60px; padding: 0 20px; }
+    .page-body { flex: 1; max-width: 860px; width: 100%; margin: 40px auto 60px; padding: 0 20px; }
 
     /* ── Profile Header ── */
     .profile-header { background: linear-gradient(135deg, #1F2937 0%, #374151 100%); border-radius: 24px; padding: 36px 40px; display: flex; align-items: center; gap: 28px; margin-bottom: 24px; box-shadow: 0 16px 40px rgba(31,41,55,.35); animation: fadeUp .5s cubic-bezier(.16,1,.3,1); }
@@ -124,6 +138,9 @@
 
   <!-- Topbar -->
   <header class="topbar">
+    <div class="menu-icon" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
     <a href="home-page.html" class="logo-wrap">
       <i class="fas fa-road"></i>
       <div class="logo-text">
@@ -131,18 +148,46 @@
         <p>Infrastructure Damage Reporting System</p>
       </div>
     </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="home-page.html" class="nav-link">Home</a>
+      <a href="report.html" class="nav-link">Report Damage</a>
+      <a href="track-report.html" class="nav-link">Track Progress</a>
+      <a href="About-project-page.html" class="nav-link">About</a>
+      <a href="community-awareness-page.html" class="nav-link">Awareness</a>
+      <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
+      <a href="help-and-support.html" class="nav-link">Support</a>
+    </nav>
     <div class="topbar-right" style="display:flex;align-items:center;gap:10px;">
       <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
         <i class="fas fa-moon" id="themeIcon"></i>
       </button>
-      <a href="home-page.html" class="btn-home">
-        <i class="fas fa-house"></i> <span>Home</span>
+      <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+        <i class="fas fa-house"></i>
       </a>
       <button class="btn-logout" id="logoutBtn">
         <i class="fas fa-right-from-bracket"></i> Logout
       </button>
     </div>
   </header>
+
+  <!-- MOBILE SIDE MENU -->
+  <div class="side-menu" id="sideMenu">
+    <div class="close-menu" onclick="toggleMenu()">
+        <i class="fas fa-times"></i>
+    </div>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
+  </div>
 
   <!-- Toast Notification -->
   <div id="toast"></div>
@@ -488,6 +533,11 @@
       window.location.href = 'login-page.html';
     }
     document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    function toggleMenu() {
+      var menu = document.getElementById("sideMenu");
+      if (menu) menu.classList.toggle("show");
+    }
 
     // ── Init ──────────────────────────────────────────────────────────────────
     loadProfile();
