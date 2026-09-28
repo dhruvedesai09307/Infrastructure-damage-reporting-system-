@@ -51,8 +51,11 @@ html[data-theme="dark"] {
   --text-secondary: #CBD5E1;
   --text-muted: #94A3B8;
 
+  --navy: #F8FAFC;
+  --navy-light: #1E293B;
   --primary: #3B82F6;
   --primary-hover: #2563EB;
+  --primary-light: #1E293B;
   --primary-glow: rgba(59, 130, 246, 0.25);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -69,7 +72,7 @@ html[data-theme="dark"] {
   --slate-300: #334155;
   --slate-200: #1E293B;
   --slate-100: #141E33;
-  --slate-50: #090D16;
+  --slate-50: #141E33;
 
   --theme-btn-bg: #1E293B;
   --theme-btn-color: #F59E0B;
@@ -169,6 +172,7 @@ html[data-theme="dark"] .close-menu {
    ========================================================================== */
 html[data-theme="dark"] .card,
 html[data-theme="dark"] .info-card,
+html[data-theme="dark"] .info-box,
 html[data-theme="dark"] .stat-card,
 html[data-theme="dark"] .category-card,
 html[data-theme="dark"] .step-box,
@@ -234,6 +238,7 @@ html[data-theme="dark"] .card-box {
 /* Card Hover States in Dark Mode */
 html[data-theme="dark"] .card:hover,
 html[data-theme="dark"] .info-card:hover,
+html[data-theme="dark"] .info-box:hover,
 html[data-theme="dark"] .stat-card:hover,
 html[data-theme="dark"] .category-card:hover,
 html[data-theme="dark"] .step-box:hover,
@@ -261,6 +266,78 @@ html[data-theme="dark"] .training-card:hover {
   background: #141E33 !important;
   border-color: rgba(59, 130, 246, 0.3) !important;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Specific Inner Components in Dark Mode */
+html[data-theme="dark"] .feedback-type,
+html[data-theme="dark"] .stat-box,
+html[data-theme="dark"] .rating-section,
+html[data-theme="dark"] .officer-card {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .feedback-type:hover,
+html[data-theme="dark"] .stat-box:hover {
+  background-color: #1E293B !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+html[data-theme="dark"] .feedback-type strong,
+html[data-theme="dark"] .officer-info h4 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .feedback-type p,
+html[data-theme="dark"] .stat-box span,
+html[data-theme="dark"] .officer-info p,
+html[data-theme="dark"] .info-key,
+html[data-theme="dark"] .log-time,
+html[data-theme="dark"] .log-content p {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .rating-section label.section-label {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .rating-options label {
+  background: #1E293B !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] .rating-options label:hover {
+  background: #25334D !important;
+  border-color: #3B82F6 !important;
+}
+
+html[data-theme="dark"] .rating-options input:checked + label {
+  background: #1E3A8A !important;
+  border-color: #60A5FA !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .btn-quick-link {
+  background-color: #1E293B !important;
+  color: #CBD5E1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .btn-quick-link:hover {
+  background-color: #25334D !important;
+  color: #FFFFFF !important;
+  border-color: #3B82F6 !important;
+}
+
+html[data-theme="dark"] .card-header,
+html[data-theme="dark"] .info-item {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .info-val,
+html[data-theme="dark"] .log-content h5 {
+  color: #F8FAFC !important;
 }
 
 /* ==========================================================================

@@ -563,9 +563,9 @@
     }
 
     .info-box {
-      background: white;
+      background: var(--bg-card, white);
       border-radius: 20px;
-      border: 1px solid var(--slate-200);
+      border: 1px solid var(--border-subtle, var(--slate-200));
       padding: 24px 28px;
       box-shadow: var(--shadow-md);
     }
@@ -582,7 +582,7 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 10px;
-      border-bottom: 1px solid var(--slate-100);
+      border-bottom: 1px solid var(--border-subtle, var(--slate-100));
     }
 
     .info-item:last-child {
@@ -612,7 +612,7 @@
       padding: 16px 20px;
       border-radius: 14px;
       margin-top: 16px;
-      border: 1px solid var(--slate-200);
+      border: 1px solid var(--border-subtle, var(--slate-200));
     }
 
     .officer-avatar {
