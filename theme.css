@@ -1,0 +1,981 @@
+/* ==========================================================================
+   IDRS Universal Theme System (Light Default & Executive Admin Dark Theme)
+   ========================================================================== */
+
+:root {
+  /* Light Theme Defaults */
+  --bg-body: #F3F4F6;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --bg-input: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+
+  --border-subtle: #E5E7EB;
+  --border-strong: #D1D5DB;
+  --border-focus: #2563EB;
+
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6B7280;
+
+  --primary: #2563EB;
+  --primary-hover: #1D4ED8;
+  --primary-glow: rgba(37, 99, 235, 0.2);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  --theme-btn-bg: #E2E8F0;
+  --theme-btn-color: #374151;
+  --theme-btn-border: #CBD5E1;
+}
+
+/* ==========================================================================
+   Executive Admin Dark Theme Overrides (html[data-theme="dark"])
+   ========================================================================== */
+html[data-theme="dark"] {
+  --bg-body: #090D16;
+  --bg-surface: #0F172A;
+  --bg-card: #0F172A;
+  --bg-card-hover: #141E33;
+  --bg-input: #1E293B;
+  --bg-glass: rgba(15, 23, 42, 0.85);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-focus: #3B82F6;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  --navy: #F8FAFC;
+  --navy-light: #1E293B;
+  --primary: #3B82F6;
+  --primary-hover: #2563EB;
+  --primary-light: #1E293B;
+  --primary-glow: rgba(59, 130, 246, 0.25);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+
+  /* Slate Color Variables Override for Pages */
+  --slate-900: #F8FAFC;
+  --slate-800: #F1F5F9;
+  --slate-700: #CBD5E1;
+  --slate-600: #94A3B8;
+  --slate-500: #64748B;
+  --slate-400: #475569;
+  --slate-300: #334155;
+  --slate-200: #1E293B;
+  --slate-100: #141E33;
+  --slate-50: #141E33;
+
+  --theme-btn-bg: #1E293B;
+  --theme-btn-color: #F59E0B;
+  --theme-btn-border: rgba(255, 255, 255, 0.15);
+}
+
+/* Smooth Body Transition & Background */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[data-theme="dark"] body {
+  background-color: #090D16 !important;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.12) 0px, transparent 50%) !important;
+  color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   Header, Navigation & Topbar
+   ========================================================================== */
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .app-topbar,
+html[data-theme="dark"] header.topbar,
+html[data-theme="dark"] header {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+  background: rgba(15, 23, 42, 0.92) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .logo-text h2,
+html[data-theme="dark"] .logo h2,
+html[data-theme="dark"] .brand-title {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .logo-text p,
+html[data-theme="dark"] .subtitle,
+html[data-theme="dark"] .card-subtitle {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .nav-link {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .nav-link:hover,
+html[data-theme="dark"] .nav-link.active {
+  background-color: #1E293B !important;
+  color: #60A5FA !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .profile-chip {
+  background-color: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .profile-chip:hover {
+  background-color: #25334D !important;
+  border-color: #3B82F6 !important;
+}
+
+/* Side Menu / Drawers */
+html[data-theme="dark"] .side-menu,
+html[data-theme="dark"] .sidebar {
+  background-color: #0F172A !important;
+  border-right-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .side-menu a,
+html[data-theme="dark"] .sidebar-nav a {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .side-menu a:hover,
+html[data-theme="dark"] .sidebar-nav a:hover,
+html[data-theme="dark"] .side-menu a.active,
+html[data-theme="dark"] .sidebar-nav a.active {
+  background-color: #1E293B !important;
+  color: #3B82F6 !important;
+}
+
+html[data-theme="dark"] .close-btn,
+html[data-theme="dark"] .close-menu {
+  color: #CBD5E1 !important;
+}
+
+/* ==========================================================================
+   Hero Sections Across All Pages in Dark Mode
+   ========================================================================== */
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .page-hero,
+html[data-theme="dark"] .about-hero,
+html[data-theme="dark"] .campaign-section,
+html[data-theme="dark"] .responsibility-section {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .hero h1,
+html[data-theme="dark"] .page-hero h1,
+html[data-theme="dark"] .about-hero h1,
+html[data-theme="dark"] .about-hero h2,
+html[data-theme="dark"] .page-title h2 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .hero p,
+html[data-theme="dark"] .page-hero p,
+html[data-theme="dark"] .about-hero p,
+html[data-theme="dark"] .page-title p {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .breadcrumb a {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .breadcrumb a:hover {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .updated,
+html[data-theme="dark"] .last-updated {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  color: #60A5FA !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ==========================================================================
+   Universal Card Containers & Boxes (Fixes All Blank White Cards Across All Pages)
+   ========================================================================== */
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .content,
+html[data-theme="dark"] .toc,
+html[data-theme="dark"] .info-card,
+html[data-theme="dark"] .info-box,
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .stats-card,
+html[data-theme="dark"] .stat,
+html[data-theme="dark"] .category-card,
+html[data-theme="dark"] .step-box,
+html[data-theme="dark"] .step-card,
+html[data-theme="dark"] .step,
+html[data-theme="dark"] .emergency-card,
+html[data-theme="dark"] .map-box,
+html[data-theme="dark"] .recent-box,
+html[data-theme="dark"] .callout-card,
+html[data-theme="dark"] .feature-card,
+html[data-theme="dark"] .feature,
+html[data-theme="dark"] .cta-box,
+html[data-theme="dark"] .cta-content,
+html[data-theme="dark"] .faq,
+html[data-theme="dark"] .faq-card,
+html[data-theme="dark"] .faq-item,
+html[data-theme="dark"] .tips-card,
+html[data-theme="dark"] .tips-box,
+html[data-theme="dark"] .awareness-card,
+html[data-theme="dark"] .awareness-box,
+html[data-theme="dark"] .responsibility-card,
+html[data-theme="dark"] .impact-item,
+html[data-theme="dark"] .policy-card,
+html[data-theme="dark"] .policy-full,
+html[data-theme="dark"] .terms-card,
+html[data-theme="dark"] .term-box,
+html[data-theme="dark"] .term-card,
+html[data-theme="dark"] .guideline-box,
+html[data-theme="dark"] .resource-card,
+html[data-theme="dark"] .hero-card,
+html[data-theme="dark"] .article-card,
+html[data-theme="dark"] .support-card,
+html[data-theme="dark"] .help-card,
+html[data-theme="dark"] .contact-box,
+html[data-theme="dark"] .contact-card,
+html[data-theme="dark"] .contact-block,
+html[data-theme="dark"] .feedback-card,
+html[data-theme="dark"] .about-card,
+html[data-theme="dark"] .training-card,
+html[data-theme="dark"] .module-box,
+html[data-theme="dark"] .quiz-card,
+html[data-theme="dark"] .cert-card,
+html[data-theme="dark"] .report-card,
+html[data-theme="dark"] .form-card,
+html[data-theme="dark"] .report-form,
+html[data-theme="dark"] .file-upload-box,
+html[data-theme="dark"] .track-card,
+html[data-theme="dark"] .report-details-card,
+html[data-theme="dark"] .timeline-item,
+html[data-theme="dark"] .timeline-box,
+html[data-theme="dark"] .profile-card,
+html[data-theme="dark"] .stat-item,
+html[data-theme="dark"] .activity-item,
+html[data-theme="dark"] .login-card,
+html[data-theme="dark"] .register-card,
+html[data-theme="dark"] .app-card,
+html[data-theme="dark"] .metric-card,
+html[data-theme="dark"] .chart-card,
+html[data-theme="dark"] .table-card,
+html[data-theme="dark"] .table-container,
+html[data-theme="dark"] .hero-right,
+html[data-theme="dark"] .hero-right .right,
+html[data-theme="dark"] .right,
+html[data-theme="dark"] .sidebar-card,
+html[data-theme="dark"] .content-card,
+html[data-theme="dark"] .location-picker-box,
+html[data-theme="dark"] .box,
+html[data-theme="dark"] .container-card,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .card-box,
+html[data-theme="dark"] .stepper-wrapper,
+html[data-theme="dark"] .ticket-card,
+html[data-theme="dark"] .benefit,
+html[data-theme="dark"] .campaign-card,
+html[data-theme="dark"] .safety-card,
+html[data-theme="dark"] .environment-card,
+html[data-theme="dark"] .volunteer-card,
+html[data-theme="dark"] .success-card,
+html[data-theme="dark"] .achievement-card,
+html[data-theme="dark"] .testimonial-card,
+html[data-theme="dark"] .gallery-card,
+html[data-theme="dark"] .news-card,
+html[data-theme="dark"] .cookie-table {
+  background-color: #0F172A !important;
+  background: #0F172A !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.05) !important;
+  color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   Terms & Conditions Page Special Components
+   ========================================================================== */
+html[data-theme="dark"] .toc a {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .toc a:hover {
+  background-color: #1E293B !important;
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .toc a.active {
+  background-color: #1E3A8A !important;
+  color: #93C5FD !important;
+  border-left-color: #3B82F6 !important;
+}
+
+html[data-theme="dark"] .quick-help {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .quick-help h4 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .quick-help p {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .quick-help a {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .toolbar {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .tool-btn {
+  background-color: #1E293B !important;
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .tool-btn:hover {
+  background-color: #25334D !important;
+  border-color: #3B82F6 !important;
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .notice {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border-left: 5px solid #3B82F6 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .notice p {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .notice i {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .term-section {
+  background: transparent !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .term-section p,
+html[data-theme="dark"] .term-section li {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .term-title h2 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .number {
+  background-color: #1E293B !important;
+  color: #60A5FA !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .highlight {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .highlight strong {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .highlight span {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .faq-question {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .faq-question:hover {
+  background-color: #1E293B !important;
+}
+
+html[data-theme="dark"] .faq-answer {
+  background-color: #0F172A !important;
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .accept-box {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+}
+
+html[data-theme="dark"] .accept-btn {
+  background-color: #3B82F6 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .accept-btn:hover {
+  background-color: #2563EB !important;
+}
+
+html[data-theme="dark"] .support {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .support h2 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .support p {
+  color: #94A3B8 !important;
+}
+
+/* Card Hover States in Dark Mode */
+html[data-theme="dark"] .card:hover,
+html[data-theme="dark"] .info-card:hover,
+html[data-theme="dark"] .info-box:hover,
+html[data-theme="dark"] .stat-card:hover,
+html[data-theme="dark"] .stats-card:hover,
+html[data-theme="dark"] .category-card:hover,
+html[data-theme="dark"] .step-box:hover,
+html[data-theme="dark"] .step-card:hover,
+html[data-theme="dark"] .emergency-card:hover,
+html[data-theme="dark"] .map-box:hover,
+html[data-theme="dark"] .recent-box:hover,
+html[data-theme="dark"] .callout-card:hover,
+html[data-theme="dark"] .feature-card:hover,
+html[data-theme="dark"] .feature:hover,
+html[data-theme="dark"] .cta-box:hover,
+html[data-theme="dark"] .faq-card:hover,
+html[data-theme="dark"] .faq-item:hover,
+html[data-theme="dark"] .tips-card:hover,
+html[data-theme="dark"] .awareness-card:hover,
+html[data-theme="dark"] .awareness-box:hover,
+html[data-theme="dark"] .responsibility-card:hover,
+html[data-theme="dark"] .impact-item:hover,
+html[data-theme="dark"] .policy-card:hover,
+html[data-theme="dark"] .terms-card:hover,
+html[data-theme="dark"] .resource-card:hover,
+html[data-theme="dark"] .article-card:hover,
+html[data-theme="dark"] .support-card:hover,
+html[data-theme="dark"] .help-card:hover,
+html[data-theme="dark"] .contact-box:hover,
+html[data-theme="dark"] .feedback-card:hover,
+html[data-theme="dark"] .about-card:hover,
+html[data-theme="dark"] .training-card:hover {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* ==========================================================================
+   Inner Elevated Components, Badges, & Interactive Tiles in Dark Mode
+   ========================================================================== */
+html[data-theme="dark"] .feedback-type,
+html[data-theme="dark"] .stat-box,
+html[data-theme="dark"] .rating-section,
+html[data-theme="dark"] .officer-card,
+html[data-theme="dark"] .cat-card,
+html[data-theme="dark"] .sev-card,
+html[data-theme="dark"] .dropzone,
+html[data-theme="dark"] .preview-container,
+html[data-theme="dark"] .card-header-bar,
+html[data-theme="dark"] .card-actions-bar,
+html[data-theme="dark"] .ticket-details-grid {
+  background-color: #141E33 !important;
+  background: #141E33 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .feedback-type:hover,
+html[data-theme="dark"] .stat-box:hover,
+html[data-theme="dark"] .cat-card:hover,
+html[data-theme="dark"] .sev-card:hover,
+html[data-theme="dark"] .dropzone:hover {
+  background-color: #1E293B !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+/* Selected Category & Severity Cards */
+html[data-theme="dark"] .cat-card.selected {
+  background-color: #1E3A8A !important;
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 2px #3B82F6 !important;
+}
+
+html[data-theme="dark"] .cat-card.selected i,
+html[data-theme="dark"] .cat-card.selected span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .sev-card.selected {
+  background-color: #1E3A8A !important;
+  border-color: #60A5FA !important;
+  box-shadow: 0 0 0 2px #60A5FA !important;
+}
+
+html[data-theme="dark"] .sev-card.selected .sev-title {
+  color: #FFFFFF !important;
+}
+
+/* Stepper Component */
+html[data-theme="dark"] .step-item {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] .step-circle {
+  background-color: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .step-item.active .step-circle {
+  background-color: #2563EB !important;
+  border-color: #3B82F6 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .step-item.completed .step-circle {
+  background-color: #10B981 !important;
+  border-color: #10B981 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .step-label {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .step-item.active .step-label {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .stepper-progress-bar {
+  background-color: #1E293B !important;
+}
+
+/* Icons & Badges in Cards */
+html[data-theme="dark"] .feature-icon,
+html[data-theme="dark"] .icon,
+html[data-theme="dark"] .stat-icon,
+html[data-theme="dark"] .page-icon,
+html[data-theme="dark"] .card-title-icon,
+html[data-theme="dark"] .brand-icon-wrap {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+  color: #60A5FA !important;
+}
+
+/* Alert Boxes */
+html[data-theme="dark"] .alert {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+  border-left: 4px solid #F59E0B !important;
+  color: #FDE68A !important;
+}
+
+html[data-theme="dark"] .alert h4,
+html[data-theme="dark"] .alert p {
+  color: #FDE68A !important;
+}
+
+html[data-theme="dark"] .alert i {
+  color: #F59E0B !important;
+}
+
+/* Result & Notification Boxes */
+html[data-theme="dark"] .result {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  color: #34D399 !important;
+}
+
+html[data-theme="dark"] .result h2 {
+  color: #34D399 !important;
+}
+
+html[data-theme="dark"] .msg.error {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #F87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+html[data-theme="dark"] .msg.success {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+html[data-theme="dark"] .logo-badge span {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .do .box-title span {
+  background: rgba(16, 185, 129, 0.2) !important;
+  color: #34D399 !important;
+}
+
+html[data-theme="dark"] .dont .box-title span {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #F87171 !important;
+}
+
+/* Strong Typography & Descriptions in Inner Cards */
+html[data-theme="dark"] .feedback-type strong,
+html[data-theme="dark"] .officer-info h4,
+html[data-theme="dark"] .stat strong,
+html[data-theme="dark"] .card-title-group h2,
+html[data-theme="dark"] .sev-title,
+html[data-theme="dark"] .dropzone-title,
+html[data-theme="dark"] .preview-name,
+html[data-theme="dark"] .detail-item p,
+html[data-theme="dark"] .benefit h3,
+html[data-theme="dark"] .feature h3,
+html[data-theme="dark"] .step h4,
+html[data-theme="dark"] .step h3 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .feedback-type p,
+html[data-theme="dark"] .stat-box span,
+html[data-theme="dark"] .officer-info p,
+html[data-theme="dark"] .info-key,
+html[data-theme="dark"] .log-time,
+html[data-theme="dark"] .log-content p,
+html[data-theme="dark"] .stat span,
+html[data-theme="dark"] .card-title-group p,
+html[data-theme="dark"] .sev-desc,
+html[data-theme="dark"] .dropzone-sub,
+html[data-theme="dark"] .preview-size,
+html[data-theme="dark"] .detail-item label,
+html[data-theme="dark"] .field-hint,
+html[data-theme="dark"] .benefit p,
+html[data-theme="dark"] .feature p,
+html[data-theme="dark"] .step p {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .rating-section label.section-label {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .rating-options label {
+  background: #1E293B !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] .rating-options label:hover {
+  background: #25334D !important;
+  border-color: #3B82F6 !important;
+}
+
+html[data-theme="dark"] .rating-options input:checked + label {
+  background: #1E3A8A !important;
+  border-color: #60A5FA !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+}
+
+html[data-theme="dark"] .btn-quick-link {
+  background-color: #1E293B !important;
+  color: #CBD5E1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .btn-quick-link:hover {
+  background-color: #25334D !important;
+  color: #FFFFFF !important;
+  border-color: #3B82F6 !important;
+}
+
+html[data-theme="dark"] .card-header,
+html[data-theme="dark"] .info-item,
+html[data-theme="dark"] .faq-item {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .info-val,
+html[data-theme="dark"] .log-content h5 {
+  color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   Typography & Text Legibility inside Dark Containers
+   ========================================================================== */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] .card-title,
+html[data-theme="dark"] .brand-title,
+html[data-theme="dark"] .step-box h3,
+html[data-theme="dark"] .emergency-card h3,
+html[data-theme="dark"] .emergency-card h2,
+html[data-theme="dark"] .stat-card h2,
+html[data-theme="dark"] .category-card h3,
+html[data-theme="dark"] .hero-left h1,
+html[data-theme="dark"] .left h1,
+html[data-theme="dark"] .question {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] p,
+html[data-theme="dark"] li,
+html[data-theme="dark"] label,
+html[data-theme="dark"] .section-subtitle,
+html[data-theme="dark"] .subtitle,
+html[data-theme="dark"] .card-subtitle,
+html[data-theme="dark"] .step-box p,
+html[data-theme="dark"] .emergency-card p,
+html[data-theme="dark"] .stat-card p,
+html[data-theme="dark"] .category-card p,
+html[data-theme="dark"] .info-card p,
+html[data-theme="dark"] .hero-left p,
+html[data-theme="dark"] .left p,
+html[data-theme="dark"] .answer {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .text-muted,
+html[data-theme="dark"] .desc,
+html[data-theme="dark"] .helper-text,
+html[data-theme="dark"] small {
+  color: #94A3B8 !important;
+}
+
+/* Icons inside Cards */
+html[data-theme="dark"] .step-box i,
+html[data-theme="dark"] .emergency-card i,
+html[data-theme="dark"] .stat-card i,
+html[data-theme="dark"] .category-card i,
+html[data-theme="dark"] .info-list i,
+html[data-theme="dark"] .map-box i,
+html[data-theme="dark"] .card i:not(.prefix-icon):not(.theme-toggle-btn i):not(.fi) {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .step-number {
+  background-color: #2563EB !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* ==========================================================================
+   Tabs, Badges & Interactive Controls
+   ========================================================================== */
+html[data-theme="dark"] .tabs,
+html[data-theme="dark"] .tab-btn {
+  background-color: #1E293B !important;
+  color: #CBD5E1 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .tab-btn.active,
+html[data-theme="dark"] .tab-btn:hover {
+  background-color: #2563EB !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .badge,
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .portal-badge,
+html[data-theme="dark"] .small-title,
+html[data-theme="dark"] .hero-badge {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  color: #60A5FA !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* ==========================================================================
+   Form Controls, Inputs, & Buttons
+   ========================================================================== */
+html[data-theme="dark"] input[type="text"],
+html[data-theme="dark"] input[type="email"],
+html[data-theme="dark"] input[type="password"],
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="tel"],
+html[data-theme="dark"] input[type="date"],
+html[data-theme="dark"] input[type="datetime-local"],
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] .input-wrap input,
+html[data-theme="dark"] .search-box input,
+html[data-theme="dark"] .report-controls input {
+  background-color: #1E293B !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] select option {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder,
+html[data-theme="dark"] select::placeholder {
+  color: #64748B !important;
+}
+
+html[data-theme="dark"] input:focus,
+html[data-theme="dark"] select:focus,
+html[data-theme="dark"] textarea:focus {
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important;
+  background-color: #141E33 !important;
+}
+
+/* Buttons */
+html[data-theme="dark"] .btn2,
+html[data-theme="dark"] .btn-secondary,
+html[data-theme="dark"] .btn-register,
+html[data-theme="dark"] .btn-outline,
+html[data-theme="dark"] .home-icon-btn,
+html[data-theme="dark"] .btn-home {
+  background-color: #1E293B !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+html[data-theme="dark"] .btn2:hover,
+html[data-theme="dark"] .btn-secondary:hover,
+html[data-theme="dark"] .btn-register:hover,
+html[data-theme="dark"] .btn-outline:hover,
+html[data-theme="dark"] .home-icon-btn:hover,
+html[data-theme="dark"] .btn-home:hover {
+  background-color: #25334D !important;
+  color: #FFFFFF !important;
+  border-color: #3B82F6 !important;
+}
+
+/* ==========================================================================
+   Tables & Modals
+   ========================================================================== */
+html[data-theme="dark"] table {
+  color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] thead {
+  background: #141E33 !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] th {
+  background-color: #141E33 !important;
+  color: #F8FAFC !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] td {
+  background-color: #0F172A !important;
+  color: #CBD5E1 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="dark"] tr:hover td,
+html[data-theme="dark"] tbody tr:hover {
+  background-color: #1A2642 !important;
+}
+
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .modal-body,
+html[data-theme="dark"] .modal-header,
+html[data-theme="dark"] .modal-footer {
+  background-color: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   Footers
+   ========================================================================== */
+html[data-theme="dark"] footer,
+html[data-theme="dark"] .footer {
+  background-color: #0B1120 !important;
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] footer p,
+html[data-theme="dark"] footer span,
+html[data-theme="dark"] footer a {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] footer a:hover {
+  color: #3B82F6 !important;
+}
+
+/* ==========================================================================
+   Theme Toggle Button Styling
+   ========================================================================== */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--theme-btn-bg);
+  color: var(--theme-btn-color);
+  border: 1px solid var(--theme-btn-border);
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.08) rotate(15deg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Floating Toggle Container for Standalone Card Pages */
+.floating-theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}

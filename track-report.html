@@ -14,8 +14,10 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <!-- IDRS AI Chatbot Styles -->
+  <!-- IDRS AI Chatbot & Universal Theme Styles -->
   <link rel="stylesheet" href="chatbot.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
 
   <style>
     :root {
@@ -95,7 +97,7 @@
       gap: 12px;
       text-decoration: none;
     }
-    .logo i { font-size: 32px; color: #2F3B4A; }
+    .logo i { font-size: 32px; color: #2563EB; }
     .logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
     .logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
     .nav-links {
@@ -174,7 +176,7 @@
       padding: 18px 25px;
       color: #374151;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 15px;
       transition: .3s;
     }
     .side-menu a:hover { background: #F3F4F6; color: #2563EB; }
@@ -182,7 +184,7 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      font-size: 25px;
+      font-size: 22px;
       cursor: pointer;
       color: #374151;
     }
@@ -227,8 +229,9 @@
       align-items: center;
       gap: 6px;
       padding: 6px 14px;
-      background-color: #E5E7EB;
-      color: #374151;
+      background-color: #EFF6FF;
+      color: #2563EB;
+      border: 1px solid #DBEAFE;
       border-radius: 20px;
       font-size: 12px;
       font-weight: 600;
@@ -237,11 +240,15 @@
     }
 
     .page-hero h1 {
-      font-size: 34px;
+      font-size: 42px;
       font-weight: 800;
       color: var(--navy);
       letter-spacing: -0.5px;
       margin-bottom: 10px;
+    }
+
+    .page-hero h1 span {
+      color: #2563EB;
     }
 
     .page-hero p {
@@ -272,7 +279,7 @@
     }
 
     .search-title i {
-      color: var(--slate-700);
+      color: #2563EB;
     }
 
     .search-form {
@@ -297,7 +304,7 @@
     .search-input {
       width: 100%;
       padding: 14px 16px 14px 46px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
       color: var(--slate-800);
       background-color: var(--slate-50);
@@ -310,16 +317,16 @@
 
     .search-input:focus {
       background-color: white;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(47, 59, 74, 0.12);
+      border-color: #2563EB;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
     }
 
     .btn-search {
       padding: 14px 28px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
       color: white;
-      background-color: var(--primary);
+      background-color: #2563EB;
       border: none;
       border-radius: 12px;
       cursor: pointer;
@@ -327,12 +334,13 @@
       align-items: center;
       gap: 10px;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(47, 59, 74, 0.25);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
     }
 
     .btn-search:hover {
-      background-color: var(--primary-hover);
+      background-color: #1D4ED8;
       transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
     }
 
     /* Quick Demo Ticket Chips */
@@ -388,7 +396,7 @@
     }
 
     .summary-ticket-info h2 {
-      font-size: 22px;
+      font-size: 28px;
       font-weight: 700;
       color: var(--navy);
       display: flex;
@@ -455,7 +463,7 @@
     }
 
     .card-heading {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--navy);
       margin-bottom: 24px;
@@ -555,9 +563,9 @@
     }
 
     .info-box {
-      background: white;
+      background: var(--bg-card, white);
       border-radius: 20px;
-      border: 1px solid var(--slate-200);
+      border: 1px solid var(--border-subtle, var(--slate-200));
       padding: 24px 28px;
       box-shadow: var(--shadow-md);
     }
@@ -574,7 +582,7 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 10px;
-      border-bottom: 1px solid var(--slate-100);
+      border-bottom: 1px solid var(--border-subtle, var(--slate-100));
     }
 
     .info-item:last-child {
@@ -604,7 +612,7 @@
       padding: 16px 20px;
       border-radius: 14px;
       margin-top: 16px;
-      border: 1px solid var(--slate-200);
+      border: 1px solid var(--border-subtle, var(--slate-200));
     }
 
     .officer-avatar {
@@ -620,7 +628,7 @@
     }
 
     .officer-info h4 {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--navy);
     }
@@ -687,7 +695,7 @@
       align-items: center;
       gap: 8px;
       padding: 10px 20px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       border-radius: 10px;
       border: none;
@@ -757,7 +765,7 @@
     }
 
     .modal-header h3 {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--navy);
     }
@@ -776,7 +784,7 @@
       border-top: 1px solid var(--slate-200);
       padding: 24px 20px;
       text-align: center;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--slate-500);
       margin-top: auto;
     }
@@ -826,13 +834,19 @@
         <a href="report.html" class="nav-link">Report Damage</a>
         <a href="track-report.html" class="nav-link active">Track Progress</a>
         <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="community-awareness-page.html" class="nav-link">Awareness</a>
         <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
         <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
 
-    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-        <i class="fas fa-house"></i>
-    </a>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+            <i class="fas fa-house"></i>
+        </a>
+    </div>
   </header>
 
   <!-- MOBILE SIDE MENU -->
@@ -840,12 +854,18 @@
     <div class="close-menu" onclick="toggleMenu()">
         <i class="fas fa-times"></i>
     </div>
-    <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
-    <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
   </div>
 
   <!-- Main Content Container -->
@@ -856,7 +876,7 @@
       <div class="hero-badge">
         <i class="fas fa-magnifying-glass-chart"></i> Official Tracking System
       </div>
-      <h1>Track Damage Report Status</h1>
+      <h1>Track <span>Damage Report Status</span></h1>
       <p>Enter your unique Reference Ticket ID to view real-time inspection updates, assigned field crews, and repair progress.</p>
     </div>
 

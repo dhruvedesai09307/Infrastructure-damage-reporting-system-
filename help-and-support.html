@@ -19,8 +19,10 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <!-- IDRS AI Chatbot Styles -->
+  <!-- IDRS AI Chatbot & Universal Theme Styles -->
   <link rel="stylesheet" href="chatbot.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
 
   <style>
     :root {
@@ -80,7 +82,7 @@
       gap: 12px;
       text-decoration: none;
     }
-    .logo i { font-size: 32px; color: #2F3B4A; }
+    .logo i { font-size: 32px; color: #2563EB; }
     .logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
     .logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
     .nav-links {
@@ -159,7 +161,7 @@
       padding: 18px 25px;
       color: #374151;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 15px;
       transition: .3s;
     }
     .side-menu a:hover { background: #F3F4F6; color: #2563EB; }
@@ -167,7 +169,7 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      font-size: 25px;
+      font-size: 22px;
       cursor: pointer;
       color: #374151;
     }
@@ -210,7 +212,7 @@
 
     .hero-left p {
 
-      font-size: 18px;
+      font-size: 19px;
       line-height: 34px;
       color: #6B7280;
       margin-bottom: 35px;
@@ -244,7 +246,7 @@
       border: none;
       outline: none;
       width: 100%;
-      font-size: 17px;
+      font-size: 16px;
       background: transparent;
       color: #374151;
 
@@ -283,7 +285,7 @@
 
     .support-card p {
 
-      font-size: 17px;
+      font-size: 16px;
       line-height: 32px;
       color: #6B7280;
       margin-bottom: 25px;
@@ -299,7 +301,7 @@
     .support-card li {
 
       margin: 14px 0;
-      font-size: 17px;
+      font-size: 18px;
 
     }
 
@@ -336,7 +338,7 @@
       text-align: center;
       max-width: 750px;
       margin: auto;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 32px;
       color: #6B7280;
       margin-bottom: 45px;
@@ -379,7 +381,7 @@
 
     .help-card h3 {
 
-      font-size: 24px;
+      font-size: 20px;
       margin-bottom: 15px;
       color: #111827;
 
@@ -387,7 +389,7 @@
 
     .help-card p {
 
-      font-size: 17px;
+      font-size: 16px;
       line-height: 30px;
       color: #6B7280;
 
@@ -447,13 +449,19 @@
         <a href="report.html" class="nav-link">Report Damage</a>
         <a href="track-report.html" class="nav-link">Track Progress</a>
         <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="community-awareness-page.html" class="nav-link">Awareness</a>
         <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
         <a href="help-and-support.html" class="nav-link active">Support</a>
     </nav>
 
-    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-        <i class="fas fa-house"></i>
-    </a>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+            <i class="fas fa-house"></i>
+        </a>
+    </div>
   </header>
 
   <!-- MOBILE SIDE MENU -->
@@ -461,12 +469,18 @@
     <div class="close-menu" onclick="toggleMenu()">
         <i class="fas fa-times"></i>
     </div>
-    <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
-    <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
   </div>
 
 
@@ -671,7 +685,7 @@
 
       display: none;
       padding: 0 28px 25px;
-      font-size: 17px;
+      font-size: 16px;
       line-height: 32px;
       color: #6B7280;
 
@@ -733,7 +747,7 @@
     .status-card h3 {
 
       margin-bottom: 12px;
-      font-size: 22px;
+      font-size: 20px;
 
     }
 
@@ -1111,14 +1125,14 @@
     .timeline-content h3 {
 
       margin-bottom: 15px;
-      font-size: 24px;
+      font-size: 20px;
       color: #111827;
 
     }
 
     .timeline-content p {
 
-      font-size: 17px;
+      font-size: 16px;
       line-height: 30px;
       color: #6B7280;
 
@@ -1194,7 +1208,7 @@
 
       line-height: 30px;
       color: #6B7280;
-      font-size: 17px;
+      font-size: 16px;
 
     }
 
@@ -1248,7 +1262,7 @@
 
     .emergency-card h2 {
 
-      font-size: 30px;
+      font-size: 32px;
       margin: 15px 0;
       color: #111827;
 
@@ -1613,14 +1627,14 @@
 
     .support-box h3 {
 
-      font-size: 26px;
+      font-size: 20px;
       margin-bottom: 15px;
 
     }
 
     .support-box p {
 
-      font-size: 17px;
+      font-size: 16px;
       line-height: 30px;
       color: #6B7280;
       margin-bottom: 20px;

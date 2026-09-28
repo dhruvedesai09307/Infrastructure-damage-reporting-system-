@@ -13,6 +13,11 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+<!-- IDRS AI Chatbot Assistant & Universal Theme Styles -->
+<link rel="stylesheet" href="chatbot.css">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+
 <style>
 
 *{
@@ -57,7 +62,7 @@ body{
     text-decoration: none;
 }
 
-.logo i { font-size: 32px; color: #2F3B4A; }
+.logo i { font-size: 32px; color: #2563EB; }
 .logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
 .logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
 
@@ -146,7 +151,7 @@ body{
     padding: 18px 25px;
     color: #374151;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
     transition: .3s;
 }
 
@@ -156,22 +161,9 @@ body{
     position: absolute;
     top: 20px;
     right: 20px;
-    font-size: 25px;
+    font-size: 22px;
     cursor: pointer;
     color: #374151;
-}
-
-.home-icon-btn:hover {
-    background: #2563EB;
-    color: #FFFFFF;
-    border-color: #2563EB;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
-}
-
-@media (max-width: 640px) {
-    .nav-container { padding: 0 16px; }
-    .nav-links { display: none; }
 }
 
 /* ================= MAIN ================= */
@@ -192,9 +184,10 @@ body{
 .page-icon{
     width:62px;
     height:62px;
-    background:#e8edf3;
-    color:#29384b;
-    border-radius:13px;
+    background:#EFF6FF;
+    color:#2563EB;
+    border:1px solid #DBEAFE;
+    border-radius:14px;
     margin:auto;
     display:flex;
     align-items:center;
@@ -204,14 +197,18 @@ body{
 }
 
 .page-title h2{
-    font-size:36px;
+    font-size:42px;
     color:#253447;
     margin-bottom:7px;
 }
 
+.page-title h2 span{
+    color:#2563EB;
+}
+
 .page-title p{
     color:#7b858f;
-    font-size:18px;
+    font-size:16px;
 }
 
 /* ================= SEARCH ================= */
@@ -235,8 +232,8 @@ body{
 }
 
 .search-box input:focus{
-    border-color:#8b9caf;
-    box-shadow:0 0 0 3px rgba(41,56,75,.06);
+    border-color:#2563EB;
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
 }
 
 .search-box i{
@@ -268,22 +265,23 @@ body{
 .stat-icon{
     width:42px;
     height:42px;
-    border-radius:8px;
-    background:#edf1f5;
+    border-radius:10px;
+    background:#EFF6FF;
+    border:1px solid #DBEAFE;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#29384b;
+    color:#2563EB;
 }
 
 .stat strong{
     display:block;
-    font-size:18px;
+    font-size:20px;
 }
 
 .stat span{
     color:#858e98;
-    font-size:15px;
+    font-size:14px;
 }
 
 /* ================= SECTION ================= */
@@ -293,12 +291,12 @@ body{
 }
 
 .section-heading h3{
-    font-size:32px;
+    font-size:42px;
 }
 
 .section-heading p{
     color:#808a94;
-    font-size:18px;
+    font-size:16px;
     margin-top:4px;
 }
 
@@ -333,9 +331,10 @@ body{
 .icon{
     width:47px;
     height:47px;
-    border-radius:9px;
-    background:#edf2f7;
-    color:#29384b;
+    border-radius:10px;
+    background:#EFF6FF;
+    color:#2563EB;
+    border:1px solid #DBEAFE;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -343,12 +342,12 @@ body{
 }
 
 .card h4{
-    font-size:18px;
+    font-size:20px;
 }
 
 .card small{
     color:#84909b;
-    font-size:15px;
+    font-size:14px;
 }
 
 .card p{
@@ -365,12 +364,12 @@ body{
     display:flex;
     gap:9px;
     color:#596673;
-    font-size:16px;
+    font-size:18px;
     margin:8px 0;
 }
 
 .tips i{
-    color:#55789d;
+    color:#2563EB;
     margin-top:3px;
 }
 
@@ -416,7 +415,7 @@ body{
 }
 
 .box-title h4{
-    font-size:18px;
+    font-size:20px;
 }
 
 .item{
@@ -454,7 +453,7 @@ body{
 .step-number{
     width:40px;
     height:40px;
-    background:#29384b;
+    background:#2563EB;
     color:#fff;
     border-radius:50%;
     display:flex;
@@ -465,13 +464,13 @@ body{
 }
 
 .step h4{
-    font-size:17px;
+    font-size:20px;
     margin-bottom:5px;
 }
 
 .step p{
     color:#7e8993;
-    font-size:15px;
+    font-size:16px;
 }
 
 /* ================= ALERT ================= */
@@ -493,13 +492,13 @@ body{
 }
 
 .alert h4{
-    font-size:17px;
+    font-size:20px;
     margin-bottom:3px;
 }
 
 .alert p{
     color:#756e65;
-    font-size:15px;
+    font-size:16px;
 }
 
 /* ================= FAQ ================= */
@@ -525,12 +524,12 @@ body{
     justify-content:space-between;
     align-items:center;
     cursor:pointer;
-    font-size:17px;
+    font-size:18px;
     font-weight:600;
 }
 
 .question i{
-    color:#7d8994;
+    color:#2563EB;
     transition:.25s;
 }
 .answer{
@@ -561,24 +560,29 @@ body{
 }
 
 .cta h3{
-    font-size:28px;
+    font-size:42px;
     margin-bottom:6px;
 }
 
 .cta p{
     color:#d1d8df;
-    font-size:16px;
+    font-size:18px;
     margin-bottom:17px;
 }
 
 .cta a{
-    background:white;
-    color:#29384b;
+    background:#2563EB;
+    color:#FFFFFF;
     text-decoration:none;
-    padding:10px 19px;
-    border-radius:6px;
+    padding:11px 22px;
+    border-radius:8px;
     font-size:16px;
-    font-weight:700;
+    font-weight:600;
+    transition:.2s;
+}
+
+.cta a:hover{
+    background:#1D4ED8;
 }
 
 /* ================= FOOTER ================= */
@@ -599,18 +603,18 @@ footer{
 
 footer h4{
     color:#fff;
-    font-size:13px;
+    font-size:14px;
 }
 
 footer p{
-    font-size:11px;
+    font-size:14px;
     margin-top:4px;
 }
 
 .footer-links a{
     color:#cbd3db;
     text-decoration:none;
-    font-size:11px;
+    font-size:14px;
     margin-left:15px;
 }
 
@@ -712,13 +716,19 @@ footer p{
         <a href="report.html" class="nav-link">Report Damage</a>
         <a href="track-report.html" class="nav-link">Track Progress</a>
         <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="community-awareness-page.html" class="nav-link">Awareness</a>
         <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
         <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
 
-    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-        <i class="fas fa-house"></i>
-    </a>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+            <i class="fas fa-house"></i>
+        </a>
+    </div>
 </header>
 
 <!-- MOBILE SIDE MENU -->
@@ -726,12 +736,18 @@ footer p{
     <div class="close-menu" onclick="toggleMenu()">
         <i class="fas fa-times"></i>
     </div>
-    <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
-    <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
 </div>
 
 
@@ -748,7 +764,7 @@ footer p{
 <i class="fa-solid fa-shield-halved"></i>
 </div>
 
-<h2>Safety Tips</h2>
+<h2>Safety <span>Tips & Guidelines</span></h2>
 
 <p>
 Important safety information for reporting infrastructure issues safely.
@@ -1462,7 +1478,7 @@ should always come first.
 
 </div>
 </div>
-</section>
+</main>
 
 <footer>
 <div class="copyright">
@@ -1471,6 +1487,15 @@ should always come first.
 </footer>
 
 <script>
+function searchTips() {
+    const query = document.getElementById("search").value.toLowerCase().trim();
+    const cards = document.querySelectorAll("#cards .card");
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? "block" : "none";
+    });
+}
+
 function toggleFAQ(element) {
   const item = element.parentElement;
   item.classList.toggle('active');
@@ -1492,5 +1517,7 @@ document.querySelectorAll(".side-menu a").forEach(function(link){
     });
 });
 </script>
+<!-- IDRS AI Chatbot Assistant -->
+<script src="chatbot.js"></script>
 </body>
 </html>

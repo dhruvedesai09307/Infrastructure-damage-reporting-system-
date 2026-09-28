@@ -5,6 +5,10 @@
 <title>IDRS</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- IDRS AI Chatbot Assistant & Universal Theme Styles -->
+<link rel="stylesheet" href="chatbot.css">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 
 <style>
 
@@ -50,7 +54,7 @@ body{
 
 .logo i{
     font-size:32px;
-    color:#2F3B4A;
+    color:#2563EB;
 }
 
 .logo-text h2{
@@ -128,7 +132,7 @@ body{
     padding:18px 25px;
     color:#374151;
     text-decoration:none;
-    font-size:16px;
+    font-size:15px;
     transition:.3s;
 }
 
@@ -138,7 +142,7 @@ body{
     position:absolute;
     top:20px;
     right:20px;
-    font-size:25px;
+    font-size:22px;
     cursor:pointer;
     color:#374151;
 }
@@ -156,12 +160,16 @@ body{
 }
 
 .left h1{
-    font-size:60px;
+    font-size:58px;
     margin-bottom:20px;
 }
 
+.left h1 span{
+    color:#2563EB;
+}
+
 .left p{
-    font-size:20px;
+    font-size:19px;
     color:#6B7280;
     margin-bottom:30px;
 }
@@ -224,12 +232,18 @@ body{
         <a href="report.html" class="nav-link">Report Damage</a>
         <a href="track-report.html" class="nav-link">Track Progress</a>
         <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="community-awareness-page.html" class="nav-link">Awareness</a>
         <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
         <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
-    <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-        <i class="fas fa-house"></i>
-    </a>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
+            <i class="fas fa-house"></i>
+        </a>
+    </div>
 </header>
 
 <!-- MOBILE SIDE MENU -->
@@ -237,18 +251,24 @@ body{
     <div class="close-menu" onclick="toggleMenu()">
         <i class="fas fa-times"></i>
     </div>
-    <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
-    <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
 </div>
 
 <section class="hero">
 
 <div class="left">
-    <h1>Building Safer Communities</h1>
+    <h1>Building <span>Safer Communities</span></h1>
 
     <p>
         Report damaged roads, broken streetlights, water leaks,
@@ -265,10 +285,10 @@ body{
 <h2>Why Use IDRS?</h2>
 
 <ul>
-    <li>✔ Easy Damage Reporting</li>
-    <li>✔ Live Complaint Tracking</li>
-    <li>✔ Secure Login</li>
-    <li>✔ Faster Issue Resolution</li>
+    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Easy Damage Reporting</li>
+    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Live Complaint Tracking</li>
+    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Secure Login</li>
+    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Faster Issue Resolution</li>
 </ul>
 
 </div>
@@ -288,5 +308,7 @@ document.querySelectorAll(".side-menu a").forEach(function(link){
     });
 });
 </script>
+<!-- IDRS AI Chatbot Assistant -->
+<script src="chatbot.js"></script>
 </body>
 </html>
