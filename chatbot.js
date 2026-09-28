@@ -827,18 +827,24 @@
       const localReports = JSON.parse(localStorage.getItem('reports') || '[]');
       localReports.unshift(reportObj);
       localStorage.setItem('reports', JSON.stringify(localReports));
+
+      const channel = new BroadcastChannel('idrs_incident_channel');
+      channel.postMessage({ type: 'NEW_REPORT', report: reportObj });
     } catch (e) {}
 
     try {
-      const formData = new FormData();
-      formData.append('category', reportWizardState.data.category);
-      formData.append('location', reportWizardState.data.location);
-      formData.append('description', reportWizardState.data.description);
-      formData.append('severity', reportWizardState.data.severity);
-      formData.append('name', localStorage.getItem('currentUser') || 'Citizen (via AI Chat)');
-      formData.append('report_id', newTicketId);
-
-      await fetch('/submit_report', { method: 'POST', body: formData });
+      await fetch('/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: reportWizardState.data.category,
+          location: reportWizardState.data.location,
+          description: reportWizardState.data.description,
+          severity: reportWizardState.data.severity,
+          name: localStorage.getItem('currentUser') || 'Citizen (via AI Chat)',
+          report_id: newTicketId
+        })
+      });
     } catch (err) {}
 
     reportWizardState.active = false;

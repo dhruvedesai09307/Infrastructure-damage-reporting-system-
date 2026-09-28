@@ -1153,45 +1153,191 @@
       color: var(--accent-rose) !important;
     }
 
-    /* GIS Map Section Styling */
+    /* GIS Map Section Styling & Radar Stream */
     .map-controls-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       margin-bottom: 16px;
       flex-wrap: wrap;
     }
 
-    .map-container-wrap {
-      position: relative;
-    }
-
-    .map-stats-pill {
-      display: inline-flex;
+    .map-tools-row {
+      display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      flex-wrap: wrap;
+    }
+
+    .map-split-container {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 16px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    @media (max-width: 1100px) {
+      .map-split-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .map-split-container.sidebar-collapsed {
+      grid-template-columns: 1fr !important;
+    }
+
+    .map-split-container.sidebar-collapsed .map-radar-sidebar {
+      display: none !important;
+    }
+
+    .map-canvas-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-md);
+      background: var(--bg-card);
+    }
+
+    .map-container-wrap.fullscreen-map {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 99999 !important;
+      background: var(--bg-body);
+      padding: 16px;
+      box-sizing: border-box;
+      border-radius: 0 !important;
+    }
+
+    .map-container-wrap.fullscreen-map #adminDamageMap {
+      height: calc(100vh - 90px) !important;
+    }
+
+    #adminDamageMap {
+      width: 100%;
+      height: 680px;
+      z-index: 1;
+      border-radius: var(--radius-lg);
+    }
+
+    .map-layer-btn-group {
+      display: inline-flex;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      font-size: 14px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .map-layer-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+    }
+
+    .map-layer-btn:hover {
       color: var(--text-primary);
+      background: var(--bg-card-hover);
+    }
+
+    .map-layer-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px var(--primary-glow);
+    }
+
+    .map-floating-hud {
+      position: absolute;
+      top: 14px;
+      left: 60px;
+      z-index: 999;
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-md);
+      flex-wrap: wrap;
+    }
+
+    .hud-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #10B981;
+      padding-left: 8px;
+      border-left: 1px solid var(--border-subtle);
+    }
+
+    .live-dot-pulse {
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .live-dot-pulse::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      background: #10B981;
+      animation: live-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes live-ping {
+      75%, 100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
     }
 
     .map-legend {
       position: absolute;
-      bottom: 24px;
-      left: 24px;
+      bottom: 20px;
+      left: 20px;
       background: var(--bg-glass);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-md);
-      padding: 10px 16px;
+      padding: 8px 14px;
       display: flex;
-      gap: 16px;
-      z-index: 1000;
+      gap: 14px;
+      z-index: 999;
       box-shadow: var(--shadow-md);
       flex-wrap: wrap;
     }
@@ -1200,7 +1346,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-primary);
     }
@@ -1212,18 +1358,250 @@
       display: inline-block;
     }
 
+    /* Side Incident Radar Stream */
+    .map-radar-sidebar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      height: 680px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .radar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 12px;
+    }
+
+    .radar-header h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .radar-incident-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-right: 4px;
+    }
+
+    .radar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .radar-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .radar-card.active-selected {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-glow);
+      background: var(--bg-card-hover);
+    }
+
+    .radar-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .radar-card-id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .radar-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .radar-card-loc {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .radar-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Radar Pin Animation */
+    @keyframes radar-pulse-danger {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.85); }
+      70% { box-shadow: 0 0 0 16px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    @keyframes radar-pulse-warning {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.85); }
+      70% { box-shadow: 0 0 0 14px rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+
+    .map-pin-pulse-danger {
+      animation: radar-pulse-danger 1.8s infinite;
+    }
+
+    .map-pin-pulse-warning {
+      animation: radar-pulse-warning 2.2s infinite;
+    }
+
+    /* Leaflet Popup Rich Layout */
     .leaflet-popup-content-wrapper {
       background: var(--bg-surface) !important;
       color: var(--text-primary) !important;
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-md) !important;
       box-shadow: var(--shadow-lg) !important;
+      padding: 0 !important;
+      overflow: hidden;
     }
+
+    .leaflet-popup-content {
+      margin: 0 !important;
+      line-height: 1.4;
+    }
+
     .leaflet-popup-tip {
       background: var(--bg-surface) !important;
     }
+
     .leaflet-container {
       font-family: var(--font-main) !important;
+    }
+
+    .idrs-map-popup-card {
+      padding: 14px;
+      min-width: 270px;
+      max-width: 320px;
+    }
+
+    .popup-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .popup-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .popup-location-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .popup-coords-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .popup-coords-chip:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .popup-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .popup-btn {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .popup-btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .popup-btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .popup-btn-secondary {
+      background: var(--bg-input);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+    .popup-btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-strong);
+    }
+    .popup-btn-success {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .popup-btn-success:hover {
+      background: #10B981;
+      color: #fff;
     }
 
     /* Broadcast Section */
@@ -2505,40 +2883,103 @@
       <section id="tab-map" class="tab-view">
         <div class="map-controls-bar">
           <div class="filter-group" style="flex-wrap:wrap;gap:8px;">
+            <div style="position:relative;">
+              <input type="search" id="mapSearchInput" class="custom-input" style="width:240px;padding-left:32px;" placeholder="Search location, ID, city..." oninput="updateMapMarkers()">
+              <i class="fas fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px;"></i>
+            </div>
             <select id="mapCategoryFilter" class="custom-select" onchange="updateMapMarkers()">
               <option value="all">All Map Categories</option>
               <option value="Pothole">Potholes & Roads</option>
-              <option value="Water">Water & Drainage</option>
+              <option value="Water">Water, Leakage & Drainage</option>
               <option value="Streetlight">Electrical & Streetlights</option>
-              <option value="Bridge">Bridges & Structures</option>
-              <option value="Sanitation">Sanitation</option>
+              <option value="Bridge">Bridges & Structural</option>
+              <option value="Sanitation">Sanitation & Garbage</option>
+              <option value="Traffic">Traffic Signals & Signs</option>
             </select>
             <select id="mapSeverityFilter" class="custom-select" onchange="updateMapMarkers()">
-              <option value="all">All Severities</option>
-              <option value="Critical">Critical Only</option>
-              <option value="High">High & Above</option>
-              <option value="Medium">Medium & Low</option>
+              <option value="all">All Urgency Severities</option>
+              <option value="Critical">🔴 Critical (Immediate Danger)</option>
+              <option value="High">🟠 High Priority & Above</option>
+              <option value="Medium">🔵 Medium & Low</option>
             </select>
             <select id="mapStatusFilter" class="custom-select" onchange="updateMapMarkers()">
-              <option value="all">All Statuses</option>
-              <option value="Pending">Pending Review</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Resolved">Resolved</option>
+              <option value="all">All Incident Statuses</option>
+              <option value="Pending">⏳ Pending Review</option>
+              <option value="In Progress">⚡ In Progress</option>
+              <option value="Resolved">✅ Resolved</option>
             </select>
           </div>
-          <div class="map-stats-pill">
-            <i class="fas fa-map-pin" style="color:var(--primary);"></i>
-            <span>Plotted Incidents on GIS Grid: <strong id="mapPlottedCount" style="color:var(--primary);margin-left:4px;">0</strong></span>
+
+          <div class="map-tools-row">
+            <!-- Map Layer Switcher -->
+            <div class="map-layer-btn-group">
+              <button class="map-layer-btn active" id="layerBtnDark" onclick="switchMapTileLayer('dark')" title="Tactical Dark Map"><i class="fas fa-moon"></i> Dark</button>
+              <button class="map-layer-btn" id="layerBtnOSM" onclick="switchMapTileLayer('osm')" title="OpenStreetMap"><i class="fas fa-map"></i> Streets</button>
+              <button class="map-layer-btn" id="layerBtnSatellite" onclick="switchMapTileLayer('satellite')" title="Satellite Imagery"><i class="fas fa-satellite"></i> Satellite</button>
+              <button class="map-layer-btn" id="layerBtnLight" onclick="switchMapTileLayer('light')" title="Light Carto"><i class="fas fa-sun"></i> Light</button>
+            </div>
+
+            <!-- Tool buttons -->
+            <button class="btn btn-secondary btn-sm" onclick="locateAdminGPS()" title="Locate My Position"><i class="fas fa-crosshairs"></i> My Location</button>
+            <button class="btn btn-secondary btn-sm" onclick="focusCriticalMap()" title="Focus on Critical Emergencies" style="color:var(--accent-rose);border-color:rgba(239,68,68,0.3);"><i class="fas fa-triangle-exclamation"></i> Criticals</button>
+            <button class="btn btn-secondary btn-sm" onclick="fitMapBounds()" title="Fit All Plotted Incidents"><i class="fas fa-expand"></i> Fit All</button>
+            <button class="btn btn-secondary btn-sm" id="pinDropModeBtn" onclick="togglePinDropMode()" title="Drop Pin on Map to File Incident"><i class="fas fa-map-pin"></i> Report on Pin</button>
+            <button class="btn btn-secondary btn-sm" onclick="toggleMapSidebar()" title="Toggle Incident Radar Stream"><i class="fas fa-list-ul"></i> Radar Stream</button>
+            <button class="btn btn-secondary btn-sm" onclick="toggleMapFullscreen()" title="Toggle Fullscreen View"><i class="fas fa-maximize"></i></button>
           </div>
         </div>
 
-        <div class="map-container-wrap">
-          <div id="adminDamageMap" style="width:100%;height:620px;border-radius:var(--radius-lg);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md);z-index:1;"></div>
-          <div class="map-legend">
-            <div class="legend-item"><span class="legend-dot" style="background:#EF4444;box-shadow:0 0 8px #EF4444;"></span> Critical (Hazard)</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#F59E0B;box-shadow:0 0 8px #F59E0B;"></span> High Priority</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#3B82F6;box-shadow:0 0 8px #3B82F6;"></span> Medium / Low</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#10B981;box-shadow:0 0 8px #10B981;"></span> Resolved</div>
+        <div class="map-container-wrap" id="mapMainContainerWrap">
+          <div class="map-split-container" id="mapSplitContainer">
+            
+            <!-- Map Canvas Col -->
+            <div class="map-canvas-wrap">
+              <!-- Floating Live HUD -->
+              <div class="map-floating-hud">
+                <div class="hud-stat-item">
+                  <span style="color:var(--accent-rose);"><i class="fas fa-circle-exclamation"></i></span>
+                  <span>Critical: <strong id="hudCriticalCount" style="color:var(--accent-rose);">0</strong></span>
+                </div>
+                <div class="hud-stat-item">
+                  <span style="color:var(--accent-amber);"><i class="fas fa-triangle-exclamation"></i></span>
+                  <span>High: <strong id="hudHighCount" style="color:var(--accent-amber);">0</strong></span>
+                </div>
+                <div class="hud-stat-item">
+                  <span style="color:var(--primary);"><i class="fas fa-location-dot"></i></span>
+                  <span>Active Pins: <strong id="mapPlottedCount" style="color:var(--primary);">0</strong></span>
+                </div>
+                <div class="live-indicator">
+                  <span class="live-dot-pulse"></span>
+                  <span>Live GIS Stream Active</span>
+                </div>
+              </div>
+
+              <!-- Leaflet Canvas -->
+              <div id="adminDamageMap"></div>
+
+              <!-- Legend -->
+              <div class="map-legend">
+                <div class="legend-item"><span class="legend-dot" style="background:#EF4444;box-shadow:0 0 8px #EF4444;"></span> Critical (Hazard)</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#F59E0B;box-shadow:0 0 8px #F59E0B;"></span> High Priority</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#3B82F6;box-shadow:0 0 8px #3B82F6;"></span> Medium / Low</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#10B981;box-shadow:0 0 8px #10B981;"></span> Resolved</div>
+              </div>
+            </div>
+
+            <!-- Side Incident Radar Stream -->
+            <div class="map-radar-sidebar" id="mapRadarSidebar">
+              <div class="radar-header">
+                <h3><i class="fas fa-satellite-dish" style="color:var(--accent-cyan);"></i> Live Incident Feed</h3>
+                <span class="system-clock-badge" id="radarCountBadge" style="font-size:11px;padding:2px 8px;">0 Visible</span>
+              </div>
+              <div class="radar-incident-list" id="radarIncidentList">
+                <div style="text-align:center;padding:40px 10px;color:var(--text-muted);font-size:12px;">
+                  <i class="fas fa-map-location-dot" style="font-size:28px;margin-bottom:8px;opacity:0.5;display:block;"></i>
+                  Initializing GIS incident stream...
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -3277,7 +3718,28 @@
       loadBroadcasts();
       loadRestorationProofs();
       loadAllData();
-      startAutoRefresh(30000); // 30s auto refresh
+      startAutoRefresh(15000); // 15s auto refresh for ultra-fast sync
+
+      // Real-time synchronization across browser tabs
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'reports') {
+          loadAllData(true);
+          notifyAlert();
+          showToast('info', 'Live incident reports updated in real time');
+        }
+      });
+
+      try {
+        const reportChannel = new BroadcastChannel('idrs_incident_channel');
+        reportChannel.onmessage = (event) => {
+          if (event.data && event.data.type === 'NEW_REPORT') {
+            loadAllData(true);
+            notifyAlert();
+            const rep = event.data.report || {};
+            showToast('warning', `🚨 New Incident: ${rep.category || 'Damage'} at ${rep.city || rep.location || 'Civic Area'}`);
+          }
+        };
+      } catch (err) {}
 
       // Drag and drop for manual intake dropzone
       const dropzone = document.getElementById('intakeDropzone');
@@ -3347,6 +3809,9 @@
       localStorage.setItem('idrs_theme', next);
       updateThemeIcon(next);
       rebuildCharts();
+      if (leafletMap && (currentMapTileLayer === 'dark' || currentMapTileLayer === 'light')) {
+        switchMapTileLayer(next === 'dark' ? 'dark' : 'light');
+      }
       showToast('info', `Switched to ${next.toUpperCase()} theme mode`);
     }
 
@@ -3488,6 +3953,10 @@
               status: lr.status || 'Pending',
               assigned_dept: lr.assigned_dept || 'Unassigned',
               admin_notes: lr.admin_notes || '',
+              latitude: lr.latitude || lr.lat || null,
+              longitude: lr.longitude || lr.lng || null,
+              lat: lr.latitude || lr.lat || null,
+              lng: lr.longitude || lr.lng || null,
               image_path: lr.image_path || lr.image || '',
               date: lr.date || 'Recent'
             });
@@ -3520,6 +3989,7 @@
       renderFeedbackGrid();
       updateDeptCounts();
       rebuildCharts();
+      if (leafletMap) updateMapMarkers();
 
       // Log initial load if empty
       if (auditLogs.length === 0) {
@@ -3847,6 +4317,9 @@
               </td>
               <td style="text-align:right;">
                 <div class="action-btn-group" style="justify-content:flex-end;">
+                  <button class="icon-action-btn" onclick="locateIncidentOnMap('${r.report_id}')" title="Locate on Live GIS Map">
+                    <i class="fas fa-map-location-dot" style="color:var(--accent-cyan);"></i>
+                  </button>
                   <button class="icon-action-btn" onclick="openInspectorModal('${r.report_id}')" title="Inspect Dossier">
                     <i class="fas fa-eye"></i>
                   </button>
@@ -3856,6 +4329,7 @@
                     </button>
                     <div class="row-menu-dropdown" id="rowMenu_${r.report_id}">
                       <div class="row-menu-header">Ticket #${r.report_id}</div>
+                      <button class="row-menu-item" onclick="locateIncidentOnMap('${r.report_id}')"><i class="fas fa-map-location-dot" style="color:var(--accent-cyan);"></i> View on Live GIS Map</button>
                       <button class="row-menu-item" onclick="openInspectorModal('${r.report_id}')"><i class="fas fa-file-waveform" style="color:var(--primary);"></i> View Full Dossier</button>
                       <button class="row-menu-item" onclick="handleStatusChange('${r.report_id}', 'In Progress')"><i class="fas fa-person-digging" style="color:var(--accent-cyan);"></i> Set In Progress</button>
                       <button class="row-menu-item" onclick="handleStatusChange('${r.report_id}', 'Resolved')"><i class="fas fa-circle-check" style="color:var(--accent-emerald);"></i> Mark Resolved</button>
@@ -3934,6 +4408,13 @@
         target.status = newStatus;
       }
 
+      if (currentInspectorReport && currentInspectorReport.report_id === reportId) {
+        currentInspectorReport.status = newStatus;
+        const statusEl = document.getElementById('modalStatus');
+        if (statusEl) statusEl.textContent = newStatus;
+        updateModalStepper(newStatus);
+      }
+
       // LocalStorage sync
       try {
         const local = JSON.parse(localStorage.getItem('reports') || '[]');
@@ -3965,6 +4446,7 @@
       updateKPIs();
       rebuildCharts();
       renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
     }
 
     // ========================================================
@@ -4025,6 +4507,8 @@
       clearBatchSelection();
       updateKPIs();
       rebuildCharts();
+      renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
     }
 
     async function batchDelete() {
@@ -4056,6 +4540,8 @@
       clearBatchSelection();
       updateKPIs();
       rebuildCharts();
+      renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
     }
 
     // ========================================================
@@ -4086,6 +4572,7 @@
       updateKPIs();
       rebuildCharts();
       renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
     }
 
     // ========================================================
@@ -4578,6 +5065,16 @@
         allReports.unshift(payload);
       }
 
+      // Sync with localStorage
+      try {
+        const local = JSON.parse(localStorage.getItem('reports') || '[]');
+        local.unshift(payload);
+        localStorage.setItem('reports', JSON.stringify(local));
+
+        const channel = new BroadcastChannel('idrs_incident_channel');
+        channel.postMessage({ type: 'NEW_REPORT', report: payload });
+      } catch (e) {}
+
       notifySuccess();
       showToast('success', `New work order ${payload.report_id} registered successfully with evidence photo!`);
       logAuditEvent('Manual Intake', `Logged new ticket ${payload.report_id} for ${name}`, 'Created');
@@ -4588,6 +5085,7 @@
       updateKPIs();
       rebuildCharts();
       renderIncidentTable();
+      if (leafletMap) updateMapMarkers();
       switchTab('incidents');
     }
 
@@ -4918,62 +5416,317 @@
     }
 
     // ========================================================
-    // GIS MAP ENGINE (LEAFLET.JS)
+    // GIS MAP ENGINE (LEAFLET.JS) - EXECUTIVE COMMAND SUITE
     // ========================================================
+    let currentMapTileLayer = 'dark';
+    let activeTileLayerObj = null;
+    let mapTileLayers = {};
+    let isPinDropModeActive = false;
+    let pinDropMarker = null;
+    let adminGpsMarker = null;
+    let activeIncidentMarkerMap = new Map();
+
     const CITY_COORDS = {
-      mumbai: [19.0760, 72.8777],
-      delhi: [28.6139, 77.2090],
-      bangalore: [12.9716, 77.5946],
-      bengaluru: [12.9716, 77.5946],
-      pune: [18.5204, 73.8567],
-      hyderabad: [17.3850, 78.4867],
-      chennai: [13.0827, 80.2707],
-      kolkata: [22.5726, 88.3639],
-      ahmedabad: [23.0225, 72.5714],
-      surat: [21.1702, 72.8311],
-      jaipur: [26.9124, 75.7873],
-      lucknow: [26.8467, 80.9462],
-      nagpur: [21.1458, 79.0882],
-      indore: [22.7196, 75.8577],
-      thane: [19.2183, 72.9781],
-      bhopal: [23.2599, 77.4126],
-      visakhapatnam: [17.6868, 83.2185],
-      patna: [25.5941, 85.1376],
-      vadodara: [22.3072, 73.1812],
-      ghaziabad: [28.6692, 77.4538],
-      default: [19.0760, 72.8777]
+      // Gujarat
+      'surat': [21.1702, 72.8311],
+      'ahmedabad': [23.0225, 72.5714],
+      'vadodara': [22.3072, 73.1812],
+      'rajkot': [22.3039, 70.8022],
+      'gandhinagar': [23.2156, 72.6369],
+      'bhavnagar': [21.7645, 72.1519],
+      'jamnagar': [22.4707, 70.0577],
+      'junagadh': [21.5222, 70.4579],
+      'anand': [22.5645, 72.9289],
+      'navsari': [20.9500, 72.9300],
+      'morbi': [22.8174, 70.8377],
+      'bharuch': [21.7051, 72.9959],
+      'mehsana': [23.5880, 72.3693],
+      'patan': [23.8493, 72.1266],
+      'palanpur': [24.1724, 72.4346],
+      'porbandar': [21.6417, 69.6293],
+      'valsad': [20.6100, 72.9300],
+      'vapi': [20.3700, 72.9100],
+      'godhra': [22.7750, 73.6150],
+      'bhuj': [23.2420, 69.6669],
+      'gandhidham': [23.0753, 70.1337],
+      'veraval': [20.9000, 70.3700],
+      
+      // Maharashtra
+      'mumbai': [19.0760, 72.8777],
+      'pune': [18.5204, 73.8567],
+      'nagpur': [21.1458, 79.0882],
+      'thane': [19.2183, 72.9781],
+      'nashik': [19.9975, 73.7898],
+      'chhatrapati sambhajinagar': [19.8762, 75.3433],
+      'aurangabad': [19.8762, 75.3433],
+      'solapur': [17.6599, 75.9064],
+      'amravati': [20.9320, 77.7523],
+      'kolhapur': [16.7050, 74.2433],
+      'navi mumbai': [19.0330, 73.0297],
+      'kalyan': [19.2437, 73.1355],
+      'vasai': [19.3919, 72.8397],
+      'dombivli': [19.2184, 73.0867],
+      'nanded': [19.1383, 77.3210],
+      'sangli': [16.8524, 74.5815],
+      'jalgaon': [21.0077, 75.5626],
+      'akola': [20.7002, 77.0082],
+      'latur': [18.4088, 76.5604],
+      'dhule': [20.9042, 74.7749],
+      'ahmednagar': [19.0952, 74.7480],
+
+      // Delhi NCR
+      'delhi': [28.6139, 77.2090],
+      'new delhi': [28.6139, 77.2090],
+      'north delhi': [28.7200, 77.1500],
+      'south delhi': [28.5355, 77.2410],
+      'east delhi': [28.6280, 77.2950],
+      'west delhi': [28.6500, 77.0800],
+      'central delhi': [28.6400, 77.2200],
+      'noida': [28.5355, 77.3910],
+      'greater noida': [28.4744, 77.5040],
+      'gurugram': [28.4595, 77.0266],
+      'gurgaon': [28.4595, 77.0266],
+      'ghaziabad': [28.6692, 77.4538],
+      'faridabad': [28.4089, 77.3178],
+
+      // Karnataka
+      'bengaluru': [12.9716, 77.5946],
+      'bangalore': [12.9716, 77.5946],
+      'mysuru': [12.2958, 76.6394],
+      'mysore': [12.2958, 76.6394],
+      'hubballi-dharwad': [15.3647, 75.1240],
+      'hubballi': [15.3647, 75.1240],
+      'hubli': [15.3647, 75.1240],
+      'mangaluru': [12.9141, 74.8560],
+      'mangalore': [12.9141, 74.8560],
+      'belagavi': [15.8497, 74.4977],
+      'belgaum': [15.8497, 74.4977],
+      'kalaburagi': [17.3297, 76.8343],
+      'ballari': [15.1394, 76.9214],
+      'udupi': [13.3409, 74.7421],
+
+      // Tamil Nadu
+      'chennai': [13.0827, 80.2707],
+      'coimbatore': [11.0168, 76.9558],
+      'madurai': [9.9252, 78.1198],
+      'tiruchirappalli': [10.7905, 78.7047],
+      'trichy': [10.7905, 78.7047],
+      'salem': [11.6643, 78.1460],
+      'tirunelveli': [8.7139, 77.7567],
+      'erode': [11.3410, 77.7172],
+      'vellore': [12.9165, 79.1325],
+
+      // Telangana & AP
+      'hyderabad': [17.3850, 78.4867],
+      'warangal': [17.9689, 79.5941],
+      'nizamabad': [18.6725, 78.0941],
+      'karimnagar': [18.4386, 79.1288],
+      'visakhapatnam': [17.6868, 83.2185],
+      'vijayawada': [16.5062, 80.6480],
+      'guntur': [16.3067, 80.4365],
+      'nellore': [14.4426, 79.9865],
+      'kurnool': [15.8281, 78.0373],
+      'tirupati': [13.6288, 79.4192],
+
+      // West Bengal
+      'kolkata': [22.5726, 88.3639],
+      'howrah': [22.5958, 88.2636],
+      'durgapur': [23.5204, 87.3119],
+      'siliguri': [26.7271, 88.3953],
+      'asansol': [23.6739, 86.9524],
+
+      // Rajasthan
+      'jaipur': [26.9124, 75.7873],
+      'jodhpur': [26.2389, 73.0243],
+      'udaipur': [24.5854, 73.7125],
+      'kota': [25.2138, 75.8648],
+      'bikaner': [28.0229, 73.3119],
+      'ajmer': [26.4499, 74.6399],
+
+      // Uttar Pradesh
+      'lucknow': [26.8467, 80.9462],
+      'kanpur': [26.4499, 80.3319],
+      'varanasi': [25.3176, 82.9739],
+      'agra': [27.1767, 78.0081],
+      'prayagraj': [25.4358, 81.8463],
+      'allahabad': [25.4358, 81.8463],
+      'meerut': [28.9845, 77.7064],
+      'bareilly': [28.3670, 79.4304],
+      'aligarh': [27.8974, 78.0880],
+      'gorakhpur': [26.7606, 83.3732],
+
+      // Madhya Pradesh
+      'bhopal': [23.2599, 77.4126],
+      'indore': [22.7196, 75.8577],
+      'gwalior': [26.2183, 78.1828],
+      'jabalpur': [23.1815, 79.9864],
+      'ujjain': [23.1765, 75.7885],
+
+      // Kerala
+      'thiruvananthapuram': [8.5241, 76.9366],
+      'kochi': [9.9312, 76.2673],
+      'cochin': [9.9312, 76.2673],
+      'kozhikode': [11.2588, 75.7804],
+      'thrissur': [10.5276, 76.2144],
+
+      // Punjab & Haryana
+      'ludhiana': [30.9010, 75.8573],
+      'amritsar': [31.6340, 74.8723],
+      'jalandhar': [31.3260, 75.5762],
+      'chandigarh': [30.7333, 76.7794],
+      'panipat': [29.3909, 76.9635],
+      'ambala': [30.3782, 76.7767],
+
+      // Bihar & Jharkhand & Odisha
+      'patna': [25.5941, 85.1376],
+      'gaya': [24.7955, 85.0002],
+      'ranchi': [23.3441, 85.3096],
+      'jamshedpur': [22.8046, 86.2029],
+      'bhubaneswar': [20.2961, 85.8245],
+      'cuttack': [20.4625, 85.8828],
+      'raipur': [21.2514, 81.6296],
+      'guwahati': [26.1445, 91.7362],
+      'shimla': [31.1048, 77.1734],
+      'dehradun': [30.3165, 78.0322],
+      'srinagar': [34.0837, 74.7973],
+      'jammu': [32.7266, 74.8570],
+      'panaji': [15.4909, 73.8278],
+      
+      'default': [19.0760, 72.8777]
     };
 
+    const STATE_COORDS = {
+      'gujarat': [22.2587, 71.1924],
+      'maharashtra': [19.7515, 75.7139],
+      'delhi': [28.6139, 77.2090],
+      'karnataka': [15.3173, 75.7139],
+      'tamil nadu': [11.1271, 78.6569],
+      'telangana': [18.1124, 79.0193],
+      'andhra pradesh': [15.9129, 79.7400],
+      'west bengal': [22.9868, 87.8550],
+      'rajasthan': [27.0238, 74.2179],
+      'uttar pradesh': [26.8467, 80.9462],
+      'madhya pradesh': [22.9734, 78.6569],
+      'kerala': [10.8505, 76.2711],
+      'punjab': [31.1471, 75.3412],
+      'haryana': [29.0588, 76.0856],
+      'bihar': [25.0961, 85.3131],
+      'jharkhand': [23.6102, 85.2799],
+      'odisha': [20.9517, 85.0985],
+      'assam': [26.2006, 92.9376],
+      'goa': [15.2993, 74.1240],
+      'uttarakhand': [30.0668, 79.0193],
+      'himachal pradesh': [31.1048, 77.1734],
+      'jammu and kashmir': [33.7782, 76.5762]
+    };
+
+    function isValidCoordinatePair(lat, lng) {
+      if (lat === null || lat === undefined || lng === null || lng === undefined) return false;
+      const nLat = parseFloat(lat);
+      const nLng = parseFloat(lng);
+      return !isNaN(nLat) && !isNaN(nLng) && nLat >= -90 && nLat <= 90 && nLng >= -180 && nLng <= 180 && (nLat !== 0 || nLng !== 0);
+    }
+
     function getReportCoordinates(report, index) {
-      const cityKey = (report.city || '').toLowerCase().trim();
-      let baseCoords = CITY_COORDS[cityKey];
+      // 1. Direct explicit GPS coordinate fields
+      const explicitLat = report.latitude ?? report.lat;
+      const explicitLng = report.longitude ?? report.lng;
+      if (isValidCoordinatePair(explicitLat, explicitLng)) {
+        return [parseFloat(explicitLat), parseFloat(explicitLng)];
+      }
+
+      // 2. Parse GPS format inside location or address string (e.g. "GPS: 19.0760, 72.8777" or "21.1702, 72.8311")
+      const combinedLocStr = `${report.location || ''} ${report.address || ''} ${report.description || ''}`;
+      const gpsRegex = /(?:gps:?\s*|lat:?\s*)?([+-]?\d{1,2}\.\d{3,8})\s*,\s*(?:lng:?\s*|lon:?\s*)?([+-]?\d{1,3}\.\d{3,8})/i;
+      const match = combinedLocStr.match(gpsRegex);
+      if (match && match[1] && match[2]) {
+        const pLat = parseFloat(match[1]);
+        const pLng = parseFloat(match[2]);
+        if (isValidCoordinatePair(pLat, pLng)) {
+          return [pLat, pLng];
+        }
+      }
+
+      // 3. Match against known Indian Cities
+      const rawCity = (report.city || '').toLowerCase().trim();
+      let baseCoords = CITY_COORDS[rawCity];
+
       if (!baseCoords) {
         for (let k in CITY_COORDS) {
-          if (cityKey.includes(k) || (report.location||'').toLowerCase().includes(k)) {
+          if (rawCity === k || rawCity.includes(k) || combinedLocStr.toLowerCase().includes(k)) {
             baseCoords = CITY_COORDS[k];
             break;
           }
         }
       }
+
+      // 4. Match against State center
+      if (!baseCoords) {
+        const rawState = (report.state || '').toLowerCase().trim();
+        baseCoords = STATE_COORDS[rawState];
+        if (!baseCoords) {
+          for (let s in STATE_COORDS) {
+            if (rawState.includes(s) || combinedLocStr.toLowerCase().includes(s)) {
+              baseCoords = STATE_COORDS[s];
+              break;
+            }
+          }
+        }
+      }
+
+      // 5. Default fallback
       if (!baseCoords) baseCoords = CITY_COORDS['default'];
 
-      const hash = (report.report_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) + (index * 7);
-      const latOffset = ((hash % 100) - 50) * 0.0008;
-      const lngOffset = (((hash * 13) % 100) - 50) * 0.0008;
+      // Deterministic geographical scatter so markers in the same municipal zone do not directly overlap
+      const seedStr = (report.report_id || '') + (report.location || '') + (index || 0);
+      const hash = seedStr.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) + (index * 13);
+      const latOffset = (((hash % 100) - 50) * 0.0006);
+      const lngOffset = ((((hash * 17) % 100) - 50) * 0.0006);
       return [baseCoords[0] + latOffset, baseCoords[1] + lngOffset];
     }
 
     function initOrResizeMap() {
       const container = document.getElementById('adminDamageMap');
-      if (!container) return;
+      if (!container || typeof L === 'undefined') return;
 
-      if (!leafletMap && typeof L !== 'undefined') {
-        leafletMap = L.map('adminDamageMap').setView([19.0760, 72.8777], 12);
+      if (!leafletMap) {
+        // Tile Providers
+        mapTileLayers = {
+          dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 19,
+            subdomains: 'abcd',
+            attribution: '&copy; CartoDB &copy; OpenStreetMap'
+          }),
+          osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+          }),
+          satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 18,
+            attribution: 'Tiles &copy; Esri'
+          }),
+          light: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 19,
+            subdomains: 'abcd',
+            attribution: '&copy; CartoDB'
+          })
+        };
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(leafletMap);
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        currentMapTileLayer = currentTheme === 'light' ? 'light' : 'dark';
+
+        leafletMap = L.map('adminDamageMap', {
+          zoomControl: true,
+          attributionControl: true
+        }).setView([19.0760, 72.8777], 12);
+
+        activeTileLayerObj = mapTileLayers[currentMapTileLayer] || mapTileLayers.dark;
+        activeTileLayerObj.addTo(leafletMap);
+
+        updateLayerButtonState(currentMapTileLayer);
+
+        // Click listener on map for interactive Pin Dropper
+        leafletMap.on('click', handleMapClickPinDrop);
       }
 
       setTimeout(() => {
@@ -4981,77 +5734,421 @@
           leafletMap.invalidateSize();
           updateMapMarkers();
         }
-      }, 200);
+      }, 150);
+    }
+
+    function switchMapTileLayer(layerType) {
+      if (!leafletMap || !mapTileLayers[layerType]) return;
+      if (activeTileLayerObj) {
+        leafletMap.removeLayer(activeTileLayerObj);
+      }
+      activeTileLayerObj = mapTileLayers[layerType];
+      activeTileLayerObj.addTo(leafletMap);
+      currentMapTileLayer = layerType;
+      updateLayerButtonState(layerType);
+      showToast('info', `Switched map to ${layerType.toUpperCase()} layer mode`);
+    }
+
+    function updateLayerButtonState(layerType) {
+      ['Dark', 'OSM', 'Satellite', 'Light'].forEach(l => {
+        const btn = document.getElementById(`layerBtn${l}`);
+        if (btn) btn.classList.remove('active');
+      });
+      const activeBtnMap = { dark: 'Dark', osm: 'OSM', satellite: 'Satellite', light: 'Light' };
+      const targetBtn = document.getElementById(`layerBtn${activeBtnMap[layerType]}`);
+      if (targetBtn) targetBtn.classList.add('active');
     }
 
     function updateMapMarkers() {
       if (!leafletMap || typeof L === 'undefined') return;
 
+      // Clear existing markers
       mapMarkers.forEach(m => leafletMap.removeLayer(m));
       mapMarkers = [];
+      activeIncidentMarkerMap.clear();
 
+      const searchKeyword = (document.getElementById('mapSearchInput')?.value || '').toLowerCase().trim();
       const catFilter = document.getElementById('mapCategoryFilter')?.value || 'all';
       const sevFilter = document.getElementById('mapSeverityFilter')?.value || 'all';
       const statusFilter = document.getElementById('mapStatusFilter')?.value || 'all';
 
       const filtered = allReports.filter(r => {
-        const matchesCat = catFilter === 'all' || (r.category || '').toLowerCase().includes(catFilter.toLowerCase());
-        const sev = (r.severity || 'Medium').toLowerCase();
-        let matchesSev = true;
-        if (sevFilter === 'Critical') matchesSev = sev === 'critical';
-        else if (sevFilter === 'High') matchesSev = sev === 'critical' || sev === 'high';
-        else if (sevFilter === 'Medium') matchesSev = sev === 'medium' || sev === 'low';
-        
-        const matchesStatus = statusFilter === 'all' || (r.status || 'Pending') === statusFilter;
-        return matchesCat && matchesSev && matchesStatus;
+        // Search Filter
+        const fullSearchBlob = `${r.report_id} ${r.title||''} ${r.description||''} ${r.category||''} ${r.location||''} ${r.city||''} ${r.state||''} ${r.name||''} ${r.fullName||''} ${r.phone||''}`.toLowerCase();
+        if (searchKeyword && !fullSearchBlob.includes(searchKeyword)) {
+          return false;
+        }
+
+        // Category Filter with smart matching
+        if (catFilter !== 'all') {
+          const c = (r.category || '').toLowerCase();
+          const target = catFilter.toLowerCase();
+          if (target === 'pothole' && !(c.includes('pothole') || c.includes('road') || c.includes('asphalt') || c.includes('street'))) return false;
+          else if (target === 'water' && !(c.includes('water') || c.includes('pipe') || c.includes('leak') || c.includes('drain') || c.includes('sewer') || c.includes('flood'))) return false;
+          else if (target === 'streetlight' && !(c.includes('street') || c.includes('light') || c.includes('electric') || c.includes('wire') || c.includes('pole') || c.includes('lamp'))) return false;
+          else if (target === 'bridge' && !(c.includes('bridge') || c.includes('flyover') || c.includes('struct') || c.includes('overpass'))) return false;
+          else if (target === 'sanitation' && !(c.includes('sanitat') || c.includes('garbage') || c.includes('waste') || c.includes('clean'))) return false;
+          else if (target === 'traffic' && !(c.includes('traffic') || c.includes('signal') || c.includes('sign'))) return false;
+        }
+
+        // Severity Filter with inclusive string check
+        if (sevFilter !== 'all') {
+          const sev = (r.severity || 'Medium').toLowerCase();
+          if (sevFilter === 'Critical' && !sev.includes('critical')) return false;
+          if (sevFilter === 'High' && !(sev.includes('high') || sev.includes('critical'))) return false;
+          if (sevFilter === 'Medium' && !(sev.includes('medium') || sev.includes('low'))) return false;
+        }
+
+        // Status Filter
+        if (statusFilter !== 'all') {
+          const s = (r.status || 'Pending');
+          if (s !== statusFilter) return false;
+        }
+
+        return true;
       });
 
+      // Update HUD counters
+      const criticals = filtered.filter(r => (r.severity || '').toLowerCase().includes('critical')).length;
+      const highs = filtered.filter(r => (r.severity || '').toLowerCase().includes('high')).length;
+      
+      const hudCrit = document.getElementById('hudCriticalCount');
+      const hudHigh = document.getElementById('hudHighCount');
       const plottedEl = document.getElementById('mapPlottedCount');
+      const radarBadge = document.getElementById('radarCountBadge');
+
+      if (hudCrit) hudCrit.textContent = criticals;
+      if (hudHigh) hudHigh.textContent = highs;
       if (plottedEl) plottedEl.textContent = filtered.length;
+      if (radarBadge) radarBadge.textContent = `${filtered.length} Visible`;
 
       const latLngs = [];
+      const radarListEl = document.getElementById('radarIncidentList');
+      if (radarListEl) radarListEl.innerHTML = '';
+
+      if (filtered.length === 0) {
+        if (radarListEl) {
+          radarListEl.innerHTML = `
+            <div style="text-align:center;padding:40px 10px;color:var(--text-muted);font-size:12px;">
+              <i class="fas fa-filter-circle-xmark" style="font-size:28px;margin-bottom:8px;opacity:0.5;display:block;"></i>
+              No incidents match current GIS filters.
+            </div>
+          `;
+        }
+        return;
+      }
 
       filtered.forEach((r, idx) => {
         const coords = getReportCoordinates(r, idx);
         latLngs.push(coords);
 
-        let pinColor = '#3B82F6';
-        const s = (r.status || 'Pending');
+        const status = r.status || 'Pending';
         const sev = (r.severity || 'Medium').toLowerCase();
 
-        if (s === 'Resolved') pinColor = '#10B981';
-        else if (sev === 'critical') pinColor = '#EF4444';
-        else if (sev === 'high') pinColor = '#F59E0B';
+        let pinBg = '#3B82F6';
+        let pulseClass = '';
+        let sevBadgeClass = 'severity-medium';
 
+        if (status === 'Resolved') {
+          pinBg = '#10B981';
+          sevBadgeClass = 'severity-low';
+        } else if (sev.includes('critical')) {
+          pinBg = '#EF4444';
+          pulseClass = 'map-pin-pulse-danger';
+          sevBadgeClass = 'severity-critical';
+        } else if (sev.includes('high')) {
+          pinBg = '#F59E0B';
+          pulseClass = 'map-pin-pulse-warning';
+          sevBadgeClass = 'severity-high';
+        }
+
+        const catIcon = getCategoryIcon(r.category);
+
+        // Custom Leaflet DivIcon
         const customIcon = L.divIcon({
-          className: 'custom-map-pin',
-          html: `<div style="background:${pinColor};width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 12px ${pinColor};cursor:pointer;"></div>`,
-          iconSize: [16, 16],
-          iconAnchor: [8, 8]
+          className: 'custom-gis-pin-wrapper',
+          html: `
+            <div class="${pulseClass}" style="
+              width: 32px;
+              height: 32px;
+              border-radius: 50% 50% 50% 0;
+              background: ${pinBg};
+              transform: rotate(-45deg);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 2px solid #FFFFFF;
+              box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+              cursor: pointer;
+            ">
+              <div style="transform: rotate(45deg); color: #FFFFFF; font-size: 13px; display: flex; align-items: center; justify-content: center;">
+                ${catIcon}
+              </div>
+            </div>
+          `,
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -32]
         });
 
         const marker = L.marker(coords, { icon: customIcon }).addTo(leafletMap);
-        
+        activeIncidentMarkerMap.set(r.report_id, marker);
+
+        // Status Select class
+        let statusSelectClass = status === 'Resolved' ? 'status-select-resolved' : status === 'In Progress' ? 'status-select-progress' : 'status-select-pending';
+
+        const photoUrl = r.image_path || (r.image || '');
+        const photoHtml = photoUrl ? `
+          <div style="margin-top:8px;border-radius:6px;overflow:hidden;cursor:pointer;" onclick="openImageLightbox('${photoUrl}', '${r.report_id} Evidence')">
+            <img src="${photoUrl}" alt="Evidence" style="width:100%;max-height:90px;object-fit:cover;display:block;">
+          </div>
+        ` : '';
+
+        const fullLoc = `${r.location || ''} ${r.city ? '('+r.city+')' : ''}`.trim() || 'Civic Infrastructure Zone';
+        const coordsText = `${coords[0].toFixed(5)}, ${coords[1].toFixed(5)}`;
+
         const popupContent = `
-          <div style="font-family:sans-serif;min-width:210px;padding:4px;">
-            <div style="font-weight:700;font-size:13px;color:#0F172A;margin-bottom:4px;">${r.title || r.category || 'Incident'}</div>
-            <div style="font-size:11px;color:#64748B;margin-bottom:6px;"><strong>ID:</strong> ${r.report_id} &bull; <strong>Status:</strong> ${r.status || 'Pending'}</div>
-            <div style="font-size:11.5px;color:#334155;margin-bottom:8px;">${(r.location || r.city || '')}</div>
-            <div style="display:flex;gap:6px;">
-              <button onclick="openInspectorModal('${r.report_id}')" style="background:#3B82F6;color:#fff;border:none;border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-weight:700;">Inspect Dossier</button>
+          <div class="idrs-map-popup-card">
+            <div class="popup-badge-row">
+              <span class="ticket-id-chip" style="font-size:11px;" onclick="openInspectorModal('${r.report_id}')">
+                <i class="fas fa-arrow-up-right-from-square"></i> ${r.report_id}
+              </span>
+              <span class="severity-pill ${sevBadgeClass}" style="font-size:10.5px;">${r.severity || 'Medium'}</span>
+            </div>
+
+            <div class="popup-title">${r.title || r.category || 'Damage Report'}</div>
+            
+            <div class="popup-location-text">
+              <i class="fas fa-location-dot" style="color:var(--accent-rose);margin-top:2px;"></i>
+              <span>${fullLoc}</span>
+            </div>
+
+            <div class="popup-coords-chip" onclick="navigator.clipboard.writeText('${coordsText}'); showToast('success','GPS Coordinates copied!');" title="Click to copy GPS coordinates">
+              <i class="fas fa-copy"></i> GPS: ${coordsText}
+            </div>
+
+            ${photoHtml}
+
+            <div style="font-size:11px;color:var(--text-muted);margin-top:6px;display:flex;justify-content:space-between;">
+              <span><strong>Reporter:</strong> ${r.fullName || r.name || 'Citizen'}</span>
+              <span><strong>Status:</strong> ${status}</span>
+            </div>
+
+            <div class="popup-actions-grid">
+              <button class="popup-btn popup-btn-primary" onclick="openInspectorModal('${r.report_id}')">
+                <i class="fas fa-file-waveform"></i> Inspect
+              </button>
+              <button class="popup-btn popup-btn-secondary" onclick="openDirectionsUrl(${coords[0]}, ${coords[1]}, '${encodeURIComponent(fullLoc)}')">
+                <i class="fas fa-diamond-turn-right"></i> Route
+              </button>
+              <button class="popup-btn popup-btn-secondary" onclick="handleStatusChange('${r.report_id}', 'In Progress')">
+                <i class="fas fa-person-digging"></i> In Progress
+              </button>
+              <button class="popup-btn popup-btn-success" onclick="handleStatusChange('${r.report_id}', 'Resolved')">
+                <i class="fas fa-circle-check"></i> Resolve
+              </button>
             </div>
           </div>
         `;
 
         marker.bindPopup(popupContent);
         mapMarkers.push(marker);
+
+        // Populate side Incident Radar Stream
+        if (radarListEl) {
+          const card = document.createElement('div');
+          card.className = `radar-card radar-card-${sev.includes('critical') ? 'danger' : sev.includes('high') ? 'warning' : 'info'}`;
+          card.id = `radarCard_${r.report_id}`;
+          card.onclick = () => flyToIncident(r.report_id);
+          card.innerHTML = `
+            <div class="radar-card-top">
+              <span class="radar-card-id">${r.report_id}</span>
+              <span class="severity-pill ${sevBadgeClass}" style="font-size:10px;padding:2px 6px;">${r.severity || 'Medium'}</span>
+            </div>
+            <div class="radar-card-title">${r.title || r.category || 'Incident'}</div>
+            <div class="radar-card-loc">
+              <i class="fas fa-location-dot" style="font-size:10px;color:var(--text-muted);"></i>
+              <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${fullLoc}</span>
+            </div>
+            <div class="radar-card-footer">
+              <span><i class="fas fa-clock" style="margin-right:3px;"></i>${r.date || 'Recent'}</span>
+              <span class="status-pill status-${status.toLowerCase().replace(' ','-')}" style="font-size:10px;padding:2px 6px;">${status}</span>
+            </div>
+          `;
+          radarListEl.appendChild(card);
+        }
       });
 
+      // Fit bounds if pins are available
       if (latLngs.length > 0) {
         try {
-          leafletMap.fitBounds(L.latLngBounds(latLngs), { padding: [40, 40], maxZoom: 14 });
+          leafletMap.fitBounds(L.latLngBounds(latLngs), { padding: [50, 50], maxZoom: 14 });
         } catch(e){}
       }
+    }
+
+    function flyToIncident(reportId) {
+      const marker = activeIncidentMarkerMap.get(reportId);
+      if (!marker || !leafletMap) return;
+
+      const coords = marker.getLatLng();
+      leafletMap.flyTo(coords, 16, { animate: true, duration: 1.2 });
+
+      setTimeout(() => {
+        marker.openPopup();
+      }, 700);
+
+      // Highlight radar card
+      document.querySelectorAll('.radar-card').forEach(c => c.classList.remove('active-selected'));
+      const activeCard = document.getElementById(`radarCard_${reportId}`);
+      if (activeCard) {
+        activeCard.classList.add('active-selected');
+        activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function locateIncidentOnMap(reportId) {
+      switchTab('map');
+      setTimeout(() => {
+        flyToIncident(reportId);
+      }, 350);
+    }
+
+    function locateAdminGPS() {
+      if (!navigator.geolocation) {
+        showToast('error', 'Geolocation not supported by browser');
+        return;
+      }
+
+      showToast('info', 'Acquiring satellite GPS fix...');
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+
+          if (adminGpsMarker && leafletMap) {
+            leafletMap.removeLayer(adminGpsMarker);
+          }
+
+          const adminIcon = L.divIcon({
+            className: 'admin-gps-pin',
+            html: `
+              <div style="background:#06B6D4;width:20px;height:20px;border-radius:50%;border:3px solid #FFFFFF;box-shadow:0 0 16px #06B6D4;position:relative;">
+                <div style="position:absolute;top:-24px;left:-20px;background:#06B6D4;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;white-space:nowrap;">YOU (Admin)</div>
+              </div>
+            `,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+          });
+
+          if (leafletMap) {
+            adminGpsMarker = L.marker([lat, lng], { icon: adminIcon }).addTo(leafletMap);
+            adminGpsMarker.bindPopup(`<strong>Your Current Location</strong><br>Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`).openPopup();
+            leafletMap.flyTo([lat, lng], 15, { animate: true, duration: 1.2 });
+            showToast('success', `GPS Position Locked: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+          }
+        },
+        (err) => {
+          showToast('error', 'Could not obtain GPS fix. Please ensure location permissions are enabled.');
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+
+    function focusCriticalMap() {
+      const criticalReports = allReports.filter(r => (r.severity || '').toLowerCase().includes('critical') || (r.severity || '').toLowerCase().includes('high'));
+      if (criticalReports.length === 0) {
+        showToast('info', 'No active critical emergency incidents currently logged.');
+        return;
+      }
+
+      const critLatLngs = criticalReports.map((r, i) => getReportCoordinates(r, i));
+      if (leafletMap && critLatLngs.length > 0) {
+        leafletMap.fitBounds(L.latLngBounds(critLatLngs), { padding: [60, 60], maxZoom: 15 });
+        showToast('warning', `Focused on ${criticalReports.length} high-urgency disaster incidents.`);
+      }
+    }
+
+    function fitMapBounds() {
+      if (!leafletMap || mapMarkers.length === 0) return;
+      const group = new L.featureGroup(mapMarkers);
+      leafletMap.fitBounds(group.getBounds(), { padding: [50, 50], maxZoom: 14 });
+    }
+
+    function toggleMapFullscreen() {
+      const wrap = document.getElementById('mapMainContainerWrap');
+      if (!wrap) return;
+      wrap.classList.toggle('fullscreen-map');
+      setTimeout(() => {
+        if (leafletMap) leafletMap.invalidateSize();
+      }, 200);
+    }
+
+    function toggleMapSidebar() {
+      const split = document.getElementById('mapSplitContainer');
+      if (!split) return;
+      split.classList.toggle('sidebar-collapsed');
+      setTimeout(() => {
+        if (leafletMap) leafletMap.invalidateSize();
+      }, 200);
+    }
+
+    function togglePinDropMode() {
+      isPinDropModeActive = !isPinDropModeActive;
+      const btn = document.getElementById('pinDropModeBtn');
+      if (btn) {
+        if (isPinDropModeActive) {
+          btn.classList.add('active');
+          btn.style.background = 'var(--accent-rose)';
+          btn.style.color = '#fff';
+          showToast('info', '🎯 Click anywhere on the map to log a new incident pin!');
+        } else {
+          btn.classList.remove('active');
+          btn.style.background = '';
+          btn.style.color = '';
+        }
+      }
+    }
+
+    async function handleMapClickPinDrop(e) {
+      if (!isPinDropModeActive) return;
+
+      const lat = e.latlng.lat;
+      const lng = e.latlng.lng;
+
+      if (pinDropMarker && leafletMap) {
+        leafletMap.removeLayer(pinDropMarker);
+      }
+
+      pinDropMarker = L.marker([lat, lng]).addTo(leafletMap);
+
+      // Reverse geocode
+      let reverseAddr = `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.display_name) {
+            reverseAddr = data.display_name;
+          }
+        }
+      } catch (err) {}
+
+      // Open Intake modal pre-filled
+      openIntakeModal();
+      setTimeout(() => {
+        const locInp = document.getElementById('intakeLocation');
+        const descInp = document.getElementById('intakeDesc');
+        if (locInp) locInp.value = reverseAddr;
+        if (descInp) descInp.value = `Incident plotted via GIS pin drop at coordinates: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+      }, 100);
+
+      togglePinDropMode();
+    }
+
+    function openDirectionsUrl(lat, lng, locationName) {
+      const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+      window.open(url, '_blank');
     }
 
     // ========================================================

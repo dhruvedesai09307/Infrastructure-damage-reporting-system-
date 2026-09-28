@@ -1472,6 +1472,9 @@
       return /^[6-9]\d{9}$/.test(digits);
     }
 
+    let detectedGPSLat = null;
+    let detectedGPSLng = null;
+
     // Real GPS & Reverse Geocoding Assist
     async function fetchGPS() {
       const locInput = document.getElementById('location');
@@ -1507,6 +1510,10 @@
           if (res.ok) {
             const ipData = await res.json();
             if (ipData && ipData.city) {
+              if (ipData.latitude && ipData.longitude) {
+                detectedGPSLat = ipData.latitude;
+                detectedGPSLng = ipData.longitude;
+              }
               autoSetCityAndState(ipData.city, ipData.region);
               return `${ipData.city}, ${ipData.region || ipData.country_name}`;
             }
@@ -1520,6 +1527,8 @@
           async (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
+            detectedGPSLat = lat;
+            detectedGPSLng = lon;
             const realAddress = await reverseGeocode(lat, lon);
             locInput.value = realAddress;
           },
@@ -1721,6 +1730,13 @@
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
 
+      if (detectedGPSLat !== null && detectedGPSLng !== null) {
+        data.latitude = detectedGPSLat;
+        data.longitude = detectedGPSLng;
+        data.lat = detectedGPSLat;
+        data.lng = detectedGPSLng;
+      }
+
       // Generated Reference ID based on username
       const rawName = (name || data.name || data.fullName || 'USER').trim();
       const cleanUsername = rawName.replace(/[^a-zA-Z0-9]/g, '').toUpperCase() || 'USER';
@@ -1749,9 +1765,21 @@
       data.status = data.status || 'Pending';
       data.fullName = data.name || data.fullName || 'Anonymous';
       data.date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      if (detectedGPSLat !== null && detectedGPSLng !== null) {
+        data.latitude = detectedGPSLat;
+        data.longitude = detectedGPSLng;
+        data.lat = detectedGPSLat;
+        data.lng = detectedGPSLng;
+      }
       const localReports = JSON.parse(localStorage.getItem('reports') || '[]');
       localReports.push(data);
       localStorage.setItem('reports', JSON.stringify(localReports));
+
+      // Broadcast to any open admin dashboard tabs
+      try {
+        const channel = new BroadcastChannel('idrs_incident_channel');
+        channel.postMessage({ type: 'NEW_REPORT', report: data });
+      } catch (e) {}
 
       document.getElementById('formCard').style.display = 'none';
       document.getElementById('refIdBadge').textContent = refId;

@@ -20,6 +20,8 @@ class Report(db.Model):
     status = db.Column(db.String(50), default='Pending')
     assigned_dept = db.Column(db.String(100), default='Unassigned')
     admin_notes = db.Column(db.Text, default='')
+    latitude = db.Column(db.Float, nullable=True)
+    longitude = db.Column(db.Float, nullable=True)
     image_path = db.Column(db.String(300))
     date = db.Column(db.String(50), default=lambda: datetime.datetime.now().strftime("%d %b %Y"))
 
@@ -40,6 +42,10 @@ class Report(db.Model):
             "status": self.status,
             "assigned_dept": self.assigned_dept or "Unassigned",
             "admin_notes": self.admin_notes or "",
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "lat": self.latitude,
+            "lng": self.longitude,
             "image_path": self.image_path,
             "date": self.date
         }
@@ -69,6 +75,14 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name or "",
+            "email": self.email,
+            "phone": self.phone or ""
+        }
 
 
 class Feedback(db.Model):
