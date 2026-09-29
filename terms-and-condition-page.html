@@ -137,15 +137,21 @@ body{
 ===================================================== */
 
 .menu-icon{
-
-    font-size:26px;
-
+    font-size:24px;
     cursor:pointer;
-
     color:#374151;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    transition:all 0.2s ease;
+}
 
-    display:none;
-
+.menu-icon:hover{
+    background:#F3F4F6;
+    color:#2563EB;
 }
 
 
@@ -256,118 +262,142 @@ body{
 
 }
 
-.home-icon-btn{
-
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    background:#FFFFFF;
-    border:1.5px solid #E5E7EB;
-    color:#374151;
+.profile-chip{
     display:flex;
     align-items:center;
-    justify-content:center;
-    font-size:17px;
+    gap:8px;
+    padding:7px 14px 7px 8px;
+    background:#F3F4F6;
+    border:1px solid #E5E7EB;
+    border-radius:30px;
     text-decoration:none;
-    transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
-    box-shadow:0 1px 4px rgba(0,0,0,0.05);
-    flex-shrink:0;
-
+    color:#374151;
+    font-size:13.5px;
+    font-weight:600;
+    transition:all .2s;
+    cursor:pointer;
 }
-
-.home-icon-btn:hover{
-
-    background:#2563EB;
-    color:#FFFFFF;
-    border-color:#2563EB;
-    transform:translateY(-2px);
-    box-shadow:0 6px 16px rgba(37,99,235,0.25);
-
+.profile-chip:hover{background:#E5E7EB;border-color:#D1D5DB;}
+.profile-chip-avatar{
+    width:30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,#2563EB,#3B82F6);
+    color:#fff;font-size:13px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
 }
 
 @media(max-width:1050px){
-
-    .menu-icon{
-
-        display:block;
-
-    }
-
     .nav-links,
     .home-button{
-
         display:none;
-
     }
-
 }
 
 
 /* =====================================================
-   MOBILE SIDE MENU
+   SIDE MENU DRAWER
 ===================================================== */
 
 .side-menu{
-
     position:fixed;
-
     top:0;
-
-    left:-290px;
-
+    left:-300px;
     width:280px;
-
     height:100vh;
-
     background:#FFFFFF;
-
     border-right:1px solid #E5E7EB;
-
-    box-shadow:5px 0 20px rgba(0,0,0,.10);
-
-    padding-top:80px;
-
-    transition:.35s;
-
+    padding:25px 20px;
+    transition:.35s ease;
     z-index:3000;
-
+    box-shadow:5px 0 25px rgba(0,0,0,.12);
+    overflow-y:auto;
 }
-
 
 .side-menu.show{
-
     left:0;
-
 }
 
+.side-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.side-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #111827;
+    text-decoration: none;
+}
+
+.side-brand i {
+    color: #2563EB;
+    font-size: 20px;
+}
+
+.side-menu-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #9CA3AF;
+    margin: 16px 0 8px 12px;
+}
+
+.side-menu-divider {
+    height: 1px;
+    background: #E5E7EB;
+    margin: 12px 0;
+}
 
 .side-menu a{
-
-    display:block;
-
-    padding:18px 25px;
-
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:13px 16px;
     color:#374151;
-
     text-decoration:none;
-
-    font-size:15px;
-
-    transition:.3s;
-
+    font-size:14.5px;
+    font-weight:500;
+    border-radius:10px;
+    margin-bottom:4px;
+    transition:.2s;
 }
-
 
 .side-menu a:hover{
-
     background:#F3F4F6;
-
     color:#2563EB;
-
 }
 
+.side-menu a.active{
+    background:#EFF6FF;
+    color:#2563EB;
+    font-weight:700;
+}
 
-.close-menu{
+.close-btn{
+    font-size:20px;
+    cursor:pointer;
+    color:#374151;
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    transition:.2s;
+}
+
+.close-btn:hover{
+    background:#F3F4F6;
+    color:#DC2626;
+}
 
     position:absolute;
 
@@ -1693,7 +1723,7 @@ footer hr{
 <header class="topbar">
 
     <!-- Mobile menu button -->
-    <div class="menu-icon" onclick="toggleMenu()">
+    <div class="menu-icon" onclick="toggleMenu()" title="Open Navigation Menu" aria-label="Open menu">
 
         <i class="fas fa-bars"></i>
 
@@ -1730,12 +1760,13 @@ footer hr{
         <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
 
-    <div style="display:flex;align-items:center;gap:10px;">
+    <div style="display:flex;align-items:center;gap:12px;">
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
             <i class="fas fa-moon" id="themeIcon"></i>
         </button>
-        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-            <i class="fas fa-house"></i>
+        <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
+            <span class="profile-chip-avatar" id="navAvatar">?</span>
+            <span id="navUserName">Profile</span>
         </a>
     </div>
 
@@ -1744,25 +1775,44 @@ footer hr{
 
 
 <!-- =====================================================
-     MOBILE SIDE MENU
+     UNIVERSAL SIDE MENU DRAWER
 ===================================================== -->
 
 <div class="side-menu" id="sideMenu">
-    <div class="close-menu" onclick="toggleMenu()">
-        <i class="fas fa-times"></i>
+    <div class="side-menu-header">
+        <a href="home-page.html" class="side-brand">
+            <i class="fas fa-road"></i>
+            <span>IDRS Navigation</span>
+        </a>
+        <div class="close-btn" onclick="toggleMenu()" title="Close Menu" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </div>
     </div>
-    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
-    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
-    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
-    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
-    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
-    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
-    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
-    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
+
+    <div class="side-menu-section-label">Main Portal</div>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> Home / Dashboard</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> Track Progress</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Resources & Guidelines</div>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> Community Awareness</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> Safety Tips</a>
+    <a href="training.html" onclick="toggleMenu()"><i class="fas fa-chalkboard-user"></i> Training & Guidelines</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Support & Policy</div>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> Help & Support</a>
+    <a href="terms-and-condition-page.html" class="active" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Account & Admin</div>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> My Profile</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> Admin Portal</a>
+    <a href="#" onclick="logout(); return false;"><i class="fas fa-right-from-bracket"></i> Logout</a>
 </div>
 
 
@@ -4204,26 +4254,7 @@ if(logo){
 
 
 
-function toggleMenu() {
-    const menu = document.getElementById("sideMenu");
-    if (menu) menu.classList.toggle("show");
-}
-
-/* =====================================================
-   ESC KEY → CLOSE MOBILE MENU
-===================================================== */
-
-document.addEventListener("keydown", function(event){
-
-    if(event.key === "Escape"){
-
-        document
-            .getElementById("sideMenu")
-            .classList.remove("show");
-
-    }
-
-});
+ 
 
 
 

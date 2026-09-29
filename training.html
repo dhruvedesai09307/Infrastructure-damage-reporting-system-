@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IDRS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training & Guidelines | Infrastructure Damage Reporting System</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <!-- IDRS AI Chatbot Assistant & Universal Theme Styles -->
@@ -11,222 +12,637 @@
 <script src="theme.js"></script>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins', sans-serif;
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#F5F5F5;
-    color:#1F2937;
-}
-
-.topbar{
-    position:sticky;
-    top:0;
-    width:100%;
-    height:76px;
-    background:#FFFFFF;
-    border-bottom:1px solid #E5E7EB;
-    box-shadow:0 2px 10px rgba(0,0,0,0.04);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 8%;
-    z-index:1000;
-}
-
-.menu-icon{
-    font-size:26px;
-    cursor:pointer;
-    color:#374151;
-    display:none;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo i{
-    font-size:32px;
-    color:#2563EB;
-}
-
-.logo-text h2{
-    margin:0;
-    font-size:24px;
-    color:#111827;
-}
-
-.logo-text p{
-    margin:0;
-    font-size:12px;
-    color:#6B7280;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-
-.nav-link{
-    text-decoration:none;
-    color:#4B5563;
-    padding:9px 16px;
-    border-radius:10px;
-    font-size:14.5px;
-    font-weight:500;
-    transition:.2s;
-    display:inline-flex;
-    align-items:center;
-    white-space:nowrap;
-}
-
-.nav-link:hover{
     background:#F3F4F6;
-    color:#2563EB;
+    color:#374151;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
-.nav-link.active{
-    background:#EFF6FF;
-    color:#2563EB;
-    font-weight:700;
-    border:1px solid #DBEAFE;
+/* ================= UNIFIED TOPBAR ================= */
+.topbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 76px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E7EB;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    z-index: 1000;
 }
 
-.home-icon-btn { width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; border: 1.5px solid #E5E7EB; color: #374151; display: flex; align-items: center; justify-content: center; font-size: 17px; text-decoration: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); flex-shrink: 0; }
-.home-icon-btn:hover { background: #2563EB; color: #FFFFFF; border-color: #2563EB; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25); }
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.menu-icon:hover {
+    background: #F3F4F6;
+    color: #2563EB;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo i {
+    font-size: 32px;
+    color: #2563EB;
+}
+
+.logo-text h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #111827;
+}
+
+.logo-text p {
+    margin: 0;
+    font-size: 12px;
+    color: #6B7280;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #4B5563;
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    font-weight: 500;
+    transition: .2s;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    background: #F3F4F6;
+    color: #2563EB;
+}
+
+.nav-link.active {
+    background: #EFF6FF;
+    color: #2563EB;
+    font-weight: 700;
+    border: 1px solid #DBEAFE;
+}
+
+.profile-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 8px;
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    border-radius: 30px;
+    text-decoration: none;
+    color: #374151;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: all .2s;
+    cursor: pointer;
+}
+.profile-chip:hover { background: #E5E7EB; border-color: #D1D5DB; }
+.profile-chip-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, #2563EB, #3B82F6);
+    color: #fff; font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
 
 @media(max-width:1050px){
-    .menu-icon{ display:block; }
-    .nav-links, .home-button, .home-icon-btn{ display:none; }
+    .nav-links { display: none; }
 }
 
-.side-menu{
-    position:fixed;
-    top:0;
-    left:-290px;
-    width:280px;
-    height:100vh;
-    background:#FFFFFF;
-    border-right:1px solid #E5E7EB;
-    box-shadow:5px 0 20px rgba(0,0,0,.10);
-    padding-top:80px;
-    transition:.35s;
-    z-index:3000;
+/* ================= UNIVERSAL SIDE MENU DRAWER ================= */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background: #FFFFFF;
+    border-right: 1px solid #E5E7EB;
+    padding: 25px 20px;
+    transition: .35s ease;
+    z-index: 3000;
+    box-shadow: 5px 0 25px rgba(0,0,0,.12);
+    overflow-y: auto;
+}
+.side-menu.show { left: 0; }
+.side-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #E5E7EB;
+}
+.side-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #111827;
+    text-decoration: none;
+}
+.side-brand i { color: #2563EB; font-size: 20px; }
+.side-menu-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #9CA3AF;
+    margin: 16px 0 8px 12px;
+}
+.side-menu-divider {
+    height: 1px;
+    background: #E5E7EB;
+    margin: 12px 0;
+}
+.side-menu a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    color: #374151;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    transition: .2s;
+}
+.side-menu a:hover { background: #F3F4F6; color: #2563EB; }
+.side-menu a.active { background: #EFF6FF; color: #2563EB; font-weight: 700; }
+.close-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: #374151;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: .2s;
+}
+.close-btn:hover { background: #F3F4F6; color: #DC2626; }
+
+/* ================= PAGE CONTAINER ================= */
+.main-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    width: 100%;
+    flex: 1;
 }
 
-.side-menu.show{ left:0; }
+/* ================= HERO SECTION ================= */
+.training-hero {
+    background: linear-gradient(135deg, #1E293B, #0F172A);
+    color: #FFFFFF;
+    border-radius: 24px;
+    padding: 50px 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+}
+.training-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #60A5FA;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.training-hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+.training-hero h1 span {
+    color: #3B82F6;
+}
+.training-hero p {
+    font-size: 17px;
+    color: #94A3B8;
+    max-width: 780px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 25px;
+    margin-top: 10px;
+}
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(59, 130, 246, 0.15);
+    color: #60A5FA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.stat-info h4 { font-size: 20px; font-weight: 700; color: #F8FAFC; }
+.stat-info p { font-size: 13px; color: #94A3B8; margin: 0; }
 
-.side-menu a{
-    display:block;
-    padding:18px 25px;
-    color:#374151;
-    text-decoration:none;
-    font-size:15px;
-    transition:.3s;
+/* ================= SECTION HEADINGS ================= */
+.section-header {
+    text-align: center;
+    margin: 50px 0 35px;
+}
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 10px;
+}
+.section-header p {
+    font-size: 16px;
+    color: #6B7280;
+    max-width: 650px;
+    margin: 0 auto;
 }
 
-.side-menu a:hover{ background:#F3F4F6; color:#2563EB; }
-
-.close-menu{
-    position:absolute;
-    top:20px;
-    right:20px;
-    font-size:22px;
-    cursor:pointer;
-    color:#374151;
+/* ================= MODULE CARDS GRID ================= */
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 24px;
+    margin-bottom: 50px;
+}
+.module-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 20px;
+    padding: 30px 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.module-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(37,99,235,0.12);
+    border-color: #BFDBFE;
+}
+.module-icon-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: #EFF6FF;
+    color: #2563EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+.module-number {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #2563EB;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+.module-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+}
+.module-desc {
+    font-size: 14.5px;
+    color: #6B7280;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+.module-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.module-list li {
+    font-size: 13.5px;
+    color: #374151;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.module-list li i {
+    color: #10B981;
+    font-size: 14px;
 }
 
-.hero{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:70px;
-    gap:50px;
+/* ================= SOP PROCESS STEPS ================= */
+.sop-wrapper {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    margin-bottom: 50px;
+}
+.sop-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    position: relative;
+}
+.sop-step-card {
+    background: #F9FAFB;
+    border: 1px solid #F3F4F6;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+}
+.step-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #2563EB;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+.sop-step-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+.sop-step-card p {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.5;
 }
 
-.left{
-    flex:1;
+/* ================= DOS AND DONTS GRID ================= */
+.dos-donts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 50px;
+}
+@media(max-width:768px){
+    .dos-donts-grid { grid-template-columns: 1fr; }
+    .training-hero { padding: 35px 20px; }
+    .training-hero h1 { font-size: 30px; }
+}
+.guideline-box {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+.guideline-box.dos { border-top: 5px solid #10B981; }
+.guideline-box.donts { border-top: 5px solid #EF4444; }
+
+.guideline-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.guideline-box.dos .guideline-title { color: #059669; }
+.guideline-box.donts .guideline-title { color: #DC2626; }
+
+.guideline-items {
+    list-style: none;
+}
+.guideline-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    color: #374151;
+    margin-bottom: 14px;
+    line-height: 1.6;
+}
+.guideline-box.dos .guideline-items i { color: #10B981; font-size: 18px; margin-top: 3px; }
+.guideline-box.donts .guideline-items i { color: #EF4444; font-size: 18px; margin-top: 3px; }
+
+/* ================= KNOWLEDGE QUIZ CARD ================= */
+.quiz-section {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    margin-bottom: 50px;
+}
+.quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 25px;
+}
+.quiz-header i {
+    font-size: 32px;
+    color: #2563EB;
+}
+.quiz-header h3 { font-size: 22px; font-weight: 700; color: #111827; }
+.quiz-header p { font-size: 14px; color: #6B7280; }
+
+.quiz-question {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+.quiz-question h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 14px;
+}
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.quiz-opt-btn {
+    text-align: left;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.quiz-opt-btn:hover {
+    border-color: #2563EB;
+    background: #EFF6FF;
+    color: #2563EB;
+}
+.quiz-feedback {
+    margin-top: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    display: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+.quiz-feedback.success { display: block; background: #D1FAE5; color: #065F46; }
+.quiz-feedback.error { display: block; background: #FEE2E2; color: #991B1B; }
+
+/* ================= CTA SECTION ================= */
+.cta-banner {
+    background: linear-gradient(135deg, #2563EB, #1D4ED8);
+    color: #FFFFFF;
+    border-radius: 24px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(37,99,235,0.25);
+}
+.cta-banner h2 { font-size: 30px; font-weight: 800; margin-bottom: 12px; }
+.cta-banner p { font-size: 16px; opacity: 0.9; max-width: 600px; margin: 0 auto 25px; }
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    color: #2563EB;
+    padding: 14px 32px;
+    border-radius: 40px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    background: #F8FAFC;
 }
 
-.left h1{
-    font-size:58px;
-    margin-bottom:20px;
+/* ================= FOOTER ================= */
+footer {
+    background: #FFFFFF;
+    border-top: 1px solid #E5E7EB;
+    padding: 50px 8% 25px;
+    margin-top: auto;
 }
-
-.left h1 span{
-    color:#2563EB;
+.footer-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-
-.left p{
-    font-size:19px;
-    color:#6B7280;
-    margin-bottom:30px;
+@media(max-width: 768px) {
+    .footer-container { grid-template-columns: 1fr; gap: 30px; }
 }
-
-.btn-report{
-    display:inline-block;
-    padding:14px 28px;
-    background:#2563EB;
-    color:#FFFFFF;
-    text-decoration:none;
-    border-radius:10px;
-    font-weight:600;
-    font-size:16px;
-    transition:background .2s;
-}
-
-.btn-report:hover{
-    background:#1D4ED8;
-}
-
-.right{
-    width:420px;
-    background:white;
-    padding:35px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-.right h2{
-    margin-bottom:20px;
-}
-
-.right ul{
-    list-style:none;
-}
-
-.right li{
-    padding:10px 0;
-    color:#4B5563;
-}
-
+.footer-about h2 { font-size: 24px; color: #111827; margin-bottom: 12px; }
+.footer-about p { color: #6B7280; font-size: 14.5px; line-height: 1.6; }
+.footer-links h3, .footer-contact h3 { font-size: 17px; color: #111827; margin-bottom: 16px; }
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: #6B7280; text-decoration: none; font-size: 14px; transition: .2s; }
+.footer-links a:hover { color: #2563EB; }
+.footer-contact p { color: #6B7280; font-size: 14px; margin-bottom: 10px; }
+.footer-contact i { color: #2563EB; margin-right: 8px; }
+footer hr { margin: 30px 0 20px; border: 0; border-top: 1px solid #E5E7EB; }
+.copyright { text-align: center; color: #9CA3AF; font-size: 13.5px; }
 </style>
-
 </head>
+
 <body>
 
+<!-- UNIFIED TOPBAR HEADER -->
 <header class="topbar">
-    <div class="menu-icon" onclick="toggleMenu()">
+    <div class="menu-icon" onclick="toggleMenu()" title="Open Navigation Menu" aria-label="Open menu">
         <i class="fas fa-bars"></i>
     </div>
-    <a href="home-page.html" class="logo" style="text-decoration:none;">
+
+    <a href="home-page.html" class="logo">
         <i class="fas fa-road"></i>
         <div class="logo-text">
             <h2>IDRS</h2>
             <p>Infrastructure Damage Reporting System</p>
         </div>
     </a>
+
     <nav class="nav-links" aria-label="Primary navigation">
         <a href="home-page.html" class="nav-link">Home</a>
         <a href="report.html" class="nav-link">Report Damage</a>
@@ -236,78 +652,347 @@ body{
         <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
         <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
-    <div style="display:flex;align-items:center;gap:10px;">
+
+    <div style="display:flex;align-items:center;gap:12px;">
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
             <i class="fas fa-moon" id="themeIcon"></i>
         </button>
-        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-            <i class="fas fa-house"></i>
+        <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
+            <span class="profile-chip-avatar" id="navAvatar">?</span>
+            <span id="navUserName">Profile</span>
         </a>
     </div>
 </header>
 
-<!-- MOBILE SIDE MENU -->
+<!-- UNIVERSAL SIDE MENU DRAWER -->
 <div class="side-menu" id="sideMenu">
-    <div class="close-menu" onclick="toggleMenu()">
-        <i class="fas fa-times"></i>
+    <div class="side-menu-header">
+        <a href="home-page.html" class="side-brand">
+            <i class="fas fa-road"></i>
+            <span>IDRS Navigation</span>
+        </a>
+        <div class="close-btn" onclick="toggleMenu()" title="Close Menu" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </div>
     </div>
-    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
-    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
-    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
-    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
-    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
-    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
-    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
-    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
+
+    <div class="side-menu-section-label">Main Portal</div>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> Home / Dashboard</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> Track Progress</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Resources & Guidelines</div>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> Community Awareness</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> Safety Tips</a>
+    <a href="training.html" class="active" onclick="toggleMenu()"><i class="fas fa-chalkboard-user"></i> Training & Guidelines</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Support & Policy</div>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> Help & Support</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Account & Admin</div>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> My Profile</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> Admin Portal</a>
+    <a href="#" onclick="logout(); return false;"><i class="fas fa-right-from-bracket"></i> Logout</a>
 </div>
 
-<section class="hero">
+<!-- MAIN CONTENT WRAPPER -->
+<main class="main-wrapper">
 
-<div class="left">
-    <h1>Building <span>Safer Communities</span></h1>
+    <!-- HERO SECTION -->
+    <section class="training-hero">
+        <div class="hero-badge">
+            <i class="fas fa-graduation-cap"></i> IDRS Certified Reporter Guidelines
+        </div>
+        <h1>Training & <span>Reporting SOP Guidelines</span></h1>
+        <p>
+            Master effective infrastructure damage reporting protocols. Follow official standard operating procedures to ensure rapid municipal response, precise location verification, and maximum public safety.
+        </p>
 
-    <p>
-        Report damaged roads, broken streetlights, water leaks,
-        traffic signal failures and other public infrastructure
-        issues quickly and efficiently.
-    </p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+                <div class="stat-info">
+                    <h4>4 Modules</h4>
+                    <p>Core SOP Standard</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon"><i class="fas fa-camera"></i></div>
+                <div class="stat-info">
+                    <h4>Photo Standards</h4>
+                    <p>Clear Evidence Rules</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon"><i class="fas fa-shield-circle-check"></i></div>
+                <div class="stat-info">
+                    <h4>100% Verified</h4>
+                    <p>Priority Resolution</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <a href="report.html" class="btn-report">Report Now</a>
+    <!-- SECTION 1: TRAINING MODULES -->
+    <div class="section-header">
+        <h2>Core Training Modules</h2>
+        <p>Explore essential procedures for identifying, documenting, and classifying public infrastructure hazards.</p>
+    </div>
 
-</div>
+    <div class="modules-grid">
+        <div class="module-card">
+            <div class="module-icon-wrap"><i class="fas fa-road-barrier"></i></div>
+            <div class="module-number">Module 01</div>
+            <div class="module-title">Hazard Categorization</div>
+            <div class="module-desc">
+                Learn how to accurately identify damage categories including roadway potholes, water pipeline bursts, broken streetlights, and traffic signal outages.
+            </div>
+            <ul class="module-list">
+                <li><i class="fas fa-check-circle"></i> Distinguish structural vs electrical hazards</li>
+                <li><i class="fas fa-check-circle"></i> Select correct report sub-categories</li>
+                <li><i class="fas fa-check-circle"></i> Prevent misclassified ticket delays</li>
+            </ul>
+        </div>
 
-<div class="right">
+        <div class="module-card">
+            <div class="module-icon-wrap"><i class="fas fa-camera-retro"></i></div>
+            <div class="module-number">Module 02</div>
+            <div class="module-title">Evidence Capture & Photo Standards</div>
+            <div class="module-desc">
+                High-quality visual evidence accelerates verification. Capture wide-angle context shots along with close-up defect details safely.
+            </div>
+            <ul class="module-list">
+                <li><i class="fas fa-check-circle"></i> Maintain minimum 3m safety distance</li>
+                <li><i class="fas fa-check-circle"></i> Capture nearby landmark for context</li>
+                <li><i class="fas fa-check-circle"></i> Avoid blurry or night-glare photos</li>
+            </ul>
+        </div>
 
-<h2>Why Use IDRS?</h2>
+        <div class="module-card">
+            <div class="module-icon-wrap"><i class="fas fa-location-crosshairs"></i></div>
+            <div class="module-number">Module 03</div>
+            <div class="module-title">Geo-Tagging & Address Precision</div>
+            <div class="module-desc">
+                Municipal repair crews rely on precise coordinates. Master pinpointing GPS locations and detailing exact street landmarks.
+            </div>
+            <ul class="module-list">
+                <li><i class="fas fa-check-circle"></i> Enable high-accuracy device GPS</li>
+                <li><i class="fas fa-check-circle"></i> Include nearest house/pole number</li>
+                <li><i class="fas fa-check-circle"></i> Specify lane direction & intersection</li>
+            </ul>
+        </div>
 
-<ul>
-    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Easy Damage Reporting</li>
-    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Live Complaint Tracking</li>
-    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Secure Login</li>
-    <li><i class="fas fa-circle-check" style="color:#2563EB; margin-right:8px;"></i> Faster Issue Resolution</li>
-</ul>
+        <div class="module-card">
+            <div class="module-icon-wrap"><i class="fas fa-triangle-exclamation"></i></div>
+            <div class="module-number">Module 04</div>
+            <div class="module-title">Severity Assessment & Emergency Protocol</div>
+            <div class="module-desc">
+                Understand severity levels (Low, Medium, High, Critical Emergency) and learn when to contact emergency dispatchers immediately.
+            </div>
+            <ul class="module-list">
+                <li><i class="fas fa-check-circle"></i> Identify active live-wire risks</li>
+                <li><i class="fas fa-check-circle"></i> Recognize major structural collapse</li>
+                <li><i class="fas fa-check-circle"></i> Emergency hotline contact guidelines</li>
+            </ul>
+        </div>
+    </div>
 
-</div>
+    <!-- SECTION 2: SOP STEP-BY-STEP WORKFLOW -->
+    <div class="sop-wrapper">
+        <div class="section-header" style="margin-top: 0;">
+            <h2>Standard Operating Procedure (SOP)</h2>
+            <p>4-Step workflow to follow every time you submit a damage report.</p>
+        </div>
 
-</section>
+        <div class="sop-steps">
+            <div class="sop-step-card">
+                <div class="step-badge">1</div>
+                <h3>Assess Safety First</h3>
+                <p>Never step into active traffic or touch exposed wires. Stand in a safe pedestrian area before documenting.</p>
+            </div>
+
+            <div class="sop-step-card">
+                <div class="step-badge">2</div>
+                <h3>Capture Photo Evidence</h3>
+                <p>Take 1-2 clear photographs showing the damage and visible surrounding context landmarks.</p>
+            </div>
+
+            <div class="sop-step-card">
+                <div class="step-badge">3</div>
+                <h3>Pinpoint Location</h3>
+                <p>Use auto-location or tap the map to place the marker exactly where the hazard exists.</p>
+            </div>
+
+            <div class="sop-step-card">
+                <div class="step-badge">4</div>
+                <h3>Submit & Track</h3>
+                <p>Submit your report to receive a tracking ID. Monitor live status updates as dispatch teams respond.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: DO'S AND DON'TS -->
+    <div class="section-header">
+        <h2>Reporting Best Practices</h2>
+        <p>Ensure your contributions meet municipal compliance standards.</p>
+    </div>
+
+    <div class="dos-donts-grid">
+        <div class="guideline-box dos">
+            <div class="guideline-title">
+                <i class="fas fa-circle-check"></i> Recommended Do's
+            </div>
+            <ul class="guideline-items">
+                <li><i class="fas fa-check"></i> <strong>Do</strong> provide concise, factual descriptions of the hazard.</li>
+                <li><i class="fas fa-check"></i> <strong>Do</strong> check if the issue has already been reported on the Live Map.</li>
+                <li><i class="fas fa-check"></i> <strong>Do</strong> ensure photos are well-lit and clearly show the damage extent.</li>
+                <li><i class="fas fa-check"></i> <strong>Do</strong> report immediately upon discovery to prevent public accidents.</li>
+            </ul>
+        </div>
+
+        <div class="guideline-box donts">
+            <div class="guideline-title">
+                <i class="fas fa-circle-xmark"></i> Strict Don'ts
+            </div>
+            <ul class="guideline-items">
+                <li><i class="fas fa-xmark"></i> <strong>Don't</strong> submit fake, exaggerated, or test reports on public portal.</li>
+                <li><i class="fas fa-xmark"></i> <strong>Don't</strong> trespass on private property to take photographs.</li>
+                <li><i class="fas fa-xmark"></i> <strong>Don't</strong> include personal faces or vehicle license plates in photos.</li>
+                <li><i class="fas fa-xmark"></i> <strong>Don't</strong> attempt to repair municipal electrical or water lines yourself.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECTION 4: KNOWLEDGE SELF-CHECK QUIZ -->
+    <div class="quiz-section">
+        <div class="quiz-header">
+            <i class="fas fa-clipboard-check"></i>
+            <div>
+                <h3>Knowledge Self-Check</h3>
+                <p>Test your understanding of IDRS reporting guidelines before submitting your next report.</p>
+            </div>
+        </div>
+
+        <div class="quiz-question">
+            <h4>Q1: What should be your absolute first priority when encountering a fallen high-voltage power line?</h4>
+            <div class="quiz-options">
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">
+                    <span>A) Walk closer to take a detailed macro photo of the wire</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, true)">
+                    <span>B) Stay at least 10 meters away, warn others, and call emergency hotline</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">
+                    <span>C) Try moving the wire off the sidewalk using a wooden stick</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question">
+            <h4>Q2: Which photo angle provides the best context for municipal repair dispatchers?</h4>
+            <div class="quiz-options">
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, true)">
+                    <span>A) A medium shot showing the damage alongside an identifiable landmark or street sign</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">
+                    <span>B) An extreme close-up of dark asphalt without any surrounding context</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="quiz-opt-btn" onclick="checkQuiz(this, false)">
+                    <span>C) A blurred photo taken from a fast-moving vehicle</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="quiz-feedback"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 5: CALL TO ACTION -->
+    <section class="cta-banner">
+        <h2>Ready to Put Guidelines into Action?</h2>
+        <p>Help keep your neighborhood safe and well-maintained by submitting an official infrastructure report now.</p>
+        <a href="report.html" class="cta-btn">
+            <i class="fas fa-file-circle-plus"></i> Submit a Damage Report Now
+        </a>
+    </section>
+
+</main>
+
+<!-- UNIFIED FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h2>IDRS</h2>
+            <p>
+                The Infrastructure Damage Reporting System empowers citizens to collaborate directly with public authorities to report roads, water networks, lighting, and civic infrastructure hazards seamlessly.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="home-page.html">Home Dashboard</a></li>
+                <li><a href="report.html">Report Damage</a></li>
+                <li><a href="track-report.html">Track Progress</a></li>
+                <li><a href="About-project-page.html">About Project</a></li>
+                <li><a href="training.html">Training & Guidelines</a></li>
+                <li><a href="terms-and-condition-page.html">Terms & Conditions</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Support & Contact</h3>
+            <p><i class="fas fa-envelope"></i> support@idrs-portal.org</p>
+            <p><i class="fas fa-phone"></i> Emergency Dispatch: 1800-IDRS-HELP</p>
+            <p><i class="fas fa-location-dot"></i> Municipal Care Center, City Hall</p>
+        </div>
+    </div>
+    <hr>
+    <div class="copyright">
+        © 2026 Infrastructure Damage Reporting System (IDRS). All rights reserved.
+    </div>
+</footer>
 
 <script>
-function toggleMenu(){
-    const menu = document.getElementById("sideMenu");
-    if(menu) menu.classList.toggle("show");
-}
-
-document.querySelectorAll(".side-menu a").forEach(function(link){
-    link.addEventListener("click", function(){
-        const menu = document.getElementById("sideMenu");
-        if(menu) menu.classList.remove("show");
+function checkQuiz(button, isCorrect) {
+    const parent = button.closest('.quiz-question');
+    const feedback = parent.querySelector('.quiz-feedback');
+    const allButtons = parent.querySelectorAll('.quiz-opt-btn');
+    
+    allButtons.forEach(btn => {
+        btn.style.borderColor = '#D1D5DB';
+        btn.style.background = '#FFFFFF';
+        btn.style.color = '#374151';
     });
-});
+
+    if (isCorrect) {
+        button.style.borderColor = '#10B981';
+        button.style.background = '#ECFDF5';
+        button.style.color = '#065F46';
+        feedback.className = 'quiz-feedback success';
+        feedback.innerHTML = '<i class="fas fa-check-circle"></i> Correct! Excellent safety judgment.';
+    } else {
+        button.style.borderColor = '#EF4444';
+        button.style.background = '#FEF2F2';
+        button.style.color = '#991B1B';
+        feedback.className = 'quiz-feedback error';
+        feedback.innerHTML = '<i class="fas fa-times-circle"></i> Incorrect. Always prioritize safety & clear context.';
+    }
+}
 </script>
+
 <!-- IDRS AI Chatbot Assistant -->
 <script src="chatbot.js"></script>
 </body>

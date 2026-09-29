@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <!-- Google Fonts: Poppins & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -18,1004 +21,1061 @@
     <link rel="stylesheet" href="theme.css">
     <script src="theme.js"></script>
 
-<style>
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-        font-family: 'Inter', sans-serif;
-        background: #F3F4F6;
-        color: #374151;
-    }
-
-    /* ================= UNIFIED TOPBAR ================= */
-    .topbar {
-        position: sticky;
-        top: 0;
-        width: 100%;
-        height: 76px;
-        background: #FFFFFF;
-        border-bottom: 1px solid #E5E7EB;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 8%;
-        z-index: 1000;
-    }
-    .menu-icon {
-        font-size: 26px;
-        cursor: pointer;
-        color: #374151;
-        display: flex;
-    }
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-    }
-    .logo i { font-size: 32px; color: #2563EB; }
-    .logo-text h2 { margin: 0; font-size: 24px; color: #111827; }
-    .logo-text p { margin: 0; font-size: 12px; color: #6B7280; }
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .nav-link {
-        text-decoration: none;
-        color: #4B5563;
-        padding: 9px 16px;
-        border-radius: 10px;
-        font-size: 14.5px;
-        font-weight: 500;
-        transition: .2s;
-        display: inline-flex;
-        align-items: center;
-        white-space: nowrap;
-    }
-    .nav-link:hover {
-        background: #F3F4F6;
-        color: #2563EB;
-    }
-    .nav-link.active {
-        background: #EFF6FF;
-        color: #2563EB;
-        font-weight: 700;
-        border: 1px solid #DBEAFE;
-    }
-    .home-icon-btn {
-        width: 44px; height: 44px;
-        border-radius: 12px;
-        background: #FFFFFF;
-        border: 1.5px solid #E5E7EB;
-        color: #374151;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 17px;
-        text-decoration: none;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-        flex-shrink: 0;
-    }
-    .home-icon-btn:hover { background: #2563EB; color: #FFFFFF; border-color: #2563EB; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37,99,235,0.25); }
-    @media (max-width: 1050px) {
-        .menu-icon { display: block; }
-        .nav-links, .home-button, .home-icon-btn { display: none; }
-    }
-    .side-menu {
-        position: fixed;
-        top: 0;
-        left: -290px;
-        width: 280px;
-        height: 100vh;
-        background: #FFFFFF;
-        border-right: 1px solid #E5E7EB;
-        box-shadow: 5px 0 20px rgba(0,0,0,.10);
-        padding-top: 80px;
-        transition: .35s;
-        z-index: 3000;
-    }
-    .side-menu.show { left: 0; }
-    .side-menu a {
-        display: block;
-        padding: 18px 25px;
-        color: #374151;
-        text-decoration: none;
-        font-size: 15px;
-        transition: .3s;
-    }
-    .side-menu a:hover { background: #F3F4F6; color: #2563EB; }
-    .close-menu {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 22px;
-        cursor: pointer;
-        color: #374151;
-    }
-
-
-
-    /* ================= MAIN ================= */  
-
-    .main {  
-        width: 90%;  
-        max-width: 1150px;  
-        margin: 35px auto 70px;  
-    }  
-
-    /* ================= HERO ================= */  
-
-    .about-hero {  
-        background: #ffffff;  
-        border: 1px solid #e1e5ea;  
-        border-radius: 12px;  
-
-        padding: 42px 45px;  
-        margin-bottom: 22px;  
-
-        position: relative;  
-        overflow: hidden;  
-
-        box-shadow: 0 5px 20px rgba(35, 50, 70, 0.04);  
-    }  
-
-    .about-hero::after {  
-        content: "";  
-        position: absolute;  
-
-        width: 230px;  
-        height: 230px;  
-
-        border-radius: 50%;  
-        border: 45px solid #f0f4f9;  
-
-        right: -80px;  
-        top: -100px;  
-    }  
-
-    .small-title {  
-        color: #2563EB;  
-        font-size: 12.5px;  
-        font-weight: 700;  
-
-        text-transform: uppercase;  
-        letter-spacing: 1px;  
-
-        margin-bottom: 10px;  
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 5px 14px;
-        background: #EFF6FF;
-        border: 1px solid #DBEAFE;
-        border-radius: 20px;
-    }  
-
-   .about-hero h2 {  
-font-size: 42px;  
-color: #263548;  
-margin-bottom: 12px;
-
-}
-
-.about-hero h2 span {
-color: #2563EB;
-}
-
-.about-hero p {
-max-width: 780px;
-color: #707b88;
-font-size: 18px;
-line-height: 1.8;
-}
-
-/* ================= SECTION ================= */  
-
-    .section-title {  
-        text-align: center;  
-        margin: 38px 0 22px;  
-    }  
-
-    .section-title h2 {  
-font-size: 42px;  
-color: #263548;
-
-}
-
-.section-title p {
-color: #7a8490;
-font-size: 16px;
-margin-top: 5px;
-}
-
-/* ================= ABOUT CARDS ================= */  
-
-    .about-grid {  
-        display: grid;  
-        grid-template-columns: 1.25fr 0.75fr;  
-        gap: 20px;  
-    }  
-
-    .card {  
-        background: white;  
-        border: 1px solid #e0e5eb;  
-        border-radius: 10px;  
-
-        padding: 27px;  
-
-        box-shadow: 0 4px 15px rgba(35, 50, 70, 0.035);  
-    }  
-
-   .card h3 {  
-color: #263548;  
-font-size: 20px;  
-margin-bottom: 11px;
-
-}
-
-.card p {
-color: #707b88;
-font-size: 16px;
-line-height: 1.8;
-}
-
-/* ================= OBJECTIVES ================= */  
-
-    .objective-list {  
-        margin-top: 18px;  
-        list-style: none;  
-    }  
-
-    .objective-list li {  
-display: flex;  
-gap: 10px;  
-margin-bottom: 12px;  
-color: #5e6875;  
-font-size: 18px;
-
-}
-.card h3 i {
-color: #2563EB;
-margin-right: 6px;
-}
-
-.objective-list i {
-color: #2563EB;
-margin-top: 3px;
-}
-
-/* ================= FEATURES ================= */  
-
-    .feature-grid {  
-        display: grid;  
-        grid-template-columns: repeat(3, 1fr);  
-        gap: 17px;  
-    }  
-
-    .feature {  
-        background: white;  
-        border: 1px solid #e0e5eb;  
-        border-radius: 10px;  
-
-        padding: 22px;  
-
-        transition: 0.25s;  
-    }  
-
-    .feature:hover {  
-        transform: translateY(-3px);  
-        box-shadow: 0 8px 25px rgba(35, 50, 70, 0.08);  
-    }  
-
-    .feature-icon {  
-        width: 44px;  
-        height: 44px;  
-
-        border-radius: 10px;  
-        background: #EFF6FF;  
-        color: #2563EB;  
-        border: 1px solid #DBEAFE;
-
-        display: flex;  
-        align-items: center;  
-        justify-content: center;  
-
-        margin-bottom: 14px;  
-        font-size: 18px;
-    }  
-
-    .feature h3 {  
-font-size: 20px;  
-margin-bottom: 7px;  
-color: #2c3b4d;
-
-}
-
-.feature p {
-font-size: 16px;
-color: #78828e;
-line-height: 1.7;
-}
-
-/* ================= WORKFLOW ================= */  
-
-    .workflow {  
-        display: grid;  
-        grid-template-columns: repeat(4, 1fr);  
-        gap: 15px;  
-    }  
-
-    .step {  
-        background: white;  
-        border: 1px solid #e0e5eb;  
-        border-radius: 10px;  
-        padding: 22px;  
-    }  
-
-    .step-number {  
-        width: 34px;  
-        height: 34px;  
-
-        background: #2563EB;  
-        color: white;  
-
-        display: flex;  
-        justify-content: center;  
-        align-items: center;  
-
-        border-radius: 50%;  
-
-        font-size: 13px;  
-        font-weight: 700;  
-
-        margin-bottom: 14px;  
-    }  
-
-    .step h3 {  
-font-size: 20px;  
-margin-bottom: 6px;
-
-}
-
-.step p {
-font-size: 16px;
-color: #78828e;
-line-height: 1.6;
-}
-
-/* ================= BENEFITS ================= */  
-
-    .benefits {  
-        display: grid;  
-        grid-template-columns: repeat(2, 1fr);  
-        gap: 15px;  
-    }  
-
-    .benefit {  
-        background: white;  
-        border: 1px solid #e0e5eb;  
-        border-radius: 9px;  
-
-        padding: 18px;  
-
-        display: flex;  
-        gap: 13px;  
-        align-items: flex-start;  
-    }  
-
-    .benefit i {  
-        color: #2563EB;  
-        font-size: 18px;  
-        margin-top: 2px;  
-    }  
-
-    .benefit h3 {  
-font-size: 20px;  
-margin-bottom: 4px;
-
-}
-
-.benefit p {
-color: #7a8490;
-font-size: 16px;
-}
-/* ================= TECHNOLOGY ================= */
-
-.technology {  
-        background: #2b394b;  
-        color: white;  
-
-        border-radius: 11px;  
-        padding: 30px;  
-
-        margin-top: 35px;  
-    }  
-
-    .technology h2 {  
-font-size: 30px;  
-margin-bottom: 7px;
-
-}
-
-.technology p {
-color: #cbd3dc;
-font-size: 16px;
-margin-bottom: 20px;
-}
-
-.tech {
-font-size: 15px;
-color: #e0e6ed;
-}
-
-.tech-list {  
-        display: flex;  
-        flex-wrap: wrap;  
-        gap: 9px;  
-    }  
-
-    .tech {  
-        padding: 8px 13px;  
-
-        border: 1px solid rgba(255,255,255,0.15);  
-        background: rgba(255,255,255,0.06);  
-
-        border-radius: 5px;  
-
-        font-size: 15px;  
-color: #e0e6ed;  
-    }  
-
-    /* ================= STATS ================= */  
-
-    .stats {  
-        display: grid;  
-        grid-template-columns: repeat(4, 1fr);  
-        gap: 15px;  
-
-        margin-top: 20px;  
-    }  
-
-    .stat {  
-        background: white;  
-        border: 1px solid #e0e5eb;  
-        border-radius: 9px;  
-
-        padding: 21px;  
-        text-align: center;  
-    }  
-
-    .stat i {  
-        color: #2563EB;  
-        font-size: 22px;  
-        margin-bottom: 8px;  
-    }  
-
-    .stat h3 {  
-font-size: 32px;  
-color: #2563EB;
-}
-
-.stat p {
-color: #7b8591;
-font-size: 16px;
-margin-top: 2px;
-}
-
-/* ================= FOOTER ================= */  
-
-    .footer {  
-        background: white;  
-        border-top: 1px solid #e0e5eb;  
-
-        padding: 25px 5%;  
-        text-align: center;  
-    }  
-
-    .footer h3 {  
-color: #263548;  
-font-size: 20px;
-
-}
-
-.footer p {
-color: #8a929d;
-font-size: 16px;
-margin-top: 5px;
-}
-
-/* ================= RESPONSIVE ================= */  
-
-    @media(max-width: 850px) {  
-
-        .brand-text h1 {  
-            font-size: 21px;  
-        }  
-
-        .navbar {  
-            height: auto;  
-            padding: 12px 5%;  
-            flex-direction: column;  
-            gap: 12px;  
-        }  
-
-        .nav-links {  
-            flex-wrap: wrap;  
-            justify-content: center;  
-        }  
-
-        .about-grid {  
-            grid-template-columns: 1fr;  
-        }  
-
-        .feature-grid {  
-            grid-template-columns: repeat(2, 1fr);  
-        }  
-
-        .workflow {  
-            grid-template-columns: repeat(2, 1fr);  
-        }  
-
-        .stats {  
-            grid-template-columns: repeat(2, 1fr);  
-        }  
-    }  
-
-    @media(max-width: 550px) {  
-
-        .header {  
-            padding: 18px 5%;  
-        }  
-
-        .brand-icon {  
-            width: 38px;  
-            height: 38px;  
-            font-size: 18px;  
-        }  
-
-        .brand-text h1 {  
-            font-size: 17px;  
-        }  
-
-        .brand-text p {  
-            font-size: 11px;  
-        }  
-
-        .main {  
-            width: 92%;  
-        }  
-
-        .about-hero {  
-            padding: 28px 22px;  
-        }  
-
-        .about-hero h2 {  
-            font-size: 26px;  
-        }  
-
-        .feature-grid,  
-        .workflow,  
-        .benefits {  
-            grid-template-columns: 1fr;  
-        }  
-
-        .stats {  
-            grid-template-columns: 1fr 1fr;  
-        }  
-
-        .nav-links a {  
-            padding: 7px 9px;  
-            font-size: 11px;  
-        }  
-    }  
-
-</style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F3F4F6;
+            color: #374151;
+        }
+
+        /* ================= UNIFIED TOPBAR ================= */
+        .topbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 76px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E5E7EB;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+            z-index: 1000;
+        }
+
+        .menu-icon {
+            font-size: 26px;
+            cursor: pointer;
+            color: #374151;
+            display: flex;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: #2563EB;
+        }
+
+        .logo-text h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #111827;
+        }
+
+        .logo-text p {
+            margin: 0;
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #4B5563;
+            padding: 9px 16px;
+            border-radius: 10px;
+            font-size: 14.5px;
+            font-weight: 500;
+            transition: .2s;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: #F3F4F6;
+            color: #2563EB;
+        }
+
+        .nav-link.active {
+            background: #EFF6FF;
+            color: #2563EB;
+            font-weight: 700;
+            border: 1px solid #DBEAFE;
+        }
+
+        .home-icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #FFFFFF;
+            border: 1.5px solid #E5E7EB;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+        }
+
+        .home-icon-btn:hover {
+            background: #2563EB;
+            color: #FFFFFF;
+            border-color: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+        }
+
+        @media (max-width: 1050px) {
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-links,
+            .home-button,
+            .home-icon-btn {
+                display: none;
+            }
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -290px;
+            width: 280px;
+            height: 100vh;
+            background: #FFFFFF;
+            border-right: 1px solid #E5E7EB;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, .10);
+            padding-top: 80px;
+            transition: .35s;
+            z-index: 3000;
+        }
+
+        .side-menu.show {
+            left: 0;
+        }
+
+        .side-menu a {
+            display: block;
+            padding: 18px 25px;
+            color: #374151;
+            text-decoration: none;
+            font-size: 15px;
+            transition: .3s;
+        }
+
+        .side-menu a:hover {
+            background: #F3F4F6;
+            color: #2563EB;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #374151;
+        }
+
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            width: 90%;
+            max-width: 1150px;
+            margin: 35px auto 70px;
+        }
+
+        /* ================= HERO ================= */
+
+        .about-hero {
+            background: #ffffff;
+            border: 1px solid #e1e5ea;
+            border-radius: 12px;
+
+            padding: 42px 45px;
+            margin-bottom: 22px;
+
+            position: relative;
+            overflow: hidden;
+
+            box-shadow: 0 5px 20px rgba(35, 50, 70, 0.04);
+        }
+
+        .about-hero::after {
+            content: "";
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            border-radius: 50%;
+            border: 45px solid #f0f4f9;
+
+            right: -80px;
+            top: -100px;
+        }
+
+        .small-title {
+            color: #2563EB;
+            font-size: 12.5px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            background: #EFF6FF;
+            border: 1px solid #DBEAFE;
+            border-radius: 20px;
+        }
+
+        .about-hero h2 {
+            font-size: 42px;
+            color: #263548;
+            margin-bottom: 12px;
+
+        }
+
+        .about-hero h2 span {
+            color: #2563EB;
+        }
+
+        .about-hero p {
+            max-width: 780px;
+            color: #707b88;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section-title {
+            text-align: center;
+            margin: 38px 0 22px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            color: #263548;
+
+        }
+
+        .section-title p {
+            color: #7a8490;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        /* ================= ABOUT CARDS ================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e0e5eb;
+            border-radius: 10px;
+
+            padding: 27px;
+
+            box-shadow: 0 4px 15px rgba(35, 50, 70, 0.035);
+        }
+
+        .card h3 {
+            color: #263548;
+            font-size: 20px;
+            margin-bottom: 11px;
+
+        }
+
+        .card p {
+            color: #707b88;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* ================= OBJECTIVES ================= */
+
+        .objective-list {
+            margin-top: 18px;
+            list-style: none;
+        }
+
+        .objective-list li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #5e6875;
+            font-size: 18px;
+
+        }
+
+        .card h3 i {
+            color: #2563EB;
+            margin-right: 6px;
+        }
+
+        .objective-list i {
+            color: #2563EB;
+            margin-top: 3px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 17px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid #e0e5eb;
+            border-radius: 10px;
+
+            padding: 22px;
+
+            transition: 0.25s;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(35, 50, 70, 0.08);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 10px;
+            background: #EFF6FF;
+            color: #2563EB;
+            border: 1px solid #DBEAFE;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 14px;
+            font-size: 18px;
+        }
+
+        .feature h3 {
+            font-size: 20px;
+            margin-bottom: 7px;
+            color: #2c3b4d;
+
+        }
+
+        .feature p {
+            font-size: 16px;
+            color: #78828e;
+            line-height: 1.7;
+        }
+
+        /* ================= WORKFLOW ================= */
+
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .step {
+            background: white;
+            border: 1px solid #e0e5eb;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .step-number {
+            width: 34px;
+            height: 34px;
+
+            background: #2563EB;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 14px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 6px;
+
+        }
+
+        .step p {
+            font-size: 16px;
+            color: #78828e;
+            line-height: 1.6;
+        }
+
+        /* ================= BENEFITS ================= */
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .benefit {
+            background: white;
+            border: 1px solid #e0e5eb;
+            border-radius: 9px;
+
+            padding: 18px;
+
+            display: flex;
+            gap: 13px;
+            align-items: flex-start;
+        }
+
+        .benefit i {
+            color: #2563EB;
+            font-size: 18px;
+            margin-top: 2px;
+        }
+
+        .benefit h3 {
+            font-size: 20px;
+            margin-bottom: 4px;
+
+        }
+
+        .benefit p {
+            color: #7a8490;
+            font-size: 16px;
+        }
+
+        /* ================= TECHNOLOGY ================= */
+
+        .technology {
+            background: #2b394b;
+            color: white;
+
+            border-radius: 11px;
+            padding: 30px;
+
+            margin-top: 35px;
+        }
+
+        .technology h2 {
+            font-size: 30px;
+            margin-bottom: 7px;
+
+        }
+
+        .technology p {
+            color: #cbd3dc;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .tech {
+            font-size: 15px;
+            color: #e0e6ed;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .tech {
+            padding: 8px 13px;
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+
+            border-radius: 5px;
+
+            font-size: 15px;
+            color: #e0e6ed;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid #e0e5eb;
+            border-radius: 9px;
+
+            padding: 21px;
+            text-align: center;
+        }
+
+        .stat i {
+            color: #2563EB;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .stat h3 {
+            font-size: 32px;
+            color: #2563EB;
+        }
+
+        .stat p {
+            color: #7b8591;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            background: white;
+            border-top: 1px solid #e0e5eb;
+
+            padding: 25px 5%;
+            text-align: center;
+        }
+
+        .footer h3 {
+            color: #263548;
+            font-size: 20px;
+
+        }
+
+        .footer p {
+            color: #8a929d;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 850px) {
+
+            .brand-text h1 {
+                font-size: 21px;
+            }
+
+            .navbar {
+                height: auto;
+                padding: 12px 5%;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workflow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 550px) {
+
+            .header {
+                padding: 18px 5%;
+            }
+
+            .brand-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+
+            .brand-text h1 {
+                font-size: 17px;
+            }
+
+            .brand-text p {
+                font-size: 11px;
+            }
+
+            .main {
+                width: 92%;
+            }
+
+            .about-hero {
+                padding: 28px 22px;
+            }
+
+            .about-hero h2 {
+                font-size: 26px;
+            }
+
+            .feature-grid,
+            .workflow,
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links a {
+                padding: 7px 9px;
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- Top Navigation Header -->
-  <header class="topbar">
-    <div class="menu-icon" onclick="toggleMenu()" title="Open Navigation Menu" aria-label="Open menu">
-        <i class="fas fa-bars"></i>
-    </div>
-    <a href="home-page.html" class="logo" style="text-decoration:none;">
-      <i class="fas fa-road"></i>
-      <div class="logo-text">
-        <h2>IDRS</h2>
-        <p>Infrastructure Damage Reporting System</p>
-      </div>
-    </a>
-    <div style="display:flex;align-items:center;gap:12px;">
-        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-            <i class="fas fa-moon" id="themeIcon"></i>
-        </button>
-        <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
-            <span class="profile-chip-avatar" id="navAvatar">?</span>
-            <span id="navUserName">Profile</span>
-        </a>
-    </div>
-  </header>
-
-  <!-- SIDE MENU DRAWER -->
-  <div id="sideMenu" class="side-menu">
-    <div class="side-menu-header">
-        <a href="home-page.html" class="side-brand">
-            <i class="fas fa-road"></i>
-            <span>IDRS Navigation</span>
-        </a>
-        <div class="close-btn" onclick="toggleMenu()" title="Close Menu" aria-label="Close menu">
-            <i class="fas fa-times"></i>
+    <!-- Top Navigation Header -->
+    <header class="topbar">
+        <div class="menu-icon" onclick="toggleMenu()" title="Open Navigation Menu" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
         </div>
-    </div>
+        <a href="home-page.html" class="logo" style="text-decoration:none;">
+            <i class="fas fa-road"></i>
+            <div class="logo-text">
+                <h2>IDRS</h2>
+                <p>Infrastructure Damage Reporting System</p>
+            </div>
+        </a>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
+                <span class="profile-chip-avatar" id="navAvatar">?</span>
+                <span id="navUserName">Profile</span>
+            </a>
+        </div>
+    </header>
 
-    <div class="side-menu-section-label">Main Portal</div>
-    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> Home / Dashboard</a>
-    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
-    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> Track Progress</a>
+    <!-- SIDE MENU DRAWER -->
+    <div id="sideMenu" class="side-menu">
+        <div class="side-menu-header">
+            <a href="home-page.html" class="side-brand">
+                <i class="fas fa-road"></i>
+                <span>IDRS Navigation</span>
+            </a>
+            <div class="close-btn" onclick="toggleMenu()" title="Close Menu" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
 
-    <div class="side-menu-divider"></div>
-    <div class="side-menu-section-label">Resources & Guidelines</div>
-    <a href="About-project-page.html" class="active" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> About Project</a>
-    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> Community Awareness</a>
-    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> Safety Tips</a>
-    <a href="training.html" onclick="toggleMenu()"><i class="fas fa-chalkboard-user"></i> Training & Guidelines</a>
-    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</a>
+        <div class="side-menu-section-label">Main Portal</div>
+        <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> Home / Dashboard</a>
+        <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
+        <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> Track
+            Progress</a>
 
-    <div class="side-menu-divider"></div>
-    <div class="side-menu-section-label">Support & Policy</div>
-    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> Help & Support</a>
-    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
-    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+        <div class="side-menu-divider"></div>
+        <div class="side-menu-section-label">Resources & Guidelines</div>
+        <a href="About-project-page.html" class="active" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> About
+            Project</a>
+        <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> Community
+            Awareness</a>
+        <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> Safety Tips</a>
+        <a href="training.html" onclick="toggleMenu()"><i class="fas fa-chalkboard-user"></i> Training & Guidelines</a>
+        <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> Feedback
+            & Suggestions</a>
 
-    <div class="side-menu-divider"></div>
-    <div class="side-menu-section-label">Account & Admin</div>
-    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> My Profile</a>
-    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> Admin Portal</a>
-    <a href="#" onclick="logout(); return false;"><i class="fas fa-right-from-bracket"></i> Logout</a>
-  </div>  <!-- =====================================================  
+        <div class="side-menu-divider"></div>
+        <div class="side-menu-section-label">Support & Policy</div>
+        <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> Help & Support</a>
+        <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> Terms &
+            Conditions</a>
+        <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+
+        <div class="side-menu-divider"></div>
+        <div class="side-menu-section-label">Account & Admin</div>
+        <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> My Profile</a>
+        <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> Admin Portal</a>
+        <a href="#" onclick="logout(); return false;"><i class="fas fa-right-from-bracket"></i> Logout</a>
+    </div> <!-- =====================================================  
      MAIN  
-===================================================== -->  <main class="main">  <!-- HERO -->  
+===================================================== -->
+    <main class="main"> <!-- HERO -->
 
-<section class="about-hero">  
+        <section class="about-hero">
 
-    <div class="small-title">  
-        About Project  
-    </div>  
+            <div class="small-title">
+                About Project
+            </div>
 
-    <h2>  
-        Infrastructure Damage <span>Reporting System</span>  
-    </h2>  
+            <h2>
+                Infrastructure Damage <span>Reporting System</span>
+            </h2>
 
-    <p>  
-        A smart digital platform designed to make reporting,  
-        tracking and managing public infrastructure problems  
-        simple, transparent and efficient. Citizens can report  
-        damaged infrastructure and authorities can manage,  
-        prioritize and resolve reported issues through one  
-        centralized system.  
-    </p>  
+            <p>
+                A smart digital platform designed to make reporting,
+                tracking and managing public infrastructure problems
+                simple, transparent and efficient. Citizens can report
+                damaged infrastructure and authorities can manage,
+                prioritize and resolve reported issues through one
+                centralized system.
+            </p>
 
-</section>  
+        </section>
 
 
-<!-- PROJECT OVERVIEW -->  
+        <!-- PROJECT OVERVIEW -->
 
-<div class="section-title">  
+        <div class="section-title">
 
-    <h2>Project Overview</h2>  
+            <h2>Project Overview</h2>
 
-    <p>  
-        Connecting citizens and authorities for better public infrastructure  
-    </p>  
+            <p>
+                Connecting citizens and authorities for better public infrastructure
+            </p>
 
-</div>  
+        </div>
 
 
-<section class="about-grid">  
+        <section class="about-grid">
 
 
-    <div class="card">  
+            <div class="card">
 
-        <h3>  
-            <i class="fa-solid fa-circle-info"></i>  
-            What is this project?  
-        </h3>  
+                <h3>
+                    <i class="fa-solid fa-circle-info"></i>
+                    What is this project?
+                </h3>
 
-        <p>  
-            The Infrastructure Damage Reporting System is a web-based  
-            platform that allows citizens to report problems related  
-            to public infrastructure such as damaged roads, potholes,  
-            broken street lights, drainage problems, damaged public  
-            property and other infrastructure issues.  
-        </p>  
+                <p>
+                    The Infrastructure Damage Reporting System is a web-based
+                    platform that allows citizens to report problems related
+                    to public infrastructure such as damaged roads, potholes,
+                    broken street lights, drainage problems, damaged public
+                    property and other infrastructure issues.
+                </p>
 
-        <br>  
+                <br>
 
-        <p>  
-            The system helps authorities receive accurate information,  
-            review submitted reports, assign issues to responsible  
-            departments and update their progress until the problem  
-            is resolved.  
-        </p>  
+                <p>
+                    The system helps authorities receive accurate information,
+                    review submitted reports, assign issues to responsible
+                    departments and update their progress until the problem
+                    is resolved.
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="card">  
+            <div class="card">
 
-        <h3>  
-            <i class="fa-solid fa-bullseye"></i>  
-            Project Objective  
-        </h3>  
+                <h3>
+                    <i class="fa-solid fa-bullseye"></i>
+                    Project Objective
+                </h3>
 
-        <ul class="objective-list">  
+                <ul class="objective-list">
 
-            <li>  
-                <i class="fa-solid fa-check"></i>  
-                Easy infrastructure issue reporting  
-            </li>  
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Easy infrastructure issue reporting
+                    </li>
 
-            <li>  
-                <i class="fa-solid fa-check"></i>  
-                Faster response from authorities  
-            </li>  
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Faster response from authorities
+                    </li>
 
-            <li>  
-                <i class="fa-solid fa-check"></i>  
-                Transparent report tracking  
-            </li>  
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Transparent report tracking
+                    </li>
 
-            <li>  
-                <i class="fa-solid fa-check"></i>  
-                Centralized complaint management  
-            </li>  
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Centralized complaint management
+                    </li>
 
-            <li>  
-                <i class="fa-solid fa-check"></i>  
-                Better public infrastructure planning  
-            </li>  
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Better public infrastructure planning
+                    </li>
 
-        </ul>  
+                </ul>
 
-    </div>  
+            </div>
 
-</section>  
+        </section>
 
 
-<!-- STATISTICS -->  
+        <!-- STATISTICS -->
 
-<div class="section-title">  
+        <div class="section-title">
 
-    <h2>System at a Glance</h2>  
+            <h2>System at a Glance</h2>
 
-</div>  
+        </div>
 
-<section class="stats">  
+        <section class="stats">
 
-    <div class="stat">  
+            <div class="stat">
 
-        <i class="fa-solid fa-file-circle-check"></i>  
+                <i class="fa-solid fa-file-circle-check"></i>
 
-        <h3>12,580</h3>  
+                <h3>12,580</h3>
 
-        <p>  
-            Reports Submitted  
-        </p>  
+                <p>
+                    Reports Submitted
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="stat">  
+            <div class="stat">
 
-        <i class="fa-solid fa-circle-check"></i>  
+                <i class="fa-solid fa-circle-check"></i>
 
-        <h3>10,962</h3>  
+                <h3>10,962</h3>
 
-        <p>  
-            Issues Resolved  
-        </p>  
+                <p>
+                    Issues Resolved
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="stat">  
+            <div class="stat">
 
-        <i class="fa-solid fa-chart-line"></i>  
+                <i class="fa-solid fa-chart-line"></i>
 
-        <h3>87%</h3>  
+                <h3>87%</h3>
 
-        <p>  
-            Resolution Rate  
-        </p>  
+                <p>
+                    Resolution Rate
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="stat">  
+            <div class="stat">
 
-        <i class="fa-solid fa-users"></i>  
+                <i class="fa-solid fa-users"></i>
 
-        <h3>5,240+</h3>  
+                <h3>5,240+</h3>
 
-        <p>  
-            Citizens  
-        </p>  
+                <p>
+                    Citizens
+                </p>
 
-    </div>  
+            </div>
 
-</section>  
+        </section>
 
 
-<!-- FEATURES -->  
+        <!-- FEATURES -->
 
-<div class="section-title">  
+        <div class="section-title">
 
-    <h2>Key Features</h2>  
+            <h2>Key Features</h2>
 
-    <p>  
-        Important features provided by the system  
-    </p>  
+            <p>
+                Important features provided by the system
+            </p>
 
-</div>  
+        </div>
 
 
-<section class="feature-grid">  
+        <section class="feature-grid">
 
 
-    <div class="feature">  
+            <div class="feature">
 
-        <div class="feature-icon">  
-            <i class="fa-solid fa-file-circle-plus"></i>  
-        </div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                </div>
 
-        <h3>Online Damage Reporting</h3>  
+                <h3>Online Damage Reporting</h3>
 
-        <p>  
-            Citizens can submit infrastructure damage reports  
-            through an easy-to-use online form.  
-        </p>  
+                <p>
+                    Citizens can submit infrastructure damage reports
+                    through an easy-to-use online form.
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="feature">  
+            <div class="feature">
 
-        <div class="feature-icon">  
-            <i class="fa-solid fa-camera"></i>  
-        </div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
 
-        <h3>Photo Evidence</h3>  
+                <h3>Photo Evidence</h3>
 
-        <p>  
-            Users can attach images to provide visual evidence  
-            of the reported infrastructure problem.  
-        </p>  
+                <p>
+                    Users can attach images to provide visual evidence
+                    of the reported infrastructure problem.
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="feature">  
+            <div class="feature">
 
-        <div class="feature-icon">  
-            <i class="fa-solid fa-location-dot"></i>  
-        </div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
 
-        <h3>Location Information</h3>  
+                <h3>Location Information</h3>
 
-        <p>  
-            Report location details help authorities identify  
-            the exact area where an issue exists.  
-        </p>  
+                <p>
+                    Report location details help authorities identify
+                    the exact area where an issue exists.
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="feature">  
+            <div class="feature">
 
-        <div class="feature-icon">  
-            <i class="fa-solid fa-magnifying-glass"></i>  
-        </div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
 
-        <h3>Report Tracking</h3>  
+                <h3>Report Tracking</h3>
 
-        <p>  
-            Citizens can track submitted reports and check  
-            the current status of their complaints.  
-        </p>  
+                <p>
+                    Citizens can track submitted reports and check
+                    the current status of their complaints.
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="feature">  
+            <div class="feature">
 
-        <div class="feature-icon">  
-            <i class="fa-solid fa-bell"></i>  
-        </div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
 
-        <h3>Status Updates</h3>  
+                <h3>Status Updates</h3>
 
-        <p>  
-            Users can receive updates when their complaint  
-            is reviewed, assigned or resolved.  
-        </p>  
+                <p>
+                    Users can receive updates when their complaint
+                    is reviewed, assigned or resolved.
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="feature">  
+            <div class="feature">
 
-        <div class="feature-icon">  
-            <i class="fa-solid fa-chart-column"></i>  
-        </div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
 
-        <h3>Analytics Dashboard</h3>  
+                <h3>Analytics Dashboard</h3>
 
-        <p>  
-            Authorities can analyze reports and monitor  
-            infrastructure problems using useful statistics.  
-        </p>  
+                <p>
+                    Authorities can analyze reports and monitor
+                    infrastructure problems using useful statistics.
+                </p>
 
-    </div>  
+            </div>
 
 
-    <div class="feature">  
+            <div class="feature">
 
-        <div class="feature-icon">  
-            <i class="fa-solid fa-layer-group"></i>  
-        </div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
 
-        <h3>Issue Categories</h3>  
+                <h3>Issue Categories</h3>
 
-        <p>  
-            Problems can be organized into categories such  
-            as roads, lighting, drainage and public property.  
-        </p>  
+                <p>
+                    Problems can be organized into categories such
+                    as roads, lighting, drainage and public property.
+                </p>
 
-    </div>  
+            </div>
 
 
-   <div class="feature">  
+            <div class="feature">
 
-<div class="feature-icon">  
-    <i class="fa-solid fa-users"></i>  
-</div>  
+                <div class="feature-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
 
-<h3>Community Participation</h3>  
+                <h3>Community Participation</h3>
 
-<p>  
-    Citizens can actively participate in improving public  
-    infrastructure by reporting issues, sharing valuable  
-    feedback, supporting local initiatives, and working  
-    together with authorities to build safer, cleaner,  
-    and smarter communities.  
-</p>
+                <p>
+                    Citizens can actively participate in improving public
+                    infrastructure by reporting issues, sharing valuable
+                    feedback, supporting local initiatives, and working
+                    together with authorities to build safer, cleaner,
+                    and smarter communities.
+                </p>
 
-</div>
+            </div>
 
-<script>
-function toggleMenu(){
-    const menu = document.getElementById("sideMenu");
-    if(menu) menu.classList.toggle("show");
-}
+            <script>
+                function toggleMenu() {
+                    const menu = document.getElementById("sideMenu");
+                    if (menu) menu.classList.toggle("show");
+                }
 
-document.querySelectorAll(".side-menu a").forEach(function(link){
-    link.addEventListener("click", function(){
-        const menu = document.getElementById("sideMenu");
-        if(menu) menu.classList.remove("show");
-    });
-});
-</script>
-<!-- IDRS AI Chatbot Assistant -->
-<script src="chatbot.js"></script>
+                document.querySelectorAll(".side-menu a").forEach(function (link) {
+                    link.addEventListener("click", function () {
+                        const menu = document.getElementById("sideMenu");
+                        if (menu) menu.classList.remove("show");
+                    });
+                });
+            </script>
+            <!-- IDRS AI Chatbot Assistant -->
+            <script src="chatbot.js"></script>
 </body>
+
 </html>
