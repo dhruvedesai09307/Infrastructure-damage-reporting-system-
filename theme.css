@@ -979,3 +979,307 @@ html[data-theme="dark"] footer a:hover {
   right: 20px;
   z-index: 9999;
 }
+
+/* ==========================================================================
+   Universal Hamburger (3 Burger Lines) & Side Menu Navigation
+   ========================================================================== */
+.topbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* 3 Burger Lines Button (Always visible on all screen sizes) */
+.menu-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 42px !important;
+  height: 42px !important;
+  font-size: 22px !important;
+  cursor: pointer !important;
+  color: #374151 !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  margin-right: 12px !important;
+}
+
+.menu-icon:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
+  color: #2563EB !important;
+  transform: scale(1.05);
+}
+
+html[data-theme="dark"] .menu-icon {
+  color: #E2E8F0 !important;
+}
+
+html[data-theme="dark"] .menu-icon:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #60A5FA !important;
+}
+
+/* Hide topbar text links so the 3 burger lines handle all page navigation */
+.topbar .nav-links,
+.topbar nav.nav-links,
+.topbar ul.nav-links {
+  display: none !important;
+}
+
+/* Slide-out Drawer Menu */
+.side-menu {
+  position: fixed !important;
+  top: 0 !important;
+  left: -330px !important;
+  width: 300px !important;
+  height: 100vh !important;
+  background: #FFFFFF !important;
+  border-right: 1px solid #E5E7EB !important;
+  padding: 20px 16px 36px !important;
+  transition: left 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 10001 !important;
+  box-shadow: 6px 0 28px rgba(0, 0, 0, 0.14) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.side-menu.show {
+  left: 0 !important;
+}
+
+.side-menu-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 4px 6px 16px !important;
+  margin-bottom: 10px !important;
+  border-bottom: 1px solid #E5E7EB !important;
+}
+
+.side-menu-header .side-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  color: #111827 !important;
+  text-decoration: none !important;
+}
+
+.side-menu-header .side-brand i {
+  color: #2563EB !important;
+  font-size: 20px !important;
+}
+
+.close-btn,
+.close-menu {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  color: #6B7280 !important;
+  background: transparent !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.close-btn:hover,
+.close-menu:hover {
+  background: #FEE2E2 !important;
+  color: #DC2626 !important;
+  transform: rotate(90deg);
+}
+
+.side-menu-section-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+  color: #9CA3AF !important;
+  padding: 10px 12px 4px !important;
+  user-select: none !important;
+}
+
+.side-menu a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 14px !important;
+  color: #374151 !important;
+  text-decoration: none !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  border-radius: 10px !important;
+  margin-bottom: 3px !important;
+  transition: all 0.2s ease !important;
+}
+
+.side-menu a i {
+  font-size: 16px !important;
+  width: 22px !important;
+  text-align: center !important;
+  color: #6B7280 !important;
+  transition: color 0.2s ease !important;
+}
+
+.side-menu a:hover {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
+  transform: translateX(3px);
+}
+
+.side-menu a:hover i {
+  color: #2563EB !important;
+}
+
+.side-menu a.active {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+}
+
+.side-menu a.active i {
+  color: #FFFFFF !important;
+}
+
+.side-menu-divider {
+  height: 1px !important;
+  background: #E5E7EB !important;
+  margin: 8px 6px !important;
+}
+
+/* Modal Overlay Backdrop for Side Menu */
+.menu-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(15, 23, 42, 0.45) !important;
+  backdrop-filter: blur(3px) !important;
+  -webkit-backdrop-filter: blur(3px) !important;
+  z-index: 10000 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.menu-backdrop.show {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Profile Chip Styling */
+.profile-chip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 7px 14px 7px 8px !important;
+  background: #F3F4F6 !important;
+  border: 1px solid #E5E7EB !important;
+  border-radius: 30px !important;
+  text-decoration: none !important;
+  color: #374151 !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  transition: all .2s !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+.profile-chip:hover {
+  background: #E5E7EB !important;
+  border-color: #D1D5DB !important;
+  transform: translateY(-1px);
+}
+
+.profile-chip-avatar {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #2563EB, #3B82F6) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+/* Dark Mode Overrides for Hamburger & Side Menu */
+html[data-theme="dark"] .side-menu {
+  background: #0F172A !important;
+  border-right-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+  box-shadow: 6px 0 28px rgba(0, 0, 0, 0.4) !important;
+}
+
+html[data-theme="dark"] .side-menu-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .side-menu-header .side-brand {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .side-menu-divider {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+html[data-theme="dark"] .side-menu-section-label {
+  color: #64748B !important;
+}
+
+html[data-theme="dark"] .side-menu a {
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="dark"] .side-menu a i {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .side-menu a:hover {
+  background: #1E293B !important;
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .side-menu a:hover i {
+  color: #60A5FA !important;
+}
+
+html[data-theme="dark"] .side-menu a.active {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"] .close-btn,
+html[data-theme="dark"] .close-menu {
+  color: #94A3B8 !important;
+}
+
+html[data-theme="dark"] .close-btn:hover,
+html[data-theme="dark"] .close-menu:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #F87171 !important;
+}
+
+html[data-theme="dark"] .profile-chip {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #E2E8F0 !important;
+}
+
+html[data-theme="dark"] .profile-chip:hover {
+  background: #334155 !important;
+  border-color: #3B82F6 !important;
+}

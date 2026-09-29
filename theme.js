@@ -52,5 +52,100 @@
       `;
       document.body.appendChild(floatWrap);
     }
+
+    // 5. Initialize Side Menu & Backdrop
+    initSideMenuNavigation();
+
+    // 6. Populate Profile Chip if present
+    syncProfileChip();
   });
+
+  // Global Universal toggleMenu function
+  window.toggleMenu = function (forceState) {
+    const sideMenu = document.getElementById('sideMenu');
+    let backdrop = document.getElementById('menuBackdrop');
+
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'menuBackdrop';
+      backdrop.className = 'menu-backdrop';
+      backdrop.setAttribute('aria-hidden', 'true');
+      backdrop.onclick = function () { window.toggleMenu(false); };
+      document.body.appendChild(backdrop);
+    }
+
+    if (!sideMenu) return;
+
+    const willShow = typeof forceState === 'boolean'
+      ? forceState
+      : !sideMenu.classList.contains('show');
+
+    if (willShow) {
+      sideMenu.classList.add('show');
+      backdrop.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    } else {
+      sideMenu.classList.remove('show');
+      backdrop.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  };
+
+  // Global Universal logout function
+  window.logout = function () {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('currentUserName');
+    localStorage.removeItem('userRole');
+    window.location.href = 'login-page.html';
+  };
+
+  // Synchronize side menu links & highlight current page
+  function initSideMenuNavigation() {
+    const sideMenu = document.getElementById('sideMenu');
+    if (!sideMenu) return;
+
+    // Create backdrop if not already existing
+    if (!document.getElementById('menuBackdrop')) {
+      const backdrop = document.createElement('div');
+      backdrop.id = 'menuBackdrop';
+      backdrop.className = 'menu-backdrop';
+      backdrop.onclick = function () { window.toggleMenu(false); };
+      document.body.appendChild(backdrop);
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sideMenu.classList.contains('show')) {
+        window.toggleMenu(false);
+      }
+    });
+
+    // Auto highlight active page link in side menu
+    const currentPath = window.location.pathname.toLowerCase().split('/').pop() || 'home-page.html';
+    const menuLinks = sideMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      const href = (link.getAttribute('href') || '').toLowerCase().split('/').pop();
+      if (href && (href === currentPath || (currentPath === '' && href === 'home-page.html') || (currentPath === 'home-page.html' && href === '#top'))) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // Populate profile chip avatar & initials from localStorage
+  function syncProfileChip() {
+    const name = localStorage.getItem('currentUserName') || localStorage.getItem('currentUser') || '';
+    const avatarEl = document.getElementById('navAvatar');
+    const nameEl = document.getElementById('navUserName');
+    if (name) {
+      const parts = name.trim().split(/\s+/);
+      const initials = parts.length > 1
+        ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+        : parts[0].slice(0, 2).toUpperCase();
+      if (avatarEl) avatarEl.textContent = initials;
+      if (nameEl) nameEl.textContent = parts[0];
+    }
+  }
 })();
+

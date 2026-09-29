@@ -52,7 +52,7 @@
         font-size: 26px;
         cursor: pointer;
         color: #374151;
-        display: none;
+        display: flex;
     }
     .logo {
         display: flex;
@@ -625,7 +625,7 @@ margin-top: 5px;
 
   <!-- Top Navigation Header -->
   <header class="topbar">
-    <div class="menu-icon" onclick="toggleMenu()">
+    <div class="menu-icon" onclick="toggleMenu()" title="Open Navigation Menu" aria-label="Open menu">
         <i class="fas fa-bars"></i>
     </div>
     <a href="home-page.html" class="logo" style="text-decoration:none;">
@@ -635,42 +635,53 @@ margin-top: 5px;
         <p>Infrastructure Damage Reporting System</p>
       </div>
     </a>
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="home-page.html" class="nav-link">Home</a>
-      <a href="report.html" class="nav-link">Report Damage</a>
-      <a href="track-report.html" class="nav-link">Track Progress</a>
-      <a href="About-project-page.html" class="nav-link active">About</a>
-      <a href="community-awareness-page.html" class="nav-link">Awareness</a>
-      <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
-      <a href="help-and-support.html" class="nav-link">Support</a>
-    </nav>
-    <div style="display:flex;align-items:center;gap:10px;">
+    <div style="display:flex;align-items:center;gap:12px;">
         <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
             <i class="fas fa-moon" id="themeIcon"></i>
         </button>
-        <a href="home-page.html" class="home-icon-btn" title="Go to Homepage" aria-label="Home">
-            <i class="fas fa-house"></i>
+        <a href="user-profile.html" class="profile-chip" id="profileChip" title="My Profile">
+            <span class="profile-chip-avatar" id="navAvatar">?</span>
+            <span id="navUserName">Profile</span>
         </a>
     </div>
   </header>
 
-  <!-- MOBILE SIDE MENU -->
-  <div class="side-menu" id="sideMenu">
-    <div class="close-menu" onclick="toggleMenu()">
-        <i class="fas fa-times"></i>
+  <!-- SIDE MENU DRAWER -->
+  <div id="sideMenu" class="side-menu">
+    <div class="side-menu-header">
+        <a href="home-page.html" class="side-brand">
+            <i class="fas fa-road"></i>
+            <span>IDRS Navigation</span>
+        </a>
+        <div class="close-btn" onclick="toggleMenu()" title="Close Menu" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </div>
     </div>
-    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
-    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
-    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
-    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
-    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
-    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
-    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
-    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
+
+    <div class="side-menu-section-label">Main Portal</div>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> Home / Dashboard</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> Track Progress</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Resources & Guidelines</div>
+    <a href="About-project-page.html" class="active" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> Community Awareness</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> Safety Tips</a>
+    <a href="training.html" onclick="toggleMenu()"><i class="fas fa-chalkboard-user"></i> Training & Guidelines</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Support & Policy</div>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> Help & Support</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Account & Admin</div>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> My Profile</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> Admin Portal</a>
+    <a href="#" onclick="logout(); return false;"><i class="fas fa-right-from-bracket"></i> Logout</a>
   </div>  <!-- =====================================================  
      MAIN  
 ===================================================== -->  <main class="main">  <!-- HERO -->  

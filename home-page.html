@@ -938,61 +938,40 @@ hr{
 </header>
 
 <div id="sideMenu" class="side-menu">
-
-    <div class="close-btn" onclick="toggleMenu()">
-        <i class="fas fa-times"></i>
+    <div class="side-menu-header">
+        <a href="home-page.html" class="side-brand">
+            <i class="fas fa-road"></i>
+            <span>IDRS Navigation</span>
+        </a>
+        <div class="close-btn" onclick="toggleMenu()" title="Close Menu" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </div>
     </div>
 
-    <a href="#top" onclick="toggleMenu()">
-        <i class="fas fa-house"></i> Dashboard
-    </a>
-
+    <div class="side-menu-section-label">Main Portal</div>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> Home / Dashboard</a>
     <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> Track Progress</a>
 
-    <a href="track-report.html" onclick="toggleMenu()">
-        <i class="fas fa-magnifying-glass-chart"></i> Track Report Progress
-    </a>
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Resources & Guidelines</div>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> Community Awareness</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> Safety Tips</a>
+    <a href="training.html" onclick="toggleMenu()"><i class="fas fa-chalkboard-user"></i> Training & Guidelines</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> Feedback & Suggestions</a>
 
-    <a href="./About-project-page.html" onclick="toggleMenu()">
-        <i class="fas fa-circle-info"></i> About Project
-    </a>
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Support & Policy</div>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> Help & Support</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> Privacy Policy</a>
 
-    <a href="./community-awareness-page.html" onclick="toggleMenu()">
-        <i class="fas fa-users"></i> Community Awareness
-    </a>
-
-    <a href="./feedback-and-suggestion-page.html" onclick="toggleMenu()">
-        <i class="fas fa-comment-dots"></i> Feedback & Suggestions
-    </a>
-
-    <a href="./safety-tips-page.html" onclick="toggleMenu()">
-        <i class="fas fa-shield-halved"></i> Safety Tips
-    </a>
-
-    <a href="./terms-and-condition-page.html" onclick="toggleMenu()">
-        <i class="fas fa-file-contract"></i> Terms & Conditions
-    </a>
-
-    <a href="./help-and-support.html" onclick="toggleMenu()">
-        <i class="fas fa-headset"></i> Help & Support
-    </a>
-
-    <a href="Privacy-Policy-page.html" onclick="toggleMenu()">
-        <i class="fas fa-user-shield"></i> Privacy Policy
-    </a>
-
-    <a href="admin-login.html" onclick="toggleMenu()">
-        <i class="fas fa-lock"></i> Admin Portal
-    </a>
-
-    <a href="user-profile.html" onclick="toggleMenu()">
-        <i class="fas fa-user-circle"></i> My Profile
-    </a>
-
-    <a href="#" onclick="logout(); return false;">
-        <i class="fas fa-right-from-bracket"></i> Logout
-    </a>
-
+    <div class="side-menu-divider"></div>
+    <div class="side-menu-section-label">Account & Admin</div>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> My Profile</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> Admin Portal</a>
+    <a href="#" onclick="logout(); return false;"><i class="fas fa-right-from-bracket"></i> Logout</a>
 </div>
 
 <section class="hero">
