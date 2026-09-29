@@ -101,6 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
       reports.push(data);
       localStorage.setItem('reports', JSON.stringify(reports));
 
+      // Broadcast to active admin dashboard tabs
+      try {
+        const channel = new BroadcastChannel('idrs_incident_channel');
+        channel.postMessage({ type: 'NEW_REPORT', report: data });
+      } catch (e) {}
+
       // Display result
       const resultDiv = document.getElementById('result');
       const refIdSpan = document.getElementById('refId');

@@ -952,6 +952,7 @@
         <a href="report.html" class="nav-link active">Report Damage</a>
         <a href="track-report.html" class="nav-link">Track Progress</a>
         <a href="About-project-page.html" class="nav-link">About</a>
+        <a href="community-awareness-page.html" class="nav-link">Awareness</a>
         <a href="feedback-and-suggestion-page.html" class="nav-link">Feedback</a>
         <a href="help-and-support.html" class="nav-link">Support</a>
     </nav>
@@ -971,12 +972,18 @@
     <div class="close-menu" onclick="toggleMenu()">
         <i class="fas fa-times"></i>
     </div>
-    <a href="home-page.html"><i class="fas fa-house"></i> &nbsp; Home</a>
-    <a href="report.html"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
-    <a href="feedback-and-suggestion-page.html"><i class="fas fa-comment-dots"></i> &nbsp; Feedback</a>
-    <a href="safety-tips-page.html"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
-    <a href="terms-and-condition-page.html"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
-    <a href="help-and-support.html"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="home-page.html" onclick="toggleMenu()"><i class="fas fa-house"></i> &nbsp; Home</a>
+    <a href="report.html" onclick="toggleMenu()"><i class="fas fa-file-circle-plus"></i> &nbsp; Report Damage</a>
+    <a href="track-report.html" onclick="toggleMenu()"><i class="fas fa-magnifying-glass-chart"></i> &nbsp; Track Report Progress</a>
+    <a href="About-project-page.html" onclick="toggleMenu()"><i class="fas fa-circle-info"></i> &nbsp; About Project</a>
+    <a href="community-awareness-page.html" onclick="toggleMenu()"><i class="fas fa-users"></i> &nbsp; Community Awareness</a>
+    <a href="feedback-and-suggestion-page.html" onclick="toggleMenu()"><i class="fas fa-comment-dots"></i> &nbsp; Feedback & Suggestions</a>
+    <a href="Safety-tips-page.html" onclick="toggleMenu()"><i class="fas fa-shield-halved"></i> &nbsp; Safety Tips</a>
+    <a href="terms-and-condition-page.html" onclick="toggleMenu()"><i class="fas fa-file-contract"></i> &nbsp; Terms & Conditions</a>
+    <a href="help-and-support.html" onclick="toggleMenu()"><i class="fas fa-headset"></i> &nbsp; Help & Support</a>
+    <a href="Privacy-Policy-page.html" onclick="toggleMenu()"><i class="fas fa-user-shield"></i> &nbsp; Privacy Policy</a>
+    <a href="admin-login.html" onclick="toggleMenu()"><i class="fas fa-lock"></i> &nbsp; Admin Portal</a>
+    <a href="user-profile.html" onclick="toggleMenu()"><i class="fas fa-user-circle"></i> &nbsp; My Profile</a>
   </div>
 
   <!-- Main Content Area -->
@@ -1472,6 +1479,9 @@
       return /^[6-9]\d{9}$/.test(digits);
     }
 
+    let detectedGPSLat = null;
+    let detectedGPSLng = null;
+
     // Real GPS & Reverse Geocoding Assist
     async function fetchGPS() {
       const locInput = document.getElementById('location');
@@ -1507,6 +1517,10 @@
           if (res.ok) {
             const ipData = await res.json();
             if (ipData && ipData.city) {
+              if (ipData.latitude && ipData.longitude) {
+                detectedGPSLat = ipData.latitude;
+                detectedGPSLng = ipData.longitude;
+              }
               autoSetCityAndState(ipData.city, ipData.region);
               return `${ipData.city}, ${ipData.region || ipData.country_name}`;
             }
@@ -1520,6 +1534,8 @@
           async (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
+            detectedGPSLat = lat;
+            detectedGPSLng = lon;
             const realAddress = await reverseGeocode(lat, lon);
             locInput.value = realAddress;
           },
@@ -1721,6 +1737,13 @@
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
 
+      if (detectedGPSLat !== null && detectedGPSLng !== null) {
+        data.latitude = detectedGPSLat;
+        data.longitude = detectedGPSLng;
+        data.lat = detectedGPSLat;
+        data.lng = detectedGPSLng;
+      }
+
       // Generated Reference ID based on username
       const rawName = (name || data.name || data.fullName || 'USER').trim();
       const cleanUsername = rawName.replace(/[^a-zA-Z0-9]/g, '').toUpperCase() || 'USER';
@@ -1749,9 +1772,21 @@
       data.status = data.status || 'Pending';
       data.fullName = data.name || data.fullName || 'Anonymous';
       data.date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      if (detectedGPSLat !== null && detectedGPSLng !== null) {
+        data.latitude = detectedGPSLat;
+        data.longitude = detectedGPSLng;
+        data.lat = detectedGPSLat;
+        data.lng = detectedGPSLng;
+      }
       const localReports = JSON.parse(localStorage.getItem('reports') || '[]');
       localReports.push(data);
       localStorage.setItem('reports', JSON.stringify(localReports));
+
+      // Broadcast to any open admin dashboard tabs
+      try {
+        const channel = new BroadcastChannel('idrs_incident_channel');
+        channel.postMessage({ type: 'NEW_REPORT', report: data });
+      } catch (e) {}
 
       document.getElementById('formCard').style.display = 'none';
       document.getElementById('refIdBadge').textContent = refId;
