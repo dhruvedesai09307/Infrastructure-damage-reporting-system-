@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>Infrastructure Damage Reporting System</title>
 
@@ -24,7 +24,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <style>
 
-*{
+*, *::before, *::after {
 margin:0;
 padding:0;
 box-sizing:border-box;
@@ -32,13 +32,19 @@ font-family:'Poppins',sans-serif;
 scroll-behavior:smooth;
 }
 
-body{
+html, body {
+max-width:100%;
+overflow-x:hidden;
+position:relative;
+}
 
+body {
 background:#F3F4F6;
 min-height:100vh;
 overflow-x:hidden;
 color:#374151;
 position:relative;
+width:100%;
 }
 
 
@@ -904,6 +910,308 @@ hr{
 
 .side-menu.show{
     left:0;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints for Tablet & Mobile (Android WebView Compatible)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .hero {
+        flex-direction: column;
+        padding: 100px 5% 50px;
+        gap: 35px;
+        min-height: auto;
+    }
+    .hero-left {
+        width: 100%;
+        text-align: center;
+    }
+    .hero-left h1 {
+        font-size: 42px;
+        line-height: 54px;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+    .hero-right {
+        width: 100%;
+        max-width: 650px;
+    }
+    .statistics {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 5% 60px;
+    }
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .steps-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .emergency-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .topbar {
+        padding: 0 16px;
+        height: 64px;
+    }
+    .logo-text p {
+        display: none;
+    }
+    .logo-text h2 {
+        font-size: 20px;
+    }
+    .logo i {
+        font-size: 24px;
+    }
+
+    .hero {
+        flex-direction: column;
+        padding: 85px 16px 40px;
+        gap: 28px;
+        min-height: auto;
+    }
+    .hero-left {
+        width: 100%;
+        text-align: left;
+    }
+    .hero-left h1 {
+        font-size: clamp(26px, 7.5vw, 36px);
+        line-height: 1.25;
+        margin-bottom: 16px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    .hero-left p {
+        font-size: 15px;
+        line-height: 25px;
+        margin-bottom: 24px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+    .btn1, .btn2 {
+        width: 100%;
+        text-align: center;
+        padding: 13px 20px;
+        font-size: 15px;
+        display: block;
+    }
+    .hero-right {
+        width: 100%;
+    }
+    .info-card {
+        padding: 22px 18px;
+        border-radius: 18px;
+        width: 100%;
+    }
+    .info-card h2 {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+    .info-card p {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 18px;
+    }
+    .info-list li {
+        font-size: 14px;
+        margin: 12px 0;
+    }
+
+    .statistics {
+        grid-template-columns: 1fr;
+        padding: 10px 16px 40px;
+        gap: 14px;
+    }
+    .stat-card {
+        padding: 22px 16px;
+        width: 100%;
+    }
+    .stat-card i {
+        font-size: 36px;
+        margin-bottom: 12px;
+    }
+    .stat-card h2 {
+        font-size: 28px;
+    }
+
+    .categories {
+        padding: 40px 16px;
+    }
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .category-card {
+        padding: 22px 16px;
+        width: 100%;
+    }
+
+    .how-it-works {
+        padding: 40px 16px;
+    }
+    .steps-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .step-box {
+        padding: 28px 18px;
+        width: 100%;
+    }
+
+    .cta {
+        padding: 30px 16px 50px;
+    }
+    .cta-content {
+        padding: 28px 16px;
+        border-radius: 18px;
+        width: 100%;
+    }
+    .cta-content h2 {
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 14px;
+    }
+    .cta-content p {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 24px;
+    }
+    .cta-btn {
+        width: 100%;
+        padding: 13px 20px;
+        text-align: center;
+        display: block;
+    }
+
+    .recent-reports {
+        padding: 40px 16px;
+    }
+    .report-controls {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin: 20px 0;
+    }
+    .report-controls input {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 14px;
+        border: 1px solid #D1D5DB;
+    }
+    .report-controls button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+    .table-container {
+        padding: 14px 10px;
+        border-radius: 14px;
+        width: 100%;
+    }
+    th, td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    .map-section {
+        padding: 40px 16px;
+    }
+    .map-box {
+        height: auto;
+        min-height: 250px;
+        padding: 25px 16px;
+    }
+    .map-box i {
+        font-size: 48px;
+    }
+    .map-box h2 {
+        font-size: 22px;
+    }
+    .map-box p {
+        font-size: 14px;
+    }
+
+    .emergency {
+        padding: 40px 16px;
+    }
+    .emergency-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .emergency-card {
+        padding: 22px 16px;
+        width: 100%;
+    }
+    .emergency-card h2 {
+        font-size: 24px;
+    }
+
+    .features {
+        padding: 40px 16px;
+    }
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .feature-card {
+        padding: 22px 16px;
+        width: 100%;
+    }
+
+    .faq {
+        padding: 40px 16px;
+    }
+    .faq-container {
+        gap: 14px;
+    }
+    .faq-item {
+        padding: 18px 16px;
+        border-radius: 14px;
+        width: 100%;
+    }
+    .faq-item h3 {
+        font-size: 16px;
+    }
+    .faq-item p {
+        font-size: 13.5px;
+        line-height: 22px;
+    }
+
+    .section-title {
+        font-size: 26px;
+        line-height: 34px;
+        margin-bottom: 10px;
+    }
+    .section-subtitle {
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 25px;
+        padding: 0 4px;
+    }
+
+    footer {
+        margin-top: 40px;
+        padding: 40px 16px 20px;
+    }
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .footer-about h2 {
+        font-size: 22px;
+    }
 }
 </style>
 

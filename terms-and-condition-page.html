@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>Terms & Conditions | Infrastructure Care</title>
 
@@ -41,7 +41,7 @@
    GLOBAL RESET
 ===================================================== */
 
-*{
+*, *::before, *::after {
 
     margin:0;
 
@@ -59,6 +59,8 @@
 html{
 
     scroll-behavior:smooth;
+    max-width:100%;
+    overflow-x:hidden;
 
 }
 
@@ -69,9 +71,13 @@ body{
 
     min-height:100vh;
 
+    max-width:100%;
+
     overflow-x:hidden;
 
     color:#374151;
+
+    position:relative;
 
 }
 
@@ -397,20 +403,6 @@ body{
 .close-btn:hover{
     background:#F3F4F6;
     color:#DC2626;
-}
-
-    position:absolute;
-
-    top:20px;
-
-    right:20px;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    color:#374151;
-
 }
 
 
@@ -3616,7 +3608,7 @@ footer hr{
 
                 <li>
 
-                    <a href="safety-tips-page.html">
+                    <a href="Safety-tips-page.html">
 
                         Safety Tips
 
@@ -3720,26 +3712,21 @@ footer hr{
 ===================================================== */
 
 function toggleMenu(){
-
     const menu = document.getElementById("sideMenu");
-
-    menu.classList.toggle("show");
-
+    if(menu){
+        menu.classList.toggle("show");
+    }
 }
 
-
 /* Close mobile menu when a link is clicked */
-
 document.querySelectorAll(".side-menu a").forEach(function(link){
-
     link.addEventListener("click", function(){
-
-        document.getElementById("sideMenu").classList.remove("show");
-
+        const menu = document.getElementById("sideMenu");
+        if(menu){
+            menu.classList.remove("show");
+        }
     });
-
 });
-
 
 
 /* =====================================================
@@ -3747,222 +3734,120 @@ document.querySelectorAll(".side-menu a").forEach(function(link){
 ===================================================== */
 
 window.addEventListener("scroll", function(){
+    const progressBar = document.getElementById("progressBar");
+    if(!progressBar) return;
 
-    const progressBar =
-        document.getElementById("progressBar");
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercentage = documentHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / documentHeight) * 100)) : 0;
 
-
-    const scrollTop =
-        window.scrollY;
-
-
-    const documentHeight =
-        document.documentElement.scrollHeight
-        - window.innerHeight;
-
-
-    const scrollPercentage =
-        (scrollTop / documentHeight) * 100;
-
-
-    progressBar.style.width =
-        scrollPercentage + "%";
-
+    progressBar.style.width = scrollPercentage + "%";
 });
-
 
 
 /* =====================================================
    BACK TO TOP BUTTON
 ===================================================== */
 
-const backTop =
-    document.getElementById("backTop");
-
+const backTop = document.getElementById("backTop");
 
 window.addEventListener("scroll", function(){
-
-    if(window.scrollY > 400){
-
+    if(!backTop) return;
+    if((window.scrollY || document.documentElement.scrollTop) > 400){
         backTop.classList.add("show");
-
-    }
-
-    else{
-
+    } else {
         backTop.classList.remove("show");
-
     }
-
 });
-
 
 
 /* =====================================================
    FAQ ACCORDION
 ===================================================== */
 
-const faqQuestions =
-    document.querySelectorAll(".faq-question");
-
+const faqQuestions = document.querySelectorAll(".faq-question");
 
 faqQuestions.forEach(function(question){
-
     question.addEventListener("click", function(){
+        const faqItem = question.parentElement;
+        if(!faqItem) return;
 
-        const faqItem =
-            question.parentElement;
+        /* Close other FAQ items so only one stays open */
+        document.querySelectorAll(".faq-item").forEach(function(item){
+            if(item !== faqItem){
+                item.classList.remove("open");
+            }
+        });
 
-
-        /*
-           Close other FAQ items
-           so only one stays open.
-        */
-
-        document
-            .querySelectorAll(".faq-item")
-            .forEach(function(item){
-
-                if(item !== faqItem){
-
-                    item.classList.remove("open");
-
-                }
-
-            });
-
-
-        /*
-           Open / close selected FAQ
-        */
-
+        /* Open / close selected FAQ */
         faqItem.classList.toggle("open");
-
     });
-
 });
-
 
 
 /* =====================================================
    SEARCH TERMS
 ===================================================== */
 
-const searchInput =
-    document.getElementById("searchInput");
+const searchInput = document.getElementById("searchInput");
+const termSections = document.querySelectorAll(".term-section");
 
-
-const termSections =
-    document.querySelectorAll(".term-section");
-
-
-searchInput.addEventListener("input", function(){
-
-    const searchText =
-        searchInput.value
-        .toLowerCase()
-        .trim();
-
-
-    termSections.forEach(function(section){
-
-        const sectionText =
-            section.innerText.toLowerCase();
-
-
-        if(sectionText.includes(searchText)){
-
-            section.style.display = "block";
-
-        }
-
-        else{
-
-            section.style.display = "none";
-
-        }
-
-    });
-
-});
-
-
-
-/* =====================================================
-   CLEAR SEARCH WITH ESCAPE KEY
-===================================================== */
-
-searchInput.addEventListener("keydown", function(event){
-
-    if(event.key === "Escape"){
-
-        searchInput.value = "";
-
+if(searchInput){
+    searchInput.addEventListener("input", function(){
+        const searchText = searchInput.value.toLowerCase().trim();
 
         termSections.forEach(function(section){
-
-            section.style.display = "block";
-
+            if(!searchText){
+                section.style.display = "";
+            } else {
+                const sectionText = section.innerText.toLowerCase();
+                section.style.display = sectionText.includes(searchText) ? "" : "none";
+            }
         });
+    });
 
-    }
-
-});
-
+    /* Clear search with Escape key */
+    searchInput.addEventListener("keydown", function(event){
+        if(event.key === "Escape"){
+            searchInput.value = "";
+            termSections.forEach(function(section){
+                section.style.display = "";
+            });
+        }
+    });
+}
 
 
 /* =====================================================
    ACTIVE TABLE OF CONTENTS
 ===================================================== */
 
-const tocLinks =
-    document.querySelectorAll(".toc-link");
+const tocLinks = document.querySelectorAll(".toc-link");
+const sections = document.querySelectorAll(".term-section");
 
+function updateActiveToc(){
+    if(!sections.length || !tocLinks.length) return;
 
-const sections =
-    document.querySelectorAll(".term-section");
-
-
-window.addEventListener("scroll", function(){
-
-    let currentSection = "";
-
+    let currentSection = sections[0].getAttribute("id");
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
 
     sections.forEach(function(section){
-
-        const sectionTop =
-            section.offsetTop;
-
-
-        if(window.scrollY >= sectionTop - 180){
-
-            currentSection =
-                section.getAttribute("id");
-
+        const sectionTop = section.offsetTop;
+        if(scrollPos >= sectionTop - 180){
+            currentSection = section.getAttribute("id");
         }
-
     });
-
 
     tocLinks.forEach(function(link){
-
         link.classList.remove("active");
-
-
-        const target =
-            link.getAttribute("href");
-
-
+        const target = link.getAttribute("href");
         if(target === "#" + currentSection){
-
             link.classList.add("active");
-
         }
-
     });
+}
 
-});
-
+window.addEventListener("scroll", updateActiveToc);
 
 
 /* =====================================================
@@ -3970,128 +3855,64 @@ window.addEventListener("scroll", function(){
 ===================================================== */
 
 tocLinks.forEach(function(link){
-
     link.addEventListener("click", function(event){
-
         event.preventDefault();
-
-
-        const targetId =
-            link.getAttribute("href");
-
-
-        const targetElement =
-            document.querySelector(targetId);
-
+        const targetId = link.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
 
         if(targetElement){
-
-            targetElement.scrollIntoView({
-
-                behavior:"smooth",
-
-                block:"start"
-
+            const topOffset = 90;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + (window.pageYOffset || document.documentElement.scrollTop) - topOffset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
             });
-
         }
-
     });
-
 });
-
 
 
 /* =====================================================
    ACCEPT TERMS
 ===================================================== */
 
-const agreeCheckbox =
-    document.getElementById("agreeCheckbox");
+const agreeCheckbox = document.getElementById("agreeCheckbox");
+const acceptButton = document.getElementById("acceptButton");
+const savedMessage = document.getElementById("savedMessage");
 
+if(agreeCheckbox && acceptButton && savedMessage){
+    /* Check whether the user previously accepted the terms */
+    if(localStorage.getItem("termsAccepted") === "true"){
+        agreeCheckbox.checked = true;
+        acceptButton.disabled = false;
+        savedMessage.style.display = "block";
+    }
 
-const acceptButton =
-    document.getElementById("acceptButton");
+    /* Enable / disable button */
+    agreeCheckbox.addEventListener("change", function(){
+        acceptButton.disabled = !agreeCheckbox.checked;
+        if(!agreeCheckbox.checked){
+            savedMessage.style.display = "none";
+        }
+    });
 
+    /* Save acceptance */
+    acceptButton.addEventListener("click", function(){
+        if(!agreeCheckbox.checked){
+            return;
+        }
 
-const savedMessage =
-    document.getElementById("savedMessage");
+        localStorage.setItem("termsAccepted", "true");
+        savedMessage.style.display = "block";
+        acceptButton.innerHTML = '<i class="fas fa-circle-check"></i> Accepted';
 
-
-
-/*
-   Check whether the user previously accepted
-   the terms.
-*/
-
-if(localStorage.getItem("termsAccepted") === "true"){
-
-    agreeCheckbox.checked = true;
-
-    acceptButton.disabled = false;
-
-    savedMessage.style.display = "block";
-
+        /* Return user to the Home page after accepting */
+        setTimeout(function(){
+            window.location.href = "home-page.html";
+        }, 1200);
+    });
 }
-
-
-
-/* Enable / disable button */
-
-agreeCheckbox.addEventListener("change", function(){
-
-    acceptButton.disabled =
-        !agreeCheckbox.checked;
-
-
-    if(!agreeCheckbox.checked){
-
-        savedMessage.style.display = "none";
-
-    }
-
-});
-
-
-
-/* Save acceptance */
-
-acceptButton.addEventListener("click", function(){
-
-    if(!agreeCheckbox.checked){
-
-        return;
-
-    }
-
-
-    localStorage.setItem(
-        "termsAccepted",
-        "true"
-    );
-
-
-    savedMessage.style.display = "block";
-
-
-    acceptButton.innerHTML =
-        '<i class="fas fa-circle-check"></i> Accepted';
-
-
-    /*
-       After accepting, return user
-       to the Home page.
-    */
-
-    setTimeout(function(){
-
-        window.location.href =
-            "home-page.html";
-
-    }, 1200);
-
-});
-
 
 
 /* =====================================================
@@ -4099,11 +3920,8 @@ acceptButton.addEventListener("click", function(){
 ===================================================== */
 
 function printPage(){
-
     window.print();
-
 }
-
 
 
 /* =====================================================
@@ -4111,51 +3929,21 @@ function printPage(){
 ===================================================== */
 
 function downloadTerms(){
+    const contentElement = document.querySelector(".content");
+    if(!contentElement) return;
 
-    const content =
-        document.querySelector(".content").innerText;
-
-
-    const file =
-        new Blob(
-
-            [content],
-
-            {
-                type:"text/plain"
-            }
-
-        );
-
-
-    const url =
-        URL.createObjectURL(file);
-
-
-    const link =
-        document.createElement("a");
-
+    const content = contentElement.innerText;
+    const file = new Blob([content], { type:"text/plain" });
+    const url = URL.createObjectURL(file);
+    const link = document.createElement("a");
 
     link.href = url;
-
-
-    link.download =
-        "Infrastructure-Care-Terms-and-Conditions.txt";
-
-
+    link.download = "Infrastructure-Care-Terms-and-Conditions.txt";
     document.body.appendChild(link);
-
-
     link.click();
-
-
     document.body.removeChild(link);
-
-
     URL.revokeObjectURL(url);
-
 }
-
 
 
 /* =====================================================
@@ -4163,99 +3951,18 @@ function downloadTerms(){
 ===================================================== */
 
 document.addEventListener("click", function(event){
-
-    const menu =
-        document.getElementById("sideMenu");
-
-
-    const menuIcon =
-        document.querySelector(".menu-icon");
-
+    const menu = document.getElementById("sideMenu");
+    const menuIcon = document.querySelector(".menu-icon");
 
     if(
-
-        menu.classList.contains("show")
-
-        &&
-
-        !menu.contains(event.target)
-
-        &&
-
-        !menuIcon.contains(event.target)
-
+        menu &&
+        menu.classList.contains("show") &&
+        !menu.contains(event.target) &&
+        (!menuIcon || !menuIcon.contains(event.target))
     ){
-
         menu.classList.remove("show");
-
     }
-
 });
-
-
-
-/* =====================================================
-   HOME PAGE CONNECTION
-===================================================== */
-
-/*
-   These links connect the Terms page
-   directly with your Home page.
-*/
-
-
-const homeLinks =
-    document.querySelectorAll(
-        'a[href="home-page.html"]'
-    );
-
-
-homeLinks.forEach(function(link){
-
-    link.addEventListener("click", function(){
-
-        /*
-           Normal navigation is allowed.
-           The browser will open:
-
-           home-page.html
-        */
-
-        window.location.href =
-            "home-page.html";
-
-    });
-
-});
-
-
-
-/* =====================================================
-   LOGO CLICK → HOME PAGE
-===================================================== */
-
-const logo =
-    document.querySelector(".logo");
-
-
-if(logo){
-
-    logo.style.cursor = "pointer";
-
-
-    logo.addEventListener("click", function(){
-
-        window.location.href =
-            "home-page.html";
-
-    });
-
-}
-
-
-
- 
-
 
 
 /* =====================================================
@@ -4263,24 +3970,8 @@ if(logo){
 ===================================================== */
 
 window.addEventListener("load", function(){
-
-    /*
-       Start the page at the top.
-    */
-
     window.scrollTo(0,0);
-
-
-    /*
-       Set first TOC item active.
-    */
-
-    if(tocLinks.length > 0){
-
-        tocLinks[0].classList.add("active");
-
-    }
-
+    updateActiveToc();
 });
 
 </script>
