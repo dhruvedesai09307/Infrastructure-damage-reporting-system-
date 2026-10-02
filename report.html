@@ -654,6 +654,7 @@
 
     /* Photo Dropzone */
     .dropzone {
+      display: block;
       border: 2px dashed var(--slate-300);
       border-radius: 14px;
       padding: 28px;
@@ -662,9 +663,12 @@
       cursor: pointer;
       transition: all 0.2s ease;
       position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: rgba(37, 99, 235, 0.1);
     }
 
-    .dropzone:hover {
+    .dropzone:hover, .dropzone.dragover {
       border-color: var(--primary);
       background: var(--slate-100);
     }
@@ -674,9 +678,10 @@
       color: var(--slate-400);
       margin-bottom: 10px;
       transition: color 0.2s;
+      pointer-events: none;
     }
 
-    .dropzone:hover i {
+    .dropzone:hover i, .dropzone.dragover i {
       color: var(--primary);
     }
 
@@ -684,16 +689,62 @@
       font-weight: 600;
       font-size: 16px;
       color: var(--slate-700);
+      pointer-events: none;
     }
 
     .dropzone-sub {
       font-size: 12px;
       color: var(--slate-500);
       margin-top: 4px;
+      pointer-events: none;
     }
 
     .file-input-hidden {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+      opacity: 0;
+    }
+
+    .fallback-btn-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .btn-fallback-upload {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #F1F5F9;
+      color: #334155;
+      border: 1.5px solid #CBD5E1;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-fallback-upload:hover {
+      background: #E2E8F0;
+      border-color: #94A3B8;
+      color: #1E293B;
+    }
+
+    .btn-fallback-upload:active {
+      transform: scale(0.98);
+      background: #CBD5E1;
     }
 
     .preview-container {
@@ -1253,11 +1304,17 @@
 
             <div class="form-group full-width">
               <label>Attach Evidence Photo (Optional)</label>
-              <div class="dropzone" id="dropzone" onclick="document.getElementById('photo').click()">
+              <label for="photo" class="dropzone" id="dropzone" aria-label="Upload photo evidence">
                 <i class="fas fa-cloud-arrow-up"></i>
                 <div class="dropzone-title">Click to upload or drag & drop image file</div>
                 <div class="dropzone-sub">Supports JPG, PNG, WEBP (Max 10MB)</div>
                 <input type="file" id="photo" name="photo" class="file-input-hidden" accept="image/*" onchange="handleFileSelect(event)">
+              </label>
+
+              <div class="fallback-btn-row" id="dropzoneFallback">
+                <button type="button" class="btn-fallback-upload" id="btnChoosePhoto" onclick="triggerPhotoUpload()">
+                  <i class="fas fa-images"></i> Choose from Gallery
+                </button>
               </div>
 
               <div class="preview-container" id="previewContainer">
@@ -1648,39 +1705,62 @@
       return allowedTypes.includes(file.type) && file.size <= maxSize;
     }
 
-    // File Preview
+    function triggerPhotoUpload() {
+      const fileInput = document.getElementById('photo') || document.getElementById('photo-upload') || document.querySelector('input[type="file"]');
+      if (fileInput) {
+        fileInput.click();
+      }
+    }
+
+    // File Preview & Selection Handler
     function handleFileSelect(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+      const target = event.target || (event.currentTarget ? event.currentTarget : null);
+      const files = target && target.files ? target.files : (event.files || null);
+      if (!files || !files.length) return;
+      const file = files[0];
 
       if (!isValidPhotoFile(file)) {
         showStepError('Please upload a valid image in JPG, PNG, or WEBP format under 10MB.');
-        event.target.value = '';
-        document.getElementById('previewContainer').style.display = 'none';
-        document.getElementById('dropzone').style.display = 'block';
+        if (target && target.value !== undefined) target.value = '';
+        const prevContainer = document.getElementById('previewContainer');
+        const dropzone = document.getElementById('dropzone');
+        const fallbackRow = document.getElementById('dropzoneFallback');
+        if (prevContainer) prevContainer.style.display = 'none';
+        if (dropzone) dropzone.style.display = 'block';
+        if (fallbackRow) fallbackRow.style.display = 'flex';
         return;
       }
 
       clearStepError();
       const reader = new FileReader();
       reader.onload = function(e) {
-        document.getElementById('previewImg').src = e.target.result;
-        document.getElementById('previewName').textContent = file.name;
-        document.getElementById('previewSize').textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
-        document.getElementById('previewContainer').style.display = 'flex';
-        document.getElementById('dropzone').style.display = 'none';
+        const previewImg = document.getElementById('previewImg');
+        const previewName = document.getElementById('previewName');
+        const previewSize = document.getElementById('previewSize');
+        const prevContainer = document.getElementById('previewContainer');
+        const dropzone = document.getElementById('dropzone');
+        const fallbackRow = document.getElementById('dropzoneFallback');
+
+        if (previewImg) previewImg.src = e.target.result;
+        if (previewName) previewName.textContent = file.name;
+        if (previewSize) previewSize.textContent = (file.size / (1024 * 1024)).toFixed(2) + " MB";
+        if (prevContainer) prevContainer.style.display = 'flex';
+        if (dropzone) dropzone.style.display = 'none';
+        if (fallbackRow) fallbackRow.style.display = 'none';
       };
       reader.readAsDataURL(file);
     }
 
     function removeFile(event) {
       if (event) event.stopPropagation();
-      const photoInput = document.getElementById('photo');
+      const photoInput = document.getElementById('photo') || document.getElementById('photo-upload') || document.querySelector('input[type="file"]');
       if (photoInput) photoInput.value = "";
       const prevContainer = document.getElementById('previewContainer');
       const dropzone = document.getElementById('dropzone');
+      const fallbackRow = document.getElementById('dropzoneFallback');
       if (prevContainer) prevContainer.style.display = 'none';
       if (dropzone) dropzone.style.display = 'block';
+      if (fallbackRow) fallbackRow.style.display = 'flex';
     }
 
     // Navigation & Validation
@@ -1855,6 +1935,42 @@
         input.addEventListener('input', clearStepError);
         input.addEventListener('change', clearStepError);
       });
+
+      // Connect Dropzone to File Input for click, touch, and drag & drop
+      const dropzone = document.querySelector('.upload-box, .dropzone, #dropzone');
+      const fileInput = document.getElementById('photo') || document.getElementById('photo-upload') || document.querySelector('input[type="file"]');
+      if (dropzone && fileInput) {
+        dropzone.addEventListener('click', function(e) {
+          if (e.target !== fileInput && !e.target.closest('button')) {
+            fileInput.click();
+          }
+        });
+
+        // Drag & Drop handlers
+        ['dragenter', 'dragover'].forEach(name => {
+          dropzone.addEventListener(name, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.add('dragover');
+          }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(name => {
+          dropzone.addEventListener(name, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropzone.classList.remove('dragover');
+          }, false);
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+          const dt = e.dataTransfer;
+          if (dt && dt.files && dt.files.length) {
+            fileInput.files = dt.files;
+            handleFileSelect({ target: fileInput });
+          }
+        }, false);
+      }
 
       // Sync initial active state
       updateUI();
