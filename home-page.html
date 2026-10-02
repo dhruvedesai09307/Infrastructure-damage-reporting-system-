@@ -961,12 +961,19 @@ hr{
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 75px !important;
+    }
     .topbar {
         padding: 0 16px;
-        height: 64px;
+        height: 60px;
+        min-height: 60px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     }
     .logo-text p {
-        display: none;
+        display: none !important;
     }
     .logo-text h2 {
         font-size: 20px;
@@ -974,10 +981,20 @@ hr{
     .logo i {
         font-size: 24px;
     }
+    .profile-chip span:not(.profile-chip-avatar), #navUserName {
+        display: none !important;
+    }
+    .profile-chip {
+        padding: 3px !important;
+        border-radius: 50% !important;
+        width: 36px !important;
+        height: 36px !important;
+        justify-content: center !important;
+    }
 
     .hero {
         flex-direction: column;
-        padding: 85px 16px 36px;
+        padding: 20px 16px 36px;
         gap: 24px;
         min-height: auto;
     }

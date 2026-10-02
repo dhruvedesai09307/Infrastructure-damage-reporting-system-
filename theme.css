@@ -1063,6 +1063,51 @@ html[data-theme="dark"] footer a:hover {
   box-sizing: border-box !important;
 }
 
+/* Unified Brand Logo & Title Across All Pages */
+.logo, .logo-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-decoration: none !important;
+}
+
+.logo-text, .logo-wrap .logo-text {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.logo-text h2, .logo-wrap h2, .logo h2 {
+  margin: 0 !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.5px !important;
+}
+
+.logo-text p, .logo-wrap p, .logo p, .brand-subtext {
+  margin: 0 !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: #6B7280 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+html[data-theme="dark"] .logo-text h2,
+html[data-theme="dark"] .logo-wrap h2,
+html[data-theme="dark"] .logo h2 {
+  color: #F8FAFC !important;
+}
+
+html[data-theme="dark"] .logo-text p,
+html[data-theme="dark"] .logo-wrap p,
+html[data-theme="dark"] .logo p,
+html[data-theme="dark"] .brand-subtext {
+  color: #94A3B8 !important;
+}
+
 /* 3 Burger Lines Button (Always visible on all screen sizes) */
 .menu-icon, .sidebar-toggle-btn {
   display: inline-flex !important;
@@ -1417,14 +1462,117 @@ html[data-theme="dark"] .profile-chip:hover {
     width: 100% !important;
   }
 
-  /* Safe Area Header/Topbar Padding on mobile */
+  /* Prevent page content from being trapped under fixed navbar */
+  body {
+    padding-top: 75px !important;
+  }
+
+  /* Fixed Clean Navbar on Mobile */
   .topbar, header.topbar, .app-topbar {
-    padding-top: max(12px, env(safe-area-inset-top)) !important;
-    padding-bottom: 10px !important;
-    padding-left: max(16px, env(safe-area-inset-left)) !important;
-    padding-right: max(16px, env(safe-area-inset-right)) !important;
-    min-height: calc(64px + env(safe-area-inset-top, 0px)) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    padding: 0 16px !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+    z-index: 1000 !important;
     box-sizing: border-box !important;
+  }
+
+  html[data-theme="dark"] .topbar,
+  html[data-theme="dark"] header.topbar,
+  html[data-theme="dark"] .app-topbar {
+    background: rgba(15, 23, 42, 0.88) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Strictly Hide Subtext on Mobile Navbar - Logo + IDRS only */
+  .logo-text p,
+  .logo-wrap p,
+  .logo p,
+  .brand-subtext,
+  .logo-subtext,
+  .logo-badge p,
+  .logo-badge span:not(:first-child) {
+    display: none !important;
+  }
+
+  .logo-text h2, .logo-wrap h2, .logo h2 {
+    font-size: 20px !important;
+  }
+
+  .idrs-road-icon {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  /* Topbar Right & Profile Controls Polish on Mobile */
+  .topbar-right,
+  .topbar > div:last-child {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .menu-icon, .sidebar-toggle-btn {
+    width: 36px !important;
+    height: 36px !important;
+    margin-right: 4px !important;
+  }
+
+  .theme-toggle-btn {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+  }
+
+  .home-icon-btn {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+  }
+
+  /* Profile button: hide long email/name, keep only circular avatar badge */
+  .profile-chip span:not(.profile-chip-avatar),
+  #navUserName,
+  .profile-chip-name,
+  .topbar-right span:not(.profile-chip-avatar),
+  .topbar .btn-logout span,
+  .topbar .nav-user-text {
+    display: none !important;
+  }
+
+  .profile-chip {
+    padding: 3px !important;
+    border-radius: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    gap: 0 !important;
+  }
+
+  .profile-chip-avatar {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 11px !important;
+  }
+
+  .btn-logout {
+    padding: 7px 12px !important;
+    font-size: 12px !important;
   }
 
   .side-menu {
@@ -1432,22 +1580,25 @@ html[data-theme="dark"] .profile-chip:hover {
     padding-bottom: max(32px, env(safe-area-inset-bottom)) !important;
   }
 
-  /* Reset layout squish across containers and cards */
-  .container, .content-container, .main-container, .wrapper, .page-container {
+  /* Uniform 16px horizontal spacing across containers and cards */
+  .container, .content-container, .main-container, .wrapper, .page-container, .main-wrapper, .page-body {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: max(16px, env(safe-area-inset-left)) !important;
-    padding-right: max(16px, env(safe-area-inset-right)) !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin-top: 10px !important;
     box-sizing: border-box !important;
   }
 
   /* Universal single-column conversion for flex/grid heroes and layouts */
   .hero, .page-hero, .about-hero {
     flex-direction: column !important;
+    padding-top: 16px !important;
     padding-left: 16px !important;
     padding-right: 16px !important;
+    padding-bottom: 36px !important;
     min-height: auto !important;
-    gap: 28px !important;
+    gap: 24px !important;
   }
 
   .hero-left, .hero-right, .hero-content, .hero-visual, .hero-image {
