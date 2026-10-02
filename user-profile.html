@@ -8,9 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 & Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous">
+  <!-- Font Awesome 6, Bootstrap Icons, Remix Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
   <link rel="stylesheet" href="chatbot.css">
   <link rel="stylesheet" href="theme.css">
   <script src="theme.js"></script>
@@ -23,8 +24,8 @@
       --slate-50: #F9FAFB; --green: #10B981; --red: #EF4444;
       --shadow: 0 12px 35px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Poppins, sans-serif; }
-    body { min-height: 100vh; background: var(--slate-100); color: var(--slate-700); display: flex; flex-direction: column; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { min-height: 100vh; background: var(--slate-100); color: var(--slate-700); display: flex; flex-direction: column; font-family: Poppins, sans-serif; }
 
     /* ── Topbar ── */
     .topbar { position: sticky; top: 0; left: 0; width: 100%; height: 76px; background: #fff; border-bottom: 1px solid var(--slate-200); box-shadow: 0 2px 10px rgba(0,0,0,.04); display: flex; justify-content: space-between; align-items: center; padding: 0 8%; z-index: 1000; }
