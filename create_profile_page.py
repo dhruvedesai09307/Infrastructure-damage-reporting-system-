@@ -11,7 +11,9 @@ html = '''<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Font Awesome 6 & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="chatbot.css">
   <style>
     :root{--navy:#111827;--primary:#2F3B4A;--primary-h:#1F2937;--blue:#2563EB;--blue-h:#1D4ED8;--slate-700:#374151;--slate-600:#4B5563;--slate-500:#6B7280;--slate-400:#9CA3AF;--slate-200:#E5E7EB;--slate-100:#F3F4F6;--slate-50:#F9FAFB;--green:#10B981;--red:#EF4444;--shadow:0 12px 35px rgba(0,0,0,.08),0 2px 8px rgba(0,0,0,.04)}

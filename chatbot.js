@@ -139,8 +139,8 @@
 
       <!-- Trigger Toggle Button -->
       <button id="idrsChatToggle" class="idrs-chatbot-toggle" aria-label="Toggle Civic AI Chatbot">
-        <i class="fas fa-headset toggle-icon-chat"></i>
-        <i class="fas fa-times toggle-icon-close"></i>
+        <svg class="toggle-icon-chat" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <svg class="toggle-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         <div class="pulse-badge"></div>
       </button>
 
@@ -150,7 +150,7 @@
         <div class="idrs-chat-header">
           <div class="idrs-header-bot-info">
             <div class="idrs-bot-avatar">
-              <i class="fas fa-robot"></i>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16.01"></line><line x1="16" y1="16" x2="16" y2="16.01"></line></svg>
             </div>
             <div class="idrs-bot-text">
               <h4>IDRS Civic AI <i class="fas fa-certificate" style="color:#60A5FA; font-size:12px;"></i></h4>
@@ -161,14 +161,14 @@
             </div>
           </div>
           <div class="idrs-header-actions">
-            <button id="idrsExpandChatBtn" class="idrs-hdr-btn" title="Expand / Minimize Window">
-              <i class="fas fa-up-right-and-down-left-from-center"></i>
+            <button id="idrsExpandChatBtn" class="idrs-hdr-btn" title="Expand / Minimize Window" aria-label="Expand Window">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
             </button>
-            <button id="idrsClearChatBtn" class="idrs-hdr-btn" title="Clear Conversation">
-              <i class="fas fa-trash-can"></i>
+            <button id="idrsClearChatBtn" class="idrs-hdr-btn" title="Clear Conversation" aria-label="Clear Conversation">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
             </button>
-            <button id="idrsCloseChatBtn" class="idrs-hdr-btn" title="Close Window">
-              <i class="fas fa-minus"></i>
+            <button id="idrsCloseChatBtn" class="idrs-hdr-btn" title="Close Window" aria-label="Close Window">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             </button>
           </div>
         </div>
@@ -215,10 +215,10 @@
               autocomplete="off"
             />
             <button type="button" id="idrsMicBtn" class="idrs-input-btn idrs-mic-btn" title="Voice Input (Speech to Text)">
-              <i class="fas fa-microphone"></i>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
             </button>
             <button type="submit" id="idrsSendBtn" class="idrs-input-btn idrs-send-btn" title="Send message">
-              <i class="fas fa-paper-plane"></i>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
           </form>
         </div>

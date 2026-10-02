@@ -44,17 +44,21 @@
   box-shadow: 0 15px 30px -5px rgba(31, 41, 55, 0.45);
 }
 
+.idrs-chatbot-toggle svg {
+  display: block;
+}
+
 .idrs-chatbot-toggle .toggle-icon-close {
-  display: none;
+  display: none !important;
   font-size: 22px;
 }
 
 .idrs-chatbot-toggle.active .toggle-icon-chat {
-  display: none;
+  display: none !important;
 }
 
 .idrs-chatbot-toggle.active .toggle-icon-close {
-  display: block;
+  display: block !important;
 }
 
 /* Online Pulse Dot */

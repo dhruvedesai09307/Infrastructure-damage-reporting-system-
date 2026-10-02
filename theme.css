@@ -993,16 +993,23 @@ html[data-theme="dark"] footer a:hover {
 }
 
 /* ==========================================================================
-   Universal Hamburger (3 Burger Lines) & Side Menu Navigation
+   Universal Header, Hamburger (3 Burger Lines) & Side Menu Navigation
    ========================================================================== */
-.topbar {
+.topbar, header.topbar, .app-topbar {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
+  padding-top: max(12px, env(safe-area-inset-top)) !important;
+  padding-bottom: 12px !important;
+  padding-left: max(24px, env(safe-area-inset-left)) !important;
+  padding-right: max(24px, env(safe-area-inset-right)) !important;
+  min-height: calc(70px + env(safe-area-inset-top, 0px)) !important;
+  height: auto !important;
+  box-sizing: border-box !important;
 }
 
 /* 3 Burger Lines Button (Always visible on all screen sizes) */
-.menu-icon {
+.menu-icon, .sidebar-toggle-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1019,17 +1026,66 @@ html[data-theme="dark"] footer a:hover {
   margin-right: 12px !important;
 }
 
-.menu-icon:hover {
+.menu-icon svg,
+.sidebar-toggle-btn svg,
+.close-btn svg,
+.close-menu svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: currentColor !important;
+  fill: none !important;
+  display: block !important;
+}
+
+.idrs-road-icon {
+  width: 30px !important;
+  height: 30px !important;
+  stroke: #2563EB !important;
+  fill: none !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  transition: stroke 0.2s ease !important;
+}
+
+html[data-theme="dark"] .idrs-road-icon {
+  stroke: #60A5FA !important;
+}
+
+.side-brand .idrs-road-icon {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.theme-icon-svg {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: currentColor !important;
+  fill: none !important;
+  display: block !important;
+}
+
+.profile-chip-avatar svg {
+  width: 15px !important;
+  height: 15px !important;
+  stroke: #FFFFFF !important;
+  fill: none !important;
+  display: block !important;
+}
+
+.menu-icon:hover, .sidebar-toggle-btn:hover {
   background: rgba(0, 0, 0, 0.06) !important;
   color: #2563EB !important;
   transform: scale(1.05);
 }
 
-html[data-theme="dark"] .menu-icon {
+html[data-theme="dark"] .menu-icon,
+html[data-theme="dark"] .sidebar-toggle-btn {
   color: #E2E8F0 !important;
 }
 
-html[data-theme="dark"] .menu-icon:hover {
+html[data-theme="dark"] .menu-icon:hover,
+html[data-theme="dark"] .sidebar-toggle-btn:hover {
   background: rgba(255, 255, 255, 0.1) !important;
   color: #60A5FA !important;
 }
@@ -1306,12 +1362,27 @@ html[data-theme="dark"] .profile-chip:hover {
     width: 100% !important;
   }
 
+  /* Safe Area Header/Topbar Padding on mobile */
+  .topbar, header.topbar, .app-topbar {
+    padding-top: max(12px, env(safe-area-inset-top)) !important;
+    padding-bottom: 10px !important;
+    padding-left: max(16px, env(safe-area-inset-left)) !important;
+    padding-right: max(16px, env(safe-area-inset-right)) !important;
+    min-height: calc(64px + env(safe-area-inset-top, 0px)) !important;
+    box-sizing: border-box !important;
+  }
+
+  .side-menu {
+    padding-top: max(20px, env(safe-area-inset-top)) !important;
+    padding-bottom: max(32px, env(safe-area-inset-bottom)) !important;
+  }
+
   /* Reset layout squish across containers and cards */
   .container, .content-container, .main-container, .wrapper, .page-container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: max(16px, env(safe-area-inset-left)) !important;
+    padding-right: max(16px, env(safe-area-inset-right)) !important;
     box-sizing: border-box !important;
   }
 

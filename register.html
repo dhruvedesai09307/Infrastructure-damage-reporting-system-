@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Create Account | Infrastructure Damage Reporting System</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Font Awesome 6 & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous">
   <!-- IDRS AI Chatbot Assistant & Universal Theme Styles -->
   <link rel="stylesheet" href="chatbot.css">
   <link rel="stylesheet" href="theme.css">
@@ -24,7 +26,7 @@
     .field label { display:block; margin-bottom:8px; font-weight:600; font-size:14px; }
     .field input { width:100%; padding:12px 14px; border:1.5px solid #E5E7EB; border-radius:10px; font-size:16px; background:#F9FAFB; outline:none; transition:.2s; }
     .field input:focus { border-color:#2563EB; background:#fff; box-shadow:0 0 0 4px rgba(37,99,235,0.12); }
-    .button { width:100%; padding:14px; border:0; border-radius:10px; background:#2563EB; color:#fff; font-size:16px; font-weight:700; cursor:pointer; margin-top:10px; box-shadow:0 4px 14px rgba(37,99,235,0.25); transition:.2s; }
+    .button { width:100%; padding:14px; border:0; border-radius:10px; background:#2563EB; color:#fff; font-size:16px; font-weight:700; cursor:pointer; margin-top:10px; box-shadow:0 4px 14px rgba(37,99,235,0.25); transition:.2s; display:inline-flex; align-items:center; justify-content:center; gap:8px; }
     .button:hover { background:#1D4ED8; transform:translateY(-1px); }
     .msg { display:none; padding:12px; border-radius:10px; font-size:14px; margin-bottom:16px; text-align:center; }
     .error { background:#fee2e2; color:#991b1b; }
@@ -35,13 +37,13 @@
 </head>
 <body>
   <div class="floating-theme-toggle">
-    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-      <i class="fas fa-moon" id="themeIcon"></i>
+    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Dark/Light Mode">
+      <svg class="theme-icon-svg" id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
     </button>
   </div>
   <main class="card">
     <a href="home-page.html" class="logo-badge">
-      <i class="fas fa-road"></i>
+      <svg class="idrs-road-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19 8.5 5"></path><path d="M20 19 15.5 5"></path><line x1="12" y1="6" x2="12" y2="8.5"></line><line x1="12" y1="12" x2="12" y2="14.5"></line><line x1="12" y1="18" x2="12" y2="20.5"></line></svg>
       <span>IDRS</span>
     </a>
     <h1>Create <span>Account</span></h1>
@@ -51,7 +53,10 @@
       <div class="field"><label for="name">Full Name</label><input id="name" required></div>
       <div class="field"><label for="email">Email Address</label><input id="email" type="email" required></div>
       <div class="field"><label for="password">Password</label><input id="password" type="password" required></div>
-      <button class="button" type="submit"><i class="fas fa-user-plus"></i> Create Account</button>
+      <button class="button" type="submit">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+        Create Account
+      </button>
     </form>
     <a class="back" href="login-page.html">Already have an account? Login</a>
   </main>
