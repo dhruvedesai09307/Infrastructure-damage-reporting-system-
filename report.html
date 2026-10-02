@@ -508,6 +508,9 @@
       padding: 16px 12px;
       text-align: center;
       cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
       background: white;
       transition: all 0.2s ease;
       display: flex;
@@ -562,6 +565,9 @@
       border-radius: 12px;
       padding: 14px;
       cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
       background: white;
       transition: all 0.2s ease;
       position: relative;
@@ -735,6 +741,29 @@
       padding: 6px;
     }
 
+    /* Inline Step Error Banner */
+    .step-error-banner {
+      background: #FEF2F2;
+      border: 1.5px solid #F87171;
+      color: #991B1B;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 14.5px;
+      font-weight: 600;
+      margin: 0 32px 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+      animation: fadeIn 0.25s ease;
+    }
+
+    .step-error-banner i {
+      font-size: 18px;
+      color: #DC2626;
+      flex-shrink: 0;
+    }
+
     /* Actions Footer inside Card */
     .card-actions-bar {
       padding: 20px 32px;
@@ -755,6 +784,9 @@
       border-radius: 10px;
       border: none;
       cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
       transition: all 0.2s ease;
       text-decoration: none;
     }
@@ -1272,13 +1304,19 @@
 
         </div>
 
+        <!-- Inline Step Error Banner -->
+        <div id="stepErrorBanner" class="step-error-banner" style="display:none;" role="alert">
+          <i class="fas fa-circle-exclamation"></i>
+          <span id="stepErrorText">Please select a category and fill in all required fields.</span>
+        </div>
+
         <!-- Footer Actions Bar -->
         <div class="card-actions-bar">
-          <button type="button" class="btn-action btn-secondary" id="btnPrev" onclick="changeStep(-1)" style="visibility:hidden">
+          <button type="button" class="btn-action btn-secondary" id="btnPrev" onclick="changeStep(-1, event)" style="visibility:hidden">
             <i class="fas fa-arrow-left"></i> Previous Step
           </button>
           
-          <button type="button" class="btn-action btn-primary" id="btnNext" onclick="changeStep(1)">
+          <button type="button" class="btn-action btn-primary" id="btnNext" onclick="changeStep(1, event)">
             Next Step <i class="fas fa-arrow-right"></i>
           </button>
           
@@ -1364,18 +1402,57 @@
       { title: "Step 3: Media & Reporter Information", sub: "Attach evidence photographs and contact info for ticket updates.", icon: "fas fa-camera" }
     ];
 
+    // Inline Error Banner Helpers
+    function showStepError(message, targetElementId) {
+      const banner = document.getElementById('stepErrorBanner');
+      const text = document.getElementById('stepErrorText');
+      if (banner && text) {
+        text.textContent = message;
+        banner.style.display = 'flex';
+        banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      if (targetElementId) {
+        const el = document.getElementById(targetElementId);
+        if (el) {
+          try {
+            el.focus();
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } catch (e) {}
+        }
+      }
+    }
+
+    function clearStepError() {
+      const banner = document.getElementById('stepErrorBanner');
+      if (banner) {
+        banner.style.display = 'none';
+      }
+    }
+
     // Category Selector
     function selectCategory(element) {
+      if (!element) return;
       document.querySelectorAll('.cat-card').forEach(card => card.classList.remove('selected'));
       element.classList.add('selected');
-      document.getElementById('category').value = element.getAttribute('data-value');
+      const val = element.getAttribute('data-value') || '';
+      const catInput = document.getElementById('category');
+      if (catInput) {
+        catInput.value = val;
+      }
+      clearStepError();
     }
 
     // Severity Selector
     function selectSeverity(element) {
+      if (!element) return;
       document.querySelectorAll('.sev-card').forEach(card => card.classList.remove('selected'));
       element.classList.add('selected');
-      document.getElementById('severity').value = element.getAttribute('data-value');
+      const val = element.getAttribute('data-value') || '';
+      const sevInput = document.getElementById('severity');
+      if (sevInput) {
+        sevInput.value = val;
+      }
+      clearStepError();
     }
 
     const cityData = {
@@ -1425,15 +1502,6 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const stateSelect = document.getElementById('state');
-      if (stateSelect) {
-        stateSelect.addEventListener('change', (e) => {
-          updateCityOptions(e.target.value);
-        });
-      }
-    });
-
     function autoSetCityAndState(detectedCity, detectedState) {
       const citySelect = document.getElementById('city');
       const stateSelect = document.getElementById('state');
@@ -1465,30 +1533,34 @@
     }
 
     function isValidStreetAddress(value) {
+      if (!value) return false;
       const trimmed = value.trim();
-      if (trimmed.length < 12) return false;
+      if (trimmed.length < 5) return false;
       if (!/[A-Za-z]/.test(trimmed)) return false;
-      if (!/\d/.test(trimmed)) return false;
-      const genericWords = /^(unknown|n\/a|not available|no landmark|test address)$/i;
+      const genericWords = /^(unknown|n\/a|na|none|null|test|test address)$/i;
       return !genericWords.test(trimmed);
     }
 
     function isValidDamageDescription(value) {
+      if (!value) return false;
       const trimmed = value.trim();
-      return trimmed.length >= 15 && /[A-Za-z]/.test(trimmed) && /\d|[A-Za-z]/.test(trimmed);
+      return trimmed.length >= 15 && /[A-Za-z]/.test(trimmed);
     }
 
     function isValidFullName(value) {
+      if (!value) return false;
       const trimmed = value.trim();
       return /^[A-Za-z][A-Za-z\s.'-]{1,49}$/.test(trimmed) && (trimmed.split(/\s+/).length >= 2);
     }
 
     function isValidEmail(value) {
+      if (!value) return false;
       const trimmed = value.trim();
       return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed);
     }
 
     function isValidPhone(value) {
+      if (!value) return false;
       const digits = value.replace(/\D/g, '');
       return /^[6-9]\d{9}$/.test(digits);
     }
@@ -1552,17 +1624,20 @@
             detectedGPSLng = lon;
             const realAddress = await reverseGeocode(lat, lon);
             locInput.value = realAddress;
+            clearStepError();
           },
           async (err) => {
             console.warn('Browser GPS permission error/denied:', err);
             const ipLoc = await fallbackIP();
             locInput.value = ipLoc;
+            clearStepError();
           },
           { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
         );
       } else {
         const ipLoc = await fallbackIP();
         locInput.value = ipLoc;
+        clearStepError();
       }
     }
 
@@ -1579,13 +1654,14 @@
       if (!file) return;
 
       if (!isValidPhotoFile(file)) {
-        alert('Please upload a valid image in JPG, PNG, or WEBP format with size under 10MB.');
+        showStepError('Please upload a valid image in JPG, PNG, or WEBP format under 10MB.');
         event.target.value = '';
         document.getElementById('previewContainer').style.display = 'none';
         document.getElementById('dropzone').style.display = 'block';
         return;
       }
 
+      clearStepError();
       const reader = new FileReader();
       reader.onload = function(e) {
         document.getElementById('previewImg').src = e.target.result;
@@ -1598,14 +1674,21 @@
     }
 
     function removeFile(event) {
-      event.stopPropagation();
-      document.getElementById('photo').value = "";
-      document.getElementById('previewContainer').style.display = 'none';
-      document.getElementById('dropzone').style.display = 'block';
+      if (event) event.stopPropagation();
+      const photoInput = document.getElementById('photo');
+      if (photoInput) photoInput.value = "";
+      const prevContainer = document.getElementById('previewContainer');
+      const dropzone = document.getElementById('dropzone');
+      if (prevContainer) prevContainer.style.display = 'none';
+      if (dropzone) dropzone.style.display = 'block';
     }
 
     // Navigation & Validation
-    function changeStep(delta) {
+    function changeStep(delta, event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
       if (delta > 0 && !validateCurrentStep()) {
         return;
       }
@@ -1615,54 +1698,59 @@
       updateUI();
     }
 
-    function goToStep(step) {
+    function goToStep(step, event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
       if (step > currentStep && !validateCurrentStep()) return;
       currentStep = step;
       updateUI();
     }
 
     function validateCurrentStep() {
+      clearStepError();
+
       if (currentStep === 1) {
-        const cat = document.getElementById('category').value;
-        const state = document.getElementById('state').value;
-        const city = document.getElementById('city').value.trim();
-        const loc = document.getElementById('location').value.trim();
+        const cat = document.getElementById('category') ? document.getElementById('category').value.trim() : '';
+        const stateEl = document.getElementById('state');
+        const state = stateEl ? stateEl.value.trim() : '';
+        const cityEl = document.getElementById('city');
+        const city = cityEl ? cityEl.value.trim() : '';
+        const locEl = document.getElementById('location');
+        const loc = locEl ? locEl.value.trim() : '';
 
         if (!cat) {
-          alert('Please select a damage category.');
+          showStepError('Please select an issue category to continue.');
           return false;
         }
         if (!state) {
-          alert('Please select a state/region.');
-          document.getElementById('state').focus();
+          showStepError('Please select a State / Region to continue.', 'state');
           return false;
         }
         if (!city) {
-          alert('Please enter a city or district.');
-          document.getElementById('city').focus();
+          showStepError('Please select or enter a City / District.', 'city');
           return false;
         }
         if (!loc) {
-          alert('Please enter a specific street address and landmark.');
-          document.getElementById('location').focus();
+          showStepError('Please enter a specific street address and landmark.', 'location');
           return false;
         }
         if (!isValidStreetAddress(loc)) {
-          alert('Please enter a valid street address with a landmark or house/building number (for example: 12 Main Road, Near City Library).');
-          document.getElementById('location').focus();
+          showStepError('Please enter a valid street address with landmark or building details.', 'location');
           return false;
         }
       } else if (currentStep === 2) {
-        const sev = document.getElementById('severity').value;
-        const desc = document.getElementById('description').value.trim();
+        const sev = document.getElementById('severity') ? document.getElementById('severity').value.trim() : '';
+        const descEl = document.getElementById('description');
+        const desc = descEl ? descEl.value.trim() : '';
 
         if (!sev) {
-          alert('Please select a severity level.');
+          showStepError('Please select an urgency and severity level to continue.');
           return false;
         }
         if (!isValidDamageDescription(desc)) {
-          alert('Please provide a detailed damage description with at least 15 valid characters.');
-          document.getElementById('description').focus();
+          showStepError('Please provide a detailed damage description (at least 15 characters).', 'description');
           return false;
         }
       }
@@ -1670,80 +1758,145 @@
     }
 
     function updateUI() {
-      // Hide all steps
-      document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-      document.getElementById(`step${currentStep}`).classList.add('active');
+      clearStepError();
+
+      // Hide all steps, show active step
+      document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.remove('active');
+        step.style.display = 'none';
+      });
+      
+      const activeStepEl = document.getElementById(`step${currentStep}`);
+      if (activeStepEl) {
+        activeStepEl.classList.add('active');
+        activeStepEl.style.display = 'block';
+      }
 
       // Update Stepper Bar
-      const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
-      document.getElementById('progressFill').style.width = `${progressPercent}%`;
+      const progressFill = document.getElementById('progressFill');
+      if (progressFill && totalSteps > 1) {
+        const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        progressFill.style.width = `${progressPercent}%`;
+      }
 
       for (let i = 1; i <= totalSteps; i++) {
         const ind = document.getElementById(`stepIndicator${i}`);
-        ind.classList.remove('active', 'completed');
-        if (i === currentStep) ind.classList.add('active');
-        else if (i < currentStep) ind.classList.add('completed');
+        if (ind) {
+          ind.classList.remove('active', 'completed');
+          if (i === currentStep) ind.classList.add('active');
+          else if (i < currentStep) ind.classList.add('completed');
+        }
       }
 
       // Update Header Text
       const stepInfo = stepTitles[currentStep - 1];
-      document.getElementById('stepTitle').textContent = stepInfo.title;
-      document.getElementById('stepSubtitle').textContent = stepInfo.sub;
-      document.getElementById('stepIcon').innerHTML = `<i class="${stepInfo.icon}"></i>`;
+      if (stepInfo) {
+        const stepTitleEl = document.getElementById('stepTitle');
+        const stepSubtitleEl = document.getElementById('stepSubtitle');
+        const stepIconEl = document.getElementById('stepIcon');
+        if (stepTitleEl) stepTitleEl.textContent = stepInfo.title;
+        if (stepSubtitleEl) stepSubtitleEl.textContent = stepInfo.sub;
+        if (stepIconEl) stepIconEl.innerHTML = `<i class="${stepInfo.icon}"></i>`;
+      }
 
       // Update Buttons
       const btnPrev = document.getElementById('btnPrev');
       const btnNext = document.getElementById('btnNext');
       const btnSubmit = document.getElementById('btnSubmit');
 
-      btnPrev.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+      if (btnPrev) btnPrev.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
 
       if (currentStep === totalSteps) {
-        btnNext.style.display = 'none';
-        btnSubmit.style.display = 'inline-flex';
+        if (btnNext) btnNext.style.display = 'none';
+        if (btnSubmit) btnSubmit.style.display = 'inline-flex';
       } else {
-        btnNext.style.display = 'inline-flex';
-        btnSubmit.style.display = 'none';
+        if (btnNext) btnNext.style.display = 'inline-flex';
+        if (btnSubmit) btnSubmit.style.display = 'none';
       }
 
-      window.scrollTo({ top: 120, behavior: 'smooth' });
+      // Scroll smoothly to form card
+      const formCard = document.getElementById('formCard');
+      if (formCard) {
+        const cardTop = formCard.getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({ top: Math.max(0, cardTop), behavior: 'smooth' });
+      }
     }
+
+    // Setup Event Listeners on DOM Ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Category Cards Click & Tap Listeners
+      document.querySelectorAll('.cat-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          selectCategory(card);
+        });
+      });
+
+      // Severity Cards Click & Tap Listeners
+      document.querySelectorAll('.sev-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          selectSeverity(card);
+        });
+      });
+
+      // State selector change listener
+      const stateSelect = document.getElementById('state');
+      if (stateSelect) {
+        stateSelect.addEventListener('change', (e) => {
+          updateCityOptions(e.target.value);
+          clearStepError();
+        });
+      }
+
+      // Input change listeners to clear error banner
+      const inputs = document.querySelectorAll('#damageForm input, #damageForm select, #damageForm textarea');
+      inputs.forEach(input => {
+        input.addEventListener('input', clearStepError);
+        input.addEventListener('change', clearStepError);
+      });
+
+      // Sync initial active state
+      updateUI();
+    });
 
     // Form Submission
     document.getElementById('damageForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      clearStepError();
 
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
+      const nameEl = document.getElementById('name');
+      const emailEl = document.getElementById('email');
+      const phoneEl = document.getElementById('phone');
       const photoInput = document.getElementById('photo');
+
+      const name = nameEl ? nameEl.value.trim() : '';
+      const email = emailEl ? emailEl.value.trim() : '';
+      const phone = phoneEl ? phoneEl.value.trim() : '';
       const photoFile = photoInput && photoInput.files ? photoInput.files[0] : null;
 
       if (!name || !email || !phone) {
-        alert('Please complete all contact details.');
+        showStepError('Please complete all contact details before submitting.');
         return;
       }
 
       if (!isValidFullName(name)) {
-        alert('Please enter a valid full name with at least first and last name.');
-        document.getElementById('name').focus();
+        showStepError('Please enter a valid full name with at least first and last name.', 'name');
         return;
       }
 
       if (!isValidEmail(email)) {
-        alert('Please enter a valid email address.');
-        document.getElementById('email').focus();
+        showStepError('Please enter a valid email address (e.g., name@example.com).', 'email');
         return;
       }
 
       if (!isValidPhone(phone)) {
-        alert('Please enter a valid 10-digit mobile number starting with 6 to 9.');
-        document.getElementById('phone').focus();
+        showStepError('Please enter a valid 10-digit mobile number starting with 6 to 9.', 'phone');
         return;
       }
 
       if (photoFile && !isValidPhotoFile(photoFile)) {
-        alert('Please upload a valid photo in JPG, PNG, or WEBP format under 10MB.');
+        showStepError('Please upload a valid photo in JPG, PNG, or WEBP format under 10MB.');
         photoInput.value = '';
         return;
       }
@@ -1826,6 +1979,7 @@
       document.getElementById('category').value = '';
       document.getElementById('severity').value = '';
       removeFile(new Event('click'));
+      clearStepError();
       currentStep = 1;
       updateUI();
       document.getElementById('ticketCard').style.display = 'none';
