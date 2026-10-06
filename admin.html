@@ -2496,9 +2496,38 @@
 
   <!-- Auth Gatekeeper -->
   <script>
-    if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
-      window.location.replace('admin-login.html');
-    }
+    (function checkAdminAuth() {
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+        return null;
+      }
+
+      const isLogged = localStorage.getItem('adminLoggedIn') === 'true' || 
+                       sessionStorage.getItem('adminLoggedIn') === 'true' || 
+                       getCookie('adminLoggedIn') === 'true';
+
+      if (!isLogged) {
+        window.location.replace('admin-login.html');
+        return;
+      }
+
+      // Synchronize state across storage mechanisms for WebView session resilience
+      const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken') || getCookie('adminToken');
+      const adminStr = localStorage.getItem('currentAdmin') || sessionStorage.getItem('currentAdmin') || getCookie('currentAdmin');
+
+      if (token) {
+        try { localStorage.setItem('adminToken', token); } catch(e){}
+        try { sessionStorage.setItem('adminToken', token); } catch(e){}
+      }
+      if (adminStr) {
+        try { localStorage.setItem('currentAdmin', adminStr); } catch(e){}
+        try { sessionStorage.setItem('currentAdmin', adminStr); } catch(e){}
+      }
+      try { localStorage.setItem('adminLoggedIn', 'true'); } catch(e){}
+      try { sessionStorage.setItem('adminLoggedIn', 'true'); } catch(e){}
+    })();
   </script>
 
   <!-- Navigation Sidebar -->
@@ -3825,8 +3854,17 @@
     }
 
     // Admin Info
+    function getStoredAdminData() {
+      const raw = localStorage.getItem('currentAdmin') || sessionStorage.getItem('currentAdmin') || '{}';
+      try {
+        return JSON.parse(raw);
+      } catch(e) {
+        return {};
+      }
+    }
+
     function initAdminProfile() {
-      const adminData = JSON.parse(sessionStorage.getItem('currentAdmin') || '{}');
+      const adminData = getStoredAdminData();
       const name = adminData.username || 'Admin';
       const display = document.getElementById('adminUsernameDisplay');
       const initials = document.getElementById('adminInitials');
@@ -3835,9 +3873,21 @@
     }
 
     function logoutAdmin() {
-      sessionStorage.removeItem('adminLoggedIn');
-      sessionStorage.removeItem('adminToken');
-      sessionStorage.removeItem('currentAdmin');
+      try {
+        localStorage.removeItem('adminLoggedIn');
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('currentAdmin');
+      } catch(e){}
+      try {
+        sessionStorage.removeItem('adminLoggedIn');
+        sessionStorage.removeItem('adminToken');
+        sessionStorage.removeItem('currentAdmin');
+      } catch(e){}
+      try {
+        document.cookie = "adminLoggedIn=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        document.cookie = "adminToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        document.cookie = "currentAdmin=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      } catch(e){}
       window.location.replace('admin-login.html');
     }
 
@@ -4429,7 +4479,7 @@
 
       // Backend sync
       try {
-        const token = sessionStorage.getItem('adminToken');
+        const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
         const headers = { 'Content-Type': 'application/json' };
         if (token) headers['Authorization'] = `Bearer ${token}`;
 
@@ -5204,7 +5254,7 @@
     // ========================================================
     function logAuditEvent(event, target, status) {
       const timestamp = new Date().toLocaleTimeString();
-      const adminData = JSON.parse(sessionStorage.getItem('currentAdmin') || '{}');
+      const adminData = getStoredAdminData();
       const adminName = adminData.username || 'System Admin';
 
       auditLogs.unshift({ timestamp, operator: adminName, event, target, status });
