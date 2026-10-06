@@ -1581,12 +1581,9 @@ html[data-theme="dark"] .profile-chip:hover {
   }
 
   /* Uniform 16px horizontal spacing across containers and cards */
-  .container, .content-container, .main-container, .wrapper, .page-container, .main-wrapper, .page-body {
+  .container, .content-container, .main-container, .wrapper, .page-container, .main-wrapper, .page-body, .content-area, .app-main {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    margin-top: 10px !important;
     box-sizing: border-box !important;
   }
 
@@ -1635,7 +1632,8 @@ html[data-theme="dark"] .profile-chip:hover {
   /* All cards and widgets take full available width with responsive padding */
   .card, .info-card, .stat-card, .stats-card, .category-card, .step-box,
   .step-card, .emergency-card, .feature-card, .faq-item, .cta-content,
-  .cta-box, .tips-card, .awareness-card, .terms-card, .policy-card {
+  .cta-box, .tips-card, .awareness-card, .terms-card, .policy-card,
+  .kpi-card, .panel-card {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;

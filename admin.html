@@ -29,7 +29,7 @@
   <script src="theme.js"></script>
 
   <style>
-    :root {
+    :root, html[data-theme="dark"] {
       --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
 
@@ -39,7 +39,7 @@
       --bg-card: #141E33;
       --bg-card-hover: #1A2642;
       --bg-input: #1E293B;
-      --bg-glass: rgba(15, 23, 42, 0.75);
+      --bg-glass: rgba(15, 23, 42, 0.88);
       
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-strong: rgba(255, 255, 255, 0.16);
@@ -86,13 +86,13 @@
       --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    [data-theme="light"] {
+    [data-theme="light"], html[data-theme="light"] {
       --bg-body: #F1F5F9;
       --bg-surface: #FFFFFF;
       --bg-card: #FFFFFF;
       --bg-card-hover: #F8FAFC;
       --bg-input: #F1F5F9;
-      --bg-glass: rgba(255, 255, 255, 0.85);
+      --bg-glass: rgba(255, 255, 255, 0.88);
 
       --border-subtle: #E2E8F0;
       --border-strong: #CBD5E1;
@@ -2464,7 +2464,28 @@
       }
     }
 
-    /* Responsive */
+    /* Sidebar Backdrop Overlay on Mobile */
+    .admin-sidebar-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 2400;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .admin-sidebar-backdrop.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Responsive Overhauls */
     @media (max-width: 1024px) {
       .kpi-grid { grid-template-columns: 1fr 1fr; }
       .chart-grid { grid-template-columns: 1fr; }
@@ -2472,23 +2493,153 @@
     }
 
     @media (max-width: 768px) {
+      body {
+        display: block !important;
+        padding-top: 75px !important;
+        min-height: 100vh !important;
+      }
       .app-sidebar {
-        transform: translateX(-100%);
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 100vh !important;
+        width: 280px !important;
+        max-width: 85vw !important;
+        transform: translateX(-100%) !important;
+        z-index: 2500 !important;
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.6) !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
       .app-sidebar.open {
-        transform: translateX(0);
+        transform: translateX(0) !important;
       }
       .app-main {
-        margin-left: 0;
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: calc(100vh - 75px) !important;
+        display: block !important;
+      }
+      .app-topbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 60px !important;
+        min-height: 60px !important;
+        max-height: 60px !important;
+        padding: 0 12px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        z-index: 1000 !important;
+        box-sizing: border-box !important;
+      }
+      .topbar-left {
+        gap: 8px !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+        display: flex !important;
+        align-items: center !important;
       }
       .sidebar-toggle-btn {
-        display: flex;
+        display: flex !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        flex-shrink: 0 !important;
+      }
+      .page-title-box {
+        min-width: 0 !important;
+        overflow: hidden !important;
+      }
+      .page-title-box h1 {
+        font-size: 15px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.2 !important;
+      }
+      .page-title-box p {
+        display: none !important;
       }
       .topbar-search-box {
-        display: none;
+        display: none !important;
       }
-      .kpi-grid { grid-template-columns: 1fr; }
-      .dossier-grid { grid-template-columns: 1fr; }
+      .system-clock-badge {
+        display: none !important;
+      }
+      .topbar-right {
+        gap: 6px !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      .topbar-btn {
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        font-size: 13px !important;
+        padding: 0 !important;
+      }
+      .content-area {
+        padding: 14px 12px 40px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+      }
+      .emergency-banner {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        padding: 12px 14px !important;
+        margin-bottom: 16px !important;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        margin-bottom: 20px !important;
+      }
+      .chart-grid, .chart-grid-secondary {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        margin-bottom: 20px !important;
+      }
+      .action-ribbon {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+      }
+      .filter-group {
+        flex-direction: column !important;
+        width: 100% !important;
+      }
+      .filter-group input, .filter-group select, .filter-group button {
+        width: 100% !important;
+      }
+      .dossier-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .panel-card {
+        padding: 16px 14px !important;
+      }
+      .panel-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+      }
+      .panel-actions {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+      }
+      .modal-card {
+        width: 95% !important;
+        max-height: 90vh !important;
+        padding: 18px 14px !important;
+        margin: 12px auto !important;
+      }
     }
   </style>
 </head>
@@ -3934,11 +4085,27 @@
 
       if (window.innerWidth <= 768) {
         document.getElementById('appSidebar')?.classList.remove('open');
+        document.getElementById('adminSidebarBackdrop')?.classList.remove('active');
       }
     }
 
     function toggleSidebar() {
-      document.getElementById('appSidebar')?.classList.toggle('open');
+      const sidebar = document.getElementById('appSidebar');
+      let backdrop = document.getElementById('adminSidebarBackdrop');
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'adminSidebarBackdrop';
+        backdrop.className = 'admin-sidebar-backdrop';
+        backdrop.onclick = () => toggleSidebar();
+        document.body.appendChild(backdrop);
+      }
+
+      const isOpen = sidebar?.classList.toggle('open');
+      if (isOpen) {
+        backdrop.classList.add('active');
+      } else {
+        backdrop.classList.remove('active');
+      }
     }
 
     function toggleSound() {
